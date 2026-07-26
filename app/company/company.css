@@ -1,0 +1,168 @@
+/* ===== Компания main page ===== */
+.co-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  max-width: 1080px;
+  margin: 0 auto 22px;
+}
+.co-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  min-height: 250px;
+}
+.co-ico { margin-bottom: 18px; }
+.co-title {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.4px;
+}
+.co-title.blue { color: var(--blue); }
+.co-title .light { color: #b3b5bb; font-weight: 700; }
+.co-sub {
+  color: var(--muted);
+  font-size: 15px;
+  margin-top: 8px;
+  line-height: 1.35;
+}
+.co-btns {
+  margin-top: auto;
+  display: flex;
+  gap: 12px;
+  padding-top: 22px;
+}
+.co-btn {
+  flex: 1;
+  height: 48px;
+  border-radius: 13px;
+  border: 1px solid var(--border2);
+  background: #fff;
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--ink);
+  cursor: pointer;
+}
+.co-btn:hover { background: #fafafa; }
+.co-btn.blue {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+  font-weight: 600;
+}
+.co-btn.blue:hover { background: var(--blue-dark); }
+.co-btn:disabled { color: #c2c4ca; cursor: default; background: #fff; }
+
+/* ===== status card ===== */
+.co-status {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  padding: 28px;
+}
+.co-status-left { min-width: 300px; }
+.co-status-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.co-status-head h2 {
+  font-size: 32px;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+.co-status-left p {
+  color: var(--muted);
+  font-size: 15px;
+  margin: 14px 0 0;
+  line-height: 1.35;
+  max-width: 220px;
+}
+.silver-badge {
+  width: 92px;
+  height: 58px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #d4d6db 0%, #eceef1 45%, #c4c6cc 100%);
+  transform: rotate(-8deg);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+  position: relative;
+  flex-shrink: 0;
+}
+.silver-badge::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 14px;
+  height: 11px;
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.28);
+}
+.silver-badge span {
+  position: absolute;
+  bottom: 9px;
+  left: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #4a4c52;
+  font-style: italic;
+}
+.co-status-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+.co-progress {
+  width: 100%;
+  height: 56px;
+  background: #ededf0;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  position: relative;
+}
+.co-progress .fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 72%;
+  background: linear-gradient(90deg, #8b5cf6, #9d6bf5);
+  border-radius: 16px;
+}
+.co-progress .dots {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.co-progress .dots i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff;
+}
+.co-progress .dots i.off { background: #c9cacf; }
+.co-progress-pill {
+  width: 88%;
+  height: 52px;
+  background: linear-gradient(90deg, #9d6bf5, #8b5cf6);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+}

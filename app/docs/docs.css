@@ -1,0 +1,13 @@
+/* ================= DOCUMENTS MODE ================= */
+
+/* Reuses the chat hero shell (.cht-hero / .cht-hero-stack); only the
+   documents artwork and the copy width differ from the design. */
+.doc-hero .cht-hero-stack img {
+  /* design: 289px (390px in the 1.348x crop) */
+  width: 290px;
+  margin-top: -47px;
+}
+/* wraps after "Напишите": line 1 is 510px, +" в" is 523px */
+.doc-hero .hero-sub {
+  max-width: 515px;
+}

@@ -1,0 +1,383 @@
+/* ===== Финансы main page ===== */
+.fin-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  max-width: 1080px;
+  margin: 0 auto 22px;
+}
+.fin-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+.fin-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+.fin-head .f-label {
+  color: var(--muted);
+  font-size: 15px;
+}
+.fin-amounts {
+  display: flex;
+  gap: 48px;
+}
+.fin-num {
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--blue);
+}
+.fin-num.grey {
+  color: #b3b5bb;
+}
+.fin-num.red {
+  color: var(--coral);
+}
+.fin-avail {
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 2px;
+}
+.fin-btns {
+  margin-top: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.fin-btns .row2 {
+  display: flex;
+  gap: 12px;
+}
+.fin-btn {
+  height: 48px;
+  border-radius: 13px;
+  border: 1px solid var(--border2);
+  background: #fff;
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--ink);
+  cursor: pointer;
+  flex: 1;
+  width: 100%;
+}
+.fin-btn:hover { background: #fafafa; }
+.fin-btn.blue {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+  font-weight: 600;
+}
+.fin-btn.blue:hover { background: var(--blue-dark); }
+.fin-btn:disabled {
+  color: #c2c4ca;
+  cursor: default;
+  background: #fff;
+}
+.fin-nodebt {
+  margin-top: 22px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px 20px;
+  color: #b3b5bb;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.fin-debt-row {
+  margin-top: 22px;
+  display: flex;
+  gap: 12px;
+}
+.fin-datebox {
+  flex: 1;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 18px;
+}
+.fin-datebox b {
+  font-size: 20px;
+  font-weight: 600;
+  color: #b3b5bb;
+  display: block;
+}
+.fin-datebox span {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* payments card (reuses emp-manage look) */
+.fin-pay {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  align-items: stretch;
+  gap: 26px;
+  padding: 26px;
+}
+.fin-pay .p-left {
+  align-self: center;
+  min-width: 220px;
+}
+.fin-pay .p-left h2 {
+  font-size: 30px;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+.fin-pay .p-left p {
+  color: var(--muted);
+  font-size: 15px;
+  margin: 8px 0 0;
+  max-width: 200px;
+}
+.fin-optgrid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.fin-opt {
+  position: relative;
+  background: var(--subcard);
+  border-radius: 16px;
+  height: 120px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  text-align: left;
+}
+.fin-opt:hover { background: #eceef1; }
+.fin-opt .o-label {
+  font-size: 15px;
+  font-weight: 500;
+  text-align: right;
+  line-height: 1.2;
+}
+.fin-opt .o-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: var(--coral);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 8px;
+}
+
+/* ===== СБП info card ===== */
+.fin-sbp {
+  background: #f3f4f6;
+  border-radius: 18px;
+  padding: 18px 20px;
+  margin-bottom: 22px;
+}
+.fin-sbp h4 {
+  margin: 0 0 12px;
+  font-size: 19px;
+  font-weight: 700;
+}
+.fin-sbp-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 8px 0;
+  font-size: 15px;
+}
+.fin-sbp-row b { font-weight: 600; }
+.fin-sbp-row span { color: var(--muted); font-size: 13px; }
+
+.fin-inline-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+.fin-inline-field > label {
+  color: var(--muted);
+  font-size: 15px;
+}
+.fin-inline-input {
+  width: 260px;
+  height: 52px;
+  border: 1px solid var(--border2);
+  border-radius: 14px;
+  background: #fff;
+  text-align: center;
+  font-size: 16px;
+  font-family: inherit;
+  color: #a9abb1;
+  outline: none;
+}
+.fin-hr { height: 1px; background: #eee; margin: 4px 0 18px; }
+
+.fin-big-btn {
+  width: 100%;
+  height: 54px;
+  border-radius: 14px;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+.fin-big-btn.blue { background: var(--blue); color: #fff; }
+.fin-big-btn.blue:hover { background: var(--blue-dark); }
+.fin-big-btn.grey { background: #f0f1f3; color: #6d6f77; }
+
+/* labeled field (Сумма пополнения / Расчетный счет) */
+.fin-field {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 18px;
+}
+.fin-field .lbl { color: var(--muted); font-size: 15px; min-width: 130px; }
+.fin-field .box {
+  position: relative;
+  flex: 1;
+  height: 52px;
+  border: 1px solid var(--border2);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  color: var(--ink);
+}
+.fin-field .box.ph { color: #a9abb1; }
+.fin-field .box .chev { position: absolute; right: 16px; }
+
+/* accounts list */
+.fin-acc-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--border2);
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin-bottom: 12px;
+}
+.fin-acc-item .a-name {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  font-weight: 600;
+}
+.fin-acc-item .a-num {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 3px;
+}
+.fin-main-badge {
+  background: var(--blue);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 8px;
+}
+
+/* invoices */
+.fin-inv {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid var(--border2);
+  border-radius: 16px;
+  padding: 14px 18px;
+  margin-bottom: 12px;
+}
+.fin-inv .i-body { flex: 1; }
+.fin-inv .i-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.fin-inv .i-amount {
+  font-size: 15px;
+  margin-top: 4px;
+}
+.fin-inv .i-amount .plus { color: var(--coral); margin-left: 8px; }
+.fin-inv .i-dates {
+  text-align: right;
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.fin-badge {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 8px;
+}
+.fin-badge.overdue { background: #ffe0e3; color: var(--coral); }
+.fin-badge.waiting { background: #e2eefe; color: var(--blue); }
+.fin-badge.paid { background: #ededef; color: #9a9ca3; }
+
+/* withdrawal request status card */
+.fin-req {
+  background: #f3f4f6;
+  border-radius: 16px;
+  padding: 16px 18px;
+  margin-bottom: 14px;
+}
+.fin-req .r-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.fin-req .r-title span { color: var(--muted); font-weight: 400; font-size: 13px; }
+.fin-req .r-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 6px 0;
+  font-size: 14px;
+}
+.fin-req .r-row span { color: var(--muted); }
+.fin-req-actions { display: flex; gap: 12px; margin-top: 12px; }
+.fin-req-actions button {
+  flex: 1;
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid var(--border2);
+  background: #fff;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+}
+.fin-req-actions button.disabled { color: #b3b5bb; }
+
+/* status modal */
+.fin-status h3 { font-size: 26px; }
+.fin-status .m-sub { max-width: 320px; }
+
+/* QR */
+.fin-qr {
+  width: 210px;
+  height: 210px;
+  margin: 6px auto 12px;
+  display: block;
+}
+.fin-link { color: var(--blue); }

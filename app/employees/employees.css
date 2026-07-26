@@ -1,0 +1,263 @@
+/* ===== Сотрудники main page ===== */
+.emp-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  max-width: 1080px;
+  margin: 0 auto 22px;
+}
+.emp-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  min-height: 240px;
+}
+.emp-card .e-ico {
+  margin-bottom: 18px;
+}
+.emp-card .e-num {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.4px;
+}
+.emp-card .e-num.blue {
+  color: var(--blue);
+}
+.emp-card .e-num.grey {
+  color: #b3b5bb;
+}
+.emp-btns {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.emp-btns .row2 {
+  display: flex;
+  gap: 12px;
+}
+.emp-btn {
+  height: 46px;
+  border-radius: 13px;
+  border: 1px solid var(--border2);
+  background: #fff;
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--ink);
+  cursor: pointer;
+  flex: 1;
+  width: 100%;
+}
+.emp-btn:hover {
+  background: #fafafa;
+}
+.emp-btn.blue {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+  font-weight: 600;
+}
+.emp-btn.blue:hover {
+  background: var(--blue-dark);
+}
+
+/* Управление card */
+.emp-manage {
+  max-width: 1080px;
+  margin: 0 auto;
+  display: flex;
+  align-items: stretch;
+  gap: 26px;
+  padding: 26px;
+}
+.emp-manage .m-left {
+  align-self: center;
+  min-width: 220px;
+}
+.emp-manage .m-left h2 {
+  font-size: 30px;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+.emp-manage .m-left p {
+  color: var(--muted);
+  font-size: 15px;
+  margin: 8px 0 0;
+  max-width: 200px;
+}
+.emp-optgrid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.emp-opt {
+  position: relative;
+  background: var(--subcard);
+  border-radius: 16px;
+  height: 116px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.emp-opt .o-emoji {
+  font-size: 28px;
+  line-height: 1;
+}
+.emp-opt .o-label {
+  font-size: 15px;
+  font-weight: 500;
+  text-align: right;
+  line-height: 1.2;
+}
+.emp-opt .o-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: #ffe5e7;
+  color: var(--coral);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 8px;
+}
+
+/* bottom section toggle */
+.emp-secbar {
+  display: flex;
+  justify-content: center;
+  margin: 24px auto 0;
+}
+.emp-secbar .bar {
+  display: flex;
+  gap: 6px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+}
+.emp-secbar button {
+  border: none;
+  background: none;
+  padding: 10px 26px;
+  border-radius: 11px;
+  font-size: 15px;
+  font-family: inherit;
+  color: #6d6f77;
+  cursor: pointer;
+}
+.emp-secbar button.on {
+  background: var(--blue);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ===== tabs (Данные / Доступ) ===== */
+.emp-tabs {
+  display: flex;
+  background: #eef0f2;
+  border-radius: 15px;
+  padding: 5px;
+  margin: 6px 0 18px;
+}
+.emp-tabs button {
+  flex: 1;
+  border: none;
+  background: none;
+  padding: 11px 0;
+  border-radius: 11px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: inherit;
+  color: #6d6f77;
+  cursor: pointer;
+}
+.emp-tabs button.on {
+  background: #fff;
+  color: var(--ink);
+  font-weight: 600;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+.emp-desc {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.45;
+  margin: 0 0 8px;
+}
+
+/* empty-placeholder field */
+.acc-field.ph .val {
+  color: #a9abb1;
+}
+.acc-field.ph label {
+  display: none;
+}
+.acc-field.ph {
+  padding: 17px 16px;
+}
+
+/* add-field row (Добавить сотрудника/пассажира) */
+.emp-addrow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--border2);
+  border-radius: 14px;
+  padding: 15px 16px;
+  color: #a9abb1;
+  font-size: 15px;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+.emp-idcard {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border: 1px solid var(--border2);
+  border-radius: 16px;
+  padding: 16px 18px;
+}
+.emp-idcard .id-name {
+  font-size: 18px;
+  font-weight: 600;
+}
+.emp-idcard .id-on {
+  color: var(--blue);
+  font-size: 14px;
+  margin-top: 2px;
+}
+.emp-idcard .id-right {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+}
+.emp-connected {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 14px;
+  border: 1px solid var(--border2);
+  border-radius: 11px;
+  background: #fff;
+  font-size: 14px;
+}
+.emp-settings-btn {
+  height: 36px;
+  padding: 0 22px;
+  border-radius: 11px;
+  background: #ededef;
+  color: #9a9ca3;
+  border: none;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+}

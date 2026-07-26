@@ -1,0 +1,131 @@
+/* ===== Виджеты page ===== */
+.wg-search-wrap {
+  max-width: 950px;
+  margin: 6px auto 22px;
+  position: relative;
+}
+.wg-search {
+  width: 100%;
+  height: 62px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: #fff;
+  padding: 0 22px;
+  font-size: 17px;
+  font-family: inherit;
+  color: var(--ink);
+  outline: none;
+}
+.wg-search::placeholder { color: #a9abb1; }
+.wg-search-x {
+  position: absolute;
+  right: 20px;
+  top: 21px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.wg-dropdown {
+  position: absolute;
+  top: 68px;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+  padding: 8px;
+  z-index: 10;
+}
+.wg-dropdown button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: none;
+  padding: 15px 16px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-family: inherit;
+  color: var(--ink);
+  cursor: pointer;
+}
+.wg-dropdown button:hover,
+.wg-dropdown button.hl { background: #eeeef0; }
+
+.wg-row {
+  max-width: 950px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+.wg-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.wg-illus { flex-shrink: 0; }
+.wg-content { flex: 1; min-width: 0; }
+.wg-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.wg-head .t {
+  font-size: 22px;
+  font-weight: 700;
+}
+.wg-badge {
+  background: var(--coral);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+}
+.wg-desc {
+  color: #5a5c63;
+  font-size: 15px;
+  line-height: 1.4;
+  margin-bottom: 16px;
+}
+.wg-actions {
+  display: flex;
+  gap: 10px;
+}
+.wg-btn {
+  height: 46px;
+  padding: 0 30px;
+  border-radius: 13px;
+  background: #1c1d21;
+  color: #fff;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+.wg-btn:hover { background: #000; }
+.wg-dots {
+  width: 46px;
+  height: 46px;
+  border-radius: 13px;
+  border: 1px solid var(--border2);
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wg-dots:hover { background: #fafafa; }

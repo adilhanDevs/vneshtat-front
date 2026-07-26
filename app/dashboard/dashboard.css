@@ -1,0 +1,918 @@
+/* ================= DASHBOARD (РАБОЧИЙ СТОЛ) ================= */
+
+/* --- Greeting title --- */
+.dash-greeting {
+  text-align: center;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 70px;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: -1.5px;
+  margin: 6px 0 30px;
+  color: #17181c;
+}
+
+/* --- Widget row --- */
+.dash-widgets {
+  display: flex;
+  gap: 18px;
+  max-width: 1060px;
+  margin: 0 auto 24px;
+}
+
+/* --- Widget card base --- */
+.dash-widget {
+  background: #fff;
+  border: 1px solid #eef0f2;
+  padding: 30px 20px 20px;
+  position: relative;
+  border-radius: 30px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  /* soft outer shadow (design) */
+  box-shadow: 0 6px 24px rgba(18, 24, 40, 0.06);
+}
+.dash-widget.finance {
+  flex: 2;
+  min-height: 220px;
+}
+.dash-widget.finance.compact {
+  flex: 1;
+}
+.dash-widget.side-widget {
+  flex: 1;
+  min-height: 220px;
+  /* distribute content vertically (like Figma) so the widget's natural height
+     stays compact; the row height is driven by the finance card and every
+     side widget stretches to match it. */
+  justify-content: space-between;
+}
+
+/* finance widget */
+.dash-fin-header {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  margin-bottom: 16px;
+}
+.dash-fin-header img {
+  width: 32px;
+  height: 30px;
+  object-fit: contain;
+}
+.dash-fin-icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 12px;
+}
+.dash-fin-dots {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.dash-fin-amount {
+  font-size: 36px;
+  font-weight: 700;
+  color: #17181c;
+  font-style: normal;
+  /* margin-bottom: 4px; */
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.dash-fin-sub {
+  color: #8a8c93;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  margin-bottom: 19px;
+  line-height: 1.4;
+}
+.dash-fin-debt {
+  color: #fe5b6b;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.dash-fin-deadline {
+  color: #8a8c93;
+  font-size: 13px;
+  margin-bottom: 18px;
+}
+.dash-fin-btns {
+  display: flex;
+  gap: 12px;
+  position: relative;
+  z-index: 2;
+}
+.dash-fin-btns .primary {
+  height: 44px;
+  padding: 0 26px;
+  border-radius: 13px;
+  background: #1e88fa;
+  color: #fff;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+.dash-fin-btns .primary:hover {
+  background: #1877ec;
+}
+.dash-fin-btns .secondary {
+  height: 44px;
+  padding: 0 22px;
+  border-radius: 13px;
+  background: #fff;
+  color: #4a4c52;
+  border: 1px solid #e4e5e8;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+}
+.dash-fin-btns .secondary:hover {
+  background: #fafafa;
+}
+.dash-fin-person {
+  position: absolute;
+  right: 0;
+  bottom: -6px;
+  top: auto;
+  width: 46%;
+  max-width: 300px;
+  height: auto;
+  object-fit: contain;
+  object-position: bottom right;
+  z-index: 1;
+  pointer-events: none;
+}
+/* Wide finance card: menu dots centered above the amount (design) */
+.dash-widget.finance:not(.compact) .dash-fin-dots {
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+}
+
+/* --- Add widget card --- */
+.dash-widget.dash-add-widget {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 30px 20px 20px;
+  gap: 10px;
+  align-self: stretch;
+  min-height: 238px;
+  background: #FAFAFA;
+  border: 1px solid #E5E7EA;
+  box-shadow: 0px 0.886045px 7.26557px rgba(0, 0, 0, 0.08);
+  border-radius: 30px;
+}
+.dash-add-text {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+.dash-add-icon {
+  margin-bottom: 0;
+  padding-left: 10px;
+}
+.dash-add-title {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0;
+  color: #17181c;
+  padding-left: 10px;
+}
+.dash-add-sub {
+  font-size: 14px;
+  color: #8a8c93;
+  margin-bottom: 0;
+  padding-left: 10px;
+}
+.dash-add-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 72px;
+  gap: 10px;
+  height: 40px;
+  background: #28292D;
+  border-radius: 13px;
+  border: none;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  align-self: stretch;
+  box-sizing: border-box;
+}
+.dash-add-btn:hover {
+  background: #2d2f35;
+}
+
+/* --- Calendar widget --- */
+.dash-cal-decor {
+  position: absolute;
+  left: 22.1%;
+  top: 44.1%;
+  width: 60.3%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+.dash-cal-header,
+.dash-cal-days,
+.dash-cal-msg,
+.dash-cal-action {
+  position: relative;
+  z-index: 1;
+}
+.dash-cal-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 12px;
+}
+.dash-cal-header img,
+.dash-radar-header img {
+  width: 28px;
+  height: 28px;
+  display: block;
+  flex-shrink: 0;
+}
+.dash-cal-header img {
+  width: 30px;
+  height: 30px;
+  /* the calendar glyph sits slightly low inside its PNG; nudge up to
+     visually match the wallet icon's baseline */
+  position: relative;
+  top: -2px;
+}
+.dash-cal-header .title {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 30px;
+  color: #34363b;
+  margin: 0;
+  position: relative;
+  top: -2px;
+}
+.dash-cal-dots {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.dash-cal-days {
+  display: flex;
+  justify-content: space-between;
+  /* align number row to the icon (left) and the ⋯ menu (right) */
+  padding: 0 4px 0 12px;
+}
+.dash-cal-day {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 500;
+  color: #787b86;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+.dash-cal-day.active {
+  background: transparent;
+  border-color: #c0c7d1;
+  color: #787b86;
+  font-weight: 500;
+}
+.dash-cal-day:hover:not(.active) {
+  background: #f3f4f6;
+}
+.dash-cal-msg {
+  background: rgba(250, 250, 250, 0.68);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid #e5e7ea;
+  border-radius: 13px;
+  padding: 14px 15px;
+}
+.dash-cal-msg b {
+  font-size: 16px;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 3px;
+  color: #34363b;
+}
+.dash-cal-msg span {
+  font-size: 14px;
+  line-height: 1.2;
+  color: #787b86;
+}
+.dash-cal-action {
+  width: 100%;
+  height: 40px;
+  border-radius: 13px;
+  background: #28292d;
+  color: #fafafa;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+}
+.dash-cal-action:hover {
+  background: #34363b;
+}
+
+/* --- Radar widget --- */
+.dash-radar-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  height: 30px;
+}
+.dash-radar-header img {
+  width: 30px;
+  height: 30px;
+}
+.dash-radar-header .title {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 30px;
+  color: #34363b;
+  margin: 0;
+}
+.dash-radar-dots {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.dash-radar-route {
+  width: 100%;
+  background: transparent;
+  border: 1px solid #e5e7ea;
+  border-radius: 13px;
+  padding: 14px 15px;
+}
+.dash-radar-route b {
+  font-size: 16px;
+  font-weight: 500;
+  color: #34363b;
+  display: block;
+  margin-bottom: 2px;
+}
+.dash-radar-route span {
+  font-size: 14px;
+  color: #787b86;
+}
+.dash-radar-timer {
+  position: relative;
+  width: 100%;
+  background: #4d4e54;
+  border-radius: 13px;
+  overflow: hidden;
+  color: #fafafa;
+}
+.dash-radar-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background: #28292d;
+}
+.dash-radar-timer-content {
+  position: relative;
+  z-index: 1;
+  padding: 14px 15px;
+}
+.dash-radar-timer b {
+  font-size: 18px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 2px;
+}
+.dash-radar-timer span {
+  font-size: 14px;
+  color: #a9abb1;
+}
+
+/* --- Employees widget --- */
+.dash-emp-icon {
+  margin-bottom: 12px;
+}
+.dash-emp-count {
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+}
+.dash-emp-sub {
+  color: #8a8c93;
+  font-size: 14px;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+.dash-emp-action {
+  width: 100%;
+  height: 44px;
+  border-radius: 13px;
+  background: #fff;
+  color: #4a4c52;
+  border: 1px solid #e4e5e8;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  margin-top: auto;
+}
+.dash-emp-action:hover {
+  background: #fafafa;
+}
+
+/* --- Order cards --- */
+.dash-orders {
+  max-width: 1060px;
+  margin: 0 auto;
+}
+.dash-order {
+  box-sizing: border-box;
+  border: 1px solid #c0c7d1;
+  border-radius: 26px;
+  padding: 20px 25px;
+  margin-bottom: 20px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  /* space-between keeps the title flush left and the price/buttons flush right,
+     while centering the stats column in the space between the two sections. */
+  justify-content: space-between;
+  gap: 43px;
+  min-height: 111px;
+}
+.dash-order-left {
+  flex: 0 0 auto;
+  min-width: 0;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+}
+.dash-order-badge {
+  position: absolute;
+  top: -13px;
+  left: 25px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.dash-order-badge .tag {
+  background: #1e88fa;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 2px 10px 4px;
+  border-radius: 13px;
+}
+.dash-order-badge .tag.future {
+  background: #a9abb1;
+}
+.dash-order-badge .count {
+  background: #fe5b6b;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  width: 28px;
+  height: 22px;
+  border-radius: 21px;
+  padding: 2px 10px 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dash-order-title {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0;
+  color: #17181c;
+  /* Constrain the title so it wraps after "для" — two balanced lines,
+     matching the Figma design. Width sits in the [485,487) window so line 2
+     ("обеспечения … соединен…", 485px) fits but adding "обеспечения" to line 1
+     (487px) does not, forcing the break after "для". */
+  max-width: 486px;
+}
+.dash-order-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  max-width: 486px;
+  margin-top: auto;
+  padding-top: 14px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #7a7d85;
+}
+/* middle column: Номер / участников / услуг */
+.dash-order-stats {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-shrink: 0;
+  font-size: 14px;
+  font-weight: 500;
+  color: #7a7d85;
+  white-space: nowrap;
+}
+/* right column: price above the buttons, left-aligned over "Чат" */
+.dash-order-right {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-shrink: 0;
+}
+.dash-order-price {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: #17181c;
+  padding: 0 12px;
+}
+.dash-order-dots {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 12px;
+  position: absolute;
+  top: 20px;
+  right: 25px;
+}
+.dash-order-actions {
+  display: flex;
+  gap: 10px;
+}
+.dash-order-actions .chat-btn {
+  height: 38px;
+  padding: 0 50px;
+  border-radius: 13px;
+  background: #1e88fa;
+  color: #fff;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+.dash-order-actions .chat-btn:hover {
+  background: #1877ec;
+}
+.dash-order-actions .data-btn {
+  height: 38px;
+  padding: 0 35px;
+  border-radius: 11px;
+  background: #fff;
+  color: #4a4c52;
+  border: 1px solid #e4e5e8;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+}
+.dash-order-actions .data-btn:hover {
+  background: #fafafa;
+}
+
+/* --- AI chat input bar --- */
+.dash-ai-bar {
+  position: sticky;
+  bottom: 20px;
+  max-width: 700px;
+  margin: 20px auto 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1px solid #e4e5e8;
+  border-radius: 22px;
+  padding: 8px 8px 8px 18px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  z-index: 10;
+}
+.dash-ai-bar input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  font-family: inherit;
+  background: none;
+  color: #17181c;
+}
+.dash-ai-bar input::placeholder {
+  color: #a9abb1;
+}
+.dash-ai-plus {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #e4e5e8;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.dash-ai-plus:hover {
+  background: #f5f5f6;
+}
+.dash-ai-sparkle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.dash-ai-send {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #17181c;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.dash-ai-send:hover {
+  background: #2d2f35;
+}
+.dash-ai-send svg {
+  color: #fff;
+}
+
+/* --- Widget settings panel (slide-out drawer) --- */
+.dash-settings-panel {
+  margin-left: auto;
+  width: 460px;
+  max-width: 92vw;
+  height: 100vh;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.12);
+  animation: dashSlideIn 0.25s ease;
+  border-top-left-radius: 22px;
+  border-bottom-left-radius: 22px;
+}
+@keyframes dashSlideIn {
+  from {
+    transform: translateX(40px);
+    opacity: 0.6;
+  }
+}
+.dash-settings-head {
+  padding: 24px 28px 0;
+}
+.dash-settings-head .breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #8a8c93;
+  margin-bottom: 6px;
+}
+.dash-settings-head .close-btn {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.dash-settings-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 22px;
+}
+.dash-settings-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 28px 20px;
+}
+.dash-widget-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid #ececee;
+  border-radius: 18px;
+  padding: 16px 18px;
+  margin-bottom: 10px;
+  position: relative;
+  background: #fff;
+  cursor: pointer;
+}
+.dash-widget-item:hover {
+  background: #fafafa;
+}
+.dash-widget-item.locked {
+  opacity: 0.45;
+}
+.dash-widget-item.locked .dash-widget-check {
+  cursor: not-allowed;
+}
+.dash-widget-check {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid #d4d5d9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+.dash-widget-check.checked {
+  background: #1e88fa;
+  border-color: #1e88fa;
+}
+.dash-widget-info {
+  flex: 1;
+  min-width: 0;
+}
+.dash-widget-info .name {
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.dash-widget-info .desc {
+  font-size: 13px;
+  color: #8a8c93;
+  margin-top: 2px;
+}
+.dash-widget-dots {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  flex-shrink: 0;
+}
+
+/* widget item context menu */
+.dash-widget-ctx {
+  position: absolute;
+  right: 10px;
+  top: 50px;
+  z-index: 30;
+  background: #fff;
+  border: 1px solid #ececee;
+  border-radius: 16px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.14);
+  padding: 8px;
+  width: 210px;
+}
+.dash-widget-ctx button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  border: none;
+  background: none;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-family: inherit;
+  color: #33353b;
+  cursor: pointer;
+  text-align: left;
+}
+.dash-widget-ctx button:hover {
+  background: #f5f5f6;
+}
+.dash-widget-ctx button.red {
+  color: #fe5b6b;
+}
+
+/* connect widget button */
+.dash-connect-btn {
+  width: 100%;
+  height: 48px;
+  border-radius: 14px;
+  background: #fff;
+  border: 1px solid #e4e5e8;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: inherit;
+  color: #4a4c52;
+  cursor: pointer;
+  margin: 10px 0;
+}
+.dash-connect-btn:hover {
+  background: #fafafa;
+}
+
+/* settings footer */
+.dash-settings-foot {
+  display: flex;
+  gap: 14px;
+  padding: 16px 28px 22px;
+  border-top: 1px solid #f0f0f0;
+}
+.dash-settings-foot .cancel {
+  height: 54px;
+  padding: 0 34px;
+  border-radius: 14px;
+  background: #ededef;
+  color: #6d6f77;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+}
+.dash-settings-foot .save {
+  flex: 1;
+  height: 54px;
+  border-radius: 14px;
+  background: #1e88fa;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+.dash-settings-foot .save:hover {
+  background: #1877ec;
+}
+
+/* --- Widget context menu on dashboard --- */
+.dash-ctx-menu {
+  position: absolute;
+  z-index: 30;
+  background: #fff;
+  border: 1px solid #ececee;
+  border-radius: 16px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.14);
+  padding: 8px;
+  width: 220px;
+}
+.dash-ctx-menu button {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  border: none;
+  background: none;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-family: inherit;
+  color: #33353b;
+  cursor: pointer;
+  text-align: left;
+}
+.dash-ctx-menu button:hover {
+  background: #f5f5f6;
+}
+
+/* --- order card position relative for dots --- */
+.dash-order {
+  position: relative;
+}
+
+/* --- Separator in widget list --- */
+.dash-widget-sep {
+  height: 1px;
+  background: #f0f0f0;
+  margin: 6px 18px;
+}

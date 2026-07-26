@@ -1,26 +1,366 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --page: #f5f5f5;
+  --card: #ffffff;
+  --logo: #b4b6be;
+  --title: #1a1a1a;
+  --muted: #a2a3a8;
+  --footer: #a7a8ad;
+  --border: #ebebed;
+  --input-bg: #ffffff;
+  --blue: #1e88fa;
+  --blue-icon: #0a7cfa;
+  --btn-disabled-bg: #e4e7eb;
+  --btn-disabled-text: #adb1b9;
+  --info: #9aa0a8;
+  --error: #f5333f;
+  --tooltip-bg: #232323;
+  --seg-track: #ededee;
+  --seg-active: #d9dce1;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  height: 100%;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background: var(--page);
+  color: var(--title);
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+}
+
+/* ---------- layout ---------- */
+.screen {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 16px 96px;
+}
+
+.logo {
+  font-family: var(--font-comfortaa), sans-serif;
+  font-weight: 600;
+  font-size: 46px;
+  line-height: 1;
+  color: var(--logo);
+  letter-spacing: 0.5px;
+  margin-bottom: 40px;
+  user-select: none;
+}
+
+/* ---------- card ---------- */
+.card {
+  position: relative;
+  width: 372px;
+  background: var(--card);
+  border-radius: 28px;
+  padding: 26px 28px 30px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.back {
+  position: absolute;
+  top: 26px;
+  left: 26px;
+  width: 26px;
+  height: 26px;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  color: #8c909c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 18px;
+}
+
+.icon-blob {
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dots {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 22px;
+}
+.dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--blue-icon);
+}
+
+.title {
+  font-size: 26px;
+  line-height: 1.18;
+  font-weight: 700;
+  text-align: center;
+  color: var(--title);
+  margin: 0 0 22px;
+  letter-spacing: -0.2px;
+}
+
+/* ---------- fields ---------- */
+.field {
+  position: relative;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.field input {
+  width: 100%;
+  height: 56px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--input-bg);
+  text-align: center;
+  font-size: 16px;
+  color: var(--title);
+  padding: 0 44px;
+  outline: none;
+  font-family: inherit;
+}
+.field input::placeholder {
+  color: #b9bcc2;
+}
+.field input:focus {
+  border-color: #d5d7db;
+}
+.field.error input {
+  border-color: var(--error);
+}
+
+.field-info {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  color: var(--info);
+  cursor: pointer;
+  display: flex;
+}
+.field.error .field-info {
+  color: var(--error);
+}
+
+.hint {
+  color: var(--muted);
+  font-size: 15px;
+  text-align: center;
+  margin: 6px 0 20px;
+  cursor: pointer;
+}
+
+/* password requirements block (new password step) */
+.reqs {
+  align-self: center;
+  margin: 4px 0 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.reqs div {
+  display: flex;
+  gap: 10px;
+  font-size: 13px;
+  color: #9a9ba0;
+  line-height: 1.1;
+}
+.reqs b {
+  color: #9a9ba0;
+  font-weight: 400;
+  min-width: 22px;
+}
+
+/* ---------- button ---------- */
+.btn {
+  width: 100%;
+  height: 56px;
+  border-radius: 16px;
+  border: none;
+  background: var(--blue);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.btn:hover {
+  background: #3f9bfb;
+}
+.btn:disabled {
+  background: var(--btn-disabled-bg);
+  color: var(--btn-disabled-text);
+  cursor: default;
+}
+
+/* ---------- segmented control ---------- */
+.segmented {
+  position: relative;
+  width: 100%;
+  height: 54px;
+  background: var(--seg-track);
+  border-radius: 16px;
+  display: flex;
+  padding: 5px;
+  margin-bottom: 12px;
+}
+.segmented button {
+  flex: 1;
+  border: none;
+  background: none;
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--title);
+  cursor: pointer;
+  z-index: 1;
+  border-radius: 12px;
+}
+.seg-pill {
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  width: calc(50% - 5px);
+  background: var(--seg-active);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease;
+}
+
+/* ---------- tooltip ---------- */
+.tooltip {
+  position: absolute;
+  z-index: 20;
+  background: var(--tooltip-bg);
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.35;
+  border-radius: 12px;
+  padding: 10px 14px;
+  width: max-content;
+  max-width: 210px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+}
+.tooltip.reqs-tip {
+  padding: 12px 14px;
+  max-width: none;
+  white-space: nowrap;
+}
+.tooltip.reqs-tip div {
+  display: flex;
+  gap: 10px;
+  margin: 2px 0;
+}
+.tooltip.reqs-tip b {
+  font-weight: 400;
+  min-width: 22px;
+  color: #cececf;
+}
+.tooltip::after {
+  content: "";
+  position: absolute;
+  border: 6px solid transparent;
+}
+/* pointer variants */
+.tooltip.tip-below::after {
+  top: -11px;
+  right: 22px;
+  border-bottom-color: var(--tooltip-bg);
+}
+.tooltip.tip-above::after {
+  bottom: -11px;
+  right: 28px;
+  border-top-color: var(--tooltip-bg);
+}
+.tooltip.tip-left::after {
+  left: -11px;
+  top: 18px;
+  border-right-color: var(--tooltip-bg);
+}
+
+/* ---------- success ---------- */
+.success-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 40;
+}
+.success-title {
+  position: absolute;
+  top: calc(50% - 130px);
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 44px;
+  font-weight: 700;
+  color: var(--title);
+  letter-spacing: -0.5px;
+}
+.success-card {
+  width: 250px;
+  height: 210px;
+  background: #fbfbfb;
+  border-radius: 26px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+}
+.success-card p {
+  margin: 0;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--title);
+}
+.blurred {
+  filter: blur(6px);
+  opacity: 0.85;
+}
+
+/* ---------- footer ---------- */
+.footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  font-size: 14px;
+  color: var(--footer);
+}
+.footer-right {
+  display: flex;
+  gap: 26px;
+}
+.footer-right span {
+  cursor: pointer;
 }
