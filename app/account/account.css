@@ -1188,7 +1188,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 22px;
-  max-width: 1000px;
+  max-width: 890px;
   margin: 0 auto 22px;
 }
 .order-cost .oc-icon {
@@ -1259,8 +1259,8 @@
 }
 .order-stats .os-box {
   display: flex;
-  gap: 22px;
-  margin-top: 8px;
+  gap: 16px;
+  margin-top: 44px;
 }
 .order-stats .os-box .st b {
   font-size: 22px;
@@ -1330,6 +1330,7 @@
 .order-optcard .oo-label {
   font-size: 14px;
   font-weight: 500;
+  color: var(--muted);
 }
 .order-seg {
   position: absolute;
@@ -1400,8 +1401,8 @@
   gap: 8px;
 }
 .order-note .n-title {
-  font-size: 13px;
-  color: var(--muted);
+  font-size: 11px;
+  color: #626262;
 }
 .order-note .n-time {
   font-size: 11px;

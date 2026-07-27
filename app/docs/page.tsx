@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { useRouter } from "next/navigation";
 import "../account/account.css";
 import "../orders/orders.css";
 import "../chat/chat.css";
@@ -16,6 +17,7 @@ type Msg = { role: "user"; text: string } | { role: "ai" };
 
 export default function Docs() {
   const [messenger, setMessenger] = useState(false);
+  const router = useRouter();
   const [msgs, setMsgs] = useState<Msg[]>([]);
   const [gen, setGen] = useState(false);
   const [text, setText] = useState("");
@@ -54,7 +56,7 @@ export default function Docs() {
           <div className="acc-top-right">
             <button className="acc-iconbtn"><IcDots /></button>
             <button className="acc-iconbtn" onClick={() => setMessenger(true)}><IcBubble /></button>
-            <img className="acc-avatar" src="/img/avatar-sm.png" alt="" />
+            <img className="acc-avatar" src="/img/avatar-sm.png" alt="" onClick={() => router.push("/account")} />
           </div>
         </div>
 

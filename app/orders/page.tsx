@@ -38,7 +38,7 @@ export default function Orders() {
           <div className="acc-top-right">
             <button className="acc-iconbtn"><IcDots /></button>
             <button className="acc-iconbtn" onClick={() => setMessenger(true)}><IcBubble /></button>
-            <img className="acc-avatar" src="/img/avatar-sm.png" alt="" />
+            <img className="acc-avatar" src="/img/avatar-sm.png" alt="" onClick={() => router.push("/account")} />
           </div>
         </div>
 
@@ -54,10 +54,10 @@ export default function Orders() {
 
         <div className="ord-list">
           {ORDERS.map((o) => (
-            <div key={o.id} className="ord-item">
+            <div key={o.id} className="ord-item px-14">
               <div className="ord-badges">
-                <span className={`ord-tag ${o.tag}`}>{o.tag === "now" ? "Сейчас" : "Через 14 дней"}</span>
-                {o.count > 0 && <span className="ord-count">{o.count}</span>}
+                <span className={`ord-tag rounded-full ${o.tag}`}>{o.tag === "now" ? "Сейчас" : "Через 14 дней"}</span>
+                {o.count > 0 && <span className="ord-count rounded-full">{o.count}</span>}
               </div>
               <div className="ord-card">
                 <div className="ord-main">
