@@ -4,10 +4,11 @@ import { useState, useRef } from "react";
 import "../account/account.css";
 import "../orders/orders.css";
 import "./chat.css";
+import "../docs/docs.css";
 import Sidebar from "../account/Sidebar";
 import Messenger from "../account/Messenger";
 import {
-  IcCard, IcDots, IcBubble, IcPlus, IcSparkle, IcStop, IcDoc, IcDocSm, IcCal3D,
+  IcCard, IcDots, IcBubble, IcPlus, IcSparkle, IcStop, IcDoc, IcDocSm, IcCal3D, IcDocMode,
   IcWidgets, IcThumbUp, IcThumbDown, IcCopy, IcDownload, IcClose, IcArrowR,
   IcPaperclip, IcFolder2, IcArchive, IcTrash, IcEye, IcMenuChat,
 } from "../account/icons";
@@ -26,6 +27,8 @@ export default function Chat() {
   const [text, setText] = useState("");
   const [topMenu, setTopMenu] = useState(false);
   const [attach, setAttach] = useState(false);
+  const [plusMenu, setPlusMenu] = useState(false);
+  const [mode, setMode] = useState<"chat" | "docs">("chat");
   const [ctx, setCtx] = useState<number | null>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const taRef = useRef<HTMLTextAreaElement>(null);
@@ -35,7 +38,8 @@ export default function Chat() {
   const respond = (q: string) => {
     const s = q.toLowerCase();
     const kind: "md" | "file" | "widget" =
-      s.includes("календар") ? "widget" : (s.includes("doc") || s.includes("файл") || s.includes("скачив")) ? "file" : "md";
+      mode === "docs" ? "file"
+        : s.includes("календар") ? "widget" : (s.includes("doc") || s.includes("файл") || s.includes("скачив")) ? "file" : "md";
     setGen(true);
     timer.current = setTimeout(() => {
       setMsgs((m) => [...m, { role: "ai", kind }]);
@@ -63,7 +67,7 @@ export default function Chat() {
     <div className="acc">
       <Sidebar active="chat" />
 
-      <main className="acc-main" style={{ position: "relative" }}>
+      <main className="acc-main with-surface" style={{ position: "relative" }}>
         <div className="acc-top">
           <div className="acc-balance">
             <span className="b-alfa">Альфа</span>
@@ -91,8 +95,9 @@ export default function Chat() {
           </>
         )}
 
-        <div className="cht-scroll">
-          {empty && (
+        <div className="acc-surface">
+          <div className="cht-scroll">
+          {empty && mode === "chat" && (
             <div className="cht-hero">
               <div className="cht-hero-stack">
                 <div className="hero-title">Новый чат</div>
@@ -101,6 +106,19 @@ export default function Chat() {
               <div className="hero-sub">
                 Попросите чат организовать поездку, найти самый дешевый билет
                 или сформировать документы. Он умеет очень многое.
+              </div>
+            </div>
+          )}
+
+          {empty && mode === "docs" && (
+            <div className="cht-hero doc-hero">
+              <div className="cht-hero-stack">
+                <div className="hero-title">Документы</div>
+                <img src="/img/person-docs.png" alt="" />
+              </div>
+              <div className="hero-sub">
+                Вы находитесь в режиме работы с документами. Напишите
+                в сообщении запрос и чат соберет необходимый документ.
               </div>
             </div>
           )}
@@ -150,16 +168,31 @@ export default function Chat() {
           {gen && (
             <div className="cht-gen2-row">
               <div className="cht-progress2"><div className="p-text">Формирую ответ...</div><div className="p-track"><div className="p-fill" /></div></div>
-              <button className="cht-stop" onClick={() => { if (timer.current) clearTimeout(timer.current); setGen(false); setMsgs((m) => [...m, { role: "ai", kind: "md" }]); }}><IcStop /></button>
+              <button className="cht-stop" onClick={() => { if (timer.current) clearTimeout(timer.current); setGen(false); setMsgs((m) => [...m, { role: "ai", kind: mode === "docs" ? "file" : "md" }]); }}><IcStop /></button>
             </div>
           )}
+          </div>
         </div>
       </main>
 
-      <div className="ord-chatbar">
+      {plusMenu && <div style={{ position: "fixed", inset: 0, zIndex: 55 }} onClick={() => setPlusMenu(false)} />}
+
+      {/* fixed bar makes its own stacking context, so it must outrank the
+          close-overlay (55) while the menu is open — but not the drawer scrim (50) otherwise */}
+      <div className="ord-chatbar" style={plusMenu ? { zIndex: 56 } : undefined}>
         <div className="inner">
-          <button className="ord-round" onClick={attachFile}><IcPlus /></button>
-          <button className="ord-round"><IcSparkle /></button>
+          <div className="cht-plus-wrap">
+            <button className="ord-round" onClick={() => setPlusMenu((v) => !v)}><IcPlus /></button>
+            {plusMenu && (
+              <div className="cht-plusmenu">
+                <button onClick={() => { setPlusMenu(false); setMode("docs"); }}><IcDocMode /> Документы</button>
+                <button onClick={() => { setPlusMenu(false); attachFile(); }}><IcPaperclip /> Прикрепить файл</button>
+              </div>
+            )}
+          </div>
+          {mode === "docs"
+            ? <button className="ord-round active" title="Выйти из режима документов" onClick={() => setMode("chat")}><IcDocMode /></button>
+            : <button className="ord-round"><IcSparkle /></button>}
           <textarea
             ref={taRef}
             rows={1}

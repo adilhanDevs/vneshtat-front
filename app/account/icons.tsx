@@ -511,30 +511,35 @@ export const IcWallet = () => (
   </svg>
 );
 export const IcPostpay = () => (
-  <svg width="40" height="26" viewBox="0 0 40 26" fill="none">
-    <rect x="1" y="1" width="38" height="24" rx="12" fill="#d6d8dd" />
-    <circle cx="13" cy="13" r="10" fill="#a9abb1" />
-    <path d="M13 8v5l3 2" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+  <svg width="38" height="26" viewBox="0 0 38 26" fill="none">
+    <circle cx="25" cy="13" r="13" fill="#d6d8dd" />
+    <circle cx="13" cy="13" r="13" fill="#a9abb1" />
+    <path d="M13 6.5v6.5l4 2.5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
+/* document silhouette with a folded top-right corner, shared by the three
+   payment tiles */
+const DOC_PATH =
+  "M8 0h10.6L30 11.4V22a8 8 0 0 1-8 8H8a8 8 0 0 1-8-8V8a8 8 0 0 1 8-8Z";
+
 export const IcFinRuble = () => (
-  <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-    <rect width="34" height="34" rx="10" fill="#43b25f" />
-    <path d="M13 10h5.5a4 4 0 0 1 0 8H13m0-3h8m-8-5v14" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+  <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+    <path d={DOC_PATH} fill="#43b25f" />
+    <path d="M11.5 9h4.8a3.5 3.5 0 0 1 0 7h-4.8m0-2.6h7m-7-4.4v12.2" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 export const IcActDoc = () => (
-  <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-    <rect width="34" height="34" rx="10" fill="#f3d34a" />
-    <rect x="9" y="11" width="16" height="2.4" rx="1.2" fill="#fff" />
-    <rect x="9" y="16" width="16" height="2.4" rx="1.2" fill="#fff" />
-    <rect x="9" y="21" width="10" height="2.4" rx="1.2" fill="#fff" />
+  <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+    <path d={DOC_PATH} fill="#f3d34a" />
+    <rect x="8" y="10" width="14" height="2.2" rx="1.1" fill="#fff" />
+    <rect x="8" y="14.4" width="14" height="2.2" rx="1.1" fill="#fff" />
+    <rect x="8" y="18.8" width="9" height="2.2" rx="1.1" fill="#fff" />
   </svg>
 );
 export const IcFinSwap = () => (
-  <svg width="34" height="34" viewBox="0 0 34 34" fill="none">
-    <rect width="34" height="34" rx="10" fill="#c9cbd1" />
-    <path d="M11 14h13l-3-3m3 8H11l3 3" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+  <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+    <path d={DOC_PATH} fill="#c9cbd1" />
+    <path d="M9.5 12.5h11l-2.6-2.6m2.6 7h-11l2.6 2.6" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 export const IcSbpRuble = () => (

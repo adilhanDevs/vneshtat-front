@@ -1,36 +1,76 @@
-/* ===== Финансы main page ===== */
+/* ===== Финансы: content surface =====
+   The page keeps the grey panel colour; the content sits on its own rounded
+   white surface inset from it, with the balance/header row staying outside on
+   the grey. .acc-main is rounded only at the top-left, so it can't do this. */
+.fin-main {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+}
+.fin-surface {
+  flex: 1;
+  background: #fff;
+  border-radius: 30px;
+  padding: 20px 0 40px;
+}
+
+/* ===== Финансы main page =====
+   Column is 800px (measured against the 1166px Figma panel); the two top
+   cards are the same 238px card component as on /company. */
 .fin-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 22px;
-  max-width: 1080px;
-  margin: 0 auto 22px;
+  gap: 10px;
+  width: 800px;
+  max-width: 100%;
+  margin: 0 auto 10px;
 }
 .fin-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  padding: 24px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  padding: 30px 20px 20px;
+  gap: 10px;
+  height: 238px;
+  background: #fafafa;
+  border: 1px solid #e5e7ea;
+  box-shadow: 0 0.886045px 7.26557px rgba(0, 0, 0, 0.08);
+  border-radius: 30px;
+}
+/* the icon row and the amount sit 18px further in than the buttons, which
+   run the full padding box — measured inside the Figma frame itself */
+.fin-head,
+.fin-money,
+.fin-amounts {
+  padding: 0 18px;
 }
 .fin-head {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: 18px;
+}
+/* 26 (icon) + 49.6 (amount) + 90 (buttons) + 2×10 gap = 185.6, inside the
+   card's 186px content box — otherwise flexbox silently shrinks the buttons */
+.fin-head > svg {
+  height: 26px;
+  width: auto;
 }
 .fin-head .f-label {
-  color: var(--muted);
-  font-size: 15px;
+  color: #787b86;
+  font-size: 20px;
+  /* Tailwind's preflight line-height:1.5 made this 30px tall and pushed the
+     head row past the icon */
+  line-height: 1.2;
 }
 .fin-amounts {
   display: flex;
   gap: 48px;
 }
 .fin-num {
-  font-size: 34px;
-  font-weight: 800;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.05;
   letter-spacing: -0.5px;
   color: var(--blue);
 }
@@ -41,31 +81,40 @@
   color: var(--coral);
 }
 .fin-avail {
-  color: var(--muted);
+  color: #787b86;
   font-size: 14px;
+  line-height: 1.15;
   margin-top: 2px;
 }
 .fin-btns {
-  margin-top: 22px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
+  /* never let the 40px buttons be squeezed to make the card fit */
+  flex-shrink: 0;
 }
 .fin-btns .row2 {
   display: flex;
-  gap: 12px;
+  gap: 10px;
 }
 .fin-btn {
-  height: 48px;
-  border-radius: 13px;
-  border: 1px solid var(--border2);
+  height: 40px;
+  /* design-system button radius (Figma "Кнопка" frames are all 16px) */
+  border-radius: 16px;
+  border: 1px solid #e5e7ea;
   background: #fff;
   font-size: 15px;
   font-family: inherit;
-  color: var(--ink);
+  color: #121212;
   cursor: pointer;
-  flex: 1;
+  /* flex:1 in the column would zero the flex-basis and override height:40px;
+     the buttons only share space inside .row2 */
+  flex: none;
   width: 100%;
+}
+.fin-btns .row2 .fin-btn {
+  flex: 1;
+  width: auto;
 }
 .fin-btn:hover { background: #fafafa; }
 .fin-btn.blue {
@@ -80,18 +129,22 @@
   cursor: default;
   background: #fff;
 }
+/* basis 0 so it grows into exactly the space left over — 87px, as in the
+   design — instead of pushing its own content height past the card */
 .fin-nodebt {
-  margin-top: 22px;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 18px 20px;
+  box-sizing: border-box;
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  border: 1px solid #e5e7ea;
+  border-radius: 16px;
+  padding: 16px 20px;
   color: #b3b5bb;
   font-size: 20px;
-  font-weight: 600;
-  line-height: 1.2;
+  font-weight: 500;
+  line-height: 1.25;
 }
 .fin-debt-row {
-  margin-top: 22px;
   display: flex;
   gap: 12px;
 }
@@ -113,56 +166,82 @@
 }
 
 /* payments card (reuses emp-manage look) */
+/* same frame geometry as the /company status bar, at the 800px column */
 .fin-pay {
-  max-width: 1080px;
-  margin: 0 auto;
+  box-sizing: border-box;
   display: flex;
-  align-items: stretch;
-  gap: 26px;
-  padding: 26px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  gap: 20px;
+  width: 800px;
+  max-width: 100%;
+  height: 150px;
+  margin: 0 auto;
+  background: #fafafa;
+  border: 1px solid #e5e7ea;
+  box-shadow: 0 0.886045px 7.26557px rgba(0, 0, 0, 0.08);
+  border-radius: 30px;
 }
+/* 190 + 20 gap + 528 = the 738px content width of the 800px card */
 .fin-pay .p-left {
-  align-self: center;
-  min-width: 220px;
+  width: 190px;
+  flex: none;
 }
 .fin-pay .p-left h2 {
-  font-size: 30px;
+  font-size: 36px;
   font-weight: 800;
   margin: 0;
   letter-spacing: -0.5px;
+  color: #121212;
 }
 .fin-pay .p-left p {
-  color: var(--muted);
-  font-size: 15px;
+  color: #787b86;
+  font-size: 16px;
+  line-height: 1.35;
   margin: 8px 0 0;
-  max-width: 200px;
+  /* wraps after "вашими" like the design */
+  max-width: 150px;
 }
 .fin-optgrid {
   flex: 1;
+  align-self: stretch;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  /* one row exactly as tall as the card's 108px content box */
+  grid-template-rows: 1fr;
+  gap: 10px;
 }
 .fin-opt {
   position: relative;
   background: var(--subcard);
-  border-radius: 16px;
-  height: 120px;
-  padding: 16px;
+  border-radius: 20px;
+  padding: 12px 18px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: stretch;
   cursor: pointer;
   border: none;
   font-family: inherit;
-  text-align: left;
+  box-sizing: border-box;
+  height: 100%;
 }
 .fin-opt:hover { background: #eceef1; }
+.fin-opt > svg {
+  display: block;
+  align-self: flex-start;
+}
+/* pinned to the bottom right so a 3-line label grows upwards past the icon row,
+   the way "Отчет о движении средств" does in the design */
 .fin-opt .o-label {
+  align-self: flex-end;
   font-size: 15px;
   font-weight: 500;
   text-align: right;
   line-height: 1.2;
+  color: #121212;
 }
 .fin-opt .o-badge {
   position: absolute;

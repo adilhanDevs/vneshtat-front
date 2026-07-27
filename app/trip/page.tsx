@@ -73,7 +73,7 @@ export default function Trip() {
     <div className="acc">
       <Sidebar />
 
-      <main className="acc-main">
+      <main className="acc-main with-surface">
         <div className="acc-top">
           <div className="acc-balance">
             <span className="b-alfa">Альфа</span>
@@ -89,7 +89,8 @@ export default function Trip() {
           </div>
         </div>
 
-        <div className="trip-scroll">
+        <div className="acc-surface">
+          <div className="trip-scroll">
           <div className="trip-steps-row">
             <div className="trip-steps">
               <div className="trip-steps-titles">
@@ -202,6 +203,7 @@ export default function Trip() {
               </div>
             </>
           )}
+          </div>
         </div>
       </main>
 

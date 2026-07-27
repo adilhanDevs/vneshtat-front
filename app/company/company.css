@@ -1,50 +1,73 @@
-/* ===== Компания main page ===== */
+/* ===== Компания main page =====
+   Figma column is 900px: 3 × 293px cards + 2 × 10px gaps = 899, and the
+   status bar below is exactly 900px wide. */
 .co-row {
   display: grid;
+  /* 1fr instead of a hard 293px so the three cards add up to exactly 900
+     and their outer edges line up with the status bar (293.33 each) */
   grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-  max-width: 1080px;
-  margin: 0 auto 22px;
+  gap: 10px;
+  width: 900px;
+  max-width: 100%;
+  /* 10px between the card row and the status bar */
+  margin: 0 auto 10px;
 }
+/* Contract / Balance / People — identical frames in Figma */
 .co-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  padding: 24px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  min-height: 250px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 20px 20px;
+  gap: 10px;
+  margin: 0 auto;
+  width: 100%;
+  height: 238px;
+  background: #fafafa;
+  border: 1px solid #e5e7ea;
+  box-shadow: 0 0.886045px 7.26557px rgba(0, 0, 0, 0.08);
+  border-radius: 30px;
 }
-.co-ico { margin-bottom: 18px; }
+/* Figma's align-items:center over children that are themselves full-width */
+.co-card > * { align-self: stretch; }
 .co-title {
-  font-size: 24px;
+  font-size: 30px;
   font-weight: 700;
-  line-height: 1.15;
+  /* design system: headings are set at 1em leading */
+  line-height: 1.05;
   letter-spacing: -0.4px;
+  color: #121212;
 }
 .co-title.blue { color: var(--blue); }
-.co-title .light { color: #b3b5bb; font-weight: 700; }
+/* "сотрудников" is a smaller regular gray word next to the bold "99" */
+.co-title .light {
+  font-size: 21px;
+  color: #787b86;
+  font-weight: 400;
+  letter-spacing: 0;
+}
 .co-sub {
-  color: var(--muted);
-  font-size: 15px;
+  color: #787b86;
+  font-size: 16px;
   margin-top: 8px;
   line-height: 1.35;
 }
 .co-btns {
-  margin-top: auto;
   display: flex;
-  gap: 12px;
-  padding-top: 22px;
+  gap: 10px;
 }
 .co-btn {
   flex: 1;
-  height: 48px;
-  border-radius: 13px;
-  border: 1px solid var(--border2);
+  height: 40px;
+  /* design-system button radius (Figma "Кнопка" frames are all 16px) */
+  border-radius: 16px;
+  /* same stroke token as the card itself */
+  border: 1px solid #e5e7ea;
   background: #fff;
   font-size: 15px;
   font-family: inherit;
-  color: var(--ink);
+  color: #121212;
   cursor: pointer;
 }
 .co-btn:hover { background: #fafafa; }
@@ -57,37 +80,54 @@
 .co-btn.blue:hover { background: var(--blue-dark); }
 .co-btn:disabled { color: #c2c4ca; cursor: default; background: #fff; }
 
-/* ===== status card ===== */
+/* ===== status card (Figma "Status bar") ===== */
 .co-status {
-  max-width: 1080px;
-  margin: 0 auto;
+  box-sizing: border-box;
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
-  gap: 30px;
-  padding: 28px;
+  padding: 20px 30px;
+  gap: 20px;
+  isolation: isolate;
+  width: 900px;
+  max-width: 100%;
+  height: 150px;
+  margin: 0 auto;
+  background: #fafafa;
+  border: 1px solid #e5e7ea;
+  box-shadow: 0 0.886045px 7.26557px rgba(0, 0, 0, 0.08);
+  border-radius: 30px;
 }
-.co-status-left { min-width: 300px; }
+/* 285 + 20 gap + 535 = the 840px content width of the 900px bar */
+.co-status-left { width: 285px; flex: none; }
 .co-status-head {
   display: flex;
   align-items: center;
-  gap: 16px;
+  /* design: 105px "Status", then 64px, then the 84px badge — the badge stops
+     ~35px short of the left column's right edge */
+  gap: 60px;
 }
 .co-status-head h2 {
   font-size: 32px;
   font-weight: 800;
   margin: 0;
   letter-spacing: -0.5px;
+  color: #121212;
 }
 .co-status-left p {
-  color: var(--muted);
+  color: #787b86;
   font-size: 15px;
-  margin: 14px 0 0;
+  margin: 12px 0 0;
   line-height: 1.35;
-  max-width: 220px;
+  /* wraps after "появится" like the design */
+  max-width: 180px;
 }
 .silver-badge {
-  width: 92px;
-  height: 58px;
+  /* rotated bounding box is 84 × 56 — the budget inside the 110px content
+     height is 56 + 12 + 40 (two text lines) */
+  width: 78px;
+  height: 46px;
   border-radius: 10px;
   background: linear-gradient(135deg, #d4d6db 0%, #eceef1 45%, #c4c6cc 100%);
   transform: rotate(-8deg);
@@ -98,18 +138,18 @@
 .silver-badge::before {
   content: "";
   position: absolute;
-  top: 12px;
-  left: 12px;
-  width: 14px;
-  height: 11px;
+  top: 9px;
+  left: 10px;
+  width: 12px;
+  height: 9px;
   border-radius: 3px;
   background: rgba(0, 0, 0, 0.28);
 }
 .silver-badge span {
   position: absolute;
-  bottom: 9px;
-  left: 12px;
-  font-size: 15px;
+  bottom: 7px;
+  left: 10px;
+  font-size: 13px;
   font-weight: 600;
   color: #4a4c52;
   font-style: italic;
@@ -121,42 +161,43 @@
   gap: 12px;
   align-items: flex-start;
 }
+/* 44 + 12 + 47 = 103, inside the bar's 110px content height */
 .co-progress {
+  box-sizing: border-box;
   width: 100%;
-  height: 56px;
+  height: 44px;
   background: #ededf0;
   border-radius: 16px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding: 0 24px;
   position: relative;
+  overflow: hidden;
 }
 .co-progress .fill {
   position: absolute;
   left: 0;
   top: 0;
   bottom: 0;
-  width: 72%;
+  width: 69%;
   background: linear-gradient(90deg, #8b5cf6, #9d6bf5);
   border-radius: 16px;
 }
-.co-progress .dots {
+.co-progress .dot {
   position: relative;
   z-index: 1;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-.co-progress .dots i {
+  display: block;
   width: 10px;
   height: 10px;
   border-radius: 50%;
   background: #fff;
+  flex-shrink: 0;
 }
-.co-progress .dots i.off { background: #c9cacf; }
+.co-progress .dot.off { background: #c9cacf; }
 .co-progress-pill {
   width: 88%;
-  height: 52px;
+  height: 47px;
   background: linear-gradient(90deg, #9d6bf5, #8b5cf6);
   border-radius: 16px;
   display: flex;

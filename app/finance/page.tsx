@@ -33,7 +33,7 @@ export default function Finance() {
     <div className="acc">
       <Sidebar active="desk" />
 
-      <main className="acc-main">
+      <main className="acc-main fin-main">
         <div className="acc-top">
           <div className="acc-balance">
             <span className="b-alfa">Альфа</span>
@@ -49,92 +49,97 @@ export default function Finance() {
           </div>
         </div>
 
-        <h1 className="acc-title" style={{ cursor: "pointer" }} onClick={() => setDebt((v) => !v)}>Финансы</h1>
+        <div className="fin-surface">
+          <h1 className="acc-title" style={{ cursor: "pointer" }} onClick={() => setDebt((v) => !v)}>Финансы</h1>
 
-        <div className="fin-row">
-          {/* deposit */}
-          <div className="fin-card">
-            <div className="fin-head">
-              <IcWallet />
-              <span className="f-label">Депозит</span>
-            </div>
-            <div className={`fin-num${debt ? " grey" : ""}`}>{debt ? "0 ₽" : "490 000 ₽"}</div>
-            <div className="fin-avail">Доступно</div>
-            <div className="fin-btns">
-              <button className="fin-btn" onClick={() => setDrawer("accounts")}>Список счетов</button>
-              <div className="row2">
-                <button className="fin-btn blue" disabled={debt} onClick={() => setDrawer("topup")}>Пополнить</button>
-                <button className="fin-btn" disabled={debt} onClick={() => setDrawer("withdraw")}>Вывести</button>
+          <div className="fin-row">
+            {/* deposit */}
+            <div className="fin-card">
+              <div className="fin-head">
+                <IcWallet />
+                <span className="f-label">Депозит</span>
+              </div>
+              <div className="fin-money">
+                <div className={`fin-num${debt ? " grey" : ""}`}>{debt ? "0 ₽" : "490 000 ₽"}</div>
+                <div className="fin-avail">Доступно</div>
+              </div>
+              <div className="fin-btns">
+                <button className="fin-btn" onClick={() => setDrawer("accounts")}>Список счетов</button>
+                <div className="row2">
+                  <button className="fin-btn blue" disabled={debt} onClick={() => setDrawer("topup")}>Пополнить</button>
+                  <button className="fin-btn" disabled={debt} onClick={() => setDrawer("withdraw")}>Вывести</button>
+                </div>
               </div>
             </div>
-          </div>
-          {/* postpay */}
-          <div className="fin-card">
-            <div className="fin-head">
-              <IcPostpay />
-              <span className="f-label">Постоплата</span>
-            </div>
-            {debt ? (
-              <>
-                <div className="fin-amounts">
-                  <div>
-                    <div className="fin-num">15 000 ₽</div>
+            {/* postpay */}
+            <div className="fin-card">
+              <div className="fin-head">
+                <IcPostpay />
+                <span className="f-label">Постоплата</span>
+              </div>
+              {debt ? (
+                <>
+                  <div className="fin-amounts">
+                    <div>
+                      <div className="fin-num">15 000 ₽</div>
+                      <div className="fin-avail">Доступно</div>
+                    </div>
+                    <div>
+                      <div className="fin-num red">85 000 ₽</div>
+                      <div className="fin-avail">Задолженность</div>
+                    </div>
+                  </div>
+                  <div className="fin-debt-row">
+                    <div className="fin-datebox">
+                      <b>21.12.2025</b>
+                      <span>Дата погашения</span>
+                    </div>
+                    <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}>
+                      <span className="oc-see" onClick={() => setDrawer("invoices")}>Смотреть счета</span>
+                      <button className="oc-pay" style={{ margin: 0, width: "100%" }}>Погасить</button>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div className="fin-money">
+                    <div className="fin-num grey">100 000 ₽</div>
                     <div className="fin-avail">Доступно</div>
                   </div>
-                  <div>
-                    <div className="fin-num red">85 000 ₽</div>
-                    <div className="fin-avail">Задолженность</div>
-                  </div>
-                </div>
-                <div className="fin-debt-row">
-                  <div className="fin-datebox">
-                    <b>21.12.2025</b>
-                    <span>Дата погашения</span>
-                  </div>
-                  <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}>
-                    <span className="oc-see" onClick={() => setDrawer("invoices")}>Смотреть счета</span>
-                    <button className="oc-pay" style={{ margin: 0, width: "100%" }}>Погасить</button>
-                  </div>
-                </div>
-              </>
-            ) : (
-              <>
-                <div className="fin-num grey">100 000 ₽</div>
-                <div className="fin-avail">Доступно</div>
-                <div className="fin-nodebt">Нет<br />задолженности</div>
-              </>
-            )}
+                  <div className="fin-nodebt">Нет<br />задолженности</div>
+                </>
+              )}
+            </div>
           </div>
-        </div>
 
-        {/* payments */}
-        <div className="acc-card fin-pay">
-          <div className="p-left">
-            <h2>Платежи</h2>
-            <p>Действия с вашими финансами</p>
+          {/* payments */}
+          <div className="acc-card fin-pay">
+            <div className="p-left">
+              <h2>Платежи</h2>
+              <p>Действия с вашими финансами</p>
+            </div>
+            <div className="fin-optgrid">
+              <button className="fin-opt" onClick={() => setDrawer("invoices")}>
+                <IcFinRuble />
+                <span className="o-label">Счета на оплату</span>
+              </button>
+              <button className="fin-opt" onClick={() => setDrawer("reconciliation")}>
+                <IcActDoc />
+                <span className="o-label">Акт сверки</span>
+              </button>
+              <button className="fin-opt" onClick={() => setDrawer("cashflow")}>
+                <IcFinSwap />
+                <span className="o-label">Отчет<br />о движении<br />средств</span>
+              </button>
+            </div>
           </div>
-          <div className="fin-optgrid">
-            <button className="fin-opt" onClick={() => setDrawer("invoices")}>
-              <IcFinRuble />
-              <span className="o-badge">3 счета</span>
-              <span className="o-label">Счета на оплату</span>
-            </button>
-            <button className="fin-opt" onClick={() => setDrawer("reconciliation")}>
-              <IcActDoc />
-              <span className="o-label">Акт сверки</span>
-            </button>
-            <button className="fin-opt" onClick={() => setDrawer("cashflow")}>
-              <IcFinSwap />
-              <span className="o-label">Отчет<br />о движении<br />средств</span>
-            </button>
-          </div>
-        </div>
 
-        <div className="emp-secbar">
-          <div className="bar">
-            <button onClick={() => router.push("/company")}>Компания</button>
-            <button className="on">Финансы</button>
-            <button onClick={() => router.push("/employees")}>Сотрудники</button>
+          <div className="emp-secbar">
+            <div className="bar">
+              <button onClick={() => router.push("/company")}>Компания</button>
+              <button className="on">Финансы</button>
+              <button onClick={() => router.push("/employees")}>Сотрудники</button>
+            </div>
           </div>
         </div>
       </main>

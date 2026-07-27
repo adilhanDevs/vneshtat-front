@@ -42,7 +42,7 @@ export default function Account() {
       <Sidebar />
 
       {/* ---------------- main ---------------- */}
-      <main className="acc-main">
+      <main className="acc-main with-surface">
         <div className="acc-top">
           <div className="acc-balance">
             <span className="b-alfa">Альфа</span>
@@ -63,55 +63,57 @@ export default function Account() {
           </div>
         </div>
 
-        <h1 className="acc-title">Ваш аккаунт</h1>
+        <div className="acc-surface">
+          <h1 className="acc-title">Ваш аккаунт</h1>
 
-        <div className="acc-row">
-          {/* profile */}
-          <div className="acc-card acc-profile">
-            <img className="p-av" src="/img/avatar.png" alt="" />
-            <div className="p-name">Иван Вознесенский</div>
-            <div className="p-phone">+7 913 ***-**-96</div>
-            <div className="p-btns">
-              <button className="acc-obtn">Сменить фото</button>
-              <button className="acc-obtn red">
-                <IcLogout /> Выйти
+          <div className="acc-row">
+            {/* profile */}
+            <div className="acc-card acc-profile">
+              <img className="p-av" src="/img/avatar.png" alt="" />
+              <div className="p-name">Иван Вознесенский</div>
+              <div className="p-phone">+7 913 ***-**-96</div>
+              <div className="p-btns">
+                <button className="acc-obtn">Сменить фото</button>
+                <button className="acc-obtn red">
+                  <IcLogout /> Выйти
+                </button>
+              </div>
+            </div>
+
+            {/* stats */}
+            <div className="acc-card acc-stats">
+              <div className="s-label">Ваша статистика</div>
+              <div className="s-km">36 312 км</div>
+              <div className="s-sub">мы прошли вместе</div>
+              <div className="acc-statbox">
+                <div className="st"><b>15</b><span>поездок</span></div>
+                <div className="st"><b>2</b><span>страны</span></div>
+                <div className="st"><b>6</b><span>городов</span></div>
+              </div>
+              <img className="s-bag" src="/img/backpack.png" alt="" />
+            </div>
+          </div>
+
+          {/* settings */}
+          <div className="acc-card acc-settings">
+            <div className="set-left">
+              <h2>Настройки</h2>
+              <p>Управление вашим аккаунтом</p>
+            </div>
+            <div className="acc-optgrid">
+              <button className="acc-opt" onClick={() => setDrawer("security")}>
+                <IcLockPurple />
+                <span className="o-label">Безопасность</span>
+              </button>
+              <button className="acc-opt" onClick={() => setDrawer("personal")}>
+                <IcPersonBlue />
+                <span className="o-label">Личные данные</span>
+              </button>
+              <button className="acc-opt" onClick={() => setDrawer("access")}>
+                <IcShieldPurple />
+                <span className="o-label">Доступ</span>
               </button>
             </div>
-          </div>
-
-          {/* stats */}
-          <div className="acc-card acc-stats">
-            <div className="s-label">Ваша статистика</div>
-            <div className="s-km">36 312 км</div>
-            <div className="s-sub">мы прошли вместе</div>
-            <div className="acc-statbox">
-              <div className="st"><b>15</b><span>поездок</span></div>
-              <div className="st"><b>2</b><span>страны</span></div>
-              <div className="st"><b>6</b><span>городов</span></div>
-            </div>
-            <img className="s-bag" src="/img/backpack.png" alt="" />
-          </div>
-        </div>
-
-        {/* settings */}
-        <div className="acc-card acc-settings">
-          <div className="set-left">
-            <h2>Настройки</h2>
-            <p>Управление вашим аккаунтом</p>
-          </div>
-          <div className="acc-optgrid">
-            <button className="acc-opt" onClick={() => setDrawer("security")}>
-              <IcLockPurple />
-              <span className="o-label">Безопасность</span>
-            </button>
-            <button className="acc-opt" onClick={() => setDrawer("personal")}>
-              <IcPersonBlue />
-              <span className="o-label">Личные данные</span>
-            </button>
-            <button className="acc-opt" onClick={() => setDrawer("access")}>
-              <IcShieldPurple />
-              <span className="o-label">Доступ</span>
-            </button>
           </div>
         </div>
       </main>

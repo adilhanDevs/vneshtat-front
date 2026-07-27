@@ -27,7 +27,7 @@ export default function Search() {
     <div className="acc">
       <Sidebar active="search" />
 
-      <main className="acc-main">
+      <main className="acc-main with-surface">
         <div className="acc-top">
           <div className="acc-balance">
             <span className="b-alfa">Альфа</span>
@@ -43,37 +43,43 @@ export default function Search() {
           </div>
         </div>
 
-        <h1 className="acc-title">Поиск в чатах</h1>
-        <div className="srch-sub">Напишите название чата или содержащиеся в нем слова.</div>
+        <div className="acc-surface">
+          <h1 className="acc-title">Поиск в чатах</h1>
+          <div className="srch-sub">Напишите название чата или содержащиеся в нем слова.</div>
 
-        <div className="srch-wrap">
-          <div className="srch-field-box">
-            <input
-              className="srch-field"
-              placeholder="Поиск"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
-            <button className="srch-filter"><IcSliders /></button>
-          </div>
+          <div className="srch-wrap">
+            <div className="srch-field-box">
+              <input
+                className="srch-field"
+                placeholder="Поиск"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+              />
+              <button className="srch-filter"><IcSliders /></button>
+            </div>
 
-          {!active
-            ? DEFAULTS.map((c, i) => (
-                <div key={i} className="srch-item">
-                  <div className="srch-title">{c.title}{c.plane && <IcPlane />}</div>
-                  <div className="srch-prev">{c.prev}</div>
-                  <button className="srch-dots"><IcDots /></button>
-                </div>
-              ))
-            : RESULTS.map((c, i) => (
-                <div key={i} className="srch-item">
-                  <div className="srch-title">{c.title}{c.plane && <IcPlane />}</div>
-                  <div className="srch-prev">
-                    <span className="hl">отчета о дви</span>жении средств с 12.05.2024 по 12.05.2025 для организации Альфа.
+            {!active
+              ? DEFAULTS.map((c, i) => (
+                  <div key={i} className="srch-item">
+                    <div className="srch-body">
+                      <div className="srch-title">{c.title}{c.plane && <IcPlane />}</div>
+                      <div className="srch-prev">{c.prev}</div>
+                    </div>
+                    <button className="srch-dots"><IcDots /></button>
                   </div>
-                  <button className="srch-dots"><IcDots /></button>
-                </div>
-              ))}
+                ))
+              : RESULTS.map((c, i) => (
+                  <div key={i} className="srch-item">
+                    <div className="srch-body">
+                      <div className="srch-title">{c.title}{c.plane && <IcPlane />}</div>
+                      <div className="srch-prev">
+                        <span className="hl">отчета о дви</span>жении средств с 12.05.2024 по 12.05.2025 для организации Альфа.
+                      </div>
+                    </div>
+                    <button className="srch-dots"><IcDots /></button>
+                  </div>
+                ))}
+          </div>
         </div>
       </main>
 

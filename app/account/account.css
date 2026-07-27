@@ -97,6 +97,17 @@
   margin-top: 0;
   padding: 22px 40px 60px;
 }
+.acc-main.with-surface {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+}
+.acc-surface {
+  flex: 1;
+  background: #fff;
+  border-radius: 30px;
+  padding: 20px 0 40px;
+}
 .acc-top {
   display: flex;
   align-items: center;

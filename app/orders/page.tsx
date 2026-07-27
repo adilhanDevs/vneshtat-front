@@ -73,13 +73,15 @@ export default function Orders() {
                   <div>18 услуг</div>
                 </div>
                 <div className="ord-right">
-                  <div className="ord-price">888 570 ₽</div>
+                  <div className="ord-price-row">
+                    <div className="ord-price">888 570 ₽</div>
+                    <button className="ord-dots" onClick={(e) => { e.stopPropagation(); setCtx(ctx === o.id ? null : o.id); }}><IcDots /></button>
+                  </div>
                   <div className="ord-actions">
                     <button className="ord-chat" onClick={() => setMessenger(true)}>Чат</button>
                     <button className="ord-data" onClick={() => router.push("/order")}>Данные</button>
                   </div>
                 </div>
-                <button className="ord-dots" onClick={(e) => { e.stopPropagation(); setCtx(ctx === o.id ? null : o.id); }}><IcDots /></button>
                 {ctx === o.id && (
                   <div className="msg-ctx" style={{ right: 16, top: 48 }} onClick={(e) => e.stopPropagation()}>
                     <button onClick={() => { setCtx(null); router.push("/order"); }}><IcInfoCircle /> О заказе</button>

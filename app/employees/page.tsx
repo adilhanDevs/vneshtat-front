@@ -37,7 +37,7 @@ export default function Employees() {
     <div className="acc">
       <Sidebar active="desk" />
 
-      <main className="acc-main">
+      <main className="acc-main with-surface">
         <div className="acc-top">
           <div className="acc-balance">
             <span className="b-alfa">Альфа</span>
@@ -53,7 +53,8 @@ export default function Employees() {
           </div>
         </div>
 
-        <h1 className="acc-title" style={{ cursor: "pointer" }} onClick={() => setHasData((v) => !v)}>Сотрудники</h1>
+        <div className="acc-surface">
+          <h1 className="acc-title" style={{ cursor: "pointer" }} onClick={() => setHasData((v) => !v)}>Сотрудники</h1>
 
         {hasData ? (
           <div className="emp-row">
@@ -141,7 +142,8 @@ export default function Employees() {
             <button className="on">Сотрудники</button>
           </div>
         </div>
-      </main>
+      </div>
+    </main>
 
       {messenger && <Messenger onClose={() => setMessenger(false)} />}
 
