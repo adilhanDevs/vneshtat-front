@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import "../account/account.css";
 import "./dashboard.css";
 import Sidebar from "../account/Sidebar";
@@ -117,6 +118,7 @@ const ORDERS = [
 /* ====================== MAIN COMPONENT ====================== */
 
 export default function Dashboard() {
+  const router = useRouter();
   const [messenger, setMessenger] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [ctxMenu, setCtxMenu] = useState<ContextMenu>(null);
@@ -202,7 +204,7 @@ export default function Dashboard() {
           <div className="acc-top-right">
             <button className="acc-iconbtn"><IcDots /></button>
             <button className="acc-iconbtn" onClick={() => setMessenger(true)}><IcBubble /></button>
-            <img className="acc-avatar" src="/img/avatar-sm.png" alt="" />
+            <img className="acc-avatar" src="/img/avatar-sm.png" alt="" onClick={() => router.push("/account")} />
           </div>
         </div>
 

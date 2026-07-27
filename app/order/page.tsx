@@ -43,7 +43,7 @@ export default function Order() {
           <div className="acc-top-right">
             <button className="acc-iconbtn"><IcDots /></button>
             <button className="acc-iconbtn"><IcClock /></button>
-            <img className="acc-avatar" src="/img/avatar-sm.png" alt="" />
+            <img className="acc-avatar" src="/img/avatar-sm.png" alt="" onClick={() => router.push("/account")} />
           </div>
         </div>
 
@@ -57,12 +57,12 @@ export default function Order() {
             <div className="oc-amount">8 385 388 ₽</div>
             <div className="oc-label">Стоимость услуг в заказе</div>
             <div className="oc-actions">
-              <div className="order-timer" style={{ background: "#f3f4f6" }}>
+              <div className="order-timer h-24 border border-stone-200" style={{ background: "#f3f4f6" }}>
                 <b style={{ color: "#b3b5bb" }}>35:44</b>
                 <span style={{ color: "#a9abb1" }}>Услуги забронированы</span>
               </div>
               <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}>
-                <span className="oc-see">Смотреть счета</span>
+                <span className="oc-see border border-stone-200 w-full pt-1.5 text-center h-10 rounded-2xl">Смотреть счета</span>
                 <button className="oc-pay" style={{ margin: 0, width: "100%" }}>Оплатить</button>
               </div>
             </div>
@@ -70,22 +70,23 @@ export default function Order() {
 
           {/* stats */}
           <div className="acc-card order-stats">
+            <div className="oc-icon"><IcOrderCard /></div>
             <img className="os-bag" src="/img/backpack.png" alt="" />
-            <div className="os-box">
+            <div className="os-box border border-stone-200 rounded-2xl p-4 text-center">
               <div className="st"><b>1</b><span>страна</span></div>
               <div className="st"><b>3</b><span>города</span></div>
               <div className="st"><b>18</b><span>услуг</span></div>
               <div className="st"><b>24</b><span>участника</span></div>
             </div>
             <div style={{ display: "flex", gap: 12, marginTop: "auto", paddingTop: 22 }}>
-              <button className="fin-btn" onClick={() => setModal("tripdata")}>Данные заказа</button>
-              <button className="fin-btn" onClick={() => setDrawer("participants")}>Участники</button>
+              <button className="fin-btn border border-stone-200 rounded-2xl text-stone-600 py-2 px-4" onClick={() => setModal("tripdata")}>Данные заказа</button>
+              <button className="fin-btn border border-stone-200 rounded-2xl text-stone-600 py-2 px-4" onClick={() => setDrawer("participants")}>Участники</button>
             </div>
           </div>
         </div>
 
         {/* actions */}
-        <div className="acc-card order-actions" style={{ padding: 26 }}>
+        <div className="acc-card order-actions border border-stone-300 w-3/4" style={{ padding: 26 }}>
           <div className="oa-left">
             <h2>Действия</h2>
             <p>Управление вашим аккаунтом</p>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import "../account/account.css";
 import "./widgets.css";
 import Sidebar from "../account/Sidebar";
@@ -8,6 +9,7 @@ import Messenger from "../account/Messenger";
 import { IcCard, IcDots, IcBubble, IcCalHeader, IcRadar, IcCal3D } from "../account/icons";
 
 export default function Widgets() {
+  const router = useRouter();
   const [messenger, setMessenger] = useState(false);
   const [query, setQuery] = useState("");
   const [focused, setFocused] = useState(false);
@@ -30,7 +32,7 @@ export default function Widgets() {
           <div className="acc-top-right">
             <button className="acc-iconbtn"><IcDots /></button>
             <button className="acc-iconbtn" onClick={() => setMessenger(true)}><IcBubble /></button>
-            <img className="acc-avatar" src="/img/avatar-sm.png" alt="" />
+            <img className="acc-avatar" src="/img/avatar-sm.png" alt="" onClick={() => router.push("/account")} />
           </div>
         </div>
 

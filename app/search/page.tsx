@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import "../account/account.css";
 import "./search.css";
 import Sidebar from "../account/Sidebar";
@@ -19,6 +20,7 @@ const RESULTS = [
 ];
 
 export default function Search() {
+  const router = useRouter();
   const [messenger, setMessenger] = useState(false);
   const [query, setQuery] = useState("");
   const active = query.trim().length > 0;
@@ -39,7 +41,7 @@ export default function Search() {
           <div className="acc-top-right">
             <button className="acc-iconbtn"><IcDots /></button>
             <button className="acc-iconbtn" onClick={() => setMessenger(true)}><IcBubble /></button>
-            <img className="acc-avatar" src="/img/avatar-sm.png" alt="" />
+            <img className="acc-avatar" src="/img/avatar-sm.png" alt="" onClick={() => router.push("/account")} />
           </div>
         </div>
 
