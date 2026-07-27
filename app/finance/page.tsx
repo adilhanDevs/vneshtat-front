@@ -14,7 +14,7 @@ import {
 } from "../account/icons";
 
 type Drawer =
-  | null | "topup" | "withdraw" | "accounts" | "addaccount" | "accountdata"
+  | null | "topup" | "topup-sbp" | "topup-forming" | "withdraw" | "accounts" | "addaccount" | "accountdata"
   | "reconciliation" | "cashflow" | "invoices";
 type Modal =
   | null | "invoice-sbp" | "forming" | "sent" | "rejected" | "approved" | "download-invoice";
@@ -26,6 +26,10 @@ export default function Finance() {
   const [messenger, setMessenger] = useState(false);
   const [ctx, setCtx] = useState<string | null>(null);
   const [debt, setDebt] = useState(false);
+  const [topupAmount, setTopupAmount] = useState("");
+
+  const hasAmount = topupAmount.trim().length > 0;
+  const displayAmount = topupAmount.includes("₽") ? topupAmount : `${topupAmount} ₽`;
 
   const closeAll = () => { setDrawer(null); setModal(null); };
 
@@ -120,15 +124,15 @@ export default function Finance() {
             </div>
             <div className="fin-optgrid">
               <button className="fin-opt" onClick={() => setDrawer("invoices")}>
-                <IcFinRuble />
+                <img src="/img/rubl.svg" alt="" width={29} height={31} />
                 <span className="o-label">Счета на оплату</span>
               </button>
               <button className="fin-opt" onClick={() => setDrawer("reconciliation")}>
-                <IcActDoc />
+               <img src="/img/document.svg" alt="" width={29} height={31} />
                 <span className="o-label">Акт сверки</span>
               </button>
               <button className="fin-opt" onClick={() => setDrawer("cashflow")}>
-                <IcFinSwap />
+                <img src="/img/transactions.png" alt="" width={29} height={31} />
                 <span className="o-label">Отчет<br />о движении<br />средств</span>
               </button>
             </div>
@@ -149,7 +153,7 @@ export default function Finance() {
       {/* ============ drawers ============ */}
       {drawer === "topup" && (
         <DrawerShell title="Пополнить баланс" onClose={closeAll}>
-          <p className="emp-desc" style={{ marginBottom: 18 }}>Вы можете пополнить баланс через СБП или сформировать счет на необходимую сумму.</p>
+          <p className="emp-desc" style={{ marginBottom: 18 }}>Вы можете пополнить баланс через СБП <br />   или сформировать счет на необходимую сумму.</p>
           <div className="fin-sbp">
             <h4>СБП</h4>
             <div className="fin-sbp-row"><IcSbpRuble /> <b>До 1 млн ₽</b> <span>за один перевод</span></div>
@@ -157,11 +161,58 @@ export default function Finance() {
           </div>
           <div className="fin-inline-field">
             <label>Сумма пополнения</label>
-            <input className="fin-inline-input" placeholder="100 000 ₽" />
+            <input
+              className="fin-inline-input"
+              placeholder="100 000 ₽"
+              value={topupAmount}
+              onChange={(e) => setTopupAmount(e.target.value)}
+            />
           </div>
           <div className="fin-hr" />
-          <button className="fin-big-btn blue" onClick={() => setModal("invoice-sbp")}>Пополнить через СБП</button>
-          <button className="fin-big-btn grey" onClick={() => setModal("forming")}>Сформировать счет</button>
+          <button className={`fin-big-btn ${hasAmount ? "blue" : "grey"}`} disabled={!hasAmount} onClick={() => setDrawer("topup-sbp")}>Пополнить через СБП</button>
+          <button className={`fin-big-btn ${hasAmount ? "blue" : "grey"}`} disabled={!hasAmount} onClick={() => setDrawer("topup-forming")}>Сформировать счет</button>
+        </DrawerShell>
+      )}
+
+      {drawer === "topup-sbp" && (
+        <DrawerShell
+          title={"Инвойс на пополнение\nчерез СБП"}
+          onClose={closeAll}
+          noFootBorder
+          footer={<button className="fin-big-btn grey" style={{ margin: 0 }} onClick={() => setDrawer("topup")}>Назад</button>}
+        >
+          <div style={{ display: "flex", flexDirection: "column", minHeight: "calc(100vh - 180px)" }}>
+            <div className="fin-sbp" style={{ marginBottom: 12 }}>
+              <div className="fin-sbp-row"><IcSbpRuble /> <b>{displayAmount}</b> <span>размер инвойса</span></div>
+              <div className="fin-sbp-row"><IcSbpPercent /> <b>Низкая комиссия</b> <span>уточните в своем банке</span></div>
+            </div>
+            <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: 20 }}>
+              <Qr />
+              <p style={{ textAlign: "center", color: "var(--muted)", fontSize: 14, margin: "20px 0 0" }}>
+                Отсканируйте QR-код<br />или перейдите по <span className="fin-link">ссылке.</span>
+              </p>
+            </div>
+          </div>
+        </DrawerShell>
+      )}
+
+      {drawer === "topup-forming" && (
+        <DrawerShell
+          title={"Формирование счета..."}
+          onClose={closeAll}
+          noFootBorder
+          footer={<button className="fin-big-btn blue" style={{ margin: 0 }} onClick={closeAll}>Скачать</button>}
+        >
+          <div style={{ display: "flex", flexDirection: "column", minHeight: "calc(100vh - 180px)" }}>
+            <div className="fin-sbp" style={{ marginBottom: 12 }}>
+              <div className="fin-sbp-row"><IcSbpRuble /> <b>{displayAmount}</b> <span>сумма счета</span></div>
+            </div>
+            <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: 20 }}>
+              <p style={{ textAlign: "center", color: "var(--muted)", fontSize: 16, margin: 0, lineHeight: 1.5 }}>
+                Загрузка документа начнется автоматически.<br />Если этого не произошло, нажмите кнопку ниже.
+              </p>
+            </div>
+          </div>
         </DrawerShell>
       )}
 
@@ -322,39 +373,9 @@ export default function Finance() {
       )}
 
       {/* ============ modals ============ */}
-      {modal === "invoice-sbp" && (
-        <ModalWrap onClose={() => setModal(null)}>
-          <div className="acc-modal" style={{ width: 400 }}>
-            <button className="acc-modal-x" onClick={() => setModal(null)}><IcClose size={20} /></button>
-            <h3 style={{ marginBottom: 16 }}>Инвойс на пополнение<br />через СБП</h3>
-            <div className="fin-sbp">
-              <div className="fin-sbp-row"><IcSbpRuble /> <b>100 000 ₽</b> <span>размер инвойса</span></div>
-              <div className="fin-sbp-row"><IcSbpPercent /> <b>Низкая комиссия</b> <span>уточните в своем банке</span></div>
-            </div>
-            <Qr />
-            <p style={{ textAlign: "center", color: "var(--muted)", fontSize: 14, margin: "0 0 18px" }}>
-              Отсканируйте QR-код<br />или перейдите по <span className="fin-link">ссылке.</span>
-            </p>
-            <button className="fin-big-btn grey" style={{ margin: 0 }} onClick={() => setModal(null)}>Отмена</button>
-          </div>
-        </ModalWrap>
-      )}
 
-      {modal === "forming" && (
-        <ModalWrap onClose={() => setModal(null)}>
-          <div className="acc-modal" style={{ width: 400 }}>
-            <button className="acc-modal-x" onClick={() => setModal(null)}><IcClose size={20} /></button>
-            <h3 style={{ marginBottom: 16 }}>Формирование счета...</h3>
-            <div className="fin-sbp" style={{ marginBottom: 60 }}>
-              <div className="fin-sbp-row"><IcSbpRuble /> <b>100 000 ₽</b> <span>сумма счета</span></div>
-            </div>
-            <p style={{ textAlign: "center", color: "var(--muted)", fontSize: 14, margin: "0 0 18px" }}>
-              Загрузка документа начнется автоматически.<br />Если этого не произошло, нажмите кнопку ниже.
-            </p>
-            <button className="fin-big-btn blue" style={{ margin: 0 }} onClick={() => setModal(null)}>Скачать</button>
-          </div>
-        </ModalWrap>
-      )}
+
+
 
       {modal === "sent" && (
         <ModalWrap onClose={() => setModal(null)}>
@@ -426,8 +447,8 @@ export default function Finance() {
 }
 
 /* ---------- shared ---------- */
-function DrawerShell({ title, children, onClose, footer }: {
-  title: string; children: React.ReactNode; onClose: () => void; footer?: React.ReactNode;
+function DrawerShell({ title, children, onClose, footer, noFootBorder }: {
+  title: string; children: React.ReactNode; onClose: () => void; footer?: React.ReactNode; noFootBorder?: boolean;
 }) {
   return (
     <div className="acc-scrim" onClick={onClose}>
@@ -437,7 +458,14 @@ function DrawerShell({ title, children, onClose, footer }: {
           <button onClick={onClose}><IcClose /></button>
         </div>
         <div className="acc-drawer-body">{children}</div>
-        {footer && <div className="acc-drawer-foot">{footer}</div>}
+        {footer && (
+          <div
+            className="acc-drawer-foot"
+            style={noFootBorder ? { borderTop: "none", paddingTop: 0, paddingBottom: 30 } : undefined}
+          >
+            {footer}
+          </div>
+        )}
       </div>
     </div>
   );

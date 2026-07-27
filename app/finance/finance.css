@@ -229,7 +229,8 @@
   height: 100%;
 }
 .fin-opt:hover { background: #eceef1; }
-.fin-opt > svg {
+.fin-opt > svg,
+.fin-opt > img {
   display: block;
   align-self: flex-start;
 }
@@ -297,8 +298,11 @@
   text-align: center;
   font-size: 16px;
   font-family: inherit;
-  color: #a9abb1;
+  color: #17181c;
   outline: none;
+}
+.fin-inline-input::placeholder {
+  color: #a9abb1;
 }
 .fin-hr { height: 1px; background: #eee; margin: 4px 0 18px; }
 
@@ -456,7 +460,7 @@
 .fin-qr {
   width: 210px;
   height: 210px;
-  margin: 6px auto 12px;
+  margin: 6px auto 0;
   display: block;
 }
 .fin-link { color: var(--blue); }
