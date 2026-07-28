@@ -191,7 +191,7 @@ export default function Dashboard() {
     <div className="acc" onClick={closeCtx}>
       <Sidebar active="desk" />
 
-      <main className="acc-main">
+      <main className="acc-main with-surface">
         {/* Top bar */}
         <div className="acc-top">
           <div className="acc-balance">
@@ -208,7 +208,8 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Greeting */}
+        <div className="acc-surface">
+          {/* Greeting */}
         <h1 className="dash-greeting">Добрый день!</h1>
 
         {/* Widget row */}
@@ -426,12 +427,13 @@ export default function Dashboard() {
           ))}
         </div>
 
-        {/* AI input bar */}
-        <div className="dash-ai-bar">
-          <button className="dash-ai-plus"><IcPlus /></button>
-          <span className="dash-ai-sparkle"><IcSparkle /></span>
-          <input placeholder="Напишите свой запрос" />
-          <button className="dash-ai-send"><IcSendDash /></button>
+          {/* AI input bar */}
+          <div className="dash-ai-bar">
+            <button className="dash-ai-plus"><IcPlus /></button>
+            <span className="dash-ai-sparkle"><IcSparkle /></span>
+            <input placeholder="Напишите свой запрос" />
+            <button className="dash-ai-send"><IcSendDash /></button>
+          </div>
         </div>
       </main>
 

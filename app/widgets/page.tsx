@@ -20,7 +20,7 @@ export default function Widgets() {
     <div className="acc">
       <Sidebar active="widgets" />
 
-      <main className="acc-main">
+      <main className="acc-main with-surface">
         <div className="acc-top">
           <div className="acc-balance">
             <span className="b-alfa">Альфа</span>
@@ -36,58 +36,60 @@ export default function Widgets() {
           </div>
         </div>
 
-        <h1 className="acc-title">Виджеты</h1>
+        <div className="acc-surface">
+          <h1 className="acc-title">Виджеты</h1>
 
-        <div className="wg-search-wrap">
-          <input
-            className="wg-search"
-            placeholder="Поиск виджетов"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            onFocus={() => setFocused(true)}
-            onBlur={() => setTimeout(() => setFocused(false), 150)}
-          />
-          {query && (
-            <button className="wg-search-x" onMouseDown={(e) => { e.preventDefault(); setQuery(""); }}>
-              <IcClose />
-            </button>
-          )}
-          {showDropdown && (
-            <div className="wg-dropdown">
-              <button className="hl" onMouseDown={() => setQuery("Календарь")}>Календарь</button>
-              <button onMouseDown={() => setQuery("Календарь")}>Календарь</button>
-            </div>
-          )}
-        </div>
-
-        <div className="wg-row">
-          <div className="wg-card">
-            <div className="wg-illus"><IcCal3D /></div>
-            <div className="wg-content">
-              <div className="wg-head">
-                <IcCalHeader />
-                <span className="t">Календарь</span>
-                <span className="wg-badge">2</span>
+          <div className="wg-search-wrap">
+            <input
+              className="wg-search"
+              placeholder="Поиск виджетов"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onFocus={() => setFocused(true)}
+              onBlur={() => setTimeout(() => setFocused(false), 150)}
+            />
+            {query && (
+              <button className="wg-search-x" onMouseDown={(e) => { e.preventDefault(); setQuery(""); }}>
+                <IcClose />
+              </button>
+            )}
+            {showDropdown && (
+              <div className="wg-dropdown">
+                <button className="hl" onMouseDown={() => setQuery("Календарь")}>Календарь</button>
+                <button onMouseDown={() => setQuery("Календарь")}>Календарь</button>
               </div>
-              <div className="wg-desc">Следите за своими<br />поездками на календаре.</div>
-              <div className="wg-actions">
-                <button className="wg-btn">Открыть</button>
-                <button className="wg-dots"><IcDots /></button>
-              </div>
-            </div>
+            )}
           </div>
 
-          <div className="wg-card">
-            <div className="wg-illus"><IcCal3D /></div>
-            <div className="wg-content">
-              <div className="wg-head">
-                <IcRadar />
-                <span className="t">Радар</span>
+          <div className="wg-row">
+            <div className="wg-card">
+              <div className="wg-illus"><IcCal3D /></div>
+              <div className="wg-content">
+                <div className="wg-head">
+                  <IcCalHeader />
+                  <span className="t">Календарь</span>
+                  <span className="wg-badge">2</span>
+                </div>
+                <div className="wg-desc">Следите за своими<br />поездками на календаре.</div>
+                <div className="wg-actions">
+                  <button className="wg-btn">Открыть</button>
+                  <button className="wg-dots"><IcDots /></button>
+                </div>
               </div>
-              <div className="wg-desc">Автобронирвоание<br />появившихся билетов.</div>
-              <div className="wg-actions">
-                <button className="wg-btn">Подключить</button>
-                <button className="wg-dots"><IcDots /></button>
+            </div>
+
+            <div className="wg-card">
+              <div className="wg-illus"><IcCal3D /></div>
+              <div className="wg-content">
+                <div className="wg-head">
+                  <IcRadar />
+                  <span className="t">Радар</span>
+                </div>
+                <div className="wg-desc">Автобронирвоание<br />появившихся билетов.</div>
+                <div className="wg-actions">
+                  <button className="wg-btn">Подключить</button>
+                  <button className="wg-dots"><IcDots /></button>
+                </div>
               </div>
             </div>
           </div>

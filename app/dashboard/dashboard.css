@@ -473,6 +473,7 @@
   justify-content: space-between;
   gap: 43px;
   min-height: 111px;
+  position: relative;
 }
 .dash-order-left {
   flex: 0 0 auto;

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import "../account/account.css";
 import "./orders.css";
+import "../dashboard/dashboard.css";
 import Sidebar from "../account/Sidebar";
 import Messenger from "../account/Messenger";
 import {
@@ -11,9 +12,24 @@ import {
 } from "../account/icons";
 
 const ORDERS = [
-  { id: "o1", tag: "now", count: 2, },
-  { id: "o2", tag: "now", count: 0, },
-  { id: "o3", tag: "later", count: 0, },
+  {
+    id: "o1", badge: "Сейчас", badgeCount: 2, future: false,
+    title: "Питер, Самара - проверка объектов для обеспечения надежности беспроводного соединен...",
+    cities: "Санкт-Петербург, Самара +3", dates: "30 июн - 30 июл",
+    num: "4739", price: "888 570 ₽", people: "12 участников", services: "18 услуг",
+  },
+  {
+    id: "o2", badge: "Сейчас", badgeCount: 0, future: false,
+    title: "Питер, Самара - проверка объектов для обеспечения надежности беспроводного соединен...",
+    cities: "Санкт-Петербург, Самара +3", dates: "30 июн - 30 июл",
+    num: "4739", price: "888 570 ₽", people: "12 участников", services: "18 услуг",
+  },
+  {
+    id: "o3", badge: "Через 14 дней", badgeCount: 0, future: true,
+    title: "Питер, Самара - проверка объектов для обеспечения надежности беспроводного соединен...",
+    cities: "Санкт-Петербург, Самара +3", dates: "30 июн - 30 июл",
+    num: "4739", price: "888 570 ₽", people: "12 участников", services: "18 услуг",
+  },
 ];
 
 export default function Orders() {
@@ -26,7 +42,7 @@ export default function Orders() {
     <div className="acc">
       <Sidebar active="orders" />
 
-      <main className="acc-main" onClick={() => setCtx(null)}>
+      <main className="acc-main with-surface" onClick={() => setCtx(null)}>
         <div className="acc-top">
           <div className="acc-balance">
             <span className="b-alfa">Альфа</span>
@@ -42,47 +58,55 @@ export default function Orders() {
           </div>
         </div>
 
-        <h1 className="acc-title">Заказы</h1>
+        <div className="acc-surface">
+          <h1 className="acc-title">Заказы</h1>
 
-        <div className="ord-search-row">
-          <input className="ord-search" placeholder="Поиск заказов" />
-          <div className="ord-seg">
-            <button className={seg === "active" ? "on" : ""} onClick={() => setSeg("active")}>Активные</button>
-            <button className={seg === "archive" ? "on" : ""} onClick={() => setSeg("archive")}>Архив</button>
+          <div className="ord-search-row">
+            <input className="ord-search" placeholder="Поиск заказов" />
+            <div className="ord-seg">
+              <button className={seg === "active" ? "on" : ""} onClick={() => setSeg("active")}>Активные</button>
+              <button className={seg === "archive" ? "on" : ""} onClick={() => setSeg("archive")}>Архив</button>
+            </div>
           </div>
-        </div>
 
-        <div className="ord-list">
-          {ORDERS.map((o) => (
-            <div key={o.id} className="ord-item px-14">
-              <div className="ord-badges">
-                <span className={`ord-tag rounded-full ${o.tag}`}>{o.tag === "now" ? "Сейчас" : "Через 14 дней"}</span>
-                {o.count > 0 && <span className="ord-count rounded-full">{o.count}</span>}
-              </div>
-              <div className="ord-card">
-                <div className="ord-main">
-                  <div className="ord-title">Питер, Самара - проверка объектов для обеспечения надежности беспроводного соединен...</div>
-                  <div className="ord-sub">
-                    <span>Санкт-Петербург, Самара +3</span>
-                    <span>30 июн - 30 июл</span>
+          <div className="dash-orders">
+            {ORDERS.map((order) => (
+              <div key={order.id} className="dash-order">
+                <div className="dash-order-badge">
+                  <span className={`tag${order.future ? " future" : ""}`}>{order.badge}</span>
+                  {order.badgeCount > 0 && <span className="count">{order.badgeCount}</span>}
+                </div>
+
+                <div className="dash-order-left">
+                  <div className="dash-order-title">{order.title}</div>
+                  <div className="dash-order-meta">
+                    <span>{order.cities}</span>
+                    <span>{order.dates}</span>
                   </div>
                 </div>
-                <div className="ord-meta">
-                  <div>Номер: 4739</div>
-                  <div>12 участников</div>
-                  <div>18 услуг</div>
+
+                <div className="dash-order-stats">
+                  <span className="num">Номер: {order.num}</span>
+                  <span className="parts">{order.people}</span>
+                  <span className="services">{order.services}</span>
                 </div>
-                <div className="ord-right">
-                  <div className="ord-price-row">
-                    <div className="ord-price">888 570 ₽</div>
-                    <button className="ord-dots" onClick={(e) => { e.stopPropagation(); setCtx(ctx === o.id ? null : o.id); }}><IcDots /></button>
-                  </div>
-                  <div className="ord-actions">
-                    <button className="ord-chat" onClick={() => setMessenger(true)}>Чат</button>
-                    <button className="ord-data" onClick={() => router.push("/order")}>Данные</button>
+
+                <div className="dash-order-right">
+                  <div className="dash-order-price">{order.price}</div>
+                  <div className="dash-order-actions">
+                    <button className="chat-btn" onClick={() => setMessenger(true)}>Чат</button>
+                    <button className="data-btn" onClick={() => router.push("/order")}>Данные</button>
                   </div>
                 </div>
-                {ctx === o.id && (
+
+                <button
+                  className="dash-order-dots"
+                  onClick={(e) => { e.stopPropagation(); setCtx(ctx === order.id ? null : order.id); }}
+                >
+                  <IcDots />
+                </button>
+
+                {ctx === order.id && (
                   <div className="msg-ctx" style={{ right: 16, top: 48 }} onClick={(e) => e.stopPropagation()}>
                     <button onClick={() => { setCtx(null); router.push("/order"); }}><IcInfoCircle /> О заказе</button>
                     <button onClick={() => { setCtx(null); router.push("/order"); }}><IcPlane /> Услуги</button>
@@ -90,8 +114,8 @@ export default function Orders() {
                   </div>
                 )}
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </main>
 
