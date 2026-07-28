@@ -12,6 +12,8 @@ import {
   IcFinRuble, IcActDoc, IcFinSwap, IcSbpRuble, IcSbpPercent, IcInvRuble,
   IcEdit, IcDownload, IcBan, IcTrash, IcInfoCircle,
 } from "../account/icons";
+import { AiFillClockCircle } from "react-icons/ai";
+import { IoChatboxEllipsesOutline } from "react-icons/io5";
 
 type Drawer =
   | null | "topup" | "withdraw" | "accounts" | "addaccount" | "accountdata"
@@ -35,16 +37,20 @@ export default function Finance() {
 
       <main className="acc-main">
         <div className="acc-top">
-          <div className="acc-balance">
+          <div className="acc-balance shadow-sm">
             <span className="b-alfa">Альфа</span>
             <span className="b-div" />
             <span className="b-amount"><IcCard /> 490 000 ₽</span>
             <span className="b-div" />
-            <span className="acc-toggle" />
+            <div className="flex items-center relative">
+              <div className="w-4.5 h-4.5 bg-gray-300 rounded-full absolute top-0.4 right-2"></div>
+              <AiFillClockCircle className="text-xl text-gray-400 z-10" />
+              <div className="w-4.5 h-4.5 rounded-full"></div>
+            </div>
           </div>
           <div className="acc-top-right">
             <button className="acc-iconbtn"><IcDots /></button>
-            <button className="acc-iconbtn" onClick={() => setMessenger(true)}><IcBubble /></button>
+            <button className="acc-iconbtn" onClick={() => setMessenger(true)}><IoChatboxEllipsesOutline className="text-xl text-gray-500" /></button>
             <img className="acc-avatar" src="/img/avatar-sm.png" alt="" onClick={() => router.push("/account")} />
           </div>
         </div>

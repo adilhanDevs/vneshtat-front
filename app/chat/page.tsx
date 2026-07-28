@@ -12,6 +12,10 @@ import {
   IcWidgets, IcThumbUp, IcThumbDown, IcCopy, IcDownload, IcClose, IcArrowR,
   IcPaperclip, IcFolder2, IcArchive, IcTrash, IcEye, IcMenuChat,
 } from "../account/icons";
+import { AiFillClockCircle } from "react-icons/ai";
+import { IoChatboxEllipsesOutline } from "react-icons/io5";
+import { BsStars } from "react-icons/bs";
+import { HiMiniPaperAirplane } from "react-icons/hi2";
 
 type Msg =
   | { role: "user"; kind: "text"; text: string }
@@ -67,16 +71,20 @@ export default function Chat() {
 
       <main className="acc-main" style={{ position: "relative" }}>
         <div className="acc-top">
-          <div className="acc-balance">
+          <div className="acc-balance shadow-sm">
             <span className="b-alfa">Альфа</span>
             <span className="b-div" />
             <span className="b-amount"><IcCard /> 490 000 ₽</span>
             <span className="b-div" />
-            <span className="acc-toggle" />
+            <div className="flex items-center relative">
+              <div className="w-4.5 h-4.5 bg-gray-300 rounded-full absolute top-0.4 right-2"></div>
+              <AiFillClockCircle className="text-xl text-gray-400 z-10" />
+              <div className="w-4.5 h-4.5 rounded-full"></div>
+            </div>
           </div>
           <div className="acc-top-right">
             <button className="acc-iconbtn" onClick={() => setTopMenu((v) => !v)}><IcDots /></button>
-            <button className="acc-iconbtn" onClick={() => setMessenger(true)}><IcBubble /></button>
+            <button className="acc-iconbtn" onClick={() => setMessenger(true)}><IoChatboxEllipsesOutline className="text-xl text-gray-500" /></button>
             <img className="acc-avatar" src="/img/avatar-sm.png" alt="" onClick={() => router.push("/account")} />
           </div>
         </div>
@@ -161,7 +169,7 @@ export default function Chat() {
       <div className="ord-chatbar">
         <div className="inner">
           <button className="ord-round" onClick={attachFile}><IcPlus /></button>
-          <button className="ord-round"><IcSparkle /></button>
+          <button className="ord-round"><BsStars className="text-xl text-gray-500" /></button>
           <textarea
             ref={taRef}
             rows={1}
@@ -172,7 +180,7 @@ export default function Chat() {
             onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }}
           />
           <button className="ord-send" style={{ background: gen ? "#eef1f4" : "var(--blue)" }} disabled={gen} onClick={send}>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill={gen ? "#9aa0a8" : "#fff"}><path d="m4 11.5 15-6.5-4 15-3.5-6.5L4 11.5Z" /></svg>
+            <HiMiniPaperAirplane className="text-white text-xl" />
           </button>
         </div>
       </div>

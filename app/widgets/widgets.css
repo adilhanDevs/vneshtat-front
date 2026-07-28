@@ -106,7 +106,7 @@
 }
 .wg-btn {
   height: 40px;
-  padding: 0 30px;
+  padding: 0 50px;
   border-radius: 13px;
   background: #1c1d21;
   color: #fff;
@@ -121,7 +121,7 @@
   width: 40px;
   height: 40px;
   border-radius: 13px;
-  border: 1px solid var(--border2);
+  border: 1px solid #b0b0b0;
   background: #fff;
   cursor: pointer;
   display: flex;

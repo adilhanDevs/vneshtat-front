@@ -192,7 +192,7 @@
   border-radius: 22px;
   padding: 26px;
 }
-
+  
 /* profile card */
 .acc-profile {
   display: flex;
@@ -204,7 +204,6 @@
   height: 84px;
   border-radius: 50%;
   object-fit: cover;
-  margin-bottom: 14px;
 }
 .acc-profile .p-name {
   font-size: 20px;
@@ -229,7 +228,7 @@
   background: #fff;
   font-size: 15px;
   font-family: inherit;
-  color: var(--ink);
+  color: #7b7b7b;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -254,9 +253,10 @@
 }
 .acc-stats .s-km {
   font-size: 34px;
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: -0.5px;
   margin-top: 6px;
+  color: #878787;
 }
 .acc-stats .s-sub {
   color: var(--muted);
@@ -324,15 +324,15 @@
   gap: 16px;
 }
 .acc-opt {
-  background: var(--subcard);
+  background: #fff;
   border-radius: 16px;
   height: 108px;
-  padding: 16px;
+  padding: 12px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
-  border: none;
+  border: 1px solid var(--border2);
   font-family: inherit;
   text-align: left;
 }
@@ -342,7 +342,7 @@
 .acc-opt .o-label {
   font-size: 15px;
   font-weight: 500;
-  color: var(--ink);
+  color: #7c7c7c;
   text-align: right;
 }
 
@@ -427,12 +427,12 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border: 1px solid var(--border2);
-  border-radius: 16px;
-  padding: 16px 18px;
+  border: 1px solid #c4cbd2;
+  border-radius: 24px;
+  padding: 8px 18px;
 }
 .acc-listcard .lc-main b {
-  font-size: 17px;
+  font-size: 20px;
   font-weight: 700;
   display: block;
 }
@@ -879,8 +879,8 @@
 .msg-search {
   width: 100%;
   height: 50px;
-  border-radius: 14px;
-  background: #f2f3f5;
+  border-radius: 20px;
+  background: #ffffff;
   border: none;
   padding: 0 18px;
   font-size: 15px;
@@ -888,6 +888,7 @@
   color: var(--ink);
   outline: none;
   margin-bottom: 16px;
+  border: 1px solid var(--border2);
 }
 .msg-search::placeholder {
   color: #a9abb1;
@@ -1168,20 +1169,25 @@
 }
 .order-title {
   text-align: center;
-  font-size: 52px;
+  font-size: 68px;
   font-weight: 800;
   letter-spacing: -1px;
-  margin: 4px 0 30px;
+  margin: 4px 0 10px;
 }
 .order-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 22px;
+  gap: 12px;
   max-width: 890px;
-  margin: 0 auto 22px;
+  margin: 0 auto 12px;
+}
+.order-cost,
+.order-stats,
+.order-actions {
+  border-radius: 36px;
 }
 .order-cost .oc-icon {
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 .order-cost .oc-amount {
   font-size: 30px;
@@ -1192,13 +1198,12 @@
 .order-cost .oc-label {
   color: var(--muted);
   font-size: 14px;
-  margin-top: 4px;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 .order-cost .oc-actions {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 8px;
 }
 .order-timer {
   background: #fff0f1;
@@ -1243,8 +1248,8 @@
 .order-stats .os-bag {
   position: absolute;
   right: -6px;
-  top: 6px;
-  width: 130px;
+  top: 0px;
+  width: 180px;
 }
 .order-stats .os-box {
   display: flex;
@@ -1272,32 +1277,34 @@
   margin: 0 auto;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 26px;
   position: relative;
 }
 .order-actions .oa-left h2 {
-  font-size: 28px;
+  font-size: 32px;
   font-weight: 800;
   margin: 0;
 }
 .order-actions .oa-left p {
   color: var(--muted);
-  font-size: 14px;
+  font-size: 16px;
   margin: 6px 0 0;
   max-width: 180px;
 }
 .order-actions .oa-grid {
   display: flex;
-  gap: 16px;
+  gap: 12px;
 }
 .order-optcard {
   position: relative;
   background: var(--subcard);
   border-radius: 16px;
-  width: 150px;
+  width: 180px;
   height: 108px;
   padding: 16px;
   display: flex;
+  border: 1px solid var(--border);
   flex-direction: column;
   justify-content: space-between;
 }
@@ -1317,7 +1324,7 @@
   justify-content: center;
 }
 .order-optcard .oo-label {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   color: var(--muted);
 }
@@ -1329,8 +1336,8 @@
   display: flex;
   background: #fff;
   border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 5px;
+  border-radius: 28px;
+  padding: 20px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 .order-seg button {
@@ -1338,7 +1345,7 @@
   background: none;
   padding: 8px 22px;
   border-radius: 10px;
-  font-size: 14px;
+  font-size: 16px;
   font-family: inherit;
   color: #6d6f77;
   cursor: pointer;
@@ -1351,27 +1358,28 @@
 /* order notification cards */
 .order-notes {
   position: absolute;
-  right: -6px;
-  bottom: 14px;
+  right: -18%;
+  bottom: -15%;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 320px;
+  width: 400px;
 }
 .order-note {
   display: flex;
+  align-items: center;
   gap: 12px;
-  background: #fff;
+  background: #f3f3f6;
   border: 1px solid var(--border);
-  border-radius: 16px;
+  border-radius: 24px;
   padding: 12px 14px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
 }
 .order-note .n-ico {
-  width: 34px;
-  height: 34px;
+  width: 42px;
+  height: 42px;
   border-radius: 10px;
-  background: #f3f4f6;
+  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1390,16 +1398,16 @@
   gap: 8px;
 }
 .order-note .n-title {
-  font-size: 11px;
+  font-size: 14px;
   color: #626262;
 }
 .order-note .n-time {
-  font-size: 11px;
+  font-size: 14px;
   color: var(--muted2);
   flex-shrink: 0;
 }
 .order-note .n-text {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 500;
   margin-top: 2px;
   line-height: 1.3;

@@ -7,11 +7,16 @@ import "../orders/orders.css";
 import Sidebar from "../account/Sidebar";
 import Messenger from "../account/Messenger";
 import Advance from "./Advance";
+import { AiFillClockCircle } from "react-icons/ai";
+import { IoChatboxEllipsesOutline, IoWallet } from "react-icons/io5";
 import {
   IcCard, IcDots, IcClock, IcBack, IcOrderCard, IcReport, IcWidgetsBig,
   IcPlane, IcBellSm, IcChatBubbles, IcClose, IcChevron, IcCalSmall, IcCopy,
   IcLockField, IcMenuChat, IcInfoCircle, IcNote,
 } from "../account/icons";
+import { MdWebStories } from "react-icons/md";
+import { HiOutlinePencilAlt } from "react-icons/hi";
+import { RiErrorWarningLine } from "react-icons/ri";
 
 type Modal = null | "tripdata" | "order-cmd";
 type Drawer = null | "participants" | "participant";
@@ -33,16 +38,20 @@ export default function Order() {
 
       <main className="acc-main" style={{ position: "relative" }}>
         <div className="acc-top">
-          <div className="acc-balance">
+          <div className="acc-balance shadow-sm">
             <span className="b-alfa">Альфа</span>
             <span className="b-div" />
             <span className="b-amount"><IcCard /> 490 000 ₽</span>
             <span className="b-div" />
-            <span className="acc-toggle" />
+            <div className="flex items-center relative">
+              <div className="w-4.5 h-4.5 bg-gray-300 rounded-full absolute top-0.4 right-2"></div>
+              <AiFillClockCircle className="text-xl text-gray-400 z-10" />
+              <div className="w-4.5 h-4.5 rounded-full"></div>
+            </div>
           </div>
           <div className="acc-top-right">
             <button className="acc-iconbtn"><IcDots /></button>
-            <button className="acc-iconbtn"><IcClock /></button>
+            <button className="acc-iconbtn"><IoChatboxEllipsesOutline className="text-xl text-gray-500" /></button>
             <img className="acc-avatar" src="/img/avatar-sm.png" alt="" onClick={() => router.push("/account")} />
           </div>
         </div>
@@ -52,8 +61,8 @@ export default function Order() {
 
         <div className="order-row">
           {/* cost */}
-          <div className="acc-card order-cost">
-            <div className="oc-icon"><IcOrderCard /></div>
+          <div className="acc-card order-cost shadow-sm">
+            <div className="oc-icon "><IoWallet className="text-3xl text-gray-400" /></div>
             <div className="oc-amount">8 385 388 ₽</div>
             <div className="oc-label">Стоимость услуг в заказе</div>
             <div className="oc-actions">
@@ -61,7 +70,7 @@ export default function Order() {
                 <b style={{ color: "#b3b5bb" }}>35:44</b>
                 <span style={{ color: "#a9abb1" }}>Услуги забронированы</span>
               </div>
-              <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}>
+              <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "center", gap: 8 }}>
                 <span className="oc-see border border-stone-200 w-full pt-1.5 text-center h-10 rounded-2xl">Смотреть счета</span>
                 <button className="oc-pay" style={{ margin: 0, width: "100%" }}>Оплатить</button>
               </div>
@@ -69,8 +78,8 @@ export default function Order() {
           </div>
 
           {/* stats */}
-          <div className="acc-card order-stats">
-            <div className="oc-icon"><IcOrderCard /></div>
+          <div className="acc-card order-stats shadow-sm">
+            <div className="oc-icon"><MdWebStories className="text-3xl text-gray-400" /></div>
             <img className="os-bag" src="/img/backpack.png" alt="" />
             <div className="os-box border border-stone-200 rounded-2xl p-4 text-center">
               <div className="st"><b>1</b><span>страна</span></div>
@@ -79,15 +88,15 @@ export default function Order() {
               <div className="st"><b>24</b><span>участника</span></div>
             </div>
             <div style={{ display: "flex", gap: 12, marginTop: "auto", paddingTop: 22 }}>
-              <button className="fin-btn border border-stone-200 rounded-2xl text-stone-600 py-2 px-4" onClick={() => setModal("tripdata")}>Данные заказа</button>
-              <button className="fin-btn border border-stone-200 rounded-2xl text-stone-600 py-2 px-4" onClick={() => setDrawer("participants")}>Участники</button>
+              <button className="fin-btn border border-stone-200 rounded-2xl text-stone-600 py-2 px-6" onClick={() => setModal("tripdata")}>Данные заказа</button>
+              <button className="fin-btn border border-stone-200 rounded-2xl text-stone-600 py-2 px-6" onClick={() => setDrawer("participants")}>Участники</button>
             </div>
           </div>
         </div>
 
         {/* actions */}
-        <div className="acc-card order-actions border border-stone-300 w-3/4" style={{ padding: 26 }}>
-          <div className="oa-left">
+        <div className="acc-card order-actions border shadow-sm border-stone-300 w-3/4" style={{ padding: 26 }}>
+          <div className="oa-left mr-6">
             <h2>Действия</h2>
             <p>Управление вашим аккаунтом</p>
           </div>
@@ -115,7 +124,7 @@ export default function Order() {
 
           <div className="order-notes">
             <div className="order-note">
-              <span className="n-ico" style={{ background: "#eaf1fe" }}><IcPlane /></span>
+              <span className="n-ico" style={{ background: "#fff" }}><IcPlane /></span>
               <div style={{ flex: 1 }}>
                 <div className="n-top"><span className="n-title">Уведомление</span><span className="n-time">4 минуты</span></div>
                 <div className="n-text">Поездка в Москву (Август 2025)</div>
@@ -147,12 +156,12 @@ export default function Order() {
       {/* ===== Данные поездки modal ===== */}
       {modal === "tripdata" && (
         <div className="acc-scrim center" onClick={closeAll}>
-          <div className="acc-modal" onClick={(e) => e.stopPropagation()} style={{ width: 400, textAlign: "left", maxHeight: "84vh", overflowY: "auto" }}>
+          <div className="acc-modal" onClick={(e) => e.stopPropagation()} style={{ width: 480, textAlign: "left", maxHeight: "84vh", overflowY: "auto" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
               <h3 style={{ margin: 0 }}>Данные поездки</h3>
               <button style={{ background: "none", border: "none", cursor: "pointer" }} onClick={closeAll}><IcClose size={20} /></button>
             </div>
-            <p className="emp-desc" style={{ marginBottom: 18 }}>Укажите информацию о поездке. С ее помощью можно будет сделать аналитику точнее и детальнее.</p>
+            <p className="emp-desc" style={{ marginBottom: 18, fontSize: 13, color: "#a9abb1" }}>Укажите информацию о поездке. С ее помощью можно будет сделать аналитику точнее и детальнее.</p>
             <TF label="Компания" value="Альфа" lock />
             <TF label="Контактное лицо" value="Вознесенский Иван Сергеевич" chevron onClick={() => setDd((v) => !v)} />
             {dd && (
@@ -210,17 +219,17 @@ export default function Order() {
             </div>
             <div className="acc-drawer-body" onClick={() => setCtx(null)}>
               <p className="acc-sec-p" style={{ marginBottom: 14 }}>Все участники поездки, имеющие аккаунт, будут получать уведомления о событиях внутри поездки.</p>
-              <input className="msg-search" placeholder="Поиск" />
+              <input className="msg-search shadow-sm" placeholder="Поиск" />
               {["p1", "p2", "p3"].map((id, i) => (
                 <div key={id} className="msg-item" onClick={() => setDrawer("participant")}>
                   <img className="m-av" src="/img/avatar.png" alt="" />
                   <div className="m-body"><div className="m-name">{i === 1 ? "Анастасия Александровна Белосельская-Белозерская" : "Яковлев Николай Никитич"}{i !== 1 && <span className="tag-on">Онлайн</span>}</div></div>
                   <button className="msg-dots" onClick={(e) => { e.stopPropagation(); setCtx(ctx === id ? null : id); }}><IcDots /></button>
                   {ctx === id && (
-                    <div className="msg-ctx" style={{ right: 10, top: 44 }} onClick={(e) => e.stopPropagation()}>
-                      <button onClick={() => { setCtx(null); setMessenger(true); }}><IcMenuChat /> Открыть чат</button>
-                      <button onClick={() => { setCtx(null); setDrawer("participant"); }}><IcInfoCircle /> Данные</button>
-                      <button onClick={() => setCtx(null)}><IcNote color="#5a5c63" /> Расходы в поездке</button>
+                    <div className="msg-ctx " style={{ right: 10, top: 44 }} onClick={(e) => e.stopPropagation()}>
+                      <button onClick={() => { setCtx(null); setMessenger(true); }}><IoChatboxEllipsesOutline className="text-gray-500" /> Открыть чат</button>
+                      <button onClick={() => { setCtx(null); setDrawer("participant"); }}><RiErrorWarningLine className="text-gray-500" /> Данные</button>
+                      <button onClick={() => setCtx(null)}><HiOutlinePencilAlt className="text-gray-500" /> Расходы в поездке</button>
                     </div>
                   )}
                 </div>

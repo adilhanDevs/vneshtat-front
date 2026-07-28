@@ -11,6 +11,8 @@ import {
   IcTwoLocks, IcPhoneBlue, IcMonitorBlue, IcTwoDevices, IcDeviceMonitor,
   IcDevicePhone, IcMenuUser, IcMenuHelp, IcMenuFeedback, IcLockTiny,
 } from "./icons";
+import { AiFillClockCircle } from "react-icons/ai";
+import { IoChatboxEllipsesOutline } from "react-icons/io5";
 
 type Drawer = null | "security" | "personal" | "access";
 type Modal =
@@ -44,16 +46,20 @@ export default function Account() {
       {/* ---------------- main ---------------- */}
       <main className="acc-main">
         <div className="acc-top">
-          <div className="acc-balance">
+          <div className="acc-balance shadow-sm">
             <span className="b-alfa">Альфа</span>
             <span className="b-div" />
             <span className="b-amount"><IcCard /> 490 000 ₽</span>
             <span className="b-div" />
-            <span className="acc-toggle" />
+            <div className="flex items-center relative">
+              <div className="w-4.5 h-4.5 bg-gray-300 rounded-full absolute top-0.4 right-2"></div>
+              <AiFillClockCircle className="text-xl text-gray-400 z-10" />
+              <div className="w-4.5 h-4.5 rounded-full"></div>
+            </div>
           </div>
           <div className="acc-top-right">
             <button className="acc-iconbtn"><IcDots /></button>
-            <button className="acc-iconbtn" onClick={() => setMessenger(true)}><IcBubble /></button>
+            <button className="acc-iconbtn" onClick={() => setMessenger(true)}><IoChatboxEllipsesOutline className="text-xl text-gray-500" /></button>
             <img
               className="acc-avatar"
               src="/img/avatar-sm.png"
@@ -67,7 +73,7 @@ export default function Account() {
 
         <div className="acc-row">
           {/* profile */}
-          <div className="acc-card acc-profile">
+          <div className="acc-card acc-profile shadow-sm">
             <img className="p-av" src="/img/avatar.png" alt="" />
             <div className="p-name">Иван Вознесенский</div>
             <div className="p-phone">+7 913 ***-**-96</div>
@@ -80,7 +86,7 @@ export default function Account() {
           </div>
 
           {/* stats */}
-          <div className="acc-card acc-stats">
+          <div className="acc-card acc-stats shadow-sm">
             <div className="s-label">Ваша статистика</div>
             <div className="s-km">36 312 км</div>
             <div className="s-sub">мы прошли вместе</div>
@@ -94,7 +100,7 @@ export default function Account() {
         </div>
 
         {/* settings */}
-        <div className="acc-card acc-settings">
+        <div className="acc-card acc-settings shadow-sm">
           <div className="set-left">
             <h2>Настройки</h2>
             <p>Управление вашим аккаунтом</p>
