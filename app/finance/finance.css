@@ -11,7 +11,7 @@
   flex: 1;
   background: #fff;
   border-radius: 30px;
-  padding: 20px 0 40px;
+  padding: 20px 0 120px;
 }
 
 /* ===== Финансы main page =====
@@ -69,20 +69,21 @@
 }
 .fin-num {
   font-size: 30px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.05;
   letter-spacing: -0.5px;
-  color: var(--blue);
+  color: #007bfb;
 }
 .fin-num.grey {
-  color: #b3b5bb;
+  color: #787b86;
 }
 .fin-num.red {
   color: var(--coral);
 }
 .fin-avail {
-  color: #787b86;
+  color: #9b9fad;
   font-size: 14px;
+  font-weight: 500;
   line-height: 1.15;
   margin-top: 2px;
 }
@@ -103,9 +104,10 @@
   border-radius: 16px;
   border: 1px solid #e5e7ea;
   background: #fff;
-  font-size: 15px;
+  font-size: 18px;
+  font-weight: 600;
   font-family: inherit;
-  color: #121212;
+  color: #787888;
   cursor: pointer;
   /* flex:1 in the column would zero the flex-basis and override height:40px;
      the buttons only share space inside .row2 */
@@ -139,7 +141,7 @@
   border: 1px solid #e5e7ea;
   border-radius: 16px;
   padding: 16px 20px;
-  color: #b3b5bb;
+  color: #9b9fad;
   font-size: 20px;
   font-weight: 500;
   line-height: 1.25;
@@ -178,7 +180,7 @@
   width: 800px;
   max-width: 100%;
   height: 150px;
-  margin: 0 auto;
+  margin: 0 auto 30px;
   background: #fafafa;
   border: 1px solid #e5e7ea;
   box-shadow: 0 0.886045px 7.26557px rgba(0, 0, 0, 0.08);
@@ -190,45 +192,45 @@
   flex: none;
 }
 .fin-pay .p-left h2 {
-  font-size: 36px;
-  font-weight: 800;
+  font-size: 32px;
+  font-weight: 600;
   margin: 0;
   letter-spacing: -0.5px;
-  color: #121212;
+  color: #17181c;
 }
 .fin-pay .p-left p {
-  color: #787b86;
+  color: #787880;
   font-size: 16px;
-  line-height: 1.35;
-  margin: 8px 0 0;
+  font-weight: 500;
+  line-height: 1.3;
+  margin: 4px 0 0;
   /* wraps after "вашими" like the design */
-  max-width: 150px;
+  max-width: 160px;
 }
 .fin-optgrid {
   flex: 1;
-  align-self: stretch;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  /* one row exactly as tall as the card's 108px content box */
-  grid-template-rows: 1fr;
+  display: flex;
+  align-items: center;
   gap: 10px;
+  height: 110px;
 }
 .fin-opt {
   position: relative;
-  background: var(--subcard);
-  border-radius: 20px;
-  padding: 12px 18px;
+  background: #ffffff;
+  border: 1px solid #e5e7ea;
+  border-radius: 13px;
+  padding: 14px 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: stretch;
   cursor: pointer;
-  border: none;
   font-family: inherit;
   box-sizing: border-box;
-  height: 100%;
+  flex: 1;
+  height: 110px;
 }
-.fin-opt:hover { background: #eceef1; }
+.fin-opt:hover { background: #fafafa; }
 .fin-opt > svg,
 .fin-opt > img {
   display: block;
@@ -241,8 +243,9 @@
   font-size: 15px;
   font-weight: 500;
   text-align: right;
-  line-height: 1.2;
-  color: #121212;
+  line-height: 1.18;
+  color: #787880;
+  margin-bottom: 2px;
 }
 .fin-opt .o-badge {
   position: absolute;

@@ -87,7 +87,7 @@
   text-align: center;
 }
 .trip-hero .hero-title {
-  font-family: 'Plus Jakarta Sans', var(--font-plus-jakarta), sans-serif;
+  font-family: 'TT Norms', var(--font-plus-jakarta), sans-serif;
   font-size: 70px;
   font-weight: 500;
   letter-spacing: -1px;
@@ -105,7 +105,7 @@
   margin-bottom: 10px;
 }
 .trip-hero .hero-sub {
-  font-family: 'Plus Jakarta Sans', var(--font-plus-jakarta), sans-serif;
+  font-family: 'TT Norms', var(--font-plus-jakarta), sans-serif;
   color: #787b86;
   font-size: 18px;
   font-weight: 500;
@@ -323,3 +323,13 @@
 .pd-check.on { background: var(--blue); border-color: var(--blue); }
 .pd-item .p-name { flex: 1; font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
 .pd-item .p-name .on { color: var(--blue); font-weight: 500; font-size: 14px; }
+
+/* Above 1500px the hero scales as one composition — at 500px the character
+   reads as too small on a 24" screen. Title and artwork share the same 1.26
+   factor, and the negative margin that overlaps them scales with it.
+   Same step as .cht-hero in chat.css. */
+@media (min-width: 1500px) {
+  .trip-hero .hero-title { font-size: 88px; }
+  .trip-hero img { width: 630px; margin-top: -73px; }
+  .trip-hero .hero-sub { font-size: 21px; max-width: 740px; }
+}

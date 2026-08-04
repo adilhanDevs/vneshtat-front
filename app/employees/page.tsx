@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Header from "../Header";
 import { useRouter } from "next/navigation";
 import "../account/account.css";
 import "./employees.css";
@@ -38,20 +39,7 @@ export default function Employees() {
       <Sidebar active="desk" />
 
       <main className="acc-main with-surface">
-        <div className="acc-top">
-          <div className="acc-balance">
-            <span className="b-alfa">Альфа</span>
-            <span className="b-div" />
-            <span className="b-amount"><IcCard /> 490 000 ₽</span>
-            <span className="b-div" />
-            <span className="acc-toggle" />
-          </div>
-          <div className="acc-top-right">
-            <button className="acc-iconbtn"><IcDots /></button>
-            <button className="acc-iconbtn" onClick={() => setMessenger(true)}><IcBubble /></button>
-            <img className="acc-avatar" src="/img/avatar-sm.png" alt="" onClick={() => router.push("/account")} />
-          </div>
-        </div>
+        <Header onMessengerClick={() => setMessenger(true)} />
 
         <div className="acc-surface">
           <h1 className="acc-title" style={{ cursor: "pointer" }} onClick={() => setHasData((v) => !v)}>Сотрудники</h1>

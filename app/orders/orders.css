@@ -1,14 +1,15 @@
 /* ===== Заказы list ===== */
 .ord-search-row {
-  max-width: 800px;
-  margin: 4px auto 14px;
+  width: min(70%, 800px);
+  margin: 0 auto 36px;
   display: flex;
   gap: 16px;
+  align-items: center;
 }
 .ord-search {
   flex: 1;
-  height: 44px;
-  border: 1px solid #cccccc;
+  height: 52px;
+  border: 1px solid #e4e5e8;
   border-radius: 18px;
   background: #fff;
   padding: 0 22px;
@@ -16,30 +17,37 @@
   font-family: inherit;
   color: var(--ink);
   outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
 }
 .ord-search::placeholder { color: #a9abb1; }
 .ord-seg {
   display: flex;
-  background: #ededf0;
-  border: 1px solid #e3e3e3;
-  border-radius: 16px;
-  padding: 6px;
+  align-items: center;
+  height: 52px;
+  background: #f0f1f4;
+  border: 1px solid #e5e7ea;
+  border-radius: 18px;
+  padding: 5px;
+  box-sizing: border-box;
 }
 .ord-seg button {
+  height: 42px;
+  padding: 0 24px;
+  border-radius: 14px;
   border: none;
-  background: none;
-  padding: 0 30px;
-  border-radius: 12px;
-  font-size: 16px;
+  background: transparent;
+  font-size: 15px;
+  font-weight: 500;
   font-family: inherit;
   color: #6d6f77;
   cursor: pointer;
+  transition: all 0.15s ease;
 }
 .ord-seg button.on {
-  background: #fff;
-  color: var(--ink);
-  font-weight: 500;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+  color: #17181c;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
 .ord-list {
@@ -152,6 +160,17 @@
   font-family: inherit;
   cursor: pointer;
 }
+.acc-title {
+  text-align: center;
+  font-family: 'TT Norms', sans-serif;
+  font-size: 55px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  margin: 16px 0 10px;
+  color: #17181c;
+}
+
+
 .ord-chat:hover { background: var(--blue-dark); }
 .ord-data {
   height: 40px;
@@ -268,87 +287,162 @@
 .trip-dd button.new { color: var(--blue); }
 
 .exp-card {
-  border: 1px solid var(--border2);
-  border-radius: 16px;
-  padding: 16px 18px;
-  margin-bottom: 12px;
+  border: 1px solid #e5e7ea;
+  border-radius: 20px;
+  padding: 14px 22px;
+  margin-bottom: 8px;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.exp-card .e-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+}
+.exp-card .e-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
 }
 .exp-card .e-top {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  width: 100%;
 }
-.exp-card .e-name { font-size: 16px; font-weight: 600; }
-.exp-card .e-amount { font-size: 17px; font-weight: 700; text-align: right; }
-.exp-card .e-amount span { display: block; font-size: 12px; color: var(--muted); font-weight: 400; }
-.exp-card .e-rows { margin-top: 8px; font-size: 13px; color: var(--muted); }
-.exp-card .e-rows div { margin: 3px 0; }
+.exp-card .e-name { font-size: 18px; font-weight: 600; color: #17181c; margin-bottom: 2px; }
+.exp-card .e-amount { font-size: 18px; font-weight: 600; text-align: right; color: #17181c; }
+.exp-card .e-amount span { display: block; font-size: 12px; color: #8c909c; font-weight: 400; margin-top: -2px; line-height: 1; margin-bottom: 12px; }
+.exp-card .e-rows { font-size: 13px; color: #8c909c; margin-top: 6px; }
+.exp-card .e-rows div { margin: 2px 0 0; }
 .exp-card .e-btn {
   height: 38px;
-  padding: 0 22px;
-  border-radius: 11px;
-  background: var(--blue);
+  min-width: 140px;
+  padding: 0 28px;
+  border-radius: 13px;
+  background: #007bfb;
   color: #fff;
   border: none;
   font-size: 14px;
   font-weight: 600;
   font-family: inherit;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 .exp-card .e-red { color: var(--coral); }
 
 /* advance sum field */
 .adv-sum {
-  display: flex;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
   margin-bottom: 12px;
 }
 .adv-sum .big {
-  flex: 1;
   height: 54px;
   border: 1px solid var(--border2);
-  border-radius: 14px;
+  border-radius: 18px;
   display: flex;
   align-items: center;
-  padding: 0 18px;
-  font-size: 16px;
+  padding: 0 25px;
+  font-size: 18px;
+  font-weight: 600;
   color: var(--ink);
 }
 .adv-sum .big.ph { color: #a9abb1; }
 .adv-sum .cur {
-  width: 120px;
   height: 54px;
   border: 1px solid var(--border2);
-  border-radius: 14px;
+  border-radius: 18px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
-  font-size: 16px;
-  color: var(--ink);
+  justify-content: space-between;
+  padding: 0 25px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #9aa0a6;
 }
 .adv-file {
   display: flex;
   align-items: center;
   gap: 12px;
   border: 1px solid var(--border2);
-  border-radius: 14px;
-  padding: 13px 16px;
+  border-radius: 18px;
+  padding: 15px 25px;
   margin-bottom: 12px;
-  font-size: 15px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #17181c;
 }
 .adv-file .fn { flex: 1; }
 .adv-addfile {
   width: 100%;
   height: 52px;
   border: 1px solid var(--border2);
-  border-radius: 14px;
+  border-radius: 18px;
   background: #fff;
-  color: #6d6f77;
-  font-size: 15px;
+  color: #787880;
+  font-size: 18px;
+  font-weight: 600;
   font-family: inherit;
   cursor: pointer;
   margin-bottom: 12px;
 }
 
+
+@media (min-width: 1500px) {
+  /* The search row keeps its 800px cap on purpose: the cards below it are
+     .dash-orders, capped at 1060px, so a wider cap here would make the row
+     overhang the card column (it reached 1050 vs 1060 at 1920px). Staying at
+     800 preserves the ~0.76 row-to-card ratio the design has at 1440px. */
+  .ord-search { height: 56px; font-size: 16px; border-radius: 20px; padding: 0 24px; }
+  .ord-seg { height: 56px; border-radius: 20px; padding: 5px; }
+  .ord-seg button { height: 46px; font-size: 16px; padding: 0 32px; border-radius: 15px; }
+}
+
+/* ================= SERVICES TAB ================= */
+.svc-container { width: min(calc(100% - 340px), 940px); margin: 30px auto 40px; position: relative; }
+.svc-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; margin-top: 4px; height: 35px; }
+.svc-title { font-size: 30px; font-weight: 600; color: #7f828e; letter-spacing: -0.5px; margin: 0; line-height: 1; }
+.svc-btn-pill { background: #fff; border: 1px solid #e5e7ea; border-radius: 18px; padding: 0 24px; height: 35px; font-size: 13px; font-weight: 500; color: #6d6f77; cursor: pointer; display: flex; align-items: center; justify-content: center; box-sizing: border-box; }
+
+
+.svc-filters { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; }
+.svc-seg { display: flex; background: #eceef2; border-radius: 15px; padding: 3px; height: 32px; box-sizing: border-box; }
+.svc-seg button { border: none; background: transparent; padding: 0 14px; border-radius: 12px; font-size: 13px; font-weight: 500; color: #6c6f79; cursor: pointer; height: 100%; display: flex; align-items: center; justify-content: center; }
+.svc-seg button.on { background: #ffffff; color: #6c6f79; font-weight: 500; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04); }
+
+.svc-filter-pill { display: flex; align-items: center; justify-content: center; gap: 6px; background: #fff; border: 1px solid #e5e7ea; border-radius: 15px; padding: 0 14px; font-size: 13px; font-weight: 500; color: #6d6f77; cursor: pointer; height: 30px; box-sizing: border-box; }
+.svc-filter-pill.active { background: #8C909C; color: #fff; border-color: #8C909C; }
+.svc-filter-pill.active .sf-close { background: rgba(255,255,255,0.25); border-radius: 50%; width: 14px; height: 14px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; }
+
+.svc-date-head { font-size: 20px; font-weight: 600; color: #8C909C; margin-bottom: 16px; }
+
+.svc-card { background: #fff; border: 1px solid #e5e7ea; border-radius: 28px; padding: 20px 28px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; height: auto; box-sizing: border-box; gap: 20px; }
+.svc-card-left { display: flex; gap: 24px; align-items: center; flex: 1; min-width: 0; }
+.svc-col { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; flex: 0 0 50%; min-width: 0; }
+.svc-thumb { width: 84px; height: 76px; border-radius: 14px; object-fit: cover; }
+.svc-time-block { display: flex; align-items: center; gap: 14px; width: 100%; }
+.svc-time-col { display: flex; flex-direction: column; gap: 0px; }
+.svc-time { font-size: 22px; font-weight: 700; line-height: 1.1; color: #17181c; letter-spacing: -0.3px; }
+.svc-time-sub { font-size: 13px; color: #8C909C; font-weight: 500; }
+.svc-time-line { flex: 1; height: 4px; background: #d7d8dc; border-radius: 2px; min-width: 40px; }
+.svc-info-block { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; flex: 0 0 150px; margin: 0 auto; }
+.svc-info-title { font-size: 15px; font-weight: 500; display: flex; align-items: center; gap: 8px; color: #6d6f77; white-space: nowrap; }
+.svc-info-sub { font-size: 13px; color: #8C909C; }
+.svc-info-meta { font-size: 13px; color: #8C909C; display: flex; flex-direction: column; gap: 4px; font-weight: 500; }
+.svc-info-meta span { display: block; }
+.svc-info-link { color: #1e88fa; font-weight: 600; cursor: pointer; display: inline-block; font-size: 13px; white-space: nowrap; margin-top: 2px; }
+
+.svc-card-right { display: flex; flex-direction: column; align-items: flex-end; gap: 14px; flex-shrink: 0; }
+.svc-price { font-size: 22px; font-weight: 700; color: #17181c; letter-spacing: -0.5px; }
+.svc-actions { display: flex; align-items: center; gap: 10px; }
+.svc-status-btn { background: #8C909C; color: #fff; min-width: 150px; height: 38px; padding: 0 24px; border-radius: 12px; font-size: 15px; font-weight: 500; font-family: inherit; border: none; cursor: pointer; }
+.svc-more-btn { width: 38px; height: 38px; border-radius: 12px; background: #eef0f3; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #8C909C; font-weight: bold; font-size: 16px; }

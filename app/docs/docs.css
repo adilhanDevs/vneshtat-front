@@ -10,3 +10,12 @@
 .doc-hero .hero-sub {
   max-width: 515px;
 }
+
+/* This rule is loaded after chat.css, so it overrides the .cht-hero .hero-sub
+   width there — including inside its 1500px step. Scale the wrap width with
+   the copy (515 * 21/18) so the line still breaks after "Напишите". */
+@media (min-width: 1500px) {
+  .doc-hero .hero-sub {
+    max-width: 600px;
+  }
+}

@@ -90,15 +90,10 @@ export const IcChevron = () => (
   </svg>
 );
 export const IcCalSmall = () => (
-  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#9a9ca3" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3.4" y="4.6" width="13.2" height="11.8" rx="2.2" />
-    <path d="M3.4 8h13.2M7 3.2v2.6M13 3.2v2.6" />
-  </svg>
+  <img src="/img/vneshtat11/Calendar.png" alt="" width={18} height={18} style={{ display: "inline-block", verticalAlign: "middle" }} />
 );
 export const IcTrash = () => (
-  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#a8aab0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M4.5 6h11M8 6V4.8A1 1 0 0 1 9 3.8h2a1 1 0 0 1 1 1V6M6 6l.6 9a1 1 0 0 0 1 1h4.8a1 1 0 0 0 1-1L15 6" />
-  </svg>
+  <img src="/img/vneshtat11/Delete.png" alt="" width={18} height={18} style={{ display: "inline-block", verticalAlign: "middle", cursor: "pointer" }} />
 );
 export const IcInfoSm = () => (
   <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#b3b5bb" strokeWidth="1.4">
@@ -243,9 +238,7 @@ export const IcNote = ({ color = "#1e88fa" }: { color?: string }) => (
   </svg>
 );
 export const IcDownload = () => (
-  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#5a5c63" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M10 3v9m0 0 3.5-3.5M10 12 6.5 8.5M4 15h12" />
-  </svg>
+  <img src="/img/vneshtat11/Download.png" alt="" width={18} height={18} style={{ display: "inline-block", verticalAlign: "middle", cursor: "pointer" }} />
 );
 export const IcMenuChat = () => (
   <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#5a5c63" strokeWidth="1.6" strokeLinejoin="round">
@@ -293,10 +286,13 @@ export const IcBack = () => (
   </svg>
 );
 export const IcOrderCard = () => (
-  <svg width="30" height="24" viewBox="0 0 34 26" fill="none">
-    <rect x="2" y="2" width="30" height="22" rx="5" fill="#d6d8dd" />
-    <rect x="2" y="7" width="30" height="4.5" fill="#a9abb1" />
+  <svg width="40" height="35" viewBox="0 0 30 26" fill="none">
+    <rect x="10" y="4" width="14" height="18" rx="4" fill="#BDBFC7" transform="rotate(14 17 13)" />
+    <rect x="2" y="2" width="16" height="22" rx="5" fill="#8C909C" />
   </svg>
+);
+export const IcWalletCard = () => (
+  <img src="/img/deposit-25.png" alt="" width={40} height={35} style={{ objectFit: 'contain' }} />
 );
 export const IcReport = () => (
   <svg width="30" height="30" viewBox="0 0 34 34" fill="none">
@@ -323,12 +319,7 @@ export const IcBellSm = () => (
 
 /* ---- employees ---- */
 export const IcPeople2 = () => (
-  <svg width="30" height="26" viewBox="0 0 34 28" fill="none">
-    <circle cx="12" cy="8" r="5" fill="#8c8e95" />
-    <circle cx="24" cy="10" r="4" fill="#bcbec3" />
-    <path d="M2 26c0-5.5 4.5-8.5 10-8.5s10 3 10 8.5H2Z" fill="#8c8e95" />
-    <path d="M23 17.5c4.5.2 9 2.8 9 8.5h-8" fill="#bcbec3" />
-  </svg>
+  <img src="/img/vneshtat12/People.png" alt="" width={24} height={24} style={{ display: "inline-block", verticalAlign: "middle" }} />
 );
 export const IcCluster3 = () => (
   <svg width="28" height="26" viewBox="0 0 30 28" fill="none">
@@ -453,10 +444,7 @@ export const IcCopy = () => (
   </svg>
 );
 export const IcLockField = () => (
-  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#9aa0a8" strokeWidth="1.5">
-    <rect x="5" y="9" width="10" height="7.5" rx="2" />
-    <path d="M7 9V7a3 3 0 0 1 6 0v2" />
-  </svg>
+  <img src="/img/vneshtat11/Lock.png" alt="" width={18} height={18} style={{ display: "inline-block", verticalAlign: "middle" }} />
 );
 export const IcChatBubbles = () => (
   <svg width="30" height="30" viewBox="0 0 34 34" fill="none">
@@ -473,11 +461,7 @@ export const IcCalHeader = ({ size = 24 }: { size?: number }) => (
   </svg>
 );
 export const IcRadar = ({ size = 24 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" strokeWidth="1.8" strokeLinecap="round">
-    <path d="M12 12a6 6 0 1 0-4.2-1.8" />
-    <path d="M12 12a3 3 0 1 0-1.6-.4" />
-    <circle cx="12" cy="12" r="1.3" fill="#8b5cf6" stroke="none" />
-  </svg>
+  <img src="/img/Radar.png" alt="" width={size} height={size} style={{ display: "inline-block", verticalAlign: "middle" }} />
 );
 export const IcCal3D = () => (
   <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
@@ -496,25 +480,18 @@ export const IcCal3D = () => (
 
 /* ---- company ---- */
 export const IcFolder = () => (
-  <svg width="34" height="30" viewBox="0 0 34 30" fill="none">
-    <path d="M3 8a4 4 0 0 1 4-4h6l3 3h11a4 4 0 0 1 4 4v11a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8Z" fill="#c9cbd1" />
-    <path d="M3 10a3 3 0 0 1 3-3h22a3 3 0 0 1 3 3v11a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V10Z" fill="#b6b8bf" />
-  </svg>
+  <img src="/img/vneshtat12/Contract.png" alt="" width={24} height={24} style={{ display: "inline-block", verticalAlign: "middle" }} />
 );
 
 /* ---- finance ---- */
 export const IcWallet = () => (
-  <svg width="34" height="30" viewBox="0 0 34 30" fill="none">
-    <rect x="3" y="5" width="28" height="21" rx="6" fill="#c9cbd1" />
-    <rect x="3" y="5" width="28" height="8" rx="4" fill="#b6b8bf" />
-    <circle cx="25" cy="16" r="2.6" fill="#fff" />
-  </svg>
+  <img src="/img/vneshtat12/Frame.png" alt="" width={24} height={24} style={{ display: "inline-block", verticalAlign: "middle" }} />
 );
 export const IcPostpay = () => (
   <svg width="38" height="26" viewBox="0 0 38 26" fill="none">
     <circle cx="25" cy="13" r="13" fill="#d6d8dd" />
     <circle cx="13" cy="13" r="13" fill="#a9abb1" />
-    <path d="M13 6.5v6.5l4 2.5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M13 6.5v6.5l-4 4" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 /* document silhouette with a folded top-right corner, shared by the three

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Header from "../Header";
 import { useRouter } from "next/navigation";
 import "../account/account.css";
 import "./orders.css";
@@ -43,20 +44,7 @@ export default function Orders() {
       <Sidebar active="orders" />
 
       <main className="acc-main with-surface" onClick={() => setCtx(null)}>
-        <div className="acc-top">
-          <div className="acc-balance">
-            <span className="b-alfa">Альфа</span>
-            <span className="b-div" />
-            <span className="b-amount"><IcCard /> 490 000 ₽</span>
-            <span className="b-div" />
-            <span className="acc-toggle" />
-          </div>
-          <div className="acc-top-right">
-            <button className="acc-iconbtn"><IcDots /></button>
-            <button className="acc-iconbtn" onClick={() => setMessenger(true)}><IcBubble /></button>
-            <img className="acc-avatar" src="/img/avatar-sm.png" alt="" onClick={() => router.push("/account")} />
-          </div>
-        </div>
+        <Header onMessengerClick={() => setMessenger(true)} />
 
         <div className="acc-surface">
           <h1 className="acc-title">Заказы</h1>
@@ -94,8 +82,8 @@ export default function Orders() {
                 <div className="dash-order-right">
                   <div className="dash-order-price">{order.price}</div>
                   <div className="dash-order-actions">
-                    <button className="chat-btn" onClick={() => setMessenger(true)}>Чат</button>
-                    <button className="data-btn" onClick={() => router.push("/order")}>Данные</button>
+                    <button className="chat-btn" onClick={(e) => { e.stopPropagation(); router.push("/chat"); }}>Чат</button>
+                    <button className="data-btn" onClick={(e) => { e.stopPropagation(); router.push("/order"); }}>Данные</button>
                   </div>
                 </div>
 

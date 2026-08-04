@@ -2,13 +2,14 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
+import Header from "../Header";
 import "../account/account.css";
 import "./dashboard.css";
 import Sidebar from "../account/Sidebar";
 import Messenger from "../account/Messenger";
 import {
   IcCard, IcDots, IcBubble, IcClose, IcWidgets as IcWidgetsNav,
-  IcCalHeader, IcRadar, IcPlus, IcSparkle,
+  IcCalHeader, IcRadar, IcPlus, IcSparkle, IcInfoCircle, IcPlane, IcMenuChat,
 } from "../account/icons";
 
 /* ====================== ICON COMPONENTS ====================== */
@@ -122,6 +123,7 @@ export default function Dashboard() {
   const [messenger, setMessenger] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [ctxMenu, setCtxMenu] = useState<ContextMenu>(null);
+  const [ctx, setCtx] = useState<string | null>(null);
   const [settingsCtx, setSettingsCtx] = useState<string | null>(null);
 
   // Widget configuration
@@ -185,6 +187,7 @@ export default function Dashboard() {
   const closeCtx = () => {
     setCtxMenu(null);
     setSettingsCtx(null);
+    setCtx(null);
   };
 
   return (
@@ -193,20 +196,7 @@ export default function Dashboard() {
 
       <main className="acc-main with-surface">
         {/* Top bar */}
-        <div className="acc-top">
-          <div className="acc-balance">
-            <span className="b-alfa">Альфа</span>
-            <span className="b-div" />
-            <span className="b-amount"><IcCard /> 490 000 ₽</span>
-            <span className="b-div" />
-            <span className="acc-toggle" />
-          </div>
-          <div className="acc-top-right">
-            <button className="acc-iconbtn"><IcDots /></button>
-            <button className="acc-iconbtn" onClick={() => setMessenger(true)}><IcBubble /></button>
-            <img className="acc-avatar" src="/img/avatar-sm.png" alt="" onClick={() => router.push("/account")} />
-          </div>
-        </div>
+        <Header onMessengerClick={() => setMessenger(true)} />
 
         <div className="acc-surface">
           {/* Greeting */}
@@ -412,17 +402,25 @@ export default function Dashboard() {
               <div className="dash-order-right">
                 <div className="dash-order-price">{order.price}</div>
                 <div className="dash-order-actions">
-                  <button className="chat-btn">Чат</button>
-                  <button className="data-btn">Данные</button>
+                  <button className="chat-btn" onClick={(e) => { e.stopPropagation(); router.push("/chat"); }}>Чат</button>
+                  <button className="data-btn" onClick={(e) => { e.stopPropagation(); router.push("/order"); }}>Данные</button>
                 </div>
               </div>
 
               <button
                 className="dash-order-dots"
-                onClick={(e) => e.stopPropagation()}
+                onClick={(e) => { e.stopPropagation(); setCtx(ctx === order.id ? null : order.id); }}
               >
                 <IcDots />
               </button>
+
+              {ctx === order.id && (
+                <div className="msg-ctx" style={{ right: 16, top: 48 }} onClick={(e) => e.stopPropagation()}>
+                  <button onClick={() => { setCtx(null); router.push("/order"); }}><IcInfoCircle /> О заказе</button>
+                  <button onClick={() => { setCtx(null); router.push("/order"); }}><IcPlane /> Услуги</button>
+                  <button onClick={() => { setCtx(null); setMessenger(true); }}><IcMenuChat /> Вложения чата</button>
+                </div>
+              )}
             </div>
           ))}
         </div>

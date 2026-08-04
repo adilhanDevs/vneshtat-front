@@ -82,7 +82,7 @@
   margin-bottom: 16px;
 }
 .cht-hero .hero-title {
-  font-family: 'Plus Jakarta Sans', var(--font-plus-jakarta), sans-serif;
+  font-family: 'TT Norms', var(--font-plus-jakarta), sans-serif;
   font-size: 70px;
   font-weight: 500;
   letter-spacing: -1px;
@@ -100,7 +100,7 @@
   margin-bottom: 10px;
 }
 .cht-hero .hero-sub {
-  font-family: 'Plus Jakarta Sans', var(--font-plus-jakarta), sans-serif;
+  font-family: 'TT Norms', var(--font-plus-jakarta), sans-serif;
   color: #787b86;
   font-size: 18px;
   font-weight: 500;
@@ -233,3 +233,28 @@
 
 /* big user bubble (default request) */
 .cht-out.wide { max-width: 500px; }
+
+/* Growth stops at the .cht-scroll 1160px cap; above 1500px the type and
+   controls step up once, the same way .dash-order does in dashboard.css.
+   The chat bar is deliberately left alone — its 900px width is tied to the
+   1160px column (0.78) and bumping it would break that ratio. */
+@media (min-width: 1500px) {
+  .cht-scroll { padding: 24px 10px 130px; }
+  .cht-ai { font-size: 18px; }
+  .cht-out { font-size: 17px; padding: 18px 24px; border-radius: 24px; max-width: 600px; }
+  .cht-out.wide { max-width: 540px; }
+  .cht-file { padding: 20px 24px; }
+  .cht-file .f-name { font-size: 17px; }
+  .cht-md { font-size: 17px; }
+  .cht-md .h { font-size: 19px; }
+  .cht-md .h2 { font-size: 23px; }
+  .cht-widget { max-width: 700px; padding: 16px 20px; }
+  .cht-userfile { padding: 18px 22px; }
+  /* The hero scales as one composition — at 500px the character reads as too
+     small on a 24" screen. Title and artwork share the same 1.26 factor so the
+     figure-to-title ratio docs.css depends on (0.75) is preserved, and the
+     negative margin that overlaps them scales with it (-58 * 1.26). */
+  .cht-hero .hero-title { font-size: 88px; }
+  .cht-hero .hero-sub { font-size: 21px; max-width: 740px; }
+  .cht-hero-stack img { width: 630px; margin-top: -73px; }
+}

@@ -33,24 +33,24 @@
 .co-card > * { align-self: stretch; }
 .co-title {
   font-size: 30px;
-  font-weight: 700;
-  /* design system: headings are set at 1em leading */
+  font-weight: 600;
   line-height: 1.05;
   letter-spacing: -0.4px;
-  color: #121212;
+  color: #17181c;
 }
-.co-title.blue { color: var(--blue); }
+.co-title.blue { color: #007bfb; }
 /* "сотрудников" is a smaller regular gray word next to the bold "99" */
 .co-title .light {
-  font-size: 21px;
-  color: #787b86;
-  font-weight: 400;
+  font-size: 20px;
+  color: #34363b;
+  font-weight: 500;
   letter-spacing: 0;
 }
 .co-sub {
-  color: #787b86;
+  color: #787880;
   font-size: 16px;
-  margin-top: 8px;
+  font-weight: 500;
+  margin-top: 0;
   line-height: 1.35;
 }
 .co-btns {
@@ -109,19 +109,20 @@
   gap: 60px;
 }
 .co-status-head h2 {
-  font-size: 32px;
-  font-weight: 800;
+  font-size: 36px;
+  font-weight: 600;
   margin: 0;
   letter-spacing: -0.5px;
-  color: #121212;
+  color: #17181c;
 }
 .co-status-left p {
-  color: #787b86;
-  font-size: 15px;
+  color: #787880;
+  font-size: 16px;
+  font-weight: 500;
   margin: 12px 0 0;
   line-height: 1.35;
-  /* wraps after "появится" like the design */
-  max-width: 180px;
+  /* wraps after "появится" like Figma W: 166px */
+  max-width: 166px;
 }
 .silver-badge {
   /* rotated bounding box is 84 × 56 — the budget inside the 110px content
@@ -188,8 +189,8 @@
   position: relative;
   z-index: 1;
   display: block;
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: #fff;
   flex-shrink: 0;

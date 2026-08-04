@@ -3,12 +3,12 @@
 /* --- Greeting title --- */
 .dash-greeting {
   text-align: center;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'TT Norms', sans-serif;
   font-size: 70px;
   font-weight: 700;
   font-style: normal;
   letter-spacing: -1.5px;
-  margin: 6px 0 30px;
+  margin: 30px 0 36px;
   color: #17181c;
 }
 
@@ -16,7 +16,7 @@
 .dash-widgets {
   display: flex;
   gap: 18px;
-  max-width: 1060px;
+  width: min(calc(100% - 240px), 1280px);
   margin: 0 auto 24px;
 }
 
@@ -81,11 +81,11 @@
   color: #17181c;
   font-style: normal;
   /* margin-bottom: 4px; */
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'TT Norms', sans-serif;
 }
 .dash-fin-sub {
   color: #8a8c93;
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'TT Norms', sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
@@ -456,14 +456,14 @@
 
 /* --- Order cards --- */
 .dash-orders {
-  max-width: 1060px;
+  width: min(calc(100% - 240px), 1280px);
   margin: 0 auto;
 }
 .dash-order {
   box-sizing: border-box;
   border: 1px solid #c0c7d1;
   border-radius: 26px;
-  padding: 20px 25px;
+  padding: 20px 30px;
   margin-bottom: 20px;
   background: #fff;
   display: flex;
@@ -471,9 +471,10 @@
   /* space-between keeps the title flush left and the price/buttons flush right,
      while centering the stats column in the space between the two sections. */
   justify-content: space-between;
-  gap: 43px;
+  gap: 20px;
   min-height: 111px;
   position: relative;
+  overflow: hidden;
 }
 .dash-order-left {
   flex: 0 0 auto;
@@ -577,12 +578,14 @@
 }
 .dash-order-actions {
   display: flex;
+  align-items: center;
   gap: 10px;
 }
 .dash-order-actions .chat-btn {
   height: 38px;
-  padding: 0 50px;
-  border-radius: 13px;
+  width: 95px;
+  padding: 0;
+  border-radius: 14px;
   background: #1e88fa;
   color: #fff;
   border: none;
@@ -590,14 +593,19 @@
   font-weight: 600;
   font-family: inherit;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 .dash-order-actions .chat-btn:hover {
   background: #1877ec;
 }
 .dash-order-actions .data-btn {
   height: 38px;
-  padding: 0 35px;
-  border-radius: 11px;
+  width: 95px;
+  padding: 0;
+  border-radius: 14px;
   background: #fff;
   color: #4a4c52;
   border: 1px solid #e4e5e8;
@@ -605,6 +613,10 @@
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 .dash-order-actions .data-btn:hover {
   background: #fafafa;
@@ -680,17 +692,16 @@
 
 /* --- Widget settings panel (slide-out drawer) --- */
 .dash-settings-panel {
-  margin-left: auto;
+  margin: 16px 16px 16px auto;
   width: 460px;
   max-width: 92vw;
-  height: 100vh;
+  height: calc(100vh - 32px);
   background: #fff;
   display: flex;
   flex-direction: column;
   box-shadow: -10px 0 40px rgba(0, 0, 0, 0.12);
   animation: dashSlideIn 0.25s ease;
-  border-top-left-radius: 22px;
-  border-bottom-left-radius: 22px;
+  border-radius: 24px;
 }
 @keyframes dashSlideIn {
   from {
@@ -917,3 +928,8 @@
   background: #f0f0f0;
   margin: 6px 18px;
 }
+
+/* The card grows horizontally only. Nothing here may change its height:
+   .dash-order-stats must keep its default spacing (a gap here forces the
+   3-line column taller and took the card from 126px to 173px), the vertical
+   padding stays at 20px, and the buttons stay 38px tall. */

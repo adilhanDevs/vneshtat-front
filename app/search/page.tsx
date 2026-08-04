@@ -1,22 +1,44 @@
 "use client";
 
 import { useState } from "react";
+import Header from "../Header";
 import { useRouter } from "next/navigation";
 import "../account/account.css";
 import "./search.css";
 import Sidebar from "../account/Sidebar";
 import Messenger from "../account/Messenger";
-import { IcCard, IcDots, IcBubble, IcSliders, IcPlane } from "../account/icons";
+import { IcCard, IcDots, IcBubble } from "../account/icons";
+
+const IcSearchSettings = () => (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+    <path fillRule="evenodd" clipRule="evenodd" d="M7.5 10.3496C9.01666 10.3496 10.2822 11.422 10.582 12.8496H17L17.1309 12.8633C17.4271 12.9238 17.6504 13.1858 17.6504 13.5C17.6504 13.8142 17.4271 14.0762 17.1309 14.1367L17 14.1504H10.582C10.2822 15.578 9.01666 16.6504 7.5 16.6504C5.98334 16.6504 4.71781 15.578 4.41797 14.1504H3C2.64101 14.1504 2.34961 13.859 2.34961 13.5C2.34961 13.141 2.64101 12.8496 3 12.8496H4.41797C4.71781 11.422 5.98334 10.3496 7.5 10.3496ZM7.5 11.6504C6.47827 11.6504 5.65039 12.4783 5.65039 13.5C5.65039 14.5217 6.47827 15.3496 7.5 15.3496C8.52173 15.3496 9.34961 14.5217 9.34961 13.5C9.34961 12.4783 8.52173 11.6504 7.5 11.6504Z" fill="#8C909C" />
+    <path fillRule="evenodd" clipRule="evenodd" d="M12.5 3.34961C14.0167 3.34961 15.2822 4.422 15.582 5.84961H17C17.359 5.84961 17.6504 6.14102 17.6504 6.5C17.6504 6.85898 17.359 7.15039 17 7.15039H15.582C15.2822 8.578 14.0167 9.65039 12.5 9.65039C10.9833 9.65039 9.71781 8.578 9.41797 7.15039H3L2.86914 7.13672C2.57289 7.07615 2.34961 6.81415 2.34961 6.5C2.34961 6.18585 2.57289 5.92385 2.86914 5.86328L3 5.84961H9.41797C9.71781 4.422 10.9833 3.34961 12.5 3.34961ZM12.5 4.65039C11.4783 4.65039 10.6504 5.47827 10.6504 6.5C10.6504 7.52173 11.4783 8.34961 12.5 8.34961C13.5217 8.34961 14.3496 7.52173 14.3496 6.5C14.3496 5.47827 13.5217 4.65039 12.5 4.65039Z" fill="#8C909C" />
+  </svg>
+);
+
+const IcMoreDots = () => (
+  <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+    <path d="M4.27539 9C4.97937 9.00021 5.5498 9.57136 5.5498 10.2754C5.54959 10.9792 4.97924 11.5496 4.27539 11.5498C3.57136 11.5498 3.00021 10.9794 3 10.2754C3 9.57123 3.57123 9 4.27539 9Z" fill="#8C909C" />
+    <path d="M10.2754 9C10.9794 9.00021 11.5498 9.57136 11.5498 10.2754C11.5496 10.9792 10.9792 11.5496 10.2754 11.5498C9.57136 11.5498 9.00021 10.9794 9 10.2754C9 9.57123 9.57123 9 10.2754 9Z" fill="#8C909C" />
+    <path d="M16.2754 9C16.9794 9.00021 17.5498 9.57136 17.5498 10.2754C17.5496 10.9792 16.9792 11.5496 16.2754 11.5498C15.5714 11.5498 15.0002 10.9794 15 10.2754C15 9.57123 15.5712 9 16.2754 9Z" fill="#8C909C" />
+  </svg>
+);
+
+const IcOrderSmall = () => (
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+    <path d="M12.3549 2.14266L9.77157 4.72597C9.71524 4.78251 9.64678 4.82514 9.57268 4.84982C9.49858 4.87451 9.42127 4.88043 9.34806 4.86705L3.05203 3.71549C2.97905 3.70215 2.90201 3.70799 2.82813 3.73247C2.75424 3.75696 2.68594 3.79927 2.62961 3.85546L2.13144 4.35363C2.08094 4.40413 2.04153 4.46437 2.01619 4.52979C1.99085 4.59521 1.98026 4.66407 1.98521 4.73115C1.99017 4.79823 2.01055 4.86176 2.0448 4.9169C2.07905 4.97204 2.12627 5.01734 2.18287 5.04937L6.34308 7.4073C6.39968 7.43932 6.4469 7.48463 6.48115 7.53977C6.5154 7.59491 6.53578 7.65843 6.54074 7.72551C6.5457 7.79259 6.5351 7.86146 6.50976 7.92688C6.48443 7.99229 6.44501 8.05254 6.39451 8.10303L4.75607 9.74147C4.70874 9.78872 4.65282 9.82627 4.59206 9.85162C4.53131 9.87696 4.46711 9.88952 4.40377 9.88845L2.27592 9.85293C1.82405 9.84609 1.59024 10.4415 1.95054 10.6811L3.90821 11.9845C3.95074 12.0128 3.98704 12.0491 4.01538 12.0917L5.31878 14.0493C5.55786 14.4102 6.15379 14.1758 6.1464 13.7245L6.11088 11.5967C6.1098 11.5332 6.12241 11.4689 6.14786 11.408C6.17331 11.3472 6.211 11.2912 6.25841 11.2438L7.89685 9.60537C7.9473 9.55495 8.00748 9.51559 8.07282 9.49027C8.13815 9.46496 8.20694 9.45435 8.27394 9.45926C8.34095 9.46417 8.40442 9.48446 8.45955 9.5186C8.51467 9.55274 8.55999 9.59983 8.59208 9.6563L10.951 13.8175C10.9831 13.874 11.0284 13.9211 11.0836 13.9552C11.1387 13.9893 11.2021 14.0096 11.2692 14.0145C11.3362 14.0195 11.4049 14.0089 11.4703 13.9835C11.5356 13.9582 11.5958 13.9189 11.6462 13.8684L12.1444 13.3703C12.2006 13.3139 12.2429 13.2456 12.2674 13.1718C12.2919 13.0979 12.2977 13.0208 12.2844 12.9479L11.1334 6.65127C11.12 6.57818 11.1259 6.501 11.1505 6.42701C11.1751 6.35302 11.2175 6.28464 11.2739 6.22831L13.8572 3.645C14.0774 3.42479 14.2095 3.13446 14.2243 2.83788C14.2391 2.5413 14.1356 2.26276 13.9363 2.06354C13.7371 1.86432 13.4586 1.76073 13.162 1.77557C12.8654 1.79041 12.5751 1.92245 12.3549 2.14266Z" fill="#007BFB" />
+  </svg>
+);
 
 const DEFAULTS = [
-  { title: "Поездка в Москву", plane: false, prev: "Оплата прошла успешно, желаю приятной поездки! Обращайтесь по любым вопросам." },
-  { title: "Поездка в Москву", plane: true, prev: "Оплата прошла успешно, желаю приятной поездки! Обращайтесь по любым вопросам." },
-  { title: "Формирование документов", plane: false, prev: "Документ успешно сформирован и проверен. Но я рекомендую перед отправкой проверить его самостояте..." },
+  { title: "Поездка в Москву", order: false, prev: "Оплата прошла успешно, желаю приятной поездки! Обращайтесь по любым вопросам." },
+  { title: "Поездка в Москву", order: true, prev: "Оплата прошла успешно, желаю приятной поездки! Обращайтесь по любым вопросам." },
+  { title: "Формирование документов", order: false, prev: "Документ успешно сформирован и проверен. Но я рекомендую перед отправкой проверить его самостояте..." },
 ];
 
 const RESULTS = [
-  { title: "Поездка в Москву", plane: false },
-  { title: "Формирование документов", plane: false },
+  { title: "Поездка в Москву", order: false },
+  { title: "Формирование документов", order: false },
 ];
 
 export default function Search() {
@@ -30,57 +52,54 @@ export default function Search() {
       <Sidebar active="search" />
 
       <main className="acc-main with-surface">
-        <div className="acc-top">
-          <div className="acc-balance">
-            <span className="b-alfa">Альфа</span>
-            <span className="b-div" />
-            <span className="b-amount"><IcCard /> 490 000 ₽</span>
-            <span className="b-div" />
-            <span className="acc-toggle" />
-          </div>
-          <div className="acc-top-right">
-            <button className="acc-iconbtn"><IcDots /></button>
-            <button className="acc-iconbtn" onClick={() => setMessenger(true)}><IcBubble /></button>
-            <img className="acc-avatar" src="/img/avatar-sm.png" alt="" onClick={() => router.push("/account")} />
-          </div>
-        </div>
+        <Header onMessengerClick={() => setMessenger(true)} />
 
-        <div className="acc-surface">
-          <h1 className="acc-title">Поиск в чатах</h1>
-          <div className="srch-sub">Напишите название чата или содержащиеся в нем слова.</div>
+        <div className="acc-surface srch-surface">
+          <div className="srch-head">
+            <h1 className="srch-h1">Поиск в чатах</h1>
+            <div className="srch-sub">Напишите название чата или содержащиеся в нем слова.</div>
+          </div>
 
           <div className="srch-wrap">
-            <div className="srch-field-box">
+            <div className="srch-bar">
               <input
                 className="srch-field"
                 placeholder="Поиск"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
               />
-              <button className="srch-filter"><IcSliders /></button>
+              <button className="srch-filter"><IcSearchSettings /></button>
             </div>
 
-            {!active
-              ? DEFAULTS.map((c, i) => (
-                  <div key={i} className="srch-item">
-                    <div className="srch-body">
-                      <div className="srch-title">{c.title}{c.plane && <IcPlane />}</div>
-                      <div className="srch-prev">{c.prev}</div>
-                    </div>
-                    <button className="srch-dots"><IcDots /></button>
-                  </div>
-                ))
-              : RESULTS.map((c, i) => (
-                  <div key={i} className="srch-item">
-                    <div className="srch-body">
-                      <div className="srch-title">{c.title}{c.plane && <IcPlane />}</div>
-                      <div className="srch-prev">
-                        <span className="hl">отчета о дви</span>жении средств с 12.05.2024 по 12.05.2025 для организации Альфа.
+            <div className="srch-list">
+              {!active
+                ? DEFAULTS.map((c, i) => (
+                    <div key={i} className="srch-item">
+                      <div className="srch-body">
+                        <div className="srch-title">
+                          <span>{c.title}</span>
+                          {c.order && <IcOrderSmall />}
+                        </div>
+                        <div className="srch-prev">{c.prev}</div>
                       </div>
+                      <button className="srch-dots"><IcMoreDots /></button>
                     </div>
-                    <button className="srch-dots"><IcDots /></button>
-                  </div>
-                ))}
+                  ))
+                : RESULTS.map((c, i) => (
+                    <div key={i} className="srch-item">
+                      <div className="srch-body">
+                        <div className="srch-title">
+                          <span>{c.title}</span>
+                          {c.order && <IcOrderSmall />}
+                        </div>
+                        <div className="srch-prev">
+                          <span className="hl">отчета о дви</span>жении средств с 12.05.2024 по 12.05.2025 для организации Альфа.
+                        </div>
+                      </div>
+                      <button className="srch-dots"><IcMoreDots /></button>
+                    </div>
+                  ))}
+            </div>
           </div>
         </div>
       </main>

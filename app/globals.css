@@ -1,5 +1,91 @@
 @import "tailwindcss";
 
+/* TT Norms font faces */
+@font-face {
+  font-family: 'TT Norms';
+  src: url('/fonts/TT Norms Std Trial Condensed Thin.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'TT Norms';
+  src: url('/fonts/TT Norms Std Trial Condensed Thin Italic.otf') format('opentype');
+  font-weight: 100;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'TT Norms';
+  src: url('/fonts/TT Norms Std Trial Condensed Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'TT Norms';
+  src: url('/fonts/TT Norms Std Trial Condensed Light Italic.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'TT Norms';
+  src: url('/fonts/TT Norms Std Trial Condensed Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'TT Norms';
+  src: url('/fonts/TT Norms Std Trial Condensed Italic.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'TT Norms';
+  src: url('/fonts/TT Norms Std Trial Condensed Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'TT Norms';
+  src: url('/fonts/TT Norms Std Trial Condensed Medium Italic.otf') format('opentype');
+  font-weight: 500;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'TT Norms';
+  src: url('/fonts/TT Norms Std Trial Condensed Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'TT Norms';
+  src: url('/fonts/TT Norms Std Trial Condensed Bold Italic.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'TT Norms';
+  src: url('/fonts/TT Norms Std Trial Condensed ExtraBold.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'TT Norms';
+  src: url('/fonts/TT Norms Std Trial Condensed ExtraBold Italic.otf') format('opentype');
+  font-weight: 800;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'TT Norms';
+  src: url('/fonts/TT Norms Std Trial Condensed Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'TT Norms';
+  src: url('/fonts/TT Norms Std Trial Condensed Black Italic.otf') format('opentype');
+  font-weight: 900;
+  font-style: italic;
+}
+
 :root {
   --page: #f5f5f5;
   --card: #ffffff;
@@ -33,7 +119,7 @@ body {
   margin: 0;
   background: var(--page);
   color: var(--title);
-  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  font-family: 'TT Norms', Arial, Helvetica, sans-serif;
 }
 
 /* ---------- layout ---------- */

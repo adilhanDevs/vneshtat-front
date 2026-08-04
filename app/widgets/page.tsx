@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Header from "../Header";
 import "../account/account.css";
 import "./widgets.css";
 import Sidebar from "../account/Sidebar";
@@ -21,49 +22,55 @@ export default function Widgets() {
       <Sidebar active="widgets" />
 
       <main className="acc-main with-surface">
-        <div className="acc-top">
-          <div className="acc-balance">
-            <span className="b-alfa">Альфа</span>
-            <span className="b-div" />
-            <span className="b-amount"><IcCard /> 490 000 ₽</span>
-            <span className="b-div" />
-            <span className="acc-toggle" />
-          </div>
-          <div className="acc-top-right">
-            <button className="acc-iconbtn"><IcDots /></button>
-            <button className="acc-iconbtn" onClick={() => setMessenger(true)}><IcBubble /></button>
-            <img className="acc-avatar" src="/img/avatar-sm.png" alt="" onClick={() => router.push("/account")} />
-          </div>
-        </div>
+        <Header onMessengerClick={() => setMessenger(true)} />
 
         <div className="acc-surface">
           <h1 className="acc-title">Виджеты</h1>
 
           <div className="wg-search-wrap">
-            <input
-              className="wg-search"
-              placeholder="Поиск виджетов"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              onFocus={() => setFocused(true)}
-              onBlur={() => setTimeout(() => setFocused(false), 150)}
-            />
-            {query && (
-              <button className="wg-search-x" onMouseDown={(e) => { e.preventDefault(); setQuery(""); }}>
-                <IcClose />
-              </button>
-            )}
-            {showDropdown && (
-              <div className="wg-dropdown">
-                <button className="hl" onMouseDown={() => setQuery("Календарь")}>Календарь</button>
-                <button onMouseDown={() => setQuery("Календарь")}>Календарь</button>
+            {!showDropdown ? (
+              <>
+                <input
+                  className="wg-search"
+                  placeholder="Поиск виджетов"
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  onFocus={() => setFocused(true)}
+                  onBlur={() => setTimeout(() => setFocused(false), 150)}
+                />
+                {query && (
+                  <button className="wg-search-x" onMouseDown={(e) => { e.preventDefault(); setQuery(""); }}>
+                    <IcClose />
+                  </button>
+                )}
+              </>
+            ) : (
+              <div className="wg-search-card">
+                <div className="wg-search-card-top">
+                  <input
+                    className="wg-search-card-input"
+                    placeholder="Поиск виджетов"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    onFocus={() => setFocused(true)}
+                    onBlur={() => setTimeout(() => setFocused(false), 150)}
+                    autoFocus
+                  />
+                  <button className="wg-search-card-x" onMouseDown={(e) => { e.preventDefault(); setQuery(""); setFocused(false); }}>
+                    <IcClose />
+                  </button>
+                </div>
+                <div className="wg-dropdown-items">
+                  <button className="hl" onMouseDown={() => setQuery("Календарь")}>Календарь</button>
+                  <button onMouseDown={() => setQuery("Календарь")}>Календарь</button>
+                </div>
               </div>
             )}
           </div>
 
           <div className="wg-row">
             <div className="wg-card">
-              <div className="wg-illus"><IcCal3D /></div>
+              <div className="wg-illus"><img src="/img/calendar-decor.png" alt="" width={142} height={142} style={{ display: "block", objectFit: "contain" }} /></div>
               <div className="wg-content">
                 <div className="wg-head">
                   <IcCalHeader />
@@ -79,7 +86,7 @@ export default function Widgets() {
             </div>
 
             <div className="wg-card">
-              <div className="wg-illus"><IcCal3D /></div>
+              <div className="wg-illus"><img src="/img/Image.png" alt="" width={142} height={142} style={{ display: "block", objectFit: "contain" }} /></div>
               <div className="wg-content">
                 <div className="wg-head">
                   <IcRadar />

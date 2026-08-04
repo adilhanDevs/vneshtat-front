@@ -1,44 +1,102 @@
-.srch-sub {
+/* Figma: Body #9916:2345 */
+.srch-surface {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 40px 25px;
+  background: #fafafa;
+  border-radius: 40px 40px 0 0;
+  box-shadow: 0 1px 8.2px rgba(0, 0, 0, 0.03);
+  /* cancels .acc-main bottom padding: the Figma body is flush to the viewport bottom */
+  margin-bottom: -20px;
+}
+
+/* Figma: Title, frame #9916:2346 */
+.srch-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 50px;
+}
+.srch-h1 {
+  width: 582px;
+  max-width: 100%;
+  margin: 0;
   text-align: center;
-  color: var(--muted);
+  font-size: 55px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #34363b;
+}
+.srch-sub {
+  width: 582px;
+  max-width: 100%;
+  text-align: center;
   font-size: 18px;
-  margin: -14px 0 28px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: #787b86;
 }
+
+/* Figma: Bar, chats #9916:3137 */
 .srch-wrap {
-  max-width: 1080px;
+  width: min(92%, 800px);
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
-.srch-field-box {
-  position: relative;
-  margin-bottom: 20px;
+
+/* Figma: Search bar #9916:3119 */
+.srch-bar {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 10px 10px 20px;
+  background: #fafafa;
+  border: 1px solid #e5e7ea;
+  border-radius: 23px;
+  box-shadow: 0 1px 26px rgba(0, 0, 0, 0.08);
 }
 .srch-field {
-  width: 100%;
-  height: 64px;
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  background: #fff;
-  padding: 0 64px 0 24px;
-  font-size: 17px;
+  flex: 1;
+  min-width: 0;
+  height: 34px;
+  border: none;
+  background: transparent;
+  padding: 0;
   font-family: inherit;
-  color: var(--ink);
+  font-size: 16px;
+  font-weight: 400;
+  color: #34363b;
   outline: none;
 }
-.srch-field::placeholder { color: #a9abb1; }
+.srch-field::placeholder {
+  color: #9b9fad;
+}
 .srch-filter {
-  position: absolute;
-  right: 12px;
-  top: 12px;
+  flex-shrink: 0;
   width: 40px;
   height: 40px;
-  border-radius: 12px;
-  border: none;
-  background: #f4f4f6;
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #fafafa;
+  border: 1px solid #e5e7ea;
+  border-radius: 13px;
+  cursor: pointer;
 }
+
+/* Figma: Chats #9916:3166 */
+.srch-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Figma: Chat #10235:25561 */
 .srch-item {
   box-sizing: border-box;
   display: flex;
@@ -47,37 +105,61 @@
   align-items: flex-start;
   padding: 16px 20px;
   gap: 16px;
-  height: 74px;
-  /* 8px between the chat rows */
-  margin-bottom: 8px;
-  background: #fafafa;
-  border: 1px solid #e5e7ea;
+  background: #FAFAFA;
+  border: 1px solid #E5E7EA;
   border-radius: 26px;
 }
-.srch-item:hover { background: #f4f5f7; }
-.srch-body { min-width: 0; }
+.srch-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
 .srch-title {
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.2;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #121212;
+}
+.srch-title svg {
+  flex-shrink: 0;
 }
 .srch-prev {
-  color: var(--muted);
   font-size: 14px;
-  line-height: 1.3;
-  margin-top: 2px;
+  font-weight: 500;
+  line-height: 1.35;
+  color: #787b86;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.srch-prev .hl { color: var(--coral); }
+.srch-prev .hl {
+  color: var(--coral);
+}
 .srch-dots {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0;
-  flex-shrink: 0;
+}
+
+@media (min-width: 1500px) {
+  .srch-wrap { width: min(92%, 1000px); }
+  .srch-head { padding-top: 60px; }
+  .srch-h1 { font-size: 68px; }
+  .srch-sub { font-size: 20px; }
+  .srch-bar { padding: 12px 12px 12px 24px; border-radius: 26px; }
+  .srch-field { height: 38px; font-size: 17px; }
+  .srch-filter { width: 44px; height: 44px; border-radius: 14px; }
+  .srch-item { padding: 18px 24px; border-radius: 28px; }
+  .srch-title { font-size: 19px; }
+  .srch-prev { font-size: 15px; }
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import Header from "../Header";
 import { useRouter } from "next/navigation";
 import "../account/account.css";
 import "../orders/orders.css";
@@ -45,20 +46,7 @@ export default function Docs() {
       <Sidebar active="chat" />
 
       <main className="acc-main" style={{ position: "relative" }}>
-        <div className="acc-top">
-          <div className="acc-balance">
-            <span className="b-alfa">Альфа</span>
-            <span className="b-div" />
-            <span className="b-amount"><IcCard /> 490 000 ₽</span>
-            <span className="b-div" />
-            <span className="acc-toggle" />
-          </div>
-          <div className="acc-top-right">
-            <button className="acc-iconbtn"><IcDots /></button>
-            <button className="acc-iconbtn" onClick={() => setMessenger(true)}><IcBubble /></button>
-            <img className="acc-avatar" src="/img/avatar-sm.png" alt="" onClick={() => router.push("/account")} />
-          </div>
-        </div>
+        <Header onMessengerClick={() => setMessenger(true)} />
 
         <div className="cht-scroll">
           {empty && (
