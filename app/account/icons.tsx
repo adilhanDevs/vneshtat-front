@@ -51,6 +51,11 @@ export const IcPlane = () => (
     <path d="M17 3.2c.5.5.4 1 0 1.7l-3.4 3.4 1 6.6c0 .3 0 .5-.3.7l-.8.6c-.2.2-.5.1-.6-.2l-2.4-4.6-3 3 .1 1.8c0 .2 0 .3-.2.5l-.4.3c-.2.1-.4.1-.5-.1l-1.4-2.2-2.2-1.4c-.2-.1-.2-.3-.1-.5l.3-.4c.2-.2.3-.2.5-.2l1.8.1 3-3L2.5 6.7c-.3-.1-.4-.4-.2-.6l.6-.8c.2-.3.4-.3.7-.3l6.6 1L14 2.6c.7-.6 1.2-.7 1.7-.2l1.3.8Z" />
   </svg>
 );
+export const IcPlaneOutline = ({ size = 18, color = "#787b86" }: { size?: number; color?: string }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M17.8 19.2 16 11l3.5-3.5c.8-.8.8-2 0-2.8s-2-.8-2.8 0L13 8.2 4.8 6.4c-.5-.1-.9.1-1.1.5l-.4.8c-.2.5 0 1 .4 1.3l5.3 3.5-3 3-2.1-.5c-.3-.1-.7 0-.9.2l-.5.5c-.3.3-.3.8 0 1.1l2.5 2.5 2.5 2.5c.3.3.8.3 1.1 0l.5-.5c.2-.2.3-.6.2-.9l-.5-2.1 3-3 3.5 5.3c.3.4.8.6 1.3.4l.8-.4c.4-.2.6-.6.5-1.1z" />
+  </svg>
+);
 
 /* ---- top bar ---- */
 export const IcCard = () => (
@@ -244,12 +249,7 @@ export const IcDoc = () => (
   </svg>
 );
 export const IcDocSm = () => (
-  <svg width="26" height="30" viewBox="0 0 34 40" fill="none">
-    <path d="M4 5a3 3 0 0 1 3-3h13l10 10v20a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V5Z" fill="#ffd24d" />
-    <path d="M20 2v8a2 2 0 0 0 2 2h8" fill="#ffc21a" />
-    <rect x="9" y="20" width="16" height="2.4" rx="1.2" fill="#fff" />
-    <rect x="9" y="26" width="11" height="2.4" rx="1.2" fill="#fff" />
-  </svg>
+  <img src="/img/Image (2).png" alt="" style={{ width: 44, height: 44, objectFit: "contain", flexShrink: 0 }} />
 );
 export const IcSendCircle = () => (
   <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
@@ -424,10 +424,7 @@ export const IcThumbDown = () => (
 );
 
 export const IcCopy = () => (
-  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#9aa0a8" strokeWidth="1.5" strokeLinejoin="round">
-    <rect x="7" y="7" width="9" height="9" rx="2" />
-    <path d="M13 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2" />
-  </svg>
+  <img src="/img/copy-icon.png" alt="" style={{ width: 20, height: 20, objectFit: "contain" }} />
 );
 export const IcLockField = () => (
   <img src="/img/vneshtat11/Lock.png" alt="" width={18} height={18} style={{ display: "inline-block", verticalAlign: "middle" }} />
@@ -450,18 +447,7 @@ export const IcRadar = ({ size = 24 }: { size?: number }) => (
   <img src="/img/Radar.png" alt="" width={size} height={size} style={{ display: "inline-block", verticalAlign: "middle" }} />
 );
 export const IcCal3D = () => (
-  <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
-    <ellipse cx="102" cy="30" rx="4" ry="5" fill="#c9cbd1" />
-    <ellipse cx="96" cy="20" rx="3" ry="4" fill="#dfe0e4" />
-    <path d="M22 44c0-6 5-11 11-11h54c6 0 11 5 11 11v46c0 6-5 11-11 11H33c-6 0-11-5-11-11V44Z" fill="#8b5cf6" />
-    <path d="M22 44c0-6 5-11 11-11h54c6 0 11 5 11 11v10H22V44Z" fill="#7c4ff0" />
-    <path d="M87 33c6 0 11 5 11 11v46c0 6-5 11-11 11 4-2 5-6 5-11V44c0-5-1-9-5-11Z" fill="#6f42e8" />
-    <rect x="38" y="26" width="7" height="18" rx="3.5" fill="#eceef1" />
-    <rect x="66" y="26" width="7" height="18" rx="3.5" fill="#eceef1" />
-    <text x="56" y="90" fontSize="34" fontWeight="700" fill="#e7defd" textAnchor="middle" fontFamily="Arial">5</text>
-    <path d="M28 30l6 6M34 30l-6 6" stroke="#f2683a" strokeWidth="3" strokeLinecap="round" />
-    <circle cx="92" cy="96" r="4" fill="#7c4ff0" />
-  </svg>
+  <img src="/img/calendar-3d.png" alt="" style={{ width: 44, height: 44, objectFit: "contain" }} />
 );
 
 /* ---- company ---- */

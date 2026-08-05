@@ -21,6 +21,7 @@
   --border2: #e4e5e8;
 }
 .msgr-drawer {
+  position: relative;
   margin-left: auto;
   width: clamp(520px, 38vw, 680px);
   max-width: 100vw;
@@ -76,6 +77,16 @@
   to {
     transform: translateX(0);
   }
+}
+
+/* Каскад из трёх панелей: список → чат → вложения.
+   Каждый следующий уровень сдвигает те, что под ним, ещё на шаг влево. */
+.msgr-drawer.shoved-2 {
+  transform: translateX(-380px);
+}
+.msgr-drawer.stacked.shoved {
+  transform: translateX(-190px);
+  cursor: pointer;
 }
 .msgr-head {
   display: flex;

@@ -3,7 +3,7 @@ import {
   IcDesk, IcChat, IcSearch, IcOrders, IcWidgets, IcCalendar, IcArchive, IcPlane,
 } from "./icons";
 
-export default function Sidebar({ active }: { active?: string }) {
+export default function Sidebar({ active, tripTitle }: { active?: string; tripTitle?: string }) {
   const cls = (name: string) => (active === name ? "active" : undefined);
   return (
     <aside className="acc-side">
@@ -22,9 +22,13 @@ export default function Sidebar({ active }: { active?: string }) {
         <div className="acc-sep" />
       </nav>
       <nav className="acc-nav acc-trip">
-        <Link href="/trip">Поездка <span><IcPlane /></span></Link>
+        <Link href="/trip" className={cls("trip")}>Поездка <span><IcPlane /></span></Link>
         <a>Идея поездки <span><IcPlane /></span></a>
-        <a>Новый чат</a>
+        {tripTitle ? (
+          <a className="active">{tripTitle} <span><IcPlane /></span></a>
+        ) : (
+          <a>Новый чат</a>
+        )}
       </nav>
       <div className="acc-side-bottom">
         <div className="acc-sep" />

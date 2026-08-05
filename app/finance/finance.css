@@ -3,16 +3,28 @@
    white surface inset from it, with the balance/header row staying outside on
    the grey. .acc-main is rounded only at the top-left, so it can't do this. */
 .fin-main {
+  flex: 1;
+  min-width: 0;
+  height: 100vh;
   display: flex;
   flex-direction: column;
-  padding-bottom: 20px;
+  background: var(--panel);
+  margin-top: 0;
+  padding: 22px 0 0 0;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 .fin-surface {
   flex: 1;
-  background: #fff;
-  border-radius: 30px;
-  padding: 40px 120px 40px;
+  min-height: 0;
+  background: #ffffff;
+  border-radius: 28px 0 0 0;
+  padding: 34px 120px 50px;
+  position: relative;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
 }
 
 /* ===== Финансы main page =====

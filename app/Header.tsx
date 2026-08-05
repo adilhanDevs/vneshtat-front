@@ -28,7 +28,7 @@ export default function Header({
           <button className="acc-iconbtn"><IcDots /></button>
           <button className="acc-iconbtn" onClick={() => {
             if (onMessengerClick) onMessengerClick();
-          }}><IcBubble /></button>
+          }}><img src="/img/Messenger.png" alt="Messenger" style={{ width: 20, height: 20, display: "block" }} /></button>
           <img
             className="acc-avatar"
             src="/img/avatar-sm.png"
@@ -62,6 +62,9 @@ export default function Header({
               }}
             >
               <img src="/img/user-menu/Account.png" alt="" width={20} height={20} style={{ objectFit: "contain" }} /> Управление аккаунтом
+            </Link>
+            <Link href="/company" style={{ cursor: "pointer" }} onClick={() => setMenu(false)}>
+              <img src="/img/vneshtat12/People.png" alt="" width={20} height={20} style={{ objectFit: "contain" }} /> Компания
             </Link>
             <a style={{cursor: 'pointer'}}>
               <img src="/img/user-menu/Help.png" alt="" width={20} height={20} style={{ objectFit: "contain" }} /> Справка

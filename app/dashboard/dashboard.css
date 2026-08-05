@@ -8,15 +8,19 @@
   font-weight: 700;
   font-style: normal;
   letter-spacing: -1.5px;
-  margin: 30px 0 36px;
+  margin: 0px 0 25px;
   color: #17181c;
 }
 
 /* --- Widget row --- */
 .dash-widgets {
   display: flex;
-  gap: 18px;
-  width: min(calc(100% - 240px), 1280px);
+  gap: 10px;
+  /* Было min(calc(100% - 240px), 1280px) — фиксированное вычитание съедало
+     тем большую долю, чем уже экран (на 1440 оставалось 624px из 864).
+     Кэп 1280 при этом всё равно срабатывал только на очень широких экранах,
+     поэтому на них поведение не меняется. */
+  width: min(100%, 1280px);
   margin: 0 auto 24px;
 }
 
@@ -178,7 +182,7 @@
 .dash-add-text {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  /* gap: 10px; */
   align-items: flex-start;
 }
 .dash-add-icon {
@@ -456,7 +460,8 @@
 
 /* --- Order cards --- */
 .dash-orders {
-  width: min(calc(100% - 240px), 1280px);
+  /* см. комментарий у .dash-widgets — та же правка ширины */
+  width: min(100%, 1280px);
   margin: 0 auto;
 }
 .dash-order {
@@ -474,7 +479,8 @@
   gap: 20px;
   min-height: 111px;
   position: relative;
-  overflow: hidden;
+  /* Без overflow: бейдж .dash-order-badge намеренно выступает за верхний
+     край карточки (top: -13px) и обрезался бы при overflow: hidden. */
 }
 .dash-order-left {
   flex: 0 0 auto;
@@ -624,36 +630,49 @@
 
 /* --- AI chat input bar --- */
 .dash-ai-bar {
-  position: sticky;
-  bottom: 20px;
-  max-width: 700px;
-  margin: 20px auto 0;
+  position: fixed;
+  left: 256px;
+  right: 0;
+  bottom: 25px;
+  width: 700px;
+  min-width: 500px;
+  max-width: calc(100% - 40px);
+  height: 80px;
+  margin: 0 auto;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   background: #fff;
   border: 1px solid #e4e5e8;
-  border-radius: 22px;
-  padding: 8px 8px 8px 18px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-  z-index: 10;
+  border-radius: 40px;
+  padding: 16px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+  z-index: 100;
 }
 .dash-ai-bar input {
   flex: 1;
+  min-width: 0;
   border: none;
   outline: none;
-  font-size: 15px;
+  font-size: 16px;
   font-family: inherit;
   background: none;
   color: #17181c;
+  padding: 0 8px;
 }
 .dash-ai-bar input::placeholder {
   color: #a9abb1;
 }
+.dash-ai-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 .dash-ai-plus {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  border-radius: 18px;
   border: 1px solid #e4e5e8;
   background: #fff;
   display: flex;
@@ -661,47 +680,67 @@
   justify-content: center;
   cursor: pointer;
   flex-shrink: 0;
+  transition: background 0.15s ease;
 }
 .dash-ai-plus:hover {
   background: #f5f5f6;
 }
 .dash-ai-sparkle {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-.dash-ai-send {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: #17181c;
-  border: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 18px;
+  border: 1px solid #e4e5e8;
+  background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   flex-shrink: 0;
+  color: #007bfb;
+  transition: background 0.15s ease;
+}
+.dash-ai-sparkle svg path {
+  fill: #007bfb;
+}
+.dash-ai-sparkle:hover {
+  background: #f5f5f6;
+}
+.dash-ai-send {
+  width: 48px;
+  height: 48px;
+  border-radius: 18px;
+  background: #e0e3ea;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  flex-shrink: 0;
+  transition: background 0.2s ease;
+}
+.dash-ai-send.active {
+  background: #007bfb;
+  cursor: pointer;
+}
+.dash-ai-send.active:hover {
+  background: #006ae6;
 }
 .dash-ai-send:hover {
-  background: #2d2f35;
-}
-.dash-ai-send svg {
-  color: #fff;
+  background: #006ae6;
 }
 
 /* --- Widget settings panel (slide-out drawer) --- */
 .dash-settings-panel {
-  margin: 16px 16px 16px auto;
-  width: 460px;
-  max-width: 92vw;
-  height: calc(100vh - 32px);
+  margin-left: auto;
+  width: clamp(520px, 38vw, 680px);
+  max-width: 100vw;
+  height: 100vh;
   background: #fff;
   display: flex;
   flex-direction: column;
-  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.12);
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.15);
   animation: dashSlideIn 0.25s ease;
-  border-radius: 24px;
+  border-radius: 28px 0 0 28px;
 }
 @keyframes dashSlideIn {
   from {
@@ -732,7 +771,7 @@
 .dash-settings-title {
   font-size: 28px;
   font-weight: 700;
-  margin: 0 0 22px;
+  margin: 0 0 20px;
 }
 .dash-settings-body {
   flex: 1;
@@ -743,9 +782,11 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  border: 1px solid #ececee;
-  border-radius: 18px;
-  padding: 16px 18px;
+  border: 1px solid #e5e7ea;
+  border-radius: 22px;
+  height: 72px;
+  padding: 0 18px;
+  box-sizing: border-box;
   margin-bottom: 10px;
   position: relative;
   background: #fff;
@@ -761,10 +802,10 @@
   cursor: not-allowed;
 }
 .dash-widget-check {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border: 2px solid #d4d5d9;
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  border: 1px solid #e5e7ea;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -772,24 +813,28 @@
   transition: all 0.15s;
 }
 .dash-widget-check.checked {
-  background: #1e88fa;
-  border-color: #1e88fa;
+  background: #007bfb;
+  border-color: #007bfb;
 }
 .dash-widget-info {
   flex: 1;
   min-width: 0;
 }
 .dash-widget-info .name {
-  font-size: 16px;
+  font-family: 'TT Norms', sans-serif;
+  font-size: 18px;
   font-weight: 500;
+  color: #121212;
   display: flex;
   align-items: center;
   gap: 6px;
 }
 .dash-widget-info .desc {
-  font-size: 13px;
-  color: #8a8c93;
-  margin-top: 2px;
+  font-family: 'TT Norms', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #787b86;
+  /* margin-top: 2px; */
 }
 .dash-widget-dots {
   background: none;
@@ -797,6 +842,7 @@
   cursor: pointer;
   padding: 4px;
   flex-shrink: 0;
+  color: #8a8c93;
 }
 
 /* widget item context menu */
@@ -836,20 +882,22 @@
 
 /* connect widget button */
 .dash-connect-btn {
-  width: 100%;
-  height: 48px;
-  border-radius: 14px;
+  width: 203px;
+  height: 43px;
+  border-radius: 13px;
   background: #fff;
-  border: 1px solid #e4e5e8;
-  font-size: 15px;
+  border: 1px solid #e5e7ea;
+  font-size: 16px;
   font-weight: 500;
-  font-family: inherit;
-  color: #4a4c52;
+  font-family: 'TT Norms', sans-serif;
+  color: #787b86;
   cursor: pointer;
-  margin: 10px 0;
+  display: block;
+  margin: 0 auto;
 }
 .dash-connect-btn:hover {
   background: #fafafa;
+  border-color: #d8dadf;
 }
 
 /* settings footer */
@@ -933,3 +981,70 @@
    .dash-order-stats must keep its default spacing (a gap here forces the
    3-line column taller and took the card from 126px to 173px), the vertical
    padding stays at 20px, and the buttons stay 38px tall. */
+
+/* ================= ШЕЛЛ СТРАНИЦЫ (развязка от .acc-*) =================
+   Копии оболочечных правил из account.css под собственными именами.
+   .dash-root объявляет те же CSS-переменные, что и .acc: они наследуются
+   вниз по дереву, поэтому общие Sidebar/Header (.acc-side, .acc-top)
+   внутри страницы продолжают получать --blue, --ink, --border и т.д.
+   Правки здесь не задевают остальные страницы на account.css. */
+.dash-root {
+  --page: #ffffff;
+  --panel: #f4f4f5;
+  --card: #ffffff;
+  --subcard: #f3f4f6;
+  --blue: #1e88fa;
+  --blue-dark: #1877ec;
+  --coral: #fe5b6b;
+  --ink: #17181c;
+  --muted: #8a8c93;
+  --muted2: #a9abb1;
+  --border: #ececee;
+  --border2: #e4e5e8;
+
+  display: flex;
+  min-height: 100vh;
+  background: var(--page);
+  color: var(--ink);
+  font-family: 'TT Norms', Arial, sans-serif;
+}
+.dash-main {
+  flex: 1;
+  min-width: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--panel);
+  margin-top: 0;
+  padding: 22px 0 0 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.dash-main.with-surface {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0;
+}
+.dash-surface {
+  flex: 1;
+  min-height: 0;
+  background: #ffffff;
+  border-radius: 28px 0 0 0;
+  padding: 34px 120px 50px;
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.dash-scrim {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 22, 28, 0.28);
+  z-index: 500;
+  display: flex;
+}
+.dash-scrim.center {
+  align-items: center;
+  justify-content: center;
+}

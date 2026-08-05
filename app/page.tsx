@@ -56,8 +56,8 @@ export default function Home() {
 
   useEffect(() => {
     if (!success) return;
-    router.prefetch("/account");
-    const t = setTimeout(() => router.push("/account"), 1800);
+    router.prefetch("/dashboard");
+    const t = setTimeout(() => router.push("/dashboard"), 1800);
     return () => clearTimeout(t);
   }, [success, router]);
 

@@ -29,7 +29,10 @@ export default function Messenger({ onClose }: { onClose: () => void }) {
   return (
     <div className="msgr-scrim" onClick={onClose}>
       {/* --- base messenger list drawer --- */}
-      <div className={`msgr-drawer${view !== "list" ? " shoved" : ""}`} onClick={(e) => e.stopPropagation()}>
+      <div
+        className={`msgr-drawer${view !== "list" ? " shoved" : ""}${view === "attach" ? " shoved-2" : ""}`}
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="msgr-head">
           <h1>Мессенджер</h1>
           <button onClick={onClose}><IcClose /></button>
@@ -79,8 +82,11 @@ export default function Messenger({ onClose }: { onClose: () => void }) {
       </div>
 
       {/* --- detail stacked chat drawer --- */}
-      {view === "chat" && (
-        <div className="msgr-drawer stacked" onClick={(e) => e.stopPropagation()}>
+      {(view === "chat" || view === "attach") && (
+        <div
+          className={`msgr-drawer stacked${view === "attach" ? " shoved" : ""}`}
+          onClick={(e) => { e.stopPropagation(); if (view === "attach") setView("chat"); }}
+        >
           <div className="msgr-chat-head">
             <span className="c-name">Яковлев Николай Никитич</span>
             <div className="c-pills">

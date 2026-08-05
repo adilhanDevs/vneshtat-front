@@ -1,0 +1,827 @@
+/* ===== /order: собственные стили =====
+   Вынесено из account.css при развязке: эти правила использует только
+   app/order/page.tsx. Правки здесь не задевают остальные 11 страниц,
+   которые импортируют account.css, и наоборот. */
+
+/* Ширина контентной колонки. Раньше было min(calc(100% - 340px), 1280px):
+   вычитание фиксированных 340px съедало долю тем большую, чем уже экран
+   (на 1440 оставалось 524px из 864 доступных — отсюда деформация карточек).
+   min(100%, 1280px) даёт тот же результат на широких экранах — кэп 1280
+   всё равно срабатывал только выше ~2200px — но перестаёт сжимать узкие. */
+.order-header-wrap {
+  width: min(100%, 1280px);
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 16px;
+  margin-bottom: 15px;
+}
+.order-title {
+  text-align: center;
+  font-size: 70px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  margin: 0;
+}
+.order-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: min(100%, 1280px);
+  margin: 0 auto 10px;
+}
+.order-cost .oc-icon {
+  margin-bottom: 16px;
+}
+.order-cost .oc-amount {
+  font-size: 30px;
+  font-weight: 500;
+  color: var(--blue);
+  letter-spacing: -0.5px;
+}
+.order-cost .oc-label {
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 0px;
+  margin-bottom: 20px;
+}
+.order-cost .oc-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.order-timer {
+  background: #f8f9fb;
+  border: 1px solid #e8eaee;
+  border-radius: 20px;
+  padding: 10px 18px;
+}
+.order-timer b {
+  color: var(--coral);
+  font-size: 20px;
+  font-weight: 700;
+  display: block;
+}
+.order-timer span {
+  color: #f08a92;
+  font-size: 12px;
+}
+.order-cost .oc-see {
+  color: var(--muted);
+  font-size: 14px;
+  cursor: pointer;
+}
+.order-cost .oc-pay {
+  margin-left: auto;
+  height: 44px;
+  padding: 0 26px;
+  border-radius: 13px;
+  background: var(--blue);
+  color: #fff;
+  border: none;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+}
+.order-stats {
+  position: relative;
+  /* Figma clips the artwork with the card: no part of the backpack sits
+     outside the card rect, and its top-right corner follows the card radius.
+     26px (measured off the Figma render) vs the shared .acc-card 22px —
+     scoped here only, since .acc-card is reused by cards that already match
+     their own Figma frames at 22px. */
+  border-radius: 26px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.order-stats .os-bag {
+  position: absolute;
+  /* Flush into the top-right corner. Measured off the Figma render: the
+     artwork spans 32.7% of the card width and is already clipped at the top
+     and right edges, so the card's own radius does the corner. z-index 0
+     keeps it behind the stats box, whose border draws over it as in Figma. */
+  top: 0;
+  right: 0;
+  width: 173.21px;
+  height: 168.94px;
+  z-index: 0;
+}
+.order-stats .os-box,
+.order-stats .oc-icon {
+  position: relative;
+  z-index: 1;
+}
+.order-stats .os-box {
+  display: flex;
+  gap: 10px;
+  margin-top: 44px;
+  padding-right: 30%;
+}
+.order-stats .os-box .st {
+  /* Figma centers the number over its label (measured off the render: number
+     and label column centers match within 0.6px across all four columns) —
+     not left-aligned, which is the flex/text default. */
+  text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.order-stats .os-box .st b {
+  font-size: 24px;
+  font-weight: 700;
+  display: block;
+  line-height: 1;
+}
+.order-stats .os-box .st span {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.2;
+  margin-top: 4px;
+}
+.order-stats .os-data {
+  margin-top: auto;
+  padding-top: 22px;
+  color: var(--muted);
+  font-size: 14px;
+  cursor: pointer;
+}
+.order-actions {
+  width: min(100%, 1280px);
+  margin: 0 auto 90px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 40px;
+  position: relative;
+  padding: 20px 9px 20px 24px;
+  border-radius: 28px;
+  box-shadow: 0px 0.886045px 7.26557px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+}
+.order-actions .oa-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.order-actions .oa-left h2 {
+  font-size: 36px;
+  font-weight: 800;
+  margin: 0;
+}
+.order-actions .oa-left p {
+  color: var(--muted);
+  font-size: 16px;
+  margin: 0px 0 0;
+  max-width: 180px;
+}
+.order-actions .oa-grid {
+  min-width: 0;
+  display: flex;
+  gap: 9px;
+}
+.order-optcard {
+  position: relative;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  flex: 1;
+  min-width: 0;
+  height: 110px;
+  padding: 9px 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.order-optcard:last-child {
+  background: #f0f1f4;
+  border: none;
+}
+.order-optcard .oo-icon {
+  align-self: flex-start;
+}
+.order-optcard .oo-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--coral);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.order-optcard .oo-label {
+  font-size: 15px;
+  font-weight: 500;
+  text-align: right;
+  align-self: flex-end;
+  color: var(--muted);
+  line-height: 1.15;
+}
+.order-seg {
+  /* Как строка поиска на референсе: не уезжает вместе с контентом при
+     скролле, а остаётся зафиксированной на экране (position: fixed
+     относительно вьюпорта, а не относительно .order-actions). */
+  position: fixed;
+  bottom: 25px;
+  /* Центр берём от области справа от сайдбара (256px), а не от всего
+     вьюпорта — иначе меню съезжает влево, под текст "Действия". */
+  left: calc(50% + 128px);
+  transform: translateX(-50%);
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  padding: 20px;
+  box-sizing: border-box;
+  background: #ffffff;
+  border: 1px solid #e1e4ea;
+  border-radius: 30px;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.08);
+}
+.order-seg button {
+  padding: 10.5px 15px;
+  border: none;
+  background: transparent;
+  border-radius: 13px;
+  font-size: 14px;
+  font-family: inherit;
+  font-weight: 500;
+  color: #72757e;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+}
+.order-seg button.on {
+  background: #007BFB;
+  color: #fff;
+  font-weight: 500;
+}
+/* order notification cards */
+.order-notes {
+  display: none !important;
+  position: fixed;
+  right: 32px;
+  bottom: 32px;
+  gap: 10px;
+  width: 340px;
+  z-index: 1000;
+}
+.order-note {
+  display: flex;
+  gap: 12px;
+  background: #f4f5f7;
+  border: none;
+  border-radius: 16px;
+  padding: 14px 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+.order-note .n-ico {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: #eef0f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.order-note .n-ico img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.order-note .n-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+.order-note .n-title {
+  font-size: 11px;
+  color: #626262;
+}
+.order-note .n-time {
+  font-size: 11px;
+  color: var(--muted2);
+  flex-shrink: 0;
+}
+.order-note .n-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #17181c;
+  margin-top: 2px;
+  line-height: 1.3;
+}
+
+/* ===== Перенесено из orders.css при развязке =====
+   Эти классы использует только /order (page.tsx + Advance.tsx),
+   хотя лежали в файле /orders, который тянут ещё 4 страницы. */
+
+/* ===== trip / participant modals ===== */
+.trip-dd {
+  border: 1px solid var(--border2);
+  border-radius: 14px;
+  padding: 6px;
+  margin: -6px 0 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  background: #fff;
+}
+.trip-dd button {
+  display: block;
+  width: 100%;
+  text-align: center;
+  border: none;
+  background: none;
+  padding: 13px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--ink);
+  cursor: pointer;
+}
+.trip-dd button:hover,
+.trip-dd button.hl { background: #eeeef0; }
+.trip-dd button.new { color: var(--blue); }
+
+.exp-card {
+  border: 1px solid #e5e7ea;
+  border-radius: 20px;
+  padding: 14px 22px;
+  margin-bottom: 8px;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.exp-card .e-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+}
+.exp-card .e-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+}
+.exp-card .e-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+.exp-card .e-name { font-size: 18px; font-weight: 500; color: #17181c; margin-bottom: 2px; }
+.exp-card .e-amount { font-size: 18px; font-weight: 500; text-align: right; color: #17181c; }
+.exp-card .e-amount span { display: block; font-size: 12px; color: #8c909c; font-weight: 400; margin-top: -2px; line-height: 1; margin-bottom: 12px; }
+.exp-card .e-rows { font-size: 13px; color: #8c909c; margin-top: 6px; }
+.exp-card .e-rows div { margin: 2px 0 0; }
+.exp-card .e-btn {
+  height: 38px;
+  min-width: 140px;
+  padding: 0 28px;
+  border-radius: 13px;
+  background: #007bfb;
+  color: #fff;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.exp-card .e-red { color: var(--coral); }
+
+/* advance sum field */
+.adv-sum {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.adv-sum .big {
+  height: 54px;
+  border: 1px solid var(--border2);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  padding: 0 25px;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--ink);
+}
+.adv-sum .big.ph { color: #a9abb1; }
+.adv-sum .cur {
+  height: 54px;
+  border: 1px solid var(--border2);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 25px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #9aa0a6;
+}
+.adv-file {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--border2);
+  border-radius: 18px;
+  padding: 15px 25px;
+  margin-bottom: 12px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #17181c;
+}
+.adv-file .fn { flex: 1; }
+.adv-addfile {
+  width: 100%;
+  height: 52px;
+  border: 1px solid var(--border2);
+  border-radius: 18px;
+  background: #fff;
+  color: #787880;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+/* ================= SERVICES TAB ================= */
+/* Та же правка, что и для .order-row: фиксированные -340px сжимали контейнер
+   до 524px на экране 1440, из-за чего колонки карточки услуги не помещались
+   и наезжали друг на друга. */
+.svc-container { width: min(100%, 940px); margin: 30px auto 40px; position: relative; }
+.svc-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; margin-top: 4px; height: 35px; }
+.svc-title { font-size: 30px; font-weight: 500; color: #7f828e; letter-spacing: -0.5px; margin: 0; line-height: 1; }
+.svc-btn-pill { background: #fff; border: 1px solid #e5e7ea; border-radius: 18px; padding: 0 24px; height: 35px; font-size: 13px; font-weight: 500; color: #6d6f77; cursor: pointer; display: flex; align-items: center; justify-content: center; box-sizing: border-box; }
+
+
+.svc-filters { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; }
+.svc-seg { display: flex; background: #eceef2; border-radius: 15px; padding: 3px; height: 32px; box-sizing: border-box; }
+.svc-seg button { border: none; background: transparent; padding: 0 14px; border-radius: 12px; font-size: 13px; font-weight: 500; color: #6c6f79; cursor: pointer; height: 100%; display: flex; align-items: center; justify-content: center; }
+.svc-seg button.on { background: #ffffff; color: #6c6f79; font-weight: 500; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04); }
+
+.svc-filter-pill { display: flex; align-items: center; justify-content: center; gap: 6px; background: #fff; border: 1px solid #e5e7ea; border-radius: 15px; padding: 0 14px; font-size: 13px; font-weight: 500; color: #6d6f77; cursor: pointer; height: 30px; box-sizing: border-box; }
+.svc-filter-pill.active { background: #8C909C; color: #fff; border-color: #8C909C; }
+.svc-filter-pill.active .sf-close { background: rgba(255,255,255,0.25); border-radius: 50%; width: 14px; height: 14px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; }
+
+.svc-date-head { font-size: 20px; font-weight: 500; color: #8C909C; margin-bottom: 16px; }
+
+.svc-card { background: #fff; border: 1px solid #e5e7ea; border-radius: 28px; padding: 20px 28px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; height: auto; box-sizing: border-box; gap: 20px; }
+.svc-card-left { display: flex; gap: 24px; align-items: center; flex: 1; min-width: 0; }
+.svc-col { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; flex: 0 0 50%; min-width: 0; }
+.svc-thumb { width: 84px; height: 76px; border-radius: 14px; object-fit: cover; }
+.svc-time-block { display: flex; align-items: center; gap: 14px; width: 100%; }
+.svc-time-col { display: flex; flex-direction: column; gap: 0px; }
+.svc-time { font-size: 22px; font-weight: 700; line-height: 1.1; color: #17181c; letter-spacing: -0.3px; }
+.svc-time-sub { font-size: 13px; color: #8C909C; font-weight: 500; }
+.svc-time-line { flex: 1; height: 4px; background: #d7d8dc; border-radius: 2px; min-width: 40px; }
+.svc-info-block { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; flex: 0 0 150px; margin: 0 auto; }
+.svc-info-title { font-size: 15px; font-weight: 500; display: flex; align-items: center; gap: 8px; color: #6d6f77; white-space: nowrap; }
+.svc-info-sub { font-size: 13px; color: #8C909C; }
+.svc-info-meta { font-size: 13px; color: #8C909C; display: flex; flex-direction: column; gap: 4px; font-weight: 500; }
+.svc-info-meta span { display: block; }
+.svc-info-link { color: #1e88fa; font-weight: 500; cursor: pointer; display: inline-block; font-size: 13px; white-space: nowrap; margin-top: 2px; }
+
+.svc-card-right { display: flex; flex-direction: column; align-items: flex-end; gap: 14px; flex-shrink: 0; }
+.svc-price { font-size: 22px; font-weight: 700; color: #17181c; letter-spacing: -0.5px; }
+.svc-actions { display: flex; align-items: center; gap: 10px; }
+.svc-status-btn { background: #8C909C; color: #fff; min-width: 150px; height: 38px; padding: 0 24px; border-radius: 12px; font-size: 15px; font-weight: 500; font-family: inherit; border: none; cursor: pointer; }
+.svc-more-btn { width: 38px; height: 38px; border-radius: 12px; background: #eef0f3; border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; color: #8C909C; font-weight: bold; font-size: 16px; }
+
+
+/* ===== Шелл и дровера (развязка от .acc-*) =====
+   Копии правил из account.css под именами /order. .order-root
+   объявляет те же CSS-переменные, что и .acc — они наследуются вниз,
+   поэтому общие Sidebar/Header внутри страницы работают как прежде. */
+.order-root {
+  --page: #ffffff;
+  --panel: #f4f4f5;
+  --card: #ffffff;
+  --subcard: #f3f4f6;
+  --blue: #1e88fa;
+  --blue-dark: #1877ec;
+  --coral: #fe5b6b;
+  --ink: #17181c;
+  --muted: #8a8c93;
+  --muted2: #a9abb1;
+  --border: #ececee;
+  --border2: #e4e5e8;
+
+  display: flex;
+  min-height: 100vh;
+  background: var(--page);
+  color: var(--ink);
+  font-family: 'TT Norms', Arial, sans-serif;
+}
+/* ---------------- main ---------------- */
+.order-main {
+  flex: 1;
+  min-width: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--panel);
+  margin-top: 0;
+  padding: 22px 0 0 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.order-main.with-surface {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0;
+}
+.order-surface {
+  flex: 1;
+  min-height: 0;
+  background: #ffffff;
+  border-radius: 28px 0 0 0;
+  padding: 34px 170px 50px;
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+.order-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 26px;
+}
+.order-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 22, 28, 0.28);
+  z-index: 500;
+  display: flex;
+}
+/* ---------------- drawer ---------------- */
+.order-drawer {
+  margin-left: auto;
+  width: clamp(520px, 38vw, 680px);
+  max-width: 100vw;
+  height: 100vh;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  border-radius: 28px 0 0 28px;
+  overflow: hidden;
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: slideIn 0.25s ease;
+}
+.order-drawer.shoved {
+  transform: translateX(-190px);
+}
+.order-drawer.shoved::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.24);
+  z-index: 10;
+  border-radius: inherit;
+  animation: fadeIn 0.2s ease;
+}
+.order-drawer.stacked {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  height: 100vh;
+  width: clamp(550px, 41vw, 715px);
+  max-width: 100vw;
+  border-radius: 28px 0 0 28px;
+  margin: 0;
+  box-shadow: -15px 0 50px rgba(0, 0, 0, 0.22);
+  z-index: 200;
+  transform: none;
+  animation: slideInStacked 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.order-drawer-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 28px 20px;
+  border-bottom: none;
+}
+.order-drawer-backdrop .order-drawer-head {
+  border-bottom: none;
+  padding: 0;
+}
+.order-drawer-head h1 {
+  font-size: 30px;
+  font-weight: 500;
+  color: #121212;
+  margin: 0;
+  line-height: 1.15;
+}
+.order-drawer-head button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: #8a8c93;
+}
+.order-drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 28px 10px;
+}
+.order-drawer-foot {
+  display: flex;
+  gap: 12px;
+  padding: 22px 28px 24px;
+  background: #ffffff;
+}
+.order-sec-h {
+  font-size: 24px;
+  font-weight: 500;
+  color: #17181c;
+  margin: 20px 0 6px;
+  letter-spacing: -0.3px;
+}
+.order-sec-p {
+  color: #787880;
+  font-size: 14px;
+  font-weight: 400;
+  margin: 0 0 16px;
+  line-height: 1.2;
+}
+.order-btn-ghost {
+  flex: 1;
+  height: 50px;
+  border-radius: 16px;
+  background: #f3f4f6;
+  color: #787b86;
+  border: none;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: 'TT Norms', sans-serif;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.order-btn-ghost:hover {
+  background: #e2e4e9;
+}
+.order-btn-primary {
+  flex: 2;
+  height: 50px;
+  border-radius: 16px;
+  background: #007bfb;
+  color: #fafafa;
+  border: none;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: 'TT Norms', sans-serif;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.order-btn-primary:hover {
+  background: #0069d9;
+}
+.order-btn-primary:disabled {
+  background: #eceef1;
+  color: #9b9fad;
+  cursor: default;
+}
+/* ---------------- form fields (drawers) ---------------- */
+.order-field {
+  position: relative;
+  border: 1px solid #e5e7ea;
+  border-radius: 22px;
+  height: 68px;
+  padding: 12px 22px;
+  background: #fafafa;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.order-field label {
+  display: block;
+  font-family: 'TT Norms', sans-serif;
+  font-size: 14px;
+  color: #787b86;
+  font-weight: 400;
+  margin-bottom: 2px;
+  line-height: 1.1;
+}
+.order-field .val {
+  font-family: 'TT Norms', sans-serif;
+  font-size: 18px;
+  color: #121212;
+  font-weight: 500;
+  line-height: 1.15;
+}
+.order-field.ph {
+  height: 51px;
+  padding: 0 22px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.order-field.ph label {
+  display: none;
+}
+.order-field.ph .val {
+  color: #9b9fad;
+  font-family: 'TT Norms', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+}
+.order-field .chev,
+.order-field .cal {
+  position: absolute;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #8a8c93;
+}
+.order-grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.order-modal-outline {
+  width: 100%;
+  height: 52px;
+  border-radius: 18px;
+  background: #ffffff;
+  border: 1px solid #dcdfe4;
+  font-size: 18px;
+  font-family: inherit;
+  font-weight: 500;
+  color: #787880;
+  cursor: pointer;
+  margin-top: 0;
+  margin-bottom: 0px;
+  transition: all 0.15s ease;
+}
+.order-modal-outline:hover {
+  background: #f7f8fa;
+  border-color: #cfd2d8;
+}
+.order-modal-outline.red {
+  color: var(--coral);
+}
+/* ================= ORDER SCREEN ================= */
+.order-backbtn {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+}
+.order-backbtn:hover {
+  background: #f7f8fa;
+}
+@media (min-width: 1500px) {
+  .order-card { padding: 28px; border-radius: 26px; }
+}
+@media (min-width: 1800px) {
+  .order-card { padding: 34px; border-radius: 30px; }
+}
+/* ---------------- custom select & calendar popovers ---------------- */
+.order-field.clickable {
+  cursor: pointer;
+  user-select: none;
+  transition: border-color 0.15s ease;
+}
+.order-field.clickable:hover {
+  border-color: #007bfe;
+}

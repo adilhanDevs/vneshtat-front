@@ -3,8 +3,10 @@
 import { useState } from "react";
 import Header from "../Header";
 import { useRouter } from "next/navigation";
+// account.css нужен только общим Sidebar/Header (.acc-side, .acc-top, .acc-nav).
+// Собственных acc-* классов у /order больше нет — вся вёрстка страницы в order.css.
 import "../account/account.css";
-import "../orders/orders.css";
+import "./order.css";
 import Sidebar from "../account/Sidebar";
 import Messenger from "../account/Messenger";
 import Advance from "./Advance";
@@ -30,14 +32,14 @@ export default function Order() {
   const closeAll = () => { setModal(null); setDrawer(null); };
 
   return (
-    <div className="acc">
+    <div className="order-root">
       <Sidebar active="orders" />
 
-      <main className="acc-main with-surface" style={{ position: "relative" }}>
+      <main className="order-main with-surface" style={{ position: "relative" }}>
         <Header onMessengerClick={() => setMessenger(true)} />
 
-        <div className="acc-surface">
-          <button className="acc-backbtn" onClick={() => router.push("/orders")}><IcBack /></button>
+        <div className="order-surface">
+          <button className="order-backbtn" onClick={() => router.push("/orders")}><IcBack /></button>
           {seg === "info" ? (
             <>
               <div className="order-header-wrap">
@@ -46,27 +48,27 @@ export default function Order() {
 
               <div className="order-row">
                 {/* cost */}
-                <div className="acc-card order-cost" style={{ borderRadius: 28, boxShadow: "0px 0.886045px 7.26557px rgba(0, 0, 0, 0.08)" }}>
+                <div className="order-card order-cost" style={{ borderRadius: 28, boxShadow: "0px 0.886045px 7.26557px rgba(0, 0, 0, 0.08)" }}>
                   <div className="oc-icon"><IcWalletCard /></div>
                   <div className="oc-amount">8 385 388 ₽</div>
                   <div className="oc-label">Стоимость услуг в заказе</div>
                   <div className="oc-actions">
                     <div className="order-timer" style={{ background: "#f8f9fb", border: "1px solid #e8eaee", width: "45%", minWidth: 0, height: 86, borderRadius: 20, display: "flex", flexDirection: "column", justifyContent: "center", textAlign: "left", paddingLeft: 16 }}>
-                      <b style={{ color: "#b3b5bb", fontSize: 16 }}>35:44</b>
-                      <span style={{ color: "#a9abb1", fontSize: 12, lineHeight: 1.2, marginTop: 4 }}>Услуги <br /> забронированы</span>
+                      <b style={{ color: "#9B9FAD", fontSize: 24, fontWeight: 500, lineHeight: 1 }}>35:44</b>
+                      <span style={{ color: "#9B9FAD", fontSize: 14, fontWeight: 500, lineHeight: 1.2, marginTop: 4 }}>Услуги <br /> забронированы</span>
                     </div> 
                     <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "stretch", justifyContent: "space-between", height: 86 }}>
-                      <span className="oc-see" onClick={() => setDrawer("invoices")} style={{ display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #e5e7ea", height: 40, borderRadius: 13, fontSize: 14, fontWeight: 500, color: "#6d6f77", cursor: "pointer" }}>Смотреть счета</span>
+                      <span className="oc-see" onClick={() => setDrawer("invoices")} style={{ display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #e5e7ea", height: 40, borderRadius: 13, fontSize: 18, fontWeight: 500, color: "#767886", cursor: "pointer" }}>Смотреть счета</span>
                       <button className="oc-pay" style={{ margin: 0, width: "100%", height: 40, borderRadius: 13, background: "var(--blue)", color: "#fff", border: "none", fontSize: 15, fontWeight: 500, cursor: "pointer" }}>Оплатить</button>
                     </div>
                   </div>
                 </div>
 
                 {/* stats */}
-                <div className="acc-card order-stats" style={{ borderRadius: 28, boxShadow: "0px 0.886045px 7.26557px rgba(0, 0, 0, 0.08)" }}>
+                <div className="order-card order-stats" style={{ borderRadius: 28, boxShadow: "0px 0.886045px 7.26557px rgba(0, 0, 0, 0.08)" }}>
                   <div className="oc-icon"><IcOrderCard /></div>
                   <img className="os-bag" src="/img/backpack-corner.png" alt="" />
-                  <div className="os-box" style={{ border: "1px solid #e5e7ea", borderRadius: 20, padding: "14px 18px", display: "flex", gap: 12 }}>
+                  <div className="os-box" style={{ border: "1px solid #e5e7ea", borderRadius: 20, padding: "14px 30% 14px 18px", display: "flex", gap: 12 }}>
                     <div className="st"><b>1</b><span>страна</span></div>
                     <div className="st"><b>3</b><span>города</span></div>
                     <div className="st"><b>18</b><span>услуг</span></div>
@@ -80,7 +82,7 @@ export default function Order() {
               </div>
 
               {/* actions */}
-              <div className="acc-card order-actions">
+              <div className="order-card order-actions">
                 <div className="oa-left">
                   <h2>Действия</h2>
                   <p>Управление вашим аккаунтом</p>
@@ -99,11 +101,11 @@ export default function Order() {
                     <span className="oo-label">Открыть чат</span>
                   </div>
                 </div>
-              </div>
 
-              <div className="order-seg">
-                <button className="on" onClick={() => setSeg("info")}>Информация</button>
-                <button className="" onClick={() => setSeg("services")}>Услуги</button>
+                <div className="order-seg">
+                  <button className="on" onClick={() => setSeg("info")}>Информация</button>
+                  <button className="" onClick={() => setSeg("services")}>Услуги</button>
+                </div>
               </div>
             </>
           ) : (
@@ -258,13 +260,13 @@ export default function Order() {
 
       {/* ===== Данные поездки drawer ===== */}
       {modal === "tripdata" && (
-        <div className="acc-drawer-backdrop" onClick={closeAll}>
-          <div className="acc-drawer" style={{ width: 600, padding: 30, borderRadius: "36px 0 0 36px" }} onClick={(e) => e.stopPropagation()}>
-            <div className="acc-drawer-head" style={{ marginBottom: 20, display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "none", padding: 0 }}>
+        <div className="order-drawer-backdrop" onClick={closeAll}>
+          <div className="order-drawer" style={{ width: 600, padding: 30, borderRadius: "36px 0 0 36px" }} onClick={(e) => e.stopPropagation()}>
+            <div className="order-drawer-head" style={{ marginBottom: 20, display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "none", padding: 0 }}>
               <h2 style={{ fontSize: 24, fontWeight: 700, margin: 0, color: "#17181c" }}>Данные поездки</h2>
               <button className="m-close" onClick={closeAll} style={{ background: "none", border: "none", cursor: "pointer", padding: 4 }}><IcClose /></button>
             </div>
-            <div className="acc-drawer-body" style={{ padding: 0, flex: 1, overflowY: "auto" }}>
+            <div className="order-drawer-body" style={{ padding: 0, flex: 1, overflowY: "auto" }}>
               <p className="emp-desc" style={{ marginBottom: 18 }}>Укажите информацию о поездке. С ее помощью можно будет сделать аналитику точнее и детальнее.</p>
               <TF label="Компания" value="Альфа" lock />
               <TF label="Контактное лицо" value="Вознесенский Иван Сергеевич" chevron onClick={() => setDd((v) => !v)} />
@@ -278,14 +280,14 @@ export default function Order() {
               )}
               <TF label="Название поездки" value="Питер, Москва - проверка объектов для обеспечения надежности соединения между участками сети" />
               <TF label="ID поездки" value="#8098" copy />
-              <div className="acc-sec-h">Центры затрат</div>
+              <div className="order-sec-h">Центры затрат</div>
               <div style={{ height: 10 }} />
               <TF label="Центр затрат (тип: список)" value="Значение 1" chevron />
               <TF label="Центр затрат (тип: строка)" value="" ph />
             </div>
-            <div className="acc-drawer-foot" style={{ padding: "20px 0 0", borderTop: "none", display: "flex", gap: 14 }}>
-              <button className="acc-btn-ghost" style={{ flex: 1 }} onClick={closeAll}>Отмена</button>
-              <button className="acc-btn-primary" style={{ flex: 1 }} onClick={closeAll}>Сохранить</button>
+            <div className="order-drawer-foot" style={{ padding: "20px 0 0", borderTop: "none", display: "flex", gap: 14 }}>
+              <button className="order-btn-ghost" style={{ flex: 1 }} onClick={closeAll}>Отмена</button>
+              <button className="order-btn-primary" style={{ flex: 1 }} onClick={closeAll}>Сохранить</button>
             </div>
           </div>
         </div>
@@ -293,24 +295,24 @@ export default function Order() {
 
       {/* ===== Приказ на командировку drawer ===== */}
       {modal === "order-cmd" && (
-        <div className="acc-drawer-backdrop" onClick={closeAll}>
-          <div className="acc-drawer" style={{ width: 600, padding: 30, borderRadius: "36px 0 0 36px" }} onClick={(e) => e.stopPropagation()}>
-            <div className="acc-drawer-head" style={{ marginBottom: 20, display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "none", padding: 0 }}>
+        <div className="order-drawer-backdrop" onClick={closeAll}>
+          <div className="order-drawer" style={{ width: 600, padding: 30, borderRadius: "36px 0 0 36px" }} onClick={(e) => e.stopPropagation()}>
+            <div className="order-drawer-head" style={{ marginBottom: 20, display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "none", padding: 0 }}>
               <h2 style={{ fontSize: 24, fontWeight: 700, margin: 0, color: "#17181c" }}>Приказ на командировку</h2>
               <button className="m-close" onClick={closeAll} style={{ background: "none", border: "none", cursor: "pointer", padding: 4 }}><IcClose /></button>
             </div>
-            <div className="acc-drawer-body" style={{ padding: 0, flex: 1, overflowY: "auto" }}>
+            <div className="order-drawer-body" style={{ padding: 0, flex: 1, overflowY: "auto" }}>
               <p className="emp-desc" style={{ marginBottom: 18 }}>Город, цель и даты командировки указаны исходя из данных о поездке. При необходимости, можете изменить их.</p>
               <TF label="Города поездки" value="Санкт-Петербург, Москва" />
               <TF label="Цель поездки" value="Питер, Москва - проверка объектов для обеспечения надежности соединения между участками сети" />
-              <div className="acc-grid2">
+              <div className="order-grid2">
                 <TF label="Дата с" value="11 марта, чт" cal />
                 <TF label="Дата по" value="11 марта, чт" cal />
               </div>
             </div>
-            <div className="acc-drawer-foot" style={{ padding: "20px 0 0", borderTop: "none", display: "flex", gap: 14 }}>
-              <button className="acc-btn-ghost" style={{ flex: 1 }} onClick={closeAll}>Отмена</button>
-              <button className="acc-btn-primary" style={{ flex: 1 }} onClick={closeAll}>Сформировать</button>
+            <div className="order-drawer-foot" style={{ padding: "20px 0 0", borderTop: "none", display: "flex", gap: 14 }}>
+              <button className="order-btn-ghost" style={{ flex: 1 }} onClick={closeAll}>Отмена</button>
+              <button className="order-btn-primary" style={{ flex: 1 }} onClick={closeAll}>Сформировать</button>
             </div>
           </div>
         </div>
@@ -318,14 +320,14 @@ export default function Order() {
 
       {/* ===== Участники поездки drawer ===== */}
       {drawer === "participants" && (
-        <div className="acc-drawer-backdrop" onClick={closeAll}>
-          <div className="acc-drawer" style={{ width: 600, padding: 30, borderRadius: "36px 0 0 36px" }} onClick={(e) => e.stopPropagation()}>
-            <div className="acc-drawer-head" style={{ marginBottom: 20, display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "none", padding: 0 }}>
+        <div className="order-drawer-backdrop" onClick={closeAll}>
+          <div className="order-drawer" style={{ width: 600, padding: 30, borderRadius: "36px 0 0 36px" }} onClick={(e) => e.stopPropagation()}>
+            <div className="order-drawer-head" style={{ marginBottom: 20, display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "none", padding: 0 }}>
               <h2 style={{ fontSize: 30, fontWeight: 500, margin: 0, color: "#17181c" }}>Участники поездки</h2>
               <button className="m-close" onClick={closeAll} style={{ background: "none", border: "none", cursor: "pointer", padding: 4 }}><IcClose /></button>
             </div>
-            <div className="acc-drawer-body" style={{ padding: 0, flex: 1, overflowY: "auto" }} onClick={() => setCtx(null)}>
-              <p className="acc-sec-p" style={{ marginBottom: 14 }}>Все участники поездки, имеющие аккаунт, будут получатьуведомления о событиях внутри поездки.</p>
+            <div className="order-drawer-body" style={{ padding: 0, flex: 1, overflowY: "auto" }} onClick={() => setCtx(null)}>
+              <p className="order-sec-p" style={{ marginBottom: 14 }}>Все участники поездки, имеющие аккаунт, будут получатьуведомления о событиях внутри поездки.</p>
               <input className="msg-search" placeholder="Поиск" />
               {["p1", "p2", "p3"].map((id, i) => (
                 <div key={id} className="msg-item" onClick={() => setDrawer("participant")}>
@@ -342,9 +344,9 @@ export default function Order() {
                 </div>
               ))}
             </div>
-            <div className="acc-drawer-foot" style={{ padding: "20px 0 0", borderTop: "none", display: "flex", gap: 14 }}>
-              <button className="acc-btn-ghost" style={{ flex: 1 }} onClick={closeAll}>Отмена</button>
-              <button className="acc-btn-primary" style={{ flex: 1 }} onClick={closeAll}>Сохранить</button>
+            <div className="order-drawer-foot" style={{ padding: "20px 0 0", borderTop: "none", display: "flex", gap: 14 }}>
+              <button className="order-btn-ghost" style={{ flex: 1 }} onClick={closeAll}>Отмена</button>
+              <button className="order-btn-primary" style={{ flex: 1 }} onClick={closeAll}>Сохранить</button>
             </div>
           </div>
         </div>
@@ -352,18 +354,18 @@ export default function Order() {
 
       {/* ===== Участник поездки drawer ===== */}
       {drawer === "participant" && (
-        <div className="acc-drawer-backdrop" onClick={closeAll}>
-          <div className="acc-drawer" style={{ width: 600, padding: 30, borderRadius: "36px 0 0 36px" }} onClick={(e) => e.stopPropagation()}>
-            <div className="acc-drawer-head" style={{ marginBottom: 20, display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "none", padding: 0 }}>
+        <div className="order-drawer-backdrop" onClick={closeAll}>
+          <div className="order-drawer" style={{ width: 600, padding: 30, borderRadius: "36px 0 0 36px" }} onClick={(e) => e.stopPropagation()}>
+            <div className="order-drawer-head" style={{ marginBottom: 20, display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "none", padding: 0 }}>
               <h2 style={{ fontSize: 24, fontWeight: 700, margin: 0, color: "#17181c" }}>Участник поездки</h2>
               <button className="m-close" onClick={() => setDrawer("participants")} style={{ background: "none", border: "none", cursor: "pointer", padding: 4 }}><IcClose /></button>
             </div>
-            <div className="acc-drawer-body" style={{ padding: 0, flex: 1, overflowY: "auto" }}>
+            <div className="order-drawer-body" style={{ padding: 0, flex: 1, overflowY: "auto" }}>
               <TF label="ФИО" value="Вознесенский Иван Сергеевич" lock />
               <TF label="Документ РФ" value="5089 849503" chevron />
               <TF label="Международный документ" value="78 329098329" chevron />
-              <button className="acc-modal-outline">Редактировать</button>
-              <div className="acc-sec-h">Расходы в поездке</div>
+              <button className="order-modal-outline">Редактировать</button>
+              <div className="order-sec-h">Расходы в поездке</div>
               <div style={{ height: 10 }} />
               <div className="exp-card">
                 <div className="e-left">
@@ -385,9 +387,9 @@ export default function Order() {
                 </div>
               </div>
             </div>
-            <div className="acc-drawer-foot" style={{ padding: "20px 0 0", borderTop: "none", display: "flex", gap: 14 }}>
-              <button className="acc-btn-ghost" style={{ flex: 1 }} onClick={() => setDrawer("participants")}>Отмена</button>
-              <button className="acc-btn-primary" style={{ flex: 1 }} onClick={closeAll}>Сохранить</button>
+            <div className="order-drawer-foot" style={{ padding: "20px 0 0", borderTop: "none", display: "flex", gap: 14 }}>
+              <button className="order-btn-ghost" style={{ flex: 1 }} onClick={() => setDrawer("participants")}>Отмена</button>
+              <button className="order-btn-primary" style={{ flex: 1 }} onClick={closeAll}>Сохранить</button>
             </div>
           </div>
         </div>
@@ -395,14 +397,14 @@ export default function Order() {
 
       {/* ===== Счета на оплату drawer ===== */}
       {drawer === "invoices" && (
-        <div className="acc-drawer-backdrop" onClick={closeAll}>
-          <div className="acc-drawer" style={{ width: 690, padding: 30, paddingTop: 20, borderRadius: "36px 0 0 36px" }} onClick={(e) => e.stopPropagation()}>
-            <div className="acc-drawer-head" style={{ marginBottom: 20, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+        <div className="order-drawer-backdrop" onClick={closeAll}>
+          <div className="order-drawer" style={{ width: 690, padding: 30, paddingTop: 20, borderRadius: "36px 0 0 36px" }} onClick={(e) => e.stopPropagation()}>
+            <div className="order-drawer-head" style={{ marginBottom: 20, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
               <h2 style={{ fontSize: 24, fontWeight: 700, margin: 0, color: "#17181c" }}>Счета на оплату</h2>
               <button className="m-close" onClick={closeAll} style={{ background: "none", border: "none", cursor: "pointer", padding: 4 }}><IcClose /></button>
             </div>
 
-            <div className="acc-drawer-body" style={{ padding: 0 }}>
+            <div className="order-drawer-body" style={{ padding: 0 }}>
               {/* Search bar */}
               <div style={{ position: "relative", marginBottom: 10 }}>
                 <input
@@ -556,7 +558,7 @@ function TF({ label, value, lock, copy, chevron, cal, ph, onClick }: {
   label: string; value: string; lock?: boolean; copy?: boolean; chevron?: boolean; cal?: boolean; ph?: boolean; onClick?: () => void;
 }) {
   return (
-    <div className="acc-field" style={{ marginBottom: 12, cursor: onClick ? "pointer" : undefined }} onClick={onClick}>
+    <div className="order-field" style={{ marginBottom: 12, cursor: onClick ? "pointer" : undefined }} onClick={onClick}>
       <label>{label}</label>
       <div className="val" style={ph ? { color: "#a9abb1" } : undefined}>{ph ? label : value}</div>
       {lock && <span className="cal"><IcLockField /></span>}

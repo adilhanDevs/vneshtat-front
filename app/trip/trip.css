@@ -1,8 +1,18 @@
 .trip-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
   max-width: 1120px;
+  width: 100%;
   margin: 0 auto;
-  padding: 10px 10px 120px;
+  padding: 10px 10px 140px;
   position: relative;
+  box-sizing: border-box;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.trip-scroll::-webkit-scrollbar {
+  display: none;
 }
 .trip-steps-row {
   display: flex;
@@ -202,22 +212,38 @@
 .trip-refresh-pill {
   position: absolute;
   left: 50%;
-  bottom: -18px;
+  bottom: -44px;
   transform: translateX(-50%);
   display: flex;
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 8px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  z-index: 1;
+  gap: 12px;
+  background: #ffffff;
+  border: 1px solid #e7e8eb;
+  border-radius: 40px;
+  padding: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  z-index: 2;
 }
 .trip-refresh-pill button {
-  display: flex; align-items: center; gap: 8px;
-  border: none; background: none; padding: 8px 18px; border-radius: 10px;
-  font-size: 15px; color: #6d6f77; font-family: inherit; cursor: pointer;
+  width: 137px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid #e7e8eb;
+  background: #ffffff;
+  border-radius: 20px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #34363b;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
-.trip-refresh-pill button:hover { background: #f4f4f6; }
+.trip-refresh-pill button:hover {
+  background: #f8f9fa;
+  border-color: #d8dadf;
+}
 
 /* chosen pill */
 .trip-chosen-pill {
@@ -262,46 +288,77 @@
 /* fills the row: 600 - 40 padding - 15 gap - 175 buttons = 370px (design) */
 .trip-booking > div:first-child { flex: 1; min-width: 0; }
 .trip-booking h3 { margin: 0 0 6px; font-size: 20px; font-weight: 700; line-height: 1.2; }
-.trip-booking p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.35; }
-.trip-booking .bk-btns { display: flex; flex-direction: column; gap: 9px; flex-shrink: 0; width: 175px; }
+.trip-booking p { margin: 0; color: #787b86; font-size: 14px; line-height: 1.4; font-weight: 400; }
+.trip-booking .bk-btns { display: flex; flex-direction: column; gap: 6px; flex-shrink: 0; width: 173px; }
 .trip-booking .bk-btns button {
-  height: 34px; padding: 0; border-radius: 13px; border: none;
-  background: var(--blue); color: #fff; font-size: 14px; font-weight: 500;
+  width: 173px; height: 41px; padding: 0; border-radius: 13px; border: none;
+  background: #007BFB; color: #ffffff; font-size: 14px; font-weight: 500;
   font-family: inherit; cursor: pointer; white-space: nowrap;
 }
-.trip-booking .bk-btns button:hover { background: var(--blue-dark); }
+.trip-booking .bk-btns button:hover { background: #0066d6; }
 
 /* variant detail drawer */
 .vd-eyebrow { display: flex; align-items: center; gap: 8px; color: #787b86; font-size: 15px; }
-.vd-h1 { font-size: 30px; font-weight: 500; letter-spacing: -0.3px; color: #121212; margin: 6px 0 10px; }
+.vd-h1 { font-size: 30px; font-weight: 500; letter-spacing: -0.3px; color: #121212;  }
 .vd-desc { color: #787b86; font-size: 16px; line-height: 1.4; margin-bottom: 18px; }
 .vd-day { color: #787b86; font-size: 18px; margin-bottom: 14px; }
 .vd-card {
   box-sizing: border-box;
   border: 1px solid #e5e7ea; border-radius: 18px; padding: 16px 22px;
-  margin-bottom: 12px; display: flex; align-items: center; gap: 16px;
+  margin-bottom: 12px; display: flex; align-items: center; gap: 20px;
   /* all three cards share one height (design) */
   min-height: 100px;
 }
 .vd-card .vd-left { flex: 1; min-width: 0; }
-.vd-flight-top { display: flex; align-items: center; gap: 14px; }
-.vd-flight-top b { font-size: 22px; font-weight: 700; color: #121212; line-height: 1.1; }
-.vd-flight-top .line { flex: 1; height: 1.5px; background: #c0c7d1; border-radius: 2px; }
-.vd-flight-sub { display: flex; justify-content: space-between; font-size: 12px; color: #787b86; margin-top: 1px; line-height: 1.2; }
+.vd-flight-route { display: flex; align-items: flex-start; gap: 14px; }
+.vd-point { display: flex; flex-direction: column; align-items: flex-start; }
+.vd-point.text-right { align-items: flex-end; }
+.vd-point b { font-size: 22px; font-weight: 700; color: #121212; line-height: 1.1; }
+.vd-point span { font-size: 12px; color: #787b86; margin-top: 2px; line-height: 1.2; }
+.vd-flight-route .line { flex: 1; max-width: 175px; min-width: 30px; height: 5px; background: #c0c7d1; border-radius: 5px; margin-top: 10px; }
 .vd-flight-note {
   display: flex; align-items: center; gap: 6px; margin-top: 6px;
   font-size: 13px; line-height: 1.2; color: #4a4c52; white-space: nowrap;
 }
 .vd-flight-note svg { width: 14px; height: 14px; flex-shrink: 0; }
-.vd-mid { font-size: 13px; color: #787b86; line-height: 1.45; text-align: left; min-width: 128px; }
-.vd-mid .more { color: var(--blue); cursor: pointer; }
-.vd-price { font-size: 20px; font-weight: 700; color: #121212; white-space: nowrap; }
-.vd-card .vd-title { font-size: 17px; font-weight: 500; color: #121212; white-space: nowrap; line-height: 1.2; }
-.vd-card .vd-title span { display: block; font-size: 13px; color: #787b86; font-weight: 400; margin-top: 2px; line-height: 1.25; }
-/* hotel card packs 4 lines into the same height -> smaller type (design) */
-.vd-card.hotel .vd-title { font-size: 15px; }
-.vd-card.hotel .vd-title span { font-size: 11px; margin-top: 0; line-height: 1.2; }
-.vd-card.hotel .vd-title + .vd-title { margin-top: 3px; }
+.vd-mid {
+  font-size: 12px;
+  font-weight: 500;
+  color: #787b86;
+  line-height: 1.35;
+  text-align: left;
+  margin: 0 auto;
+  flex-shrink: 0;
+}
+.vd-mid .more { color: #007BFB; font-size: 12px; font-weight: 500; cursor: pointer; display: block; margin-top: 2px; }
+.vd-price { font-size: 22px; font-weight: 700; color: #121212; white-space: nowrap; margin-left: auto; flex-shrink: 0; }
+.vd-card .vd-title { font-size: 16px; font-weight: 500; color: #121212; white-space: nowrap; line-height: 1.2; }
+.vd-card .vd-title span { display: block; font-size: 12px; color: #787b86; font-weight: 500; margin-top: 2px; line-height: 1.25; }
+
+/* --- Independent card styles --- */
+/* Flight Card */
+.vd-card-flight { display: flex; align-items: center; }
+.vd-card-flight .vd-flight-route .line { width: 140px; flex: none; height: 5px; background: #c0c7d1; border-radius: 5px; margin-top: 10px; }
+.vd-left-flight { flex: 0 0 auto; }
+.vd-mid-flight { flex: 1; margin-left: 156px; text-align: left; }
+.vd-price-flight { flex: 0 0 auto; margin-left: auto; text-align: right; }
+
+/* Train Card */
+.vd-card-train { display: flex; align-items: center; }
+.vd-left-train { flex: 0 0 200px; }
+.vd-mid-train { flex: 1; margin-left: 36px; text-align: left; }
+.vd-price-train { flex: 0 0 auto; margin-left: auto; text-align: right; }
+
+/* Hotel Card */
+.vd-card-hotel { display: flex; align-items: center; }
+.vd-card-hotel .vd-hotel-img { margin-right: 18px; flex-shrink: 0; }
+.vd-left-hotel { flex: 0 0 auto; }
+.vd-mid-hotel { flex: 1; margin-left: 36px; text-align: left; }
+.vd-price-hotel { flex: 0 0 auto; margin-left: auto; text-align: right; }
+.vd-card-hotel .vd-title { font-size: 16px; font-weight: 500; color: #121212; }
+.vd-card-hotel .vd-title span { font-size: 12px; font-weight: 500; color: #787b86; margin-top: 0; line-height: 1.2; }
+.vd-card-hotel .vd-title + .vd-title { margin-top: 3px; }
+
 .vd-hotel-img {
   width: 76px; height: 64px; border-radius: 12px; flex-shrink: 0;
   background-image: url(/img/hotel-room.jpg);
@@ -332,4 +389,288 @@
   .trip-hero .hero-title { font-size: 88px; }
   .trip-hero img { width: 630px; margin-top: -73px; }
   .trip-hero .hero-sub { font-size: 21px; max-width: 740px; }
+}
+
+/* ================= ШЕЛЛ СТРАНИЦЫ (развязка от .acc-* и .ord-*) =================
+   Копии оболочечных правил из account.css и orders.css под собственными именами.
+   Оригиналы там остаются: шторки и чатбар реально нужны ещё 3-4 страницам, это
+   копирование, а не вырезание. Смысл в том, что правка account.css ради /account
+   или orders.css ради списка заказов больше не задевает /trip.
+   .trip-root объявляет те же CSS-переменные, что и .acc: они наследуются вниз,
+   поэтому общие Sidebar/Header внутри страницы работают как прежде. */
+.trip-root {
+  --page: #ffffff;
+  --panel: #f4f4f5;
+  --card: #ffffff;
+  --subcard: #f3f4f6;
+  --blue: #1e88fa;
+  --blue-dark: #1877ec;
+  --coral: #fe5b6b;
+  --ink: #17181c;
+  --muted: #8a8c93;
+  --muted2: #a9abb1;
+  --border: #ececee;
+  --border2: #e4e5e8;
+
+  display: flex;
+  min-height: 100vh;
+  background: var(--page);
+  color: var(--ink);
+  font-family: 'TT Norms', Arial, sans-serif;
+}
+.trip-main {
+  flex: 1;
+  min-width: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--panel);
+  margin-top: 0;
+  padding: 22px 0 0 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.trip-main.with-surface {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 0;
+}
+.trip-surface {
+  flex: 1;
+  min-height: 0;
+  background: #ffffff;
+  border-radius: 28px 0 0 0;
+  padding: 0;
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ---------------- overlays: scrim + drawer ---------------- */
+.trip-scrim {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 22, 28, 0.28);
+  z-index: 500;
+  display: flex;
+}
+/* Own keyframe name instead of account.css's slideIn: reusing that one would
+   quietly put the dependency we just removed back in through the animation. */
+.trip-drawer {
+  margin-left: auto;
+  width: 47.9167%;
+  max-width: 100vw;
+  height: 100vh;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  border-radius: 28px 0 0 28px;
+  overflow: hidden;
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: tripSlideIn 0.25s ease;
+}
+@keyframes tripSlideIn {
+  from {
+    transform: translateX(40px);
+    opacity: 0.6;
+  }
+}
+.trip-drawer-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 28px 20px;
+  border-bottom: none;
+}
+.trip-drawer-head h1 {
+  font-size: 30px;
+  font-weight: 500;
+  color: #121212;
+  margin: 0;
+  line-height: 1.15;
+}
+.trip-drawer-head button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: #8a8c93;
+}
+.trip-drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 28px 10px;
+}
+.trip-drawer-foot {
+  display: flex;
+  gap: 12px;
+  padding: 22px 28px 24px;
+  background: #ffffff;
+}
+.trip-btn-ghost {
+  flex: 1;
+  height: 50px;
+  border-radius: 16px;
+  background: #f3f4f6;
+  color: #787b86;
+  border: none;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: 'TT Norms', sans-serif;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.trip-btn-ghost:hover {
+  background: #e2e4e9;
+}
+.trip-btn-primary {
+  flex: 2;
+  height: 50px;
+  border-radius: 16px;
+  background: #007bfb;
+  color: #fafafa;
+  border: none;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: 'TT Norms', sans-serif;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.trip-btn-primary:hover {
+  background: #0069d9;
+}
+.trip-btn-primary:disabled {
+  background: #eceef1;
+  color: #9b9fad;
+  cursor: default;
+}
+
+/* ---------------- participants drawer: search + row menu ---------------- */
+.trip-search {
+  width: 100%;
+  height: 54px;
+  border-radius: 23px;
+  background: #ffffff;
+  border: 1px solid #e5e7ea;
+  padding: 10px 10px 10px 20px;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: 'TT Norms', sans-serif;
+  color: #121212;
+  outline: none;
+  margin-bottom: 10px;
+}
+.trip-search::placeholder {
+  color: #9b9fad;
+  font-family: 'TT Norms', sans-serif;
+}
+.trip-dots {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+}
+.trip-ctx {
+  position: absolute;
+  z-index: 30;
+  background: #fafafa;
+  border: 1px solid #e5e7ea;
+  border-radius: 23px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  width: 170px;
+}
+.trip-ctx button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  border: none;
+  background: none;
+  padding: 8px 10px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: 'TT Norms', sans-serif;
+  color: #34363b;
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+}
+.trip-ctx button:hover {
+  background: #f0f1f3;
+}
+
+/* ---------------- bottom chat bar ---------------- */
+.trip-chatbar {
+  position: fixed;
+  left: 256px;
+  right: 0;
+  bottom: 25px;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 100;
+}
+.trip-chatbar .inner {
+  pointer-events: auto;
+  width: 700px;
+  min-width: 500px;
+  max-width: calc(100% - 40px);
+  height: 80px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 40px;
+  padding: 16px;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
+}
+.trip-chatbar textarea {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  font-family: inherit;
+  background: none;
+  color: var(--ink);
+  resize: none;
+  line-height: 1.4;
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 0 8px;
+  align-self: center;
+}
+.trip-chatbar textarea::placeholder { color: #a9abb1; }
+.trip-round.active {
+  color: #007bfb;
+}
+.trip-round.active svg path {
+  fill: #007bfb;
+}
+.trip-send {
+  width: 48px;
+  height: 48px;
+  border-radius: 18px;
+  background: #e0e3ea;
+  border: none;
+  cursor: default;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s ease;
+}
+.trip-send.active {
+  background: #007bfb;
+  cursor: pointer;
+}
+.trip-send.active:hover {
+  background: #006ae6;
 }

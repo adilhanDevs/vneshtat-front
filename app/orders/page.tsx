@@ -40,14 +40,14 @@ export default function Orders() {
   const [ctx, setCtx] = useState<string | null>(null);
 
   return (
-    <div className="acc">
+    <div className="ord-root">
       <Sidebar active="orders" />
 
-      <main className="acc-main with-surface" onClick={() => setCtx(null)}>
+      <main className="ord-page with-surface" onClick={() => setCtx(null)}>
         <Header onMessengerClick={() => setMessenger(true)} />
 
-        <div className="acc-surface">
-          <h1 className="acc-title">Заказы</h1>
+        <div className="ord-surface">
+          <h1 className="ord-page-title">Заказы</h1>
 
           <div className="ord-search-row">
             <input className="ord-search" placeholder="Поиск заказов" />
@@ -96,9 +96,15 @@ export default function Orders() {
 
                 {ctx === order.id && (
                   <div className="msg-ctx" style={{ right: 16, top: 48 }} onClick={(e) => e.stopPropagation()}>
-                    <button onClick={() => { setCtx(null); router.push("/order"); }}><IcInfoCircle /> О заказе</button>
-                    <button onClick={() => { setCtx(null); router.push("/order"); }}><IcPlane /> Услуги</button>
-                    <button onClick={() => { setCtx(null); setMessenger(true); }}><IcMenuChat /> Вложения чата</button>
+                    <button onClick={() => { setCtx(null); router.push("/order"); }}>
+                      <img src="/img/Внештат 2.0 (22)/Info.png" alt="" style={{ width: 18, height: 18, objectFit: "contain" }} /> О заказе
+                    </button>
+                    <button onClick={() => { setCtx(null); router.push("/order"); }}>
+                      <img src="/img/Внештат 2.0 (22)/Orders.png" alt="" style={{ width: 18, height: 18, objectFit: "contain" }} /> Услуги
+                    </button>
+                    <button onClick={() => { setCtx(null); setMessenger(true); }}>
+                      <img src="/img/Внештат 2.0 (22)/Attachments.png" alt="" style={{ width: 18, height: 18, objectFit: "contain" }} /> Вложения чата
+                    </button>
                   </div>
                 )}
               </div>
@@ -110,10 +116,10 @@ export default function Orders() {
       <div className="ord-chatbar">
         <div className="inner">
           <button className="ord-round"><IcPlus /></button>
-          <button className="ord-round"><IcPlane /></button>
+          <button className="ord-round active"><IcPlane /></button>
           <input placeholder="Напишите свой запрос" />
           <button className="ord-send">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="#9aa0a8"><path d="m4 11.5 15-6.5-4 15-3.5-6.5L4 11.5Z" /></svg>
+            <img src="/img/Send (1).png" alt="" style={{ width: 22, height: 22, objectFit: "contain" }} />
           </button>
         </div>
       </div>

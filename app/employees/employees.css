@@ -25,23 +25,31 @@
 .emp-main {
   flex: 1;
   min-width: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
   background: var(--panel);
-  border-top-left-radius: 26px;
   margin-top: 0;
-  padding: 22px 40px 60px;
+  padding: 22px 0 0 0;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 .emp-main.with-surface {
   display: flex;
   flex-direction: column;
-  padding-bottom: 20px;
+  padding-bottom: 0;
 }
 .emp-surface {
   flex: 1;
-  background: #fff;
-  border-radius: 30px;
-  padding: 30px 120px 50px;
+  min-height: 0;
+  background: #ffffff;
+  border-radius: 28px 0 0 0;
+  padding: 34px 120px 50px;
   position: relative;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
 }
 .emp-title {
   text-align: center;

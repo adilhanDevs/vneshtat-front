@@ -43,19 +43,11 @@ const IcSettingsGear = () => (
 );
 
 const IcOpenWidget = () => (
-  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#5a5c63" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="6" cy="6" r="2.4" />
-    <rect x="11.6" y="3.6" width="4.8" height="4.8" rx="1.2" />
-    <rect x="3.6" y="11.6" width="4.8" height="4.8" rx="1.2" />
-    <path d="M14 11.6v4.8M11.6 14h4.8" />
-  </svg>
+  <img src="/img/ctx-widget-open.png" alt="" style={{ width: 20, height: 20, objectFit: "contain" }} />
 );
 
 const IcDisconnect = () => (
-  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#fe5b6b" strokeWidth="1.6" strokeLinecap="round">
-    <circle cx="10" cy="10" r="7" />
-    <path d="m7 7 6 6" />
-  </svg>
+  <img src="/img/ctx-widget-off.png" alt="" style={{ width: 20, height: 20, objectFit: "contain" }} />
 );
 
 const IcGoTo = () => (
@@ -130,12 +122,13 @@ export default function Dashboard() {
   const [widgets, setWidgets] = useState<WidgetConfig[]>([
     { id: "finance", name: "Финансы", desc: "Ваш текущий баланс", icon: null, enabled: true },
     { id: "employees", name: "Сотрудники", desc: "Какие сотрудники сейчас в поездках", icon: null, enabled: false },
-    { id: "calendar", name: "Календарь", desc: "Ваши поездки на текущую неделю", icon: <IcCalEmoji />, enabled: true },
-    { id: "radar", name: "Радар", desc: "Первыми выхватим появившийся билет", icon: <IcRadarEmoji />, enabled: true },
+    { id: "calendar", name: "Календарь", desc: "Ваши поездки на текущую неделю", icon: <IcCalEmoji />, enabled: false },
+    { id: "radar", name: "Радар", desc: "Первыми выхватим появившийся билет", icon: <IcRadarEmoji />, enabled: false },
   ]);
 
   // Finance widget state
   const [financeVariant, setFinanceVariant] = useState<"normal" | "debt">("normal");
+  const [dashInput, setDashInput] = useState("");
 
   // Radar timer
   const [radarTime, setRadarTime] = useState(13534); // 03:45:34 in seconds
@@ -191,14 +184,14 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="acc" onClick={closeCtx}>
+    <div className="dash-root" onClick={closeCtx}>
       <Sidebar active="desk" />
 
-      <main className="acc-main with-surface">
+      <main className="dash-main with-surface">
         {/* Top bar */}
         <Header onMessengerClick={() => setMessenger(true)} />
 
-        <div className="acc-surface">
+        <div className="dash-surface">
           {/* Greeting */}
         <h1 className="dash-greeting">Добрый день!</h1>
 
@@ -416,9 +409,15 @@ export default function Dashboard() {
 
               {ctx === order.id && (
                 <div className="msg-ctx" style={{ right: 16, top: 48 }} onClick={(e) => e.stopPropagation()}>
-                  <button onClick={() => { setCtx(null); router.push("/order"); }}><IcInfoCircle /> О заказе</button>
-                  <button onClick={() => { setCtx(null); router.push("/order"); }}><IcPlane /> Услуги</button>
-                  <button onClick={() => { setCtx(null); setMessenger(true); }}><IcMenuChat /> Вложения чата</button>
+                  <button onClick={() => { setCtx(null); router.push("/order"); }}>
+                    <img src="/img/Внештат 2.0 (22)/Info.png" alt="" style={{ width: 18, height: 18, objectFit: "contain" }} /> О заказе
+                  </button>
+                  <button onClick={() => { setCtx(null); router.push("/order"); }}>
+                    <img src="/img/Внештат 2.0 (22)/Orders.png" alt="" style={{ width: 18, height: 18, objectFit: "contain" }} /> Услуги
+                  </button>
+                  <button onClick={() => { setCtx(null); setMessenger(true); }}>
+                    <img src="/img/Внештат 2.0 (22)/Attachments.png" alt="" style={{ width: 18, height: 18, objectFit: "contain" }} /> Вложения чата
+                  </button>
                 </div>
               )}
             </div>
@@ -427,10 +426,31 @@ export default function Dashboard() {
 
           {/* AI input bar */}
           <div className="dash-ai-bar">
-            <button className="dash-ai-plus"><IcPlus /></button>
-            <span className="dash-ai-sparkle"><IcSparkle /></span>
-            <input placeholder="Напишите свой запрос" />
-            <button className="dash-ai-send"><IcSendDash /></button>
+            <div className="dash-ai-left">
+              <button className="dash-ai-plus"><IcPlus /></button>
+              <button className="dash-ai-sparkle active">
+                <IcPlane />
+              </button>
+            </div>
+            <input
+              placeholder="Напишите свой запрос"
+              value={dashInput}
+              onChange={(e) => setDashInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && dashInput.trim()) {
+                  router.push("/chat");
+                }
+              }}
+            />
+            <button
+              className={`dash-ai-send ${dashInput.trim() ? "active" : ""}`}
+              disabled={!dashInput.trim()}
+              onClick={() => {
+                if (dashInput.trim()) router.push("/chat");
+              }}
+            >
+              <img src="/img/Send (1).png" alt="" style={{ width: 22, height: 22, objectFit: "contain" }} />
+            </button>
           </div>
         </div>
       </main>
@@ -441,7 +461,7 @@ export default function Dashboard() {
       {/* Widget settings panel */}
       {settingsOpen && (
         <div
-          className="acc-scrim"
+          className="dash-scrim"
           onClick={() => { setSettingsOpen(false); setSettingsCtx(null); }}
         >
           <div

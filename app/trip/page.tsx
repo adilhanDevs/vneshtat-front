@@ -3,13 +3,15 @@
 import { useState, useRef } from "react";
 import Header from "../Header";
 import { useRouter } from "next/navigation";
+// account.css нужен только общим Sidebar/Header (.acc-side, .acc-logo, .acc-nav,
+// .acc-top, .acc-balance, .acc-avatar, .acc-menu). Собственных acc-* классов у
+// /trip больше нет — вся вёрстка страницы, включая шторки и чатбар, в trip.css.
 import "../account/account.css";
-import "../orders/orders.css";
 import "./trip.css";
 import Sidebar from "../account/Sidebar";
 import Messenger from "../account/Messenger";
 import {
-  IcCard, IcDots, IcBubble, IcPlus, IcPlane, IcStop, IcRefresh, IcUndo,
+  IcCard, IcDots, IcBubble, IcPlus, IcPlane, IcPlaneOutline, IcStop, IcRefresh, IcUndo,
   IcThumbUp, IcThumbDown, IcCopy, IcClose, IcInfoCircle, IcMenuChat,
 } from "../account/icons";
 
@@ -73,13 +75,13 @@ export default function Trip() {
   const choose = (i: number) => { setChosen(i); setPhase("chosen"); setTab("route"); setDetail(null); };
 
   return (
-    <div className="acc">
+    <div className="trip-root">
       <Sidebar />
 
-      <main className="acc-main with-surface">
+      <main className="trip-main with-surface">
         <Header onMessengerClick={() => setMessenger(true)} />
 
-        <div className="acc-surface">
+        <div className="trip-surface">
           <div className="trip-scroll">
           <div className="trip-steps-row">
             <div className="trip-steps">
@@ -197,10 +199,10 @@ export default function Trip() {
         </div>
       </main>
 
-      <div className="ord-chatbar">
+      <div className="trip-chatbar">
         <div className="inner">
-          <button className="ord-round"><IcPlus /></button>
-          <button className="ord-round active"><IcPlane /></button>
+          <button className="trip-round"><IcPlus /></button>
+          <button className="trip-round active"><IcPlane /></button>
           <textarea
             ref={taRef}
             rows={1}
@@ -210,8 +212,8 @@ export default function Trip() {
             onChange={(e) => { setText(e.target.value); grow(e.target); }}
             onKeyDown={(e) => { if (e.key === "Enter" && !e.shiftKey && phase !== "generating") { e.preventDefault(); send(); } }}
           />
-          <button className="ord-send" style={{ background: phase === "generating" ? "#eef1f4" : "var(--blue)" }} disabled={phase === "generating"} onClick={send}>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill={phase === "generating" ? "#9aa0a8" : "#fff"}><path d="m4 11.5 15-6.5-4 15-3.5-6.5L4 11.5Z" /></svg>
+          <button className={`trip-send ${text.trim() ? "active" : ""}`} disabled={!text.trim() || phase === "generating"} onClick={send}>
+            <img src="/img/Send (1).png" alt="" style={{ width: 22, height: 22, objectFit: "contain" }} />
           </button>
         </div>
       </div>
@@ -220,44 +222,47 @@ export default function Trip() {
 
       {/* variant detail drawer */}
       {detail !== null && (
-        <div className="acc-scrim" onClick={() => setDetail(null)}>
-          <div className="acc-drawer" onClick={(e) => e.stopPropagation()}>
-            <div className="acc-drawer-head" style={{ display: "block" }}>
+        <div className="trip-scrim" onClick={() => setDetail(null)}>
+          <div className="trip-drawer" onClick={(e) => e.stopPropagation()}>
+            <div className="trip-drawer-head" style={{ display: "block" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                 <div>
-                  <div className="vd-eyebrow"><IcPlane /> {VARIANTS[detail].n}</div>
+                  <div className="vd-eyebrow"><IcPlaneOutline /> {VARIANTS[detail].n}</div>
                   <div className="vd-h1">{VARIANTS[detail].title}</div>
                 </div>
                 <button style={{ background: "none", border: "none", cursor: "pointer" }} onClick={() => setDetail(null)}><IcClose /></button>
               </div>
               <div className="vd-desc">{VARIANTS[detail].desc}</div>
             </div>
-            <div className="acc-drawer-body">
+            <div className="trip-drawer-body">
               <div className="vd-day">11 марта, четверг</div>
-              <div className="vd-card">
-                <div className="vd-left">
-                  <div className="vd-flight-top"><b>08:35</b><span className="line" /><b>10:05</b></div>
-                  <div className="vd-flight-sub"><span>DME</span><span>LED</span></div>
-                  <div className="vd-flight-note"><IcPlane /> Перелет: Санкт-Петербург - Москва</div>
+              <div className="vd-card vd-card-flight">
+                <div className="vd-left vd-left-flight">
+                  <div className="vd-flight-route">
+                    <div className="vd-point"><b>08:35</b><span>DME</span></div>
+                    <span className="line" />
+                    <div className="vd-point text-right"><b>10:05</b><span>LED</span></div>
+                  </div>
+                  <div className="vd-flight-note"><IcPlaneOutline /> Перелет: Санкт-Петербург - Москва</div>
                 </div>
-                <div className="vd-mid">В пути: 4ч 50мин<br />Рейс: DP 2550<br /><span className="more">Подробнее</span></div>
-                <div className="vd-price">8 570 ₽</div>
+                <div className="vd-mid vd-mid-flight">В пути: 4ч 50мин<br />Рейс: DP 2550<br /><span className="more">Подробнее</span></div>
+                <div className="vd-price vd-price-flight">8 570 ₽</div>
               </div>
-              <div className="vd-card">
-                <div className="vd-left"><div className="vd-title">Аэроэкспресс<span>Поезд, туда-обратно</span></div></div>
-                <div className="vd-mid">В пути: 45 мин<br />Класс: Стандартный<br /><span className="more">Подробнее</span></div>
-                <div className="vd-price">8 570 ₽</div>
+              <div className="vd-card vd-card-train">
+                <div className="vd-left vd-left-train"><div className="vd-title">Аэроэкспресс<span>Поезд, туда-обратно</span></div></div>
+                <div className="vd-mid vd-mid-train">В пути: 45 мин<br />Класс: Стандартный<br /><span className="more">Подробнее</span></div>
+                <div className="vd-price vd-price-train">8 570 ₽</div>
               </div>
-              <div className="vd-card hotel">
+              <div className="vd-card vd-card-hotel hotel">
                 <div className="vd-hotel-img" />
-                <div className="vd-left"><div className="vd-title">Заезд 11 марта, чт<span>с 15:00</span></div><div className="vd-title">Выезд 15 марта, вт<span>до 12:00</span></div></div>
-                <div className="vd-mid">Отель: Pentahotel<br />Moscow Arbat<br /><span className="more">Подробнее</span></div>
-                <div className="vd-price">8 570 ₽</div>
+                <div className="vd-left vd-left-hotel"><div className="vd-title">Заезд 11 марта, чт<span>с 15:00</span></div><div className="vd-title">Выезд 15 марта, вт<span>до 12:00</span></div></div>
+                <div className="vd-mid vd-mid-hotel">Отель: Pentahotel<br />Moscow Arbat<br /><span className="more">Подробнее</span></div>
+                <div className="vd-price vd-price-hotel">8 570 ₽</div>
               </div>
             </div>
-            <div className="acc-drawer-foot">
-              <button className="acc-btn-ghost" onClick={() => setDetail(null)}>Отмена</button>
-              <button className="acc-btn-primary" onClick={() => choose(detail)}>Выбрать</button>
+            <div className="trip-drawer-foot">
+              <button className="trip-btn-ghost" onClick={() => setDetail(null)}>Отмена</button>
+              <button className="trip-btn-primary" onClick={() => choose(detail)}>Выбрать</button>
             </div>
           </div>
         </div>
@@ -265,28 +270,28 @@ export default function Trip() {
 
       {/* participants drawer */}
       {participants && (
-        <div className="acc-scrim" onClick={() => setParticipants(false)}>
-          <div className="acc-drawer" onClick={(e) => e.stopPropagation()}>
-            <div className="acc-drawer-head" style={{ display: "block" }}>
+        <div className="trip-scrim" onClick={() => setParticipants(false)}>
+          <div className="trip-drawer" onClick={(e) => e.stopPropagation()}>
+            <div className="trip-drawer-head" style={{ display: "block" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                 <div>
-                  <div className="vd-eyebrow"><IcPlane /> Бронирование</div>
+                  <div className="vd-eyebrow"><IcPlaneOutline /> Бронирование</div>
                   <div className="vd-h1">Выбор участников поездки</div>
                 </div>
                 <button style={{ background: "none", border: "none", cursor: "pointer" }} onClick={() => setParticipants(false)}><IcClose /></button>
               </div>
             </div>
-            <div className="acc-drawer-body" onClick={() => setCtx(null)}>
-              <input className="msg-search" placeholder="Поиск" />
+            <div className="trip-drawer-body" onClick={() => setCtx(null)}>
+              <input className="trip-search" placeholder="Поиск" />
               {[0, 1, 2, 3].map((i) => (
                 <div key={i} className="pd-item" onClick={() => setChecked((c) => ({ ...c, [i]: !c[i] }))}>
                   <span className={`pd-check${checked[i] ? " on" : ""}`}>{checked[i] && (
                     <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="m4 8 2.5 2.5L12 5" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
                   )}</span>
                   <div className="p-name">Яковлев Николай Никитич {(i === 0 || i === 2) && <span className="on">Онлайн</span>}</div>
-                  <button className="msg-dots" onClick={(e) => { e.stopPropagation(); setCtx(ctx === i ? null : i); }}><IcDots /></button>
+                  <button className="trip-dots" onClick={(e) => { e.stopPropagation(); setCtx(ctx === i ? null : i); }}><IcDots /></button>
                   {ctx === i && (
-                    <div className="msg-ctx" style={{ right: 10, top: 44 }} onClick={(e) => e.stopPropagation()}>
+                    <div className="trip-ctx" style={{ right: 10, top: 44 }} onClick={(e) => e.stopPropagation()}>
                       <button onClick={() => setCtx(null)}><IcInfoCircle /> Смотреть данные</button>
                       <button onClick={() => { setCtx(null); setMessenger(true); }}><IcMenuChat /> Открыть чат</button>
                     </div>
@@ -294,9 +299,9 @@ export default function Trip() {
                 </div>
               ))}
             </div>
-            <div className="acc-drawer-foot">
-              <button className="acc-btn-ghost" onClick={() => setParticipants(false)}>Отмена</button>
-              <button className="acc-btn-primary" onClick={() => setParticipants(false)}>Продолжить</button>
+            <div className="trip-drawer-foot">
+              <button className="trip-btn-ghost" onClick={() => setParticipants(false)}>Отмена</button>
+              <button className="trip-btn-primary" onClick={() => setParticipants(false)}>Продолжить</button>
             </div>
           </div>
         </div>
