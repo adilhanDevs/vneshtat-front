@@ -57,7 +57,7 @@ export default function Order() {
                     </div> 
                     <div style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: "stretch", justifyContent: "space-between", height: 86 }}>
                       <span className="oc-see" onClick={() => setDrawer("invoices")} style={{ display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid #e5e7ea", height: 40, borderRadius: 13, fontSize: 14, fontWeight: 500, color: "#6d6f77", cursor: "pointer" }}>Смотреть счета</span>
-                      <button className="oc-pay" style={{ margin: 0, width: "100%", height: 40, borderRadius: 13, background: "var(--blue)", color: "#fff", border: "none", fontSize: 15, fontWeight: 600, cursor: "pointer" }}>Оплатить</button>
+                      <button className="oc-pay" style={{ margin: 0, width: "100%", height: 40, borderRadius: 13, background: "var(--blue)", color: "#fff", border: "none", fontSize: 15, fontWeight: 500, cursor: "pointer" }}>Оплатить</button>
                     </div>
                   </div>
                 </div>
@@ -321,7 +321,7 @@ export default function Order() {
         <div className="acc-drawer-backdrop" onClick={closeAll}>
           <div className="acc-drawer" style={{ width: 600, padding: 30, borderRadius: "36px 0 0 36px" }} onClick={(e) => e.stopPropagation()}>
             <div className="acc-drawer-head" style={{ marginBottom: 20, display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "none", padding: 0 }}>
-              <h2 style={{ fontSize: 30, fontWeight: 600, margin: 0, color: "#17181c" }}>Участники поездки</h2>
+              <h2 style={{ fontSize: 30, fontWeight: 500, margin: 0, color: "#17181c" }}>Участники поездки</h2>
               <button className="m-close" onClick={closeAll} style={{ background: "none", border: "none", cursor: "pointer", padding: 4 }}><IcClose /></button>
             </div>
             <div className="acc-drawer-body" style={{ padding: 0, flex: 1, overflowY: "auto" }} onClick={() => setCtx(null)}>
@@ -435,7 +435,7 @@ export default function Order() {
                     <div>
                       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
                         <span style={{ fontSize: 16, fontWeight: 700, color: "#17181c" }}>№ 8909</span>
-                        <span style={{ background: "#ff4d4f", color: "#fff", padding: "2px 10px", borderRadius: 10, fontSize: 11, fontWeight: 600 }}>Просрочен</span>
+                        <span style={{ background: "#ff4d4f", color: "#fff", padding: "2px 10px", borderRadius: 10, fontSize: 11, fontWeight: 500 }}>Просрочен</span>
                       </div>
                       <div style={{ display: "flex", alignItems: "center", gap: 6, fontSize: 14 }}>
                         <span style={{ fontWeight: 500, color: "#6d6f77" }}>8 570,00 ₽</span>
@@ -468,7 +468,7 @@ export default function Order() {
                     <div>
                       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
                         <span style={{ fontSize: 16, fontWeight: 700, color: "#17181c" }}>№ 8909</span>
-                        <span style={{ background: "#007BFB", color: "#fff", padding: "2px 10px", borderRadius: 10, fontSize: 11, fontWeight: 600 }}>Ожидает оплаты</span>
+                        <span style={{ background: "#007BFB", color: "#fff", padding: "2px 10px", borderRadius: 10, fontSize: 11, fontWeight: 500 }}>Ожидает оплаты</span>
                       </div>
                       <div style={{ fontSize: 14, fontWeight: 500, color: "#6d6f77" }}>
                         8 570,00 ₽
@@ -500,7 +500,7 @@ export default function Order() {
                     <div>
                       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
                         <span style={{ fontSize: 16, fontWeight: 700, color: "#17181c" }}>№ 8909</span>
-                        <span style={{ background: "#eef0f3", color: "#8c909c", padding: "2px 10px", borderRadius: 10, fontSize: 11, fontWeight: 600 }}>Оплачен</span>
+                        <span style={{ background: "#eef0f3", color: "#8c909c", padding: "2px 10px", borderRadius: 10, fontSize: 11, fontWeight: 500 }}>Оплачен</span>
                       </div>
                       <div style={{ fontSize: 14, fontWeight: 500, color: "#6d6f77" }}>
                         8 570,00 ₽

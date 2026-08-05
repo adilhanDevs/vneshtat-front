@@ -134,7 +134,7 @@ body {
 
 .logo {
   font-family: var(--font-comfortaa), sans-serif;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 46px;
   line-height: 1;
   color: var(--logo);
@@ -286,7 +286,7 @@ body {
   background: var(--blue);
   color: #fff;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   font-family: inherit;
   cursor: pointer;
   transition: background 0.15s;

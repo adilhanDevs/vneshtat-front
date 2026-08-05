@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import Header from "../Header";
 import { useRouter } from "next/navigation";
 import "../account/account.css";
@@ -15,24 +15,77 @@ import {
 } from "../account/icons";
 
 type Drawer =
-  | null | "topup" | "topup-sbp" | "topup-forming" | "withdraw" | "accounts" | "addaccount" | "accountdata"
-  | "reconciliation" | "cashflow" | "invoices";
+  | null | "topup" | "topup-sbp" | "topup-forming" | "withdraw" | "accounts" | "addaccount" | "addacc-sent" | "accountdata"
+  | "reconciliation" | "cashflow" | "invoices" | "req-sent" | "req-rejected" | "req-approved";
 type Modal =
   | null | "invoice-sbp" | "forming" | "sent" | "rejected" | "approved" | "download-invoice";
 
 export default function Finance() {
   const router = useRouter();
-  const [drawer, setDrawer] = useState<Drawer>(null);
+  const [drawerStack, setDrawerStack] = useState<NonNullable<Drawer>[]>([]);
   const [modal, setModal] = useState<Modal>(null);
   const [messenger, setMessenger] = useState(false);
   const [ctx, setCtx] = useState<string | null>(null);
   const [debt, setDebt] = useState(false);
   const [topupAmount, setTopupAmount] = useState("");
+  const [withdrawAmount, setWithdrawAmount] = useState("");
+  const [addAccInput, setAddAccInput] = useState("");
 
   const hasAmount = topupAmount.trim().length > 0;
+  const hasWithdrawAmount = withdrawAmount.trim().length > 0;
+  const hasAddAccInput = addAccInput.trim().length > 0;
   const displayAmount = topupAmount.includes("₽") ? topupAmount : `${topupAmount} ₽`;
 
-  const closeAll = () => { setDrawer(null); setModal(null); };
+  const drawer = drawerStack[drawerStack.length - 1] || null;
+
+  const setDrawer = (d: Drawer) => {
+    if (d === null) {
+      setDrawerStack([]);
+    } else {
+      const mainDrawers = ["topup", "withdraw", "accounts", "reconciliation", "cashflow", "invoices"];
+      if (mainDrawers.includes(d)) {
+        setDrawerStack([d]);
+      } else {
+        setDrawerStack((prev) => {
+          if (prev.length === 0) return [d];
+          const main = prev[0];
+          return [main, d];
+        });
+      }
+    }
+  };
+
+  const popDrawer = () => {
+    setDrawerStack((prev) => prev.slice(0, -1));
+  };
+
+  const closeAll = () => {
+    setDrawerStack([]);
+    setModal(null);
+    setTopupAmount("");
+    setWithdrawAmount("");
+    setAddAccInput("");
+  };
+
+  const handleTopupChange = (val: string) => {
+    const digits = val.replace(/\D/g, "");
+    if (!digits) {
+      setTopupAmount("");
+      return;
+    }
+    const formatted = parseInt(digits, 10).toLocaleString("ru-RU");
+    setTopupAmount(`${formatted} ₽`);
+  };
+
+  const handleWithdrawChange = (val: string) => {
+    const digits = val.replace(/\D/g, "");
+    if (!digits) {
+      setWithdrawAmount("");
+      return;
+    }
+    const formatted = parseInt(digits, 10).toLocaleString("ru-RU");
+    setWithdrawAmount(`${formatted} ₽`);
+  };
 
   return (
     <div className="acc">
@@ -112,6 +165,7 @@ export default function Finance() {
             </div>
             <div className="fin-optgrid">
               <button className="fin-opt" onClick={() => setDrawer("invoices")}>
+                <span className="o-badge">3 счета</span>
                 <img src="/img/rubl.svg" alt="" width={29} height={31} />
                 <span className="o-label">Счета на оплату</span>
               </button>
@@ -139,232 +193,477 @@ export default function Finance() {
       {messenger && <Messenger onClose={() => setMessenger(false)} />}
 
       {/* ============ drawers ============ */}
-      {drawer === "topup" && (
-        <DrawerShell title="Пополнить баланс" onClose={closeAll}>
-          <p className="emp-desc" style={{ marginBottom: 18 }}>Вы можете пополнить баланс через СБП <br />   или сформировать счет на необходимую сумму.</p>
-          <div className="fin-sbp">
-            <h4>СБП</h4>
-            <div className="fin-sbp-row"><IcSbpRuble /> <b>До 1 млн ₽</b> <span>за один перевод</span></div>
-            <div className="fin-sbp-row"><IcSbpPercent /> <b>Низкая комиссия</b> <span>уточните в своем банке</span></div>
-          </div>
-          <div className="fin-inline-field">
-            <label>Сумма пополнения</label>
-            <input
-              className="fin-inline-input"
-              placeholder="100 000 ₽"
-              value={topupAmount}
-              onChange={(e) => setTopupAmount(e.target.value)}
-            />
-          </div>
-          <div className="fin-hr" />
-          <button className={`fin-big-btn ${hasAmount ? "blue" : "grey"}`} disabled={!hasAmount} onClick={() => setDrawer("topup-sbp")}>Пополнить через СБП</button>
-          <button className={`fin-big-btn ${hasAmount ? "blue" : "grey"}`} disabled={!hasAmount} onClick={() => setDrawer("topup-forming")}>Сформировать счет</button>
-        </DrawerShell>
-      )}
-
-      {drawer === "topup-sbp" && (
-        <DrawerShell
-          title={"Инвойс на пополнение\nчерез СБП"}
-          onClose={closeAll}
-          noFootBorder
-          footer={<button className="fin-big-btn grey" style={{ margin: 0 }} onClick={() => setDrawer("topup")}>Назад</button>}
-        >
-          <div style={{ display: "flex", flexDirection: "column", minHeight: "calc(100vh - 180px)" }}>
-            <div className="fin-sbp" style={{ marginBottom: 12 }}>
-              <div className="fin-sbp-row"><IcSbpRuble /> <b>{displayAmount}</b> <span>размер инвойса</span></div>
-              <div className="fin-sbp-row"><IcSbpPercent /> <b>Низкая комиссия</b> <span>уточните в своем банке</span></div>
-            </div>
-            <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: 20 }}>
-              <Qr />
-              <p style={{ textAlign: "center", color: "var(--muted)", fontSize: 14, margin: "20px 0 0" }}>
-                Отсканируйте QR-код<br />или перейдите по <span className="fin-link">ссылке.</span>
-              </p>
-            </div>
-          </div>
-        </DrawerShell>
-      )}
-
-      {drawer === "topup-forming" && (
-        <DrawerShell
-          title={"Формирование счета..."}
-          onClose={closeAll}
-          noFootBorder
-          footer={<button className="fin-big-btn blue" style={{ margin: 0 }} onClick={closeAll}>Скачать</button>}
-        >
-          <div style={{ display: "flex", flexDirection: "column", minHeight: "calc(100vh - 180px)" }}>
-            <div className="fin-sbp" style={{ marginBottom: 12 }}>
-              <div className="fin-sbp-row"><IcSbpRuble /> <b>{displayAmount}</b> <span>сумма счета</span></div>
-            </div>
-            <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: 20 }}>
-              <p style={{ textAlign: "center", color: "var(--muted)", fontSize: 16, margin: 0, lineHeight: 1.5 }}>
-                Загрузка документа начнется автоматически.<br />Если этого не произошло, нажмите кнопку ниже.
-              </p>
-            </div>
-          </div>
-        </DrawerShell>
-      )}
-
-      {drawer === "withdraw" && (
-        <DrawerShell
-          title={"Подать заявку на вывод\nсвободных средств"}
-          onClose={closeAll}
-          footer={<button className="acc-btn-primary" onClick={() => setModal("sent")}>Подать заявку</button>}
-        >
-          <p className="emp-desc" style={{ marginBottom: 20 }}>Вы можете вывести активы с депозита, если у вас нет неоплаченных счетов. Вывод средств осуществляется ежедневно (тут коррекция текста)</p>
-          <div className="fin-field">
-            <span className="lbl">Сумма пополнения</span>
-            <div className="box ph">100 000 ₽</div>
-          </div>
-          <div className="fin-field">
-            <span className="lbl">Расчетный счет</span>
-            <div className="box">ПАО “Альфа-Банк” <span className="chev"><IcChevron /></span></div>
-          </div>
-
-          <div className="acc-sec-h">Заявки</div>
-          <div style={{ height: 10 }} />
-          {[
-            { st: "sent" as const, label: "Отправлена" },
-            { st: "rejected" as const, label: "Отклонена" },
-            { st: "approved" as const, label: "Одобрена" },
-          ].map((r) => (
-            <div key={r.st} className="fin-req">
-              <div className="r-title">Заявка №1 <span>от 09.05.2025</span></div>
-              <div className="r-row"><IcSbpRuble /> <b>100 000 ₽</b> <span>за один перевод</span></div>
-              <div className="r-row"><IcSbpPercent /> <b>ПАО “Альфа-Банк”</b> <span>расчетный счет</span></div>
-              <div className="fin-req-actions">
-                <button className="disabled">{r.label}</button>
-                <button onClick={() => setModal(r.st)}>{r.st === "sent" ? "Отозвать" : r.st === "rejected" ? "Подробнее" : "Открыть"}</button>
-              </div>
-            </div>
-          ))}
-        </DrawerShell>
-      )}
-
-      {drawer === "accounts" && (
-        <DrawerShell
-          title="Расчетные счета"
-          onClose={closeAll}
-          footer={<button className="acc-btn-primary" onClick={() => setDrawer("addaccount")}>Добавить счет</button>}
-        >
-          <div onClick={() => setCtx(null)}>
-            {[
-              { id: "a1", name: "ПАО “Альфа-Банк”", num: "329502895024809", main: true },
-              { id: "a2", name: "ПАО “Совкомбанк”", num: "457923739847 2984", main: false },
-            ].map((a) => (
-              <div key={a.id} className="fin-acc-item">
-                <div>
-                  <div className="a-name">{a.name}{a.main && <span className="fin-main-badge">Основной счет</span>}</div>
-                  <div className="a-num">{a.num}</div>
+      {drawerStack.map((curDrawer, index) => {
+        const isShoved = index < drawerStack.length - 1;
+        const isStacked = index > 0;
+        const onClose = isStacked ? popDrawer : closeAll;
+        const zIndex = 1000 + index * 10;
+        return (
+          <React.Fragment key={`${curDrawer}-${index}`}>
+            {curDrawer === "topup" && (
+              <DrawerShell title="Пополнить баланс" onClose={onClose} isShoved={isShoved} isStacked={isStacked} zIndex={zIndex}>
+                <p className="emp-desc" style={{ marginBottom: 18 }}>Вы можете пополнить баланс через СБП <br />   или сформировать счет на необходимую сумму.</p>
+                <div className="fin-sbp">
+                  <h4>СБП</h4>
+                  <div className="fin-sbp-row"><IcSbpRuble /> <b>До 1 млн ₽</b> <span>за один перевод</span></div>
+                  <div className="fin-sbp-row"><IcSbpPercent /> <b>Низкая комиссия</b> <span>уточните в своем банке</span></div>
                 </div>
-                <button className="msg-dots" onClick={(e) => { e.stopPropagation(); setCtx(ctx === a.id ? null : a.id); }}><IcDots /></button>
-                {ctx === a.id && (
-                  <div className="msg-ctx" style={{ right: 10, top: 44 }} onClick={(e) => e.stopPropagation()}>
-                    <button onClick={() => setCtx(null)}><IcEdit /> Сделать основным</button>
-                    <button onClick={() => { setCtx(null); setDrawer("accountdata"); }}><IcInfoCircle /> Данные счета</button>
-                    <button className="red" onClick={() => setCtx(null)}><IcTrash /> Удалить счет</button>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </DrawerShell>
-      )}
-
-      {drawer === "addaccount" && (
-        <DrawerShell
-          title="Добавить расчетный счет"
-          onClose={closeAll}
-          footer={<button className="acc-btn-primary" onClick={() => setModal("sent")}>Подать заявку</button>}
-        >
-          <AccountForm ph />
-        </DrawerShell>
-      )}
-
-      {drawer === "accountdata" && (
-        <DrawerShell
-          title="Данные расчетного счета"
-          onClose={closeAll}
-          footer={<>
-            <button className="acc-btn-ghost" style={{ flex: 1 }} onClick={closeAll}>Сделать основным</button>
-            <button className="acc-btn-primary" style={{ background: "var(--coral)" }} onClick={closeAll}>Удалить счет</button>
-          </>}
-        >
-          <AccountForm />
-        </DrawerShell>
-      )}
-
-      {drawer === "reconciliation" && (
-        <DrawerShell
-          title="Сформировать акт сверки"
-          onClose={closeAll}
-          footer={<>
-            <button className="acc-btn-ghost" onClick={closeAll}>Отмена</button>
-            <button className="acc-btn-primary" onClick={closeAll}>Скачать</button>
-          </>}
-        >
-          <div className="acc-grid2">
-            <F label="Дата от" value="19.04.2025" cal />
-            <F label="Дата до" value="19.05.2025" cal />
-          </div>
-          <div className="acc-grid2">
-            <F label="Тип" value="Простой акт" chevron />
-            <F label="Тип файла" value="PDF" chevron />
-          </div>
-        </DrawerShell>
-      )}
-
-      {drawer === "cashflow" && (
-        <DrawerShell
-          title="Отчет о движении средств"
-          onClose={closeAll}
-          footer={<>
-            <button className="acc-btn-ghost" onClick={closeAll}>Отмена</button>
-            <button className="acc-btn-primary" onClick={closeAll}>Скачать</button>
-          </>}
-        >
-          <div className="acc-grid2">
-            <F label="Дата от" value="19.04.2025" cal />
-            <F label="Дата до" value="19.05.2025" cal />
-          </div>
-          <div className="acc-fullrow"><F label="Тип файла" value="PDF" chevron /></div>
-        </DrawerShell>
-      )}
-
-      {drawer === "invoices" && (
-        <DrawerShell title="Счета на оплату" onClose={closeAll}>
-          <input className="msg-search" placeholder="Поиск" />
-          <div onClick={() => setCtx(null)}>
-            {[
-              { id: "i1", badge: "overdue", label: "Просрочен", amount: "8 570,00 ₽", plus: "+270,00 ₽", muted: false },
-              { id: "i2", badge: "waiting", label: "Ожидает оплаты", amount: "8 570,00 ₽", plus: null, muted: false },
-              { id: "i3", badge: "paid", label: "Оплачен", amount: "8 570,00 ₽", plus: null, muted: true },
-            ].map((inv) => (
-              <div key={inv.id} className="fin-inv">
-                <IcInvRuble muted={inv.muted} />
-                <div className="i-body">
-                  <div className="i-top">№ 8909 <span className={`fin-badge ${inv.badge}`}>{inv.label}</span></div>
-                  <div className="i-amount">{inv.amount}{inv.plus && <span className="plus">{inv.plus}</span>}</div>
+                <div className="fin-inline-field">
+                  <label>Сумма пополнения</label>
+                  <input
+                    className={`fin-inline-input${hasAmount ? " has-val" : ""}`}
+                    placeholder="100 000 ₽"
+                    value={topupAmount}
+                    onChange={(e) => handleTopupChange(e.target.value)}
+                  />
                 </div>
-                <div className="i-dates">от 01.09.2025<br />до 01.10.2025</div>
-                <button className="msg-dots" onClick={(e) => { e.stopPropagation(); setCtx(ctx === inv.id ? null : inv.id); }}><IcDots /></button>
-                {ctx === inv.id && (
-                  <div className="msg-ctx" style={{ right: 10, top: 44 }} onClick={(e) => e.stopPropagation()}>
-                    <button onClick={() => setCtx(null)}><IcEdit /> Оплатить</button>
-                    <button onClick={() => { setCtx(null); setModal("download-invoice"); }}><IcDownload /> Скачать</button>
-                    <button className="red" onClick={() => setCtx(null)}><IcBan /> Оспорить</button>
+                <div className="fin-hr" />
+                <button className={`fin-big-btn ${hasAmount ? "blue" : "grey"}`} disabled={!hasAmount} onClick={() => setDrawer("topup-sbp")}>Пополнить через СБП</button>
+                <button className={`fin-big-btn ${hasAmount ? "blue" : "grey"}`} disabled={!hasAmount} onClick={() => setDrawer("topup-forming")}>Сформировать счет</button>
+              </DrawerShell>
+            )}
+
+            {curDrawer === "topup-sbp" && (
+              <DrawerShell
+                title={"Инвойс на пополнение\nчерез СБП"}
+                onClose={onClose}
+                isShoved={isShoved}
+                isStacked={isStacked}
+                zIndex={zIndex}
+                noFootBorder
+                footer={<button className="fin-big-btn grey" style={{ margin: 0 }} onClick={onClose}>Назад</button>}
+              >
+                <div style={{ display: "flex", flexDirection: "column", minHeight: "calc(100vh - 180px)" }}>
+                  <div className="fin-sbp" style={{ marginBottom: 12 }}>
+                    <div className="fin-sbp-row"><IcSbpRuble /> <b>{displayAmount}</b> <span>размер инвойса</span></div>
+                    <div className="fin-sbp-row"><IcSbpPercent /> <b>Низкая комиссия</b> <span>уточните в своем банке</span></div>
                   </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </DrawerShell>
-      )}
+                  <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: 20 }}>
+                    <Qr />
+                    <p style={{ textAlign: "center", color: "var(--muted)", fontSize: 14, margin: "20px 0 0" }}>
+                      Отсканируйте QR-код<br />или перейдите по <span className="fin-link">ссылке.</span>
+                    </p>
+                  </div>
+                </div>
+              </DrawerShell>
+            )}
+
+            {curDrawer === "topup-forming" && (
+              <DrawerShell
+                title={"Формирование счета..."}
+                onClose={onClose}
+                isShoved={isShoved}
+                isStacked={isStacked}
+                zIndex={zIndex}
+                noFootBorder
+                footer={<button className="fin-big-btn blue" style={{ margin: 0 }} onClick={closeAll}>Скачать</button>}
+              >
+                <div style={{ display: "flex", flexDirection: "column", minHeight: "calc(100vh - 180px)" }}>
+                  <div className="fin-sbp" style={{ marginBottom: 12 }}>
+                    <div className="fin-sbp-row"><IcSbpRuble /> <b>{displayAmount}</b> <span>сумма счета</span></div>
+                  </div>
+                  <div style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", paddingBottom: 20 }}>
+                    <p style={{ textAlign: "center", color: "var(--muted)", fontSize: 16, margin: 0, lineHeight: 1.5 }}>
+                      Загрузка документа начнется автоматически.<br />Если этого не произошло, нажмите кнопку ниже.
+                    </p>
+                  </div>
+                </div>
+              </DrawerShell>
+            )}
+
+            {curDrawer === "withdraw" && (
+              <DrawerShell
+                title={"Подать заявку на вывод\nсвободных средств"}
+                onClose={onClose}
+                isShoved={isShoved}
+                isStacked={isStacked}
+                zIndex={zIndex}
+                footer={
+                  <button
+                    className="fin-big-btn blue"
+                    disabled={!hasWithdrawAmount}
+                    onClick={() => setDrawer("req-sent")}
+                    style={{ width: "100%", height: 50, borderRadius: 16, margin: 0 }}
+                  >
+                    Подать заявку
+                  </button>
+                }
+              >
+                <p className="emp-desc" style={{ marginBottom: 20 }}>Вы можете вывести активы с депозита, если у вас нет неоплаченных счетов. Вывод средств осуществляется ежедневно (тут коррекция текста)</p>
+                <div className="fin-field">
+                  <span className="lbl">Сумма пополнения</span>
+                  <input
+                    className={`fin-inline-input${hasWithdrawAmount ? " has-val" : ""}`}
+                    placeholder="100 000 ₽"
+                    value={withdrawAmount}
+                    onChange={(e) => handleWithdrawChange(e.target.value)}
+                  />
+                </div>
+                <div className="fin-field">
+                  <span className="lbl">Расчетный счет</span>
+                  <div className="box" style={{ fontFamily: "'TT Norms', sans-serif", fontSize: 18, fontWeight: 500, color: "#121212" }}>
+                    ПАО “Альфа-Банк” <span className="chev"><IcChevron /></span>
+                  </div>
+                </div>
+
+                <div className="acc-sec-h">Заявки</div>
+                <div style={{ height: 10 }} />
+                {[
+                  { st: "req-sent" as const, statusLabel: "Отправлена", isSingleRed: false, actionLabel: "Отозвать" },
+                  { st: "req-rejected" as const, statusLabel: "Отклонена", isSingleRed: true, actionLabel: "Подробнее" },
+                  { st: "req-approved" as const, statusLabel: "Одобрена", isSingleRed: false, actionLabel: "Открыть" },
+                ].map((r) => (
+                  <div key={r.st} className="fin-req" onClick={() => setDrawer(r.st)} style={{ cursor: "pointer" }}>
+                    <div className="r-title">Заявка №1 <span>от 09.05.2025</span></div>
+                    <div className="r-row"><IcSbpRuble /> <b>100 000 ₽</b> <span>за один перевод</span></div>
+                    <div className="r-row"><IcSbpPercent /> <b>ПАО “Альфа-Банк”</b> <span>расчетный счет</span></div>
+                    <div className="fin-req-actions" onClick={(e) => e.stopPropagation()}>
+                      {r.isSingleRed ? (
+                        <button className="disabled red" style={{ width: "100%" }} onClick={() => setDrawer(r.st)}>{r.statusLabel}</button>
+                      ) : (
+                        <>
+                          <button className="disabled">{r.statusLabel}</button>
+                          <button onClick={() => setDrawer(r.st)}>{r.actionLabel}</button>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </DrawerShell>
+            )}
+
+            {curDrawer === "accounts" && (
+              <DrawerShell
+                title="Расчетные счета"
+                onClose={onClose}
+                isShoved={isShoved}
+                isStacked={isStacked}
+                zIndex={zIndex}
+                footer={<button className="acc-btn-primary" onClick={() => setDrawer("addaccount")}>Добавить счет</button>}
+              >
+                <div onClick={() => setCtx(null)}>
+                  {[
+                    { id: "a1", name: "ПАО “Альфа-Банк”", num: "329502895024809", main: true },
+                    { id: "a2", name: "ПАО “Совкомбанк”", num: "457923739847 2984", main: false },
+                  ].map((a) => (
+                    <div key={a.id} className="fin-acc-item">
+                      <div>
+                        <div className="a-name">{a.name}{a.main && <span className="fin-main-badge">Основной счет</span>}</div>
+                        <div className="a-num">{a.num}</div>
+                      </div>
+                      <button className="msg-dots" onClick={(e) => { e.stopPropagation(); setCtx(ctx === a.id ? null : a.id); }}><IcDots size={20} color="#787B86" /></button>
+                      {ctx === a.id && (
+                        <div className="msg-ctx" style={{ right: 10, top: 44 }} onClick={(e) => e.stopPropagation()}>
+                          <button onClick={() => setCtx(null)}>
+                            <img src="/img/pin.png" alt="" width={20} height={20} style={{ display: "inline-block", marginRight: 8, verticalAlign: "middle" }} /> Сделать основным
+                          </button>
+                          <button onClick={() => { setCtx(null); setDrawer("accountdata"); }}>
+                            <img src="/img/info.png" alt="" width={20} height={20} style={{ display: "inline-block", marginRight: 8, verticalAlign: "middle" }} /> Данные счета
+                          </button>
+                          <button className="red" onClick={() => setCtx(null)}>
+                            <img src="/img/delete.png" alt="" width={20} height={20} style={{ display: "inline-block", marginRight: 8, verticalAlign: "middle" }} /> Удалить счет
+                          </button>
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </DrawerShell>
+            )}
+
+            {curDrawer === "addaccount" && (
+              <DrawerShell
+                title="Добавить расчетный счет"
+                onClose={onClose}
+                isShoved={isShoved}
+                isStacked={isStacked}
+                zIndex={zIndex}
+                footer={
+                  <button
+                    className="fin-big-btn blue"
+                    disabled={!hasAddAccInput}
+                    onClick={() => setDrawer("addacc-sent")}
+                    style={{ width: "100%", height: 50, borderRadius: 16, margin: 0 }}
+                  >
+                    Подать заявку
+                  </button>
+                }
+              >
+                <AccountForm ph accountInput={addAccInput} onAccountInputChange={setAddAccInput} />
+              </DrawerShell>
+            )}
+
+            {curDrawer === "addacc-sent" && (
+              <DrawerShell
+                title=""
+                onClose={onClose}
+                isShoved={isShoved}
+                isStacked={isStacked}
+                zIndex={zIndex}
+                footer={
+                  <button
+                    className="fin-big-btn"
+                    style={{ margin: 0, background: "#FF5F6A", color: "#fff", width: "100%", height: 50, borderRadius: 16, fontSize: 18, fontWeight: 500 }}
+                    onClick={closeAll}
+                  >
+                    Отозвать заявку
+                  </button>
+                }
+              >
+                <div style={{ display: "flex", flexDirection: "column", height: "100%", justifyContent: "center", alignItems: "center", paddingBottom: 20, textAlign: "center" }}>
+                  <h2 style={{ fontFamily: "'TT Norms', sans-serif", fontSize: 30, fontWeight: 500, color: "#121212", margin: "0 0 8px" }}>
+                    Заявка отправлена!
+                  </h2>
+                  <p style={{ color: "#787B86", fontSize: 18, lineHeight: 1.4, margin: 0, maxWidth: 384, fontFamily: "'TT Norms', sans-serif" }}>
+                    Менеджер проверит заявку и если всё в порядке, мы оповестим вас.
+                  </p>
+                </div>
+              </DrawerShell>
+            )}
+
+            {curDrawer === "accountdata" && (
+              <DrawerShell
+                title="Данные расчетного счета"
+                onClose={onClose}
+                isShoved={isShoved}
+                isStacked={isStacked}
+                zIndex={zIndex}
+                footer={
+                  <div style={{ display: "flex", gap: 12, width: "100%" }}>
+                    <button
+                      className="fin-big-btn grey"
+                      style={{ margin: 0, flex: 1, height: 50, borderRadius: 16, color: "#9B9FAD", fontSize: 18, fontWeight: 500 }}
+                      onClick={closeAll}
+                    >
+                      Сделать основным
+                    </button>
+                    <button
+                      className="fin-big-btn"
+                      style={{ margin: 0, flex: 1, height: 50, borderRadius: 16, background: "#FF5F6A", color: "#ffffff", fontSize: 18, fontWeight: 500 }}
+                      onClick={closeAll}
+                    >
+                      Удалить счет
+                    </button>
+                  </div>
+                }
+              >
+                <AccountForm />
+              </DrawerShell>
+            )}
+
+            {curDrawer === "reconciliation" && (
+              <DrawerShell
+                title="Сформировать акт сверки"
+                onClose={onClose}
+                isShoved={isShoved}
+                isStacked={isStacked}
+                zIndex={zIndex}
+                footer={<>
+                  <button className="acc-btn-ghost" onClick={closeAll}>Отмена</button>
+                  <button className="acc-btn-primary" onClick={closeAll}>Скачать</button>
+                </>}
+              >
+                <div className="acc-grid2">
+                  <F label="Дата от" value="19.04.2025" cal />
+                  <F label="Дата до" value="19.05.2025" cal />
+                </div>
+                <div className="acc-grid2">
+                  <F label="Тип" value="Простой акт" chevron />
+                  <F label="Тип файла" value="PDF" chevron />
+                </div>
+              </DrawerShell>
+            )}
+
+            {curDrawer === "cashflow" && (
+              <DrawerShell
+                title="Отчет о движении средств"
+                onClose={onClose}
+                isShoved={isShoved}
+                isStacked={isStacked}
+                zIndex={zIndex}
+                footer={<>
+                  <button className="acc-btn-ghost" onClick={closeAll}>Отмена</button>
+                  <button className="acc-btn-primary" onClick={closeAll}>Скачать</button>
+                </>}
+              >
+                <div className="acc-grid2">
+                  <F label="Дата от" value="19.04.2025" cal />
+                  <F label="Дата до" value="19.05.2025" cal />
+                </div>
+                <div className="acc-fullrow"><F label="Тип файла" value="PDF" chevron /></div>
+              </DrawerShell>
+            )}
+
+            {curDrawer === "invoices" && (
+              <DrawerShell title="Счета на оплату" onClose={onClose} isShoved={isShoved} isStacked={isStacked} zIndex={zIndex}>
+                <input className="msg-search" placeholder="Поиск" />
+                <div onClick={() => setCtx(null)}>
+                  {[
+                    { id: "i1", badge: "overdue", label: "Просрочен", amount: "8 570,00 ₽", plus: "+270,00 ₽", muted: false },
+                    { id: "i2", badge: "waiting", label: "Ожидает оплаты", amount: "8 570,00 ₽", plus: null, muted: false },
+                    { id: "i3", badge: "paid", label: "Оплачен", amount: "8 570,00 ₽", plus: null, muted: true },
+                  ].map((inv) => (
+                    <div key={inv.id} className="fin-inv">
+                      <IcInvRuble muted={inv.muted} />
+                      <div className="i-body">
+                        <div className="i-top">№ 8909 <span className={`fin-badge ${inv.badge}`}>{inv.label}</span></div>
+                        <div className="i-amount">{inv.amount}{inv.plus && <span className="plus">{inv.plus}</span>}</div>
+                      </div>
+                      <div style={{ position: "relative", display: "flex", alignItems: "flex-start", gap: 12 }}>
+                        <div className="i-dates">от 01.09.2025<br />до 01.10.2025</div>
+                        <button className="msg-dots" style={{ marginTop: -1, padding: 0, height: 17, display: "inline-flex", alignItems: "center" }} onClick={(e) => { e.stopPropagation(); setCtx(ctx === inv.id ? null : inv.id); }}>
+                          <IcDots size={18} color="#787B86" />
+                        </button>
+                        {ctx === inv.id && (
+                          <div className="msg-ctx" style={{ right: 0, top: 28 }} onClick={(e) => e.stopPropagation()}>
+                            <button onClick={() => setCtx(null)}>
+                              <img src="/img/pay.png" alt="" width={20} height={20} style={{ display: "inline-block", marginRight: 8, verticalAlign: "middle" }} /> Оплатить
+                            </button>
+                            <button onClick={() => { setCtx(null); setModal("download-invoice"); }}>
+                              <img src="/img/download.png" alt="" width={20} height={20} style={{ display: "inline-block", marginRight: 8, verticalAlign: "middle" }} /> Скачать
+                            </button>
+                            <button className="red" onClick={() => setCtx(null)}>
+                              <img src="/img/argue.png" alt="" width={20} height={20} style={{ display: "inline-block", marginRight: 8, verticalAlign: "middle" }} /> Оспорить
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </DrawerShell>
+            )}
+
+            {curDrawer === "req-sent" && (
+              <DrawerShell
+                title=""
+                onClose={onClose}
+                isShoved={isShoved}
+                isStacked={isStacked}
+                zIndex={zIndex}
+                footer={
+                  <button
+                    className="fin-big-btn"
+                    style={{ margin: 0, background: "#FF5F6A", color: "#fff", width: "100%", height: 50, borderRadius: 16, fontSize: 18, fontWeight: 500 }}
+                    onClick={closeAll}
+                  >
+                    Отозвать заявку
+                  </button>
+                }
+              >
+                <div style={{ display: "flex", flexDirection: "column", height: "100%", justifyContent: "center" }}>
+                  <div>
+                    <div style={{ textAlign: "center", marginBottom: 20 }}>
+                      <h2 style={{ fontFamily: "'TT Norms', sans-serif", fontSize: 30, fontWeight: 500, color: "#121212", margin: 0 }}>
+                        Заявка отправлена!
+                      </h2>
+                      <p style={{ color: "#787B86", fontSize: 18, lineHeight: 1.4, margin: "20px auto 20px", maxWidth: 384, fontFamily: "'TT Norms', sans-serif" }}>
+                        Менеджер проверит заявку и если всё в порядке, мы оповестим вас.
+                      </p>
+                    </div>
+                    <div className="fin-field">
+                      <span className="lbl">Сумма пополнения</span>
+                      <div className="box" style={{ fontFamily: "'TT Norms', sans-serif", fontSize: 18, fontWeight: 500, color: "#121212" }}>
+                        {withdrawAmount || "100 000 ₽"}
+                      </div>
+                    </div>
+                    <div className="fin-field">
+                      <span className="lbl">Расчетный счет</span>
+                      <div className="box" style={{ fontFamily: "'TT Norms', sans-serif", fontSize: 18, fontWeight: 500, color: "#121212" }}>
+                        ПАО “Альфа-Банк” <span className="chev"><IcChevron /></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </DrawerShell>
+            )}
+
+            {curDrawer === "req-rejected" && (
+              <DrawerShell
+                title=""
+                onClose={onClose}
+                isShoved={isShoved}
+                isStacked={isStacked}
+                zIndex={zIndex}
+                footer={
+                  <div style={{ display: "flex", gap: 12, width: "100%" }}>
+                    <button className="fin-big-btn grey" style={{ margin: 0, flex: 1, height: 50, borderRadius: 16, color: "#9B9FAD" }} onClick={closeAll}>Отозвать заявку</button>
+                    <button className="fin-big-btn blue" style={{ margin: 0, flex: 1, height: 50, borderRadius: 16 }} onClick={() => setDrawer("withdraw")}>Редактировать</button>
+                  </div>
+                }
+              >
+                <div style={{ display: "flex", flexDirection: "column", height: "100%", justifyContent: "center" }}>
+                  <div>
+                    <div style={{ textAlign: "center", marginBottom: 20 }}>
+                      <h2 style={{ fontFamily: "'TT Norms', sans-serif", fontSize: 30, fontWeight: 500, color: "#121212", margin: 0 }}>
+                        Заявка отклонена
+                      </h2>
+                      <p style={{ color: "#787B86", fontSize: 18, lineHeight: 1.4, margin: "20px auto 20px", maxWidth: 384, fontFamily: "'TT Norms', sans-serif" }}>
+                        Наш менеджер обнаружил ошибку в заявке. Подробности <span className="fin-link">в чате.</span>
+                      </p>
+                    </div>
+                    <div className="fin-field">
+                      <span className="lbl">Сумма пополнения</span>
+                      <div className="box" style={{ fontFamily: "'TT Norms', sans-serif", fontSize: 18, fontWeight: 500, color: "#121212" }}>
+                        100 000 ₽
+                      </div>
+                    </div>
+                    <div className="fin-field">
+                      <span className="lbl">Расчетный счет</span>
+                      <div className="box" style={{ fontFamily: "'TT Norms', sans-serif", fontSize: 18, fontWeight: 500, color: "#121212" }}>
+                        ПАО “Альфа-Банк” <span className="chev"><IcChevron /></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </DrawerShell>
+            )}
+
+            {curDrawer === "req-approved" && (
+              <DrawerShell
+                title=""
+                onClose={onClose}
+                isShoved={isShoved}
+                isStacked={isStacked}
+                zIndex={zIndex}
+                footer={
+                  <div style={{ display: "flex", gap: 12, width: "100%" }}>
+                    <button className="fin-big-btn grey" style={{ margin: 0, flex: 1, height: 50, borderRadius: 16, color: "#9B9FAD" }} onClick={closeAll}>Отозвать заявку</button>
+                    <button className="fin-big-btn grey" style={{ margin: 0, flex: 1, height: 50, borderRadius: 16, color: "#9B9FAD" }} onClick={closeAll}>Редактировать</button>
+                  </div>
+                }
+              >
+                <div style={{ display: "flex", flexDirection: "column", height: "100%", justifyContent: "center" }}>
+                  <div>
+                    <div style={{ textAlign: "center", marginBottom: 20 }}>
+                      <h2 style={{ fontFamily: "'TT Norms', sans-serif", fontSize: 30, fontWeight: 500, color: "#121212", margin: 0 }}>
+                        Заявка одобрена!
+                      </h2>
+                      <p style={{ color: "#787B86", fontSize: 18, lineHeight: 1.4, margin: "20px auto 20px", maxWidth: 384, fontFamily: "'TT Norms', sans-serif" }}>
+                        Деньги поступят на ваш расчетный счет в течение 3 рабочих дней.
+                      </p>
+                    </div>
+                    <div className="fin-field">
+                      <span className="lbl">Сумма пополнения</span>
+                      <div className="box" style={{ fontFamily: "'TT Norms', sans-serif", fontSize: 18, fontWeight: 500, color: "#121212" }}>
+                        100 000 ₽
+                      </div>
+                    </div>
+                    <div className="fin-field">
+                      <span className="lbl">Расчетный счет</span>
+                      <div className="box" style={{ fontFamily: "'TT Norms', sans-serif", fontSize: 18, fontWeight: 500, color: "#121212" }}>
+                        ПАО “Альфа-Банк” <span className="chev"><IcChevron /></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </DrawerShell>
+            )}
+          </React.Fragment>
+        );
+      })}
 
       {/* ============ modals ============ */}
-
-
-
-
       {modal === "sent" && (
         <ModalWrap onClose={() => setModal(null)}>
           <div className="acc-modal center-c fin-status" style={{ width: 400 }}>
@@ -435,14 +734,14 @@ export default function Finance() {
 }
 
 /* ---------- shared ---------- */
-function DrawerShell({ title, children, onClose, footer, noFootBorder }: {
-  title: string; children: React.ReactNode; onClose: () => void; footer?: React.ReactNode; noFootBorder?: boolean;
+function DrawerShell({ title, children, onClose, footer, noFootBorder, isShoved, isStacked, zIndex }: {
+  title: string; children: React.ReactNode; onClose: () => void; footer?: React.ReactNode; noFootBorder?: boolean; isShoved?: boolean; isStacked?: boolean; zIndex?: number;
 }) {
   return (
-    <div className="acc-scrim" onClick={onClose}>
-      <div className="acc-drawer" onClick={(e) => e.stopPropagation()}>
-        <div className="acc-drawer-head">
-          <h1 style={{ whiteSpace: "pre-line" }}>{title}</h1>
+    <div className="acc-scrim" onClick={onClose} style={zIndex ? { zIndex } : undefined}>
+      <div className={`acc-drawer${isShoved ? " shoved" : ""}${isStacked ? " stacked" : ""}`} onClick={(e) => e.stopPropagation()}>
+        <div className="acc-drawer-head" style={!title ? { justifyContent: "flex-end" } : undefined}>
+          {title ? <h1 style={{ whiteSpace: "pre-line" }}>{title}</h1> : null}
           <button onClick={onClose}><IcClose /></button>
         </div>
         <div className="acc-drawer-body">{children}</div>
@@ -461,7 +760,7 @@ function DrawerShell({ title, children, onClose, footer, noFootBorder }: {
 
 function ModalWrap({ children, onClose }: { children: React.ReactNode; onClose: () => void }) {
   return (
-    <div className="acc-scrim center" onClick={onClose}>
+    <div className="acc-scrim center" onClick={onClose} style={{ zIndex: 2000 }}>
       <div onClick={(e) => e.stopPropagation()}>{children}</div>
     </div>
   );
@@ -478,9 +777,9 @@ function F({ label, value, chevron, cal }: { label: string; value: string; chevr
   );
 }
 
-function AccountForm({ ph }: { ph?: boolean }) {
+function AccountForm({ ph, accountInput, onAccountInputChange }: { ph?: boolean; accountInput?: string; onAccountInputChange?: (val: string) => void }) {
   const rows: [string, string][] = [
-    ["Расчетный счет", ph ? "0000000000000" : "0000000000000"],
+    ["Расчетный счет", "0000000000000"],
     ["БИК банка", "439748397"],
     ["Название банка", "ПАО “Альфа-Банк”"],
     ["Корпоративный счет", "00000000000"],
@@ -488,10 +787,19 @@ function AccountForm({ ph }: { ph?: boolean }) {
   ];
   return (
     <>
-      {rows.map(([lbl, val]) => (
+      {rows.map(([lbl, val], idx) => (
         <div key={lbl} className="fin-field">
           <span className="lbl">{lbl}</span>
-          <div className={`box${ph ? " ph" : ""}`}>{val}</div>
+          {ph && idx === 0 ? (
+            <input
+              className={`fin-inline-input${accountInput ? " has-val" : ""}`}
+              placeholder={val}
+              value={accountInput || ""}
+              onChange={(e) => onAccountInputChange?.(e.target.value)}
+            />
+          ) : (
+            <div className={`box${ph ? " ph" : ""}`}>{val}</div>
+          )}
         </div>
       ))}
     </>

@@ -31,6 +31,12 @@ export default function Employees() {
     setTab("data");
     setCard(c);
     setCtx(null);
+    if (!list) {
+      if (c === "employee") setList("employees");
+      else if (c === "department") setList("departments");
+      else if (c === "group") setList("groups");
+      else if (c === "passenger") setList("passengers");
+    }
   };
   const closeAll = () => { setList(null); setCard(null); setAddOpen(false); };
 
@@ -47,7 +53,7 @@ export default function Employees() {
         {hasData ? (
           <div className="emp-row">
             <div className="emp-card">
-              <div className="e-ico"><IcPeople2 /></div>
+              <div className="e-ico"><img src="/img/people-card.png" alt="" width={30} height={30} /></div>
               <div className="e-num blue">99 сотрудников</div>
               <div className="emp-btns">
                 <button className="emp-btn" onClick={() => setList("employees")}>Открыть список</button>
@@ -58,14 +64,14 @@ export default function Employees() {
               </div>
             </div>
             <div className="emp-card">
-              <div className="e-ico"><IcCluster3 /></div>
+              <div className="e-ico"><img src="/img/department-card.png" alt="" width={30} height={30} /></div>
               <div className="e-num">4 отдела</div>
               <div className="emp-btns">
                 <button className="emp-btn" onClick={() => setList("departments")}>Открыть список</button>
               </div>
             </div>
             <div className="emp-card">
-              <div className="e-ico"><IcCluster4 /></div>
+              <div className="e-ico"><img src="/img/group-card.png" alt="" width={30} height={30} /></div>
               <div className="e-num">8 групп</div>
               <div className="emp-btns">
                 <button className="emp-btn" onClick={() => setList("passengers")}>Пассажиры</button>
@@ -107,17 +113,17 @@ export default function Employees() {
           </div>
           <div className="emp-optgrid">
             <div className="emp-opt">
-              <span className="o-emoji">👌</span>
+              <div className="o-ico"><img src="/img/ok-hand.png" alt="" width={27} height={31} /></div>
               <span className="o-badge">Изменение</span>
               <span className="o-label">Согласование</span>
             </div>
             <div className="emp-opt">
-              <span className="o-emoji">✨</span>
+              <div className="o-ico"><img src="/img/sparkles.png" alt="" width={30} height={32} /></div>
               <span className="o-badge">Изменение</span>
               <span className="o-label">Тревел-<br />политика</span>
             </div>
             <div className="emp-opt">
-              <span className="o-emoji">🎯</span>
+              <div className="o-ico"><img src="/img/target.png" alt="" width={31} height={28} /></div>
               <span className="o-label">Центры<br />затрат</span>
             </div>
           </div>
@@ -140,7 +146,7 @@ export default function Employees() {
         <div className="acc-scrim" onClick={closeAll}>
           {/* --- employees list --- */}
           {list === "employees" && (
-            <div className="acc-drawer" onClick={(e) => e.stopPropagation()}>
+            <div className={`acc-drawer${card ? " shoved" : ""}`} onClick={(e) => e.stopPropagation()}>
               <div className="acc-drawer-head">
                 <h1>Сотрудники</h1>
                 <button onClick={closeAll}><IcClose /></button>
@@ -180,7 +186,7 @@ export default function Employees() {
 
           {/* --- departments list --- */}
           {list === "departments" && (
-            <div className="acc-drawer" onClick={(e) => e.stopPropagation()}>
+            <div className={`acc-drawer${card ? " shoved" : ""}`} onClick={(e) => e.stopPropagation()}>
               <div className="acc-drawer-head">
                 <h1>Отделы</h1>
                 <button onClick={closeAll}><IcClose /></button>
@@ -218,7 +224,7 @@ export default function Employees() {
 
           {/* --- groups list --- */}
           {list === "groups" && (
-            <div className="acc-drawer" onClick={(e) => e.stopPropagation()}>
+            <div className={`acc-drawer${card ? " shoved" : ""}`} onClick={(e) => e.stopPropagation()}>
               <div className="acc-drawer-head">
                 <h1>Группы</h1>
                 <button onClick={closeAll}><IcClose /></button>
@@ -256,7 +262,7 @@ export default function Employees() {
 
           {/* --- passengers list --- */}
           {list === "passengers" && (
-            <div className="acc-drawer" onClick={(e) => e.stopPropagation()}>
+            <div className={`acc-drawer${card ? " shoved" : ""}`} onClick={(e) => e.stopPropagation()}>
               <div className="acc-drawer-head">
                 <h1>Пассажиры</h1>
                 <button onClick={closeAll}><IcClose /></button>

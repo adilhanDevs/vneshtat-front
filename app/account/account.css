@@ -106,8 +106,9 @@
   flex: 1;
   background: #fff;
   border-radius: 30px;
-  padding: 20px 0 100px;
+  padding: 30px 120px 50px;
   position: relative;
+  box-sizing: border-box;
 }
 .acc-top {
   display: flex;
@@ -139,7 +140,7 @@
   align-items: center;
   gap: 7px;
   color: var(--blue);
-  font-weight: 600;
+  font-weight: 500;
 }
 .acc-toggle {
   width: 40px;
@@ -187,9 +188,9 @@
   text-align: center;
   font-family: 'TT Norms', sans-serif;
   font-size: 70px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: -0.6px;
-  margin: 16px 0 15px;
+  margin: 0px 0 15px;
   color: #17181c;
 }
 
@@ -223,7 +224,7 @@
 }
 .acc-profile .p-name {
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 500;
 }
 .acc-profile .p-phone {
   color: var(--muted);
@@ -299,7 +300,7 @@
 }
 .acc-statbox .st b {
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.1;
   display: block;
   color: #17181c;
@@ -383,7 +384,7 @@
 }
 .acc-opt .o-label {
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
   color: #5e626e;
   text-align: right;
   width: 100%;
@@ -467,18 +468,19 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 28px 14px;
-  border-bottom: 1px solid #eef0f4;
+  padding: 20px 28px 18px;
+  border-bottom: none;
 }
 .acc-drawer-backdrop .acc-drawer-head {
   border-bottom: none;
   padding: 0;
 }
 .acc-drawer-head h1 {
-  font-size: 25px;
-  font-weight: 700;
-  color: #17181c;
+  font-size: 30px;
+  font-weight: 500;
+  color: #121212;
   margin: 0;
+  line-height: 1.15;
 }
 .acc-drawer-head button {
   background: none;
@@ -500,7 +502,7 @@
 }
 .acc-sec-h {
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 500;
   color: #17181c;
   margin: 20px 0 6px;
   letter-spacing: -0.3px;
@@ -551,7 +553,7 @@
   border: none;
   color: #ffffff;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
   font-family: inherit;
   cursor: pointer;
   flex: none;
@@ -567,12 +569,12 @@
   flex: 1;
   height: 50px;
   border-radius: 16px;
-  background: #eeeff2;
-  color: #6c707a;
+  background: #f3f4f6;
+  color: #787b86;
   border: none;
-  font-size: 16px;
-  font-weight: 600;
-  font-family: inherit;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: 'TT Norms', sans-serif;
   cursor: pointer;
   transition: background 0.15s ease;
 }
@@ -584,17 +586,22 @@
   flex: 2;
   height: 50px;
   border-radius: 16px;
-  background: #007bfe;
-  color: #ffffff;
+  background: #007bfb;
+  color: #fafafa;
   border: none;
-  font-size: 16px;
-  font-weight: 600;
-  font-family: inherit;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: 'TT Norms', sans-serif;
   cursor: pointer;
   transition: background 0.15s ease;
 }
 .acc-btn-primary:hover {
   background: #0069d9;
+}
+.acc-btn-primary:disabled {
+  background: #eceef1;
+  color: #9b9fad;
+  cursor: default;
 }
 
 .acc-id-btn {
@@ -646,7 +653,7 @@
   color: #ff3b30;
   border: none;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   font-family: inherit;
   cursor: pointer;
   transition: background 0.15s ease;
@@ -687,7 +694,7 @@
 }
 .acc-device .d-name b {
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   display: block;
 }
 .acc-device .d-name span {
@@ -699,7 +706,7 @@
 }
 .acc-device .d-right b {
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
   display: block;
 }
 .acc-device .d-right span {
@@ -725,8 +732,8 @@
 }
 .acc-field .val {
   font-size: 18px;
-  color: #17181c;
-  font-weight: 600;
+  color: #121212;
+  font-weight: 500;
   line-height: 1.15;
   margin-top: 0px;
 }
@@ -817,7 +824,7 @@
 }
 .acc-modal h3 {
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 500;
   color: #121212;
   margin: 0 0 8px;
   line-height: 1.25;
@@ -878,7 +885,7 @@
   color: #fff;
   border: none;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   font-family: inherit;
   cursor: pointer;
   margin-top: 4px;
@@ -906,7 +913,7 @@
   border: 1px solid #dcdfe4;
   font-size: 18px;
   font-family: inherit;
-  font-weight: 600;
+  font-weight: 500;
   color: #787880;
   cursor: pointer;
   margin-top: 0;
@@ -1007,7 +1014,7 @@
 .acc-modal-title-row h3 {
   margin: 0;
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 500;
   color: #17181c;
 }
 
@@ -1053,7 +1060,7 @@
 }
 .acc-menu .mn-name {
   font-size: 17px;
-  font-weight: 600;
+  font-weight: 500;
 }
 .acc-menu .mn-phone {
   font-size: 13px;
@@ -1086,19 +1093,21 @@
 /* ================= MESSENGER ================= */
 .msg-search {
   width: 100%;
-  height: 50px;
-  border-radius: 14px;
-  background: #f2f3f5;
-  border: none;
-  padding: 0 18px;
-  font-size: 15px;
-  font-family: inherit;
-  color: var(--ink);
+  height: 54px;
+  border-radius: 23px;
+  background: #ffffff;
+  border: 1px solid #e5e7ea;
+  padding: 10px 10px 10px 20px;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: 'TT Norms', sans-serif;
+  color: #121212;
   outline: none;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 .msg-search::placeholder {
-  color: #a9abb1;
+  color: #9b9fad;
+  font-family: 'TT Norms', sans-serif;
 }
 .msg-item {
   position: relative;
@@ -1128,7 +1137,7 @@
   align-items: center;
   justify-content: center;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   color: #7d7f86;
 }
 .msg-item .m-av.system {
@@ -1142,21 +1151,28 @@
   min-width: 0;
 }
 .msg-item .m-name {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 15px;
-  font-weight: 600;
+  font-family: 'TT Norms', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #121212;
+  line-height: 1.25;
+  word-break: break-word;
 }
 .msg-item .m-name .tag-op {
   color: #8b7bf7;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 16px;
+  margin-left: 8px;
+  display: inline-block;
+  white-space: nowrap;
 }
 .msg-item .m-name .tag-on {
-  color: var(--blue);
+  color: #007BFB;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 16px;
+  margin-left: 8px;
+  display: inline-block;
+  white-space: nowrap;
 }
 .msg-item .m-prev {
   font-size: 13px;
@@ -1192,34 +1208,36 @@
   padding: 2px;
 }
 
-/* messenger context menu */
+/* messenger / popup context menu */
 .msg-ctx {
   position: absolute;
   z-index: 30;
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.14);
-  padding: 8px;
-  width: 200px;
+  background: #fafafa;
+  border: 1px solid #e5e7ea;
+  border-radius: 23px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  width: 170px;
 }
 .msg-ctx button {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   width: 100%;
   border: none;
   background: none;
-  padding: 10px 10px;
-  border-radius: 10px;
+  padding: 8px 10px;
+  border-radius: 12px;
   font-size: 15px;
-  font-family: inherit;
-  color: #33353b;
+  font-weight: 500;
+  font-family: 'TT Norms', sans-serif;
+  color: #34363b;
   cursor: pointer;
   text-align: left;
+  white-space: nowrap;
 }
 .msg-ctx button:hover {
-  background: #f5f5f6;
+  background: #f0f1f3;
 }
 .msg-ctx button.blue {
   color: var(--blue);
@@ -1394,7 +1412,7 @@
 .order-title {
   text-align: center;
   font-size: 70px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: -0.5px;
   margin: 0;
 }
@@ -1455,7 +1473,7 @@
   color: #fff;
   border: none;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
   font-family: inherit;
   cursor: pointer;
 }
@@ -1578,7 +1596,7 @@
   background: var(--coral);
   color: #fff;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 500;
   width: 20px;
   height: 20px;
   border-radius: 50%;
@@ -1683,7 +1701,7 @@
 }
 .order-note .n-text {
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   color: #17181c;
   margin-top: 2px;
   line-height: 1.3;
@@ -1776,7 +1794,7 @@
 .acc-select-opt.active {
   background: #eff6ff;
   color: #007bfe;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 /* Calendar popover */
@@ -1820,7 +1838,7 @@
   grid-template-columns: repeat(7, 1fr);
   text-align: center;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 500;
   color: #9aa0a6;
   margin-bottom: 8px;
 }

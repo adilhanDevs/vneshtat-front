@@ -123,7 +123,7 @@ export default function Dashboard() {
   const [messenger, setMessenger] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [ctxMenu, setCtxMenu] = useState<ContextMenu>(null);
-  const [ctx, setCtx] = useState<string | null>(null);
+  const [ctx, setCtx] = useState<number | null>(null);
   const [settingsCtx, setSettingsCtx] = useState<string | null>(null);
 
   // Widget configuration

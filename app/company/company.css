@@ -33,7 +33,7 @@
 .co-card > * { align-self: stretch; }
 .co-title {
   font-size: 30px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.05;
   letter-spacing: -0.4px;
   color: #17181c;
@@ -65,7 +65,7 @@
   /* same stroke token as the card itself */
   border: 1px solid #e5e7ea;
   background: #fff;
-  font-size: 15px;
+  font-size: 16px;
   font-family: inherit;
   color: #121212;
   cursor: pointer;
@@ -75,7 +75,7 @@
   background: var(--blue);
   color: #fff;
   border-color: var(--blue);
-  font-weight: 600;
+  font-weight: 500;
 }
 .co-btn.blue:hover { background: var(--blue-dark); }
 .co-btn:disabled { color: #c2c4ca; cursor: default; background: #fff; }
@@ -110,7 +110,7 @@
 }
 .co-status-head h2 {
   font-size: 36px;
-  font-weight: 600;
+  font-weight: 500;
   margin: 0;
   letter-spacing: -0.5px;
   color: #17181c;
@@ -151,7 +151,7 @@
   bottom: 7px;
   left: 10px;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
   color: #4a4c52;
   font-style: italic;
 }

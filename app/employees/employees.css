@@ -2,92 +2,114 @@
 .emp-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-  max-width: 1080px;
-  margin: 0 auto 22px;
+  gap: 20px;
+  width: 100%;
+  margin: 0 auto 10px;
 }
 .emp-card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 22px;
-  padding: 24px;
+  box-sizing: border-box;
+  background: #ffffff;
+  border: 1px solid #e5e7ea;
+  border-radius: 30px;
+  padding: 24px 20px 20px;
   display: flex;
   flex-direction: column;
-  min-height: 240px;
+  height: 238px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
 }
 .emp-card .e-ico {
-  margin-bottom: 18px;
+  margin-bottom: 14px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
 }
 .emp-card .e-num {
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: -0.4px;
+  font-family: 'TT Norms', sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  color: #34363B;
 }
 .emp-card .e-num.blue {
-  color: var(--blue);
+  color: #007BFB;
 }
 .emp-card .e-num.grey {
-  color: #b3b5bb;
+  color: #787b86;
 }
 .emp-btns {
   margin-top: auto;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 .emp-btns .row2 {
   display: flex;
-  gap: 12px;
+  gap: 10px;
 }
 .emp-btn {
-  height: 46px;
+  height: 40px;
   border-radius: 13px;
-  border: 1px solid var(--border2);
-  background: #fff;
-  font-size: 15px;
-  font-family: inherit;
-  color: var(--ink);
+  border: 1px solid #e5e7ea;
+  background: #ffffff;
+  font-family: 'TT Norms', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #787b86;
   cursor: pointer;
   flex: 1;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10.5px 14px;
+  line-height: 19px;
+  box-sizing: border-box;
 }
 .emp-btn:hover {
-  background: #fafafa;
+  background: #f0f1f3;
 }
 .emp-btn.blue {
-  background: var(--blue);
-  color: #fff;
-  border-color: var(--blue);
-  font-weight: 600;
+  background: #007BFB;
+  color: #ffffff;
+  border-color: #007BFB;
+  font-weight: 500;
 }
 .emp-btn.blue:hover {
-  background: var(--blue-dark);
+  background: #0066d6;
 }
 
 /* Управление card */
 .emp-manage {
-  max-width: 1080px;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   align-items: stretch;
   gap: 26px;
   padding: 26px;
+  box-sizing: border-box;
+  background: #ffffff;
+  border: 1px solid #e5e7ea;
+  border-radius: 30px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
 }
 .emp-manage .m-left {
   align-self: center;
   min-width: 220px;
 }
 .emp-manage .m-left h2 {
+  font-family: 'TT Norms', sans-serif;
   font-size: 30px;
-  font-weight: 800;
+  font-weight: 500;
   margin: 0;
-  letter-spacing: -0.5px;
+  color: #000000;
 }
 .emp-manage .m-left p {
-  color: var(--muted);
-  font-size: 15px;
+  font-family: 'TT Norms', sans-serif;
+  color: #787b86;
+  font-size: 16px;
+  font-weight: 500;
   margin: 8px 0 0;
-  max-width: 200px;
+  max-width: 240px;
 }
 .emp-optgrid {
   flex: 1;
@@ -97,22 +119,30 @@
 }
 .emp-opt {
   position: relative;
-  background: var(--subcard);
-  border-radius: 16px;
-  height: 116px;
+  background: #ffffff;
+  border: 1px solid #e5e7ea;
+  border-radius: 13px;
+  height: 110px;
   padding: 16px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
 }
-.emp-opt .o-emoji {
-  font-size: 28px;
-  line-height: 1;
+.emp-opt:hover {
+  background: #fafafa;
+}
+.emp-opt .o-ico {
+  display: flex;
+  align-items: center;
+  height: 32px;
 }
 .emp-opt .o-label {
-  font-size: 15px;
+  font-family: 'TT Norms', sans-serif;
+  font-size: 16px;
   font-weight: 500;
+  color: #787b86;
   text-align: right;
   line-height: 1.2;
 }
@@ -120,18 +150,25 @@
   position: absolute;
   top: 16px;
   right: 16px;
-  background: #ffe5e7;
-  color: var(--coral);
-  font-size: 12px;
+  background: #FF5F6A;
+  color: #ffffff;
+  font-family: 'TT Norms', sans-serif;
+  font-size: 13px;
   font-weight: 500;
-  padding: 3px 10px;
-  border-radius: 8px;
+  height: 20px;
+  padding: 2px 10px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
 }
 
 /* bottom section toggle */
 .emp-secbar {
   position: fixed;
-  bottom: 25px;
+  bottom: 10px;
   left: calc(50% + 128px);
   transform: translateX(-50%);
   z-index: 100;
@@ -142,11 +179,11 @@
 .emp-secbar .bar {
   display: flex;
   gap: 4px;
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 20px;
+  background: #ffffff;
+  border: 1px solid #e5e7ea;
+  border-radius: 22px;
   padding: 6px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
 .emp-secbar button {
   border: none;
@@ -161,10 +198,9 @@
 .emp-secbar button.on {
   background: var(--blue);
   color: #fff;
-  font-weight: 600;
+  font-weight: 500;
 }
 
-/* ===== tabs (Данные / Доступ) ===== */
 .emp-tabs {
   display: flex;
   background: #eef0f2;
@@ -178,23 +214,28 @@
   background: none;
   padding: 11px 0;
   border-radius: 11px;
-  font-size: 15px;
+  font-family: 'TT Norms', sans-serif;
+  font-size: 18px;
   font-weight: 500;
-  font-family: inherit;
-  color: #6d6f77;
+  color: #787b86;
   cursor: pointer;
 }
 .emp-tabs button.on {
   background: #fff;
-  color: var(--ink);
-  font-weight: 600;
+  color: #121212;
+  font-family: 'TT Norms', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
 }
 .emp-desc {
-  color: var(--muted);
+  color: #787b86;
+  font-family: 'TT Norms', sans-serif;
   font-size: 14px;
-  line-height: 1.45;
-  margin: 0 0 8px;
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 0px 0 20px;
+  max-width: 435px;
 }
 
 /* empty-placeholder field */
@@ -231,7 +272,7 @@
 }
 .emp-idcard .id-name {
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
 }
 .emp-idcard .id-on {
   color: var(--blue);

@@ -44,10 +44,7 @@ export const IcCalendar = () => (
   </svg>
 );
 export const IcArchive = () => (
-  <svg width="20" height="20" viewBox="0 0 20 20" {...s}>
-    <rect x="3" y="4" width="14" height="4" rx="1.4" />
-    <path d="M4.5 8v7a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1V8M8 11h4" />
-  </svg>
+  <img src="/img/ctx-archive.png" alt="" width={18} height={18} style={{ display: "inline-block", verticalAlign: "middle" }} />
 );
 export const IcPlane = () => (
   <svg width="16" height="16" viewBox="0 0 20 20" fill="#1e88fa">
@@ -59,11 +56,11 @@ export const IcPlane = () => (
 export const IcCard = () => (
   <img src="/img/balance.png" alt="" width={22} height={18} style={{ display: "inline-block" }} />
 );
-export const IcDots = () => (
-  <svg width="22" height="20" viewBox="0 0 22 20" fill="#9698a1">
-    <circle cx="3" cy="10" r="1.9" />
-    <circle cx="11" cy="10" r="1.9" />
-    <circle cx="19" cy="10" r="1.9" />
+export const IcDots = ({ size = 20, color = "#9698a1" }: { size?: number; color?: string }) => (
+  <svg width={size} height={size} viewBox="0 0 20 20" fill={color}>
+    <circle cx="4" cy="10" r="2" />
+    <circle cx="10" cy="10" r="2" />
+    <circle cx="16" cy="10" r="2" />
   </svg>
 );
 export const IcBubble = () => (
@@ -79,7 +76,7 @@ export const IcLogout = ({ color = "#fe6a75" }: { color?: string }) => (
     <path d="M8.5 10H17m0 0-2.5-2.5M17 10l-2.5 2.5" />
   </svg>
 );
-export const IcClose = ({ size = 22 }: { size?: number }) => (
+export const IcClose = ({ size = 25 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="#9a9ca3" strokeWidth="1.8" strokeLinecap="round">
     <path d="m6 6 12 12M18 6 6 18" />
   </svg>
@@ -93,7 +90,7 @@ export const IcCalSmall = () => (
   <img src="/img/vneshtat11/Calendar.png" alt="" width={18} height={18} style={{ display: "inline-block", verticalAlign: "middle" }} />
 );
 export const IcTrash = () => (
-  <img src="/img/vneshtat11/Delete.png" alt="" width={18} height={18} style={{ display: "inline-block", verticalAlign: "middle", cursor: "pointer" }} />
+  <img src="/img/ctx-delete.png" alt="" width={18} height={18} style={{ display: "inline-block", verticalAlign: "middle", cursor: "pointer" }} />
 );
 export const IcInfoSm = () => (
   <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#b3b5bb" strokeWidth="1.4">
@@ -241,9 +238,7 @@ export const IcDownload = () => (
   <img src="/img/vneshtat11/Download.png" alt="" width={18} height={18} style={{ display: "inline-block", verticalAlign: "middle", cursor: "pointer" }} />
 );
 export const IcMenuChat = () => (
-  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#5a5c63" strokeWidth="1.6" strokeLinejoin="round">
-    <path d="M4 6.5A1.5 1.5 0 0 1 5.5 5h9A1.5 1.5 0 0 1 16 6.5v5A1.5 1.5 0 0 1 14.5 13H8l-3 2.5V13H5.5" />
-  </svg>
+  <img src="/img/ctx-messenger.png" alt="" width={18} height={18} style={{ display: "inline-block", verticalAlign: "middle" }} />
 );
 export const IcDoc = () => (
   <svg width="34" height="40" viewBox="0 0 34 40" fill="none">
@@ -337,10 +332,7 @@ export const IcCluster4 = () => (
   </svg>
 );
 export const IcBan = () => (
-  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#fe5b6b" strokeWidth="1.6">
-    <circle cx="10" cy="10" r="7" />
-    <path d="m5 5 10 10" strokeLinecap="round" />
-  </svg>
+  <img src="/img/ctx-ban.png" alt="" width={18} height={18} style={{ display: "inline-block", verticalAlign: "middle" }} />
 );
 export const IcEdit = () => (
   <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke="#5a5c63" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
@@ -520,10 +512,7 @@ export const IcFinSwap = () => (
   </svg>
 );
 export const IcSbpRuble = () => (
-  <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
-    <rect width="26" height="26" rx="8" fill="#1e88fa" />
-    <path d="M9 8h4a3 3 0 0 1 0 6H9m0-2.2h6M9 8v10" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
+  <img src="/img/amount.png" alt="" width={30} height={20} style={{ display: "inline-block", verticalAlign: "middle", objectFit: "contain" }} />
 );
 export const IcSbpPercent = () => (
   <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
@@ -534,10 +523,11 @@ export const IcSbpPercent = () => (
   </svg>
 );
 export const IcInvRuble = ({ muted }: { muted?: boolean }) => (
-  <svg width="34" height="40" viewBox="0 0 34 40" fill="none">
-    <path d="M4 5a3 3 0 0 1 3-3h13l10 10v20a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V5Z" fill={muted ? "#c9cbd1" : "#43b25f"} />
-    <path d="M20 2v8a2 2 0 0 0 2 2h8" fill={muted ? "#b6b8bf" : "#37984f"} />
-    <path d="M12 16h5a3 3 0 0 1 0 6h-5m0-2.5h7m-7-3.5v11" stroke="#fff" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
+  <img
+    src={muted ? "/img/rubl-grey.png" : "/img/rubl.svg"}
+    alt=""
+    width={34}
+    height={36}
+  />
 );
 

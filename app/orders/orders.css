@@ -46,7 +46,7 @@
 .ord-seg button.on {
   background: #ffffff;
   color: #17181c;
-  font-weight: 600;
+  font-weight: 500;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
 }
 
@@ -65,7 +65,7 @@
 }
 .ord-tag {
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
   padding: 4px 14px;
 }
 .ord-tag.now { background: var(--blue); color: #fff; }
@@ -74,7 +74,7 @@
   background: var(--coral);
   color: #fff;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   width: 32px;
   height: 26px;
   display: flex;
@@ -96,7 +96,7 @@
 .ord-main { flex: 0 1 auto; min-width: 0; }
 .ord-title {
   font-size: 19px;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.25;
   max-width: 520px;
 }
@@ -156,7 +156,7 @@
   color: #fff;
   border: none;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
   font-family: inherit;
   cursor: pointer;
 }
@@ -164,7 +164,7 @@
   text-align: center;
   font-family: 'TT Norms', sans-serif;
   font-size: 55px;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.6px;
   margin: 16px 0 10px;
   color: #17181c;
@@ -314,8 +314,8 @@
   align-items: flex-start;
   width: 100%;
 }
-.exp-card .e-name { font-size: 18px; font-weight: 600; color: #17181c; margin-bottom: 2px; }
-.exp-card .e-amount { font-size: 18px; font-weight: 600; text-align: right; color: #17181c; }
+.exp-card .e-name { font-size: 18px; font-weight: 500; color: #17181c; margin-bottom: 2px; }
+.exp-card .e-amount { font-size: 18px; font-weight: 500; text-align: right; color: #17181c; }
 .exp-card .e-amount span { display: block; font-size: 12px; color: #8c909c; font-weight: 400; margin-top: -2px; line-height: 1; margin-bottom: 12px; }
 .exp-card .e-rows { font-size: 13px; color: #8c909c; margin-top: 6px; }
 .exp-card .e-rows div { margin: 2px 0 0; }
@@ -328,7 +328,7 @@
   color: #fff;
   border: none;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: 500;
   font-family: inherit;
   cursor: pointer;
   margin-top: auto;
@@ -353,7 +353,7 @@
   align-items: center;
   padding: 0 25px;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--ink);
 }
 .adv-sum .big.ph { color: #a9abb1; }
@@ -366,7 +366,7 @@
   justify-content: space-between;
   padding: 0 25px;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
   color: #9aa0a6;
 }
 .adv-file {
@@ -378,7 +378,7 @@
   padding: 15px 25px;
   margin-bottom: 12px;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
   color: #17181c;
 }
 .adv-file .fn { flex: 1; }
@@ -390,7 +390,7 @@
   background: #fff;
   color: #787880;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
   font-family: inherit;
   cursor: pointer;
   margin-bottom: 12px;
@@ -410,7 +410,7 @@
 /* ================= SERVICES TAB ================= */
 .svc-container { width: min(calc(100% - 340px), 940px); margin: 30px auto 40px; position: relative; }
 .svc-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; margin-top: 4px; height: 35px; }
-.svc-title { font-size: 30px; font-weight: 600; color: #7f828e; letter-spacing: -0.5px; margin: 0; line-height: 1; }
+.svc-title { font-size: 30px; font-weight: 500; color: #7f828e; letter-spacing: -0.5px; margin: 0; line-height: 1; }
 .svc-btn-pill { background: #fff; border: 1px solid #e5e7ea; border-radius: 18px; padding: 0 24px; height: 35px; font-size: 13px; font-weight: 500; color: #6d6f77; cursor: pointer; display: flex; align-items: center; justify-content: center; box-sizing: border-box; }
 
 
@@ -423,7 +423,7 @@
 .svc-filter-pill.active { background: #8C909C; color: #fff; border-color: #8C909C; }
 .svc-filter-pill.active .sf-close { background: rgba(255,255,255,0.25); border-radius: 50%; width: 14px; height: 14px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: bold; }
 
-.svc-date-head { font-size: 20px; font-weight: 600; color: #8C909C; margin-bottom: 16px; }
+.svc-date-head { font-size: 20px; font-weight: 500; color: #8C909C; margin-bottom: 16px; }
 
 .svc-card { background: #fff; border: 1px solid #e5e7ea; border-radius: 28px; padding: 20px 28px; margin-bottom: 16px; display: flex; align-items: center; justify-content: space-between; height: auto; box-sizing: border-box; gap: 20px; }
 .svc-card-left { display: flex; gap: 24px; align-items: center; flex: 1; min-width: 0; }
@@ -439,7 +439,7 @@
 .svc-info-sub { font-size: 13px; color: #8C909C; }
 .svc-info-meta { font-size: 13px; color: #8C909C; display: flex; flex-direction: column; gap: 4px; font-weight: 500; }
 .svc-info-meta span { display: block; }
-.svc-info-link { color: #1e88fa; font-weight: 600; cursor: pointer; display: inline-block; font-size: 13px; white-space: nowrap; margin-top: 2px; }
+.svc-info-link { color: #1e88fa; font-weight: 500; cursor: pointer; display: inline-block; font-size: 13px; white-space: nowrap; margin-top: 2px; }
 
 .svc-card-right { display: flex; flex-direction: column; align-items: flex-end; gap: 14px; flex-shrink: 0; }
 .svc-price { font-size: 22px; font-weight: 700; color: #17181c; letter-spacing: -0.5px; }

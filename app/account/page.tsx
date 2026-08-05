@@ -15,7 +15,7 @@ import {
 
 type Drawer = null | "security" | "personal" | "access";
 type Modal =
-  | null | "session" | "endall" | "2fa-disable" | "codepass"
+  | null | "session" | "endall" | "2fa-disable" | "2fa-enable" | "codepass"
   | "codepass-set" | "pass-current" | "pass-recovery" | "pass-new";
 
 const REQS = [
@@ -341,7 +341,7 @@ export default function Account() {
             <div className="m-ico" style={{ margin: "10px 0 20px", color: "#007bfe", transform: "scale(1.2)" }}>
               <IcTwoLocks />
             </div>
-            <h3 style={{ fontSize: 22, fontWeight: 600, color: "#121212", marginBottom: 8, textAlign: "center", lineHeight: 1.25 }}>
+            <h3 style={{ fontSize: 22, fontWeight: 500, color: "#121212", marginBottom: 8, textAlign: "center", lineHeight: 1.25 }}>
               Двухфакторная<br />аутентификация
             </h3>
             <p className="m-sub" style={{ fontSize: 14, color: "#8a8c93", marginBottom: 28, textAlign: "center", maxWidth: 260, lineHeight: 1.35 }}>
@@ -349,7 +349,7 @@ export default function Account() {
             </p>
             <button
               className="acc-modal-btn"
-              style={{ width: "100%", height: 50, borderRadius: 16, background: "#007BFB", fontSize: 16, fontWeight: 600, color: "#ffffff" }}
+              style={{ width: "100%", height: 50, borderRadius: 16, background: "#007BFB", fontSize: 16, fontWeight: 500, color: "#ffffff" }}
               onClick={() => setModal("2fa-disable")}
             >
               Подключить
@@ -365,7 +365,7 @@ export default function Account() {
             <div className="m-ico" style={{ margin: "10px 0 20px", color: "#ff4d4f", transform: "scale(1.2)" }}>
               <IcTwoLocks />
             </div>
-            <h3 style={{ fontSize: 20, fontWeight: 600, color: "#121212", marginBottom: 18, textAlign: "center", lineHeight: 1.25 }}>
+            <h3 style={{ fontSize: 20, fontWeight: 500, color: "#121212", marginBottom: 18, textAlign: "center", lineHeight: 1.25 }}>
               Отключить<br />Двухфакторную<br />аутентификацию
             </h3>
             <div className="acc-seg" style={{ marginBottom: 14 }}>
@@ -380,7 +380,7 @@ export default function Account() {
             </div>
             <button
               className="acc-modal-btn"
-              style={{ width: "100%", height: 50, borderRadius: 16, background: "#ff4d4f", fontSize: 16, fontWeight: 600, color: "#ffffff" }}
+              style={{ width: "100%", height: 50, borderRadius: 16, background: "#ff4d4f", fontSize: 16, fontWeight: 500, color: "#ffffff" }}
               onClick={() => setModal(null)}
             >
               Отключить

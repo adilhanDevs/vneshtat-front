@@ -75,7 +75,7 @@ export default function Advance({ onClose }: { onClose: () => void }) {
               <button className="m-close" onClick={() => setView("reports")} style={{ background: "none", border: "none", cursor: "pointer", padding: 4 }}><IcClose /></button>
             </div>
             <div className="acc-drawer-body" style={{ padding: 0, flex: 1, overflowY: "auto" }}>
-              <div style={{ display: "inline-block", background: "#f0f2f5", borderRadius: 16, padding: "10px 20px", fontSize: 16, fontWeight: 600, color: "#17181c", marginBottom: 20 }}>Вознесенский Иван Сергеевич</div>
+              <div style={{ display: "inline-block", background: "#f0f2f5", borderRadius: 16, padding: "10px 20px", fontSize: 16, fontWeight: 500, color: "#17181c", marginBottom: 20 }}>Вознесенский Иван Сергеевич</div>
               <div style={{ height: 1, background: "#e5e7ea", margin: "0 0 24px" }} />
               <div className="acc-sec-h" style={{ marginTop: 0 }}>Аванс и суточные</div>
               <p className="acc-sec-p" style={{ marginBottom: 16, color: "#787880", fontSize: 14, lineHeight: 1.2 }}>Укажите сумму аванса и суточных, которые сотрудник получил в кассе организации.</p>
@@ -118,7 +118,7 @@ export default function Advance({ onClose }: { onClose: () => void }) {
             </div>
             <div className="acc-drawer-foot" style={{ padding: "24px 0 0", borderTop: "none", display: "flex", gap: 14 }}>
               <button className="acc-btn-ghost" style={{ width: 140, flex: "0 0 140px", height: 52, borderRadius: 18, fontSize: 15, fontWeight: 500, background: "#eceef2", color: "#787880", border: "none", cursor: "pointer" }} onClick={() => setView("reports")}>Отмена</button>
-              <button className="acc-btn-primary" style={{ flex: 1, height: 52, borderRadius: 18, fontSize: 15, fontWeight: 600, background: "#007bfb", color: "#fff", border: "none", cursor: "pointer" }} onClick={() => setView("reports")}>Сохранить</button>
+              <button className="acc-btn-primary" style={{ flex: 1, height: 52, borderRadius: 18, fontSize: 15, fontWeight: 500, background: "#007bfb", color: "#fff", border: "none", cursor: "pointer" }} onClick={() => setView("reports")}>Сохранить</button>
             </div>
           </>
         )}
@@ -151,7 +151,7 @@ export default function Advance({ onClose }: { onClose: () => void }) {
             </div>
             <div className="acc-drawer-foot" style={{ padding: "24px 0 0", borderTop: "none", display: "flex", gap: 14 }}>
               <button className="acc-btn-ghost" style={{ width: 140, flex: "0 0 140px", height: 52, borderRadius: 18, fontSize: 15, fontWeight: 500, background: "#eceef2", color: "#787880", border: "none", cursor: "pointer" }} onClick={() => setView("report")}>Удалить</button>
-              <button className="acc-btn-primary" style={{ flex: 1, height: 52, borderRadius: 18, fontSize: 15, fontWeight: 600, background: "#007bfb", color: "#fff", border: "none", cursor: "pointer" }} onClick={() => setView("report")}>Сохранить</button>
+              <button className="acc-btn-primary" style={{ flex: 1, height: 52, borderRadius: 18, fontSize: 15, fontWeight: 500, background: "#007bfb", color: "#fff", border: "none", cursor: "pointer" }} onClick={() => setView("report")}>Сохранить</button>
             </div>
           </>
         )}
@@ -182,7 +182,7 @@ export default function Advance({ onClose }: { onClose: () => void }) {
             </div>
             <div className="acc-drawer-foot" style={{ padding: "24px 0 0", borderTop: "none", display: "flex", gap: 14 }}>
               <button className="acc-btn-ghost" style={{ width: 140, flex: "0 0 140px", height: 52, borderRadius: 18, fontSize: 15, fontWeight: 500, background: "#eceef2", color: "#787880", border: "none", cursor: "pointer" }} onClick={() => setView("report")}>Удалить</button>
-              <button className="acc-btn-primary" style={{ flex: 1, height: 52, borderRadius: 18, fontSize: 15, fontWeight: 600, background: "#007bfb", color: "#fff", border: "none", cursor: "pointer" }} onClick={() => setView("report")}>Сохранить</button>
+              <button className="acc-btn-primary" style={{ flex: 1, height: 52, borderRadius: 18, fontSize: 15, fontWeight: 500, background: "#007bfb", color: "#fff", border: "none", cursor: "pointer" }} onClick={() => setView("report")}>Сохранить</button>
             </div>
           </>
         )}

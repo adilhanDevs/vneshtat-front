@@ -67,7 +67,7 @@
   cursor: pointer;
   position: relative;
 }
-.trip-tabs button.on { color: var(--blue); font-weight: 600; }
+.trip-tabs button.on { color: var(--blue); font-weight: 500; }
 .trip-tabs button.on::after {
   content: "";
   position: absolute;
@@ -152,7 +152,7 @@
   padding: 14px 18px 16px;
   background: #fff;
 }
-.trip-progress .p-text { font-size: 15px; font-weight: 600; margin-bottom: 10px; }
+.trip-progress .p-text { font-size: 15px; font-weight: 500; margin-bottom: 10px; }
 .trip-progress .p-track { height: 5px; border-radius: 4px; background: #e7e8eb; overflow: hidden; }
 .trip-progress .p-fill { height: 100%; width: 45%; border-radius: 4px; background: var(--blue); }
 .trip-stop {
@@ -194,7 +194,7 @@
 }
 .trip-select {
   height: 52px; border-radius: 14px; border: none;
-  background: var(--blue); color: #fff; font-size: 16px; font-weight: 600;
+  background: var(--blue); color: #fff; font-size: 16px; font-weight: 500;
   font-family: inherit; cursor: pointer; margin-top: auto;
 }
 .trip-select.dim { background: #d3d4d9; }
@@ -235,7 +235,7 @@
   border-radius: 13px;
   background: #fff;
   font-size: 17px;
-  font-weight: 600;
+  font-weight: 500;
   white-space: nowrap;
   /* own row; left edge lines up with the rightmost card's button
      (2 column pitches + 2 gaps + the card's 22px padding + 1px border) */
@@ -266,7 +266,7 @@
 .trip-booking .bk-btns { display: flex; flex-direction: column; gap: 9px; flex-shrink: 0; width: 175px; }
 .trip-booking .bk-btns button {
   height: 34px; padding: 0; border-radius: 13px; border: none;
-  background: var(--blue); color: #fff; font-size: 14px; font-weight: 600;
+  background: var(--blue); color: #fff; font-size: 14px; font-weight: 500;
   font-family: inherit; cursor: pointer; white-space: nowrap;
 }
 .trip-booking .bk-btns button:hover { background: var(--blue-dark); }
@@ -296,7 +296,7 @@
 .vd-mid { font-size: 13px; color: #787b86; line-height: 1.45; text-align: left; min-width: 128px; }
 .vd-mid .more { color: var(--blue); cursor: pointer; }
 .vd-price { font-size: 20px; font-weight: 700; color: #121212; white-space: nowrap; }
-.vd-card .vd-title { font-size: 17px; font-weight: 600; color: #121212; white-space: nowrap; line-height: 1.2; }
+.vd-card .vd-title { font-size: 17px; font-weight: 500; color: #121212; white-space: nowrap; line-height: 1.2; }
 .vd-card .vd-title span { display: block; font-size: 13px; color: #787b86; font-weight: 400; margin-top: 2px; line-height: 1.25; }
 /* hotel card packs 4 lines into the same height -> smaller type (design) */
 .vd-card.hotel .vd-title { font-size: 15px; }
@@ -321,7 +321,7 @@
   display: flex; align-items: center; justify-content: center;
 }
 .pd-check.on { background: var(--blue); border-color: var(--blue); }
-.pd-item .p-name { flex: 1; font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.pd-item .p-name { flex: 1; font-size: 16px; font-weight: 500; display: flex; align-items: center; gap: 8px; }
 .pd-item .p-name .on { color: var(--blue); font-weight: 500; font-size: 14px; }
 
 /* Above 1500px the hero scales as one composition — at 500px the character
