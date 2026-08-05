@@ -237,8 +237,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  width: min(92%, 800px);
-  max-width: 800px;
+  width: min(100%, 940px);
   margin: 0 auto 10px;
 }
 .acc-card {
@@ -372,8 +371,7 @@
 
 /* settings card */
 .acc-settings {
-  width: min(92%, 800px);
-  max-width: 800px;
+  width: min(100%, 940px);
   margin: 0 auto 74px;
   display: flex;
   align-items: stretch;
@@ -1459,50 +1457,6 @@
 }
 .acc-backbtn:hover {
   background: #f7f8fa;
-}
-
-@media (min-width: 1500px) {
-  .acc-title { font-size: 50px; margin: 24px 0 20px; }
-  .acc-row, .acc-settings { width: min(92%, 1080px); max-width: 1080px; gap: 14px; }
-  .acc-row { margin: 0 auto 14px; }
-  .acc-settings { margin: 0 auto 60px; padding: 28px; }
-  .acc-card { padding: 28px; border-radius: 26px; }
-  .acc-profile .p-av { width: 92px; height: 92px; }
-  .acc-profile .p-name { font-size: 22px; }
-  .acc-profile .p-phone { font-size: 15px; }
-  .acc-obtn { height: 46px; font-size: 15px; }
-  .acc-stats .s-km { font-size: 38px; }
-  .acc-stats .s-sub { font-size: 15px; }
-  .acc-statbox { width: calc(100% - 40px); padding: 18px 28px; gap: 36px; }
-  .acc-statbox .st b { font-size: 32px; }
-  .acc-statbox .st span { font-size: 15px; }
-  .acc-stats .s-bag { width: 215px; right: -5px; bottom: -15px; }
-  .acc-settings .set-left h2 { font-size: 32px; }
-  .acc-settings .set-left p { font-size: 16px; }
-  .acc-opt { height: 126px; padding: 20px 22px; }
-  .acc-opt .o-label { font-size: 19px; }
-}
-
-@media (min-width: 1800px) {
-  .acc-title { font-size: 56px; margin: 32px 0 24px; }
-  .acc-row, .acc-settings { width: min(92%, 1280px); max-width: 1280px; gap: 18px; }
-  .acc-row { margin: 0 auto 18px; }
-  .acc-settings { margin: 0 auto 74px; padding: 34px; }
-  .acc-card { padding: 34px; border-radius: 30px; }
-  .acc-profile .p-av { width: 104px; height: 104px; }
-  .acc-profile .p-name { font-size: 24px; }
-  .acc-profile .p-phone { font-size: 16px; }
-  .acc-obtn { height: 50px; font-size: 16px; }
-  .acc-stats .s-km { font-size: 44px; }
-  .acc-stats .s-sub { font-size: 16px; }
-  .acc-statbox { width: calc(100% - 50px); padding: 20px 32px; gap: 42px; }
-  .acc-statbox .st b { font-size: 36px; }
-  .acc-statbox .st span { font-size: 16px; }
-  .acc-stats .s-bag { width: 240px; right: -5px; bottom: -15px; }
-  .acc-settings .set-left h2 { font-size: 36px; }
-  .acc-settings .set-left p { font-size: 17px; }
-  .acc-opt { height: 136px; padding: 22px 24px; }
-  .acc-opt .o-label { font-size: 20px; }
 }
 
 /* ---------------- custom select & calendar popovers ---------------- */

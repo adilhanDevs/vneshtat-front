@@ -9,7 +9,7 @@
    min(100%, 1280px) даёт тот же результат на широких экранах — кэп 1280
    всё равно срабатывал только выше ~2200px — но перестаёт сжимать узкие. */
 .order-header-wrap {
-  width: min(100%, 1280px);
+  width: min(100%, 940px);
   margin: 0 auto;
   position: relative;
   display: flex;
@@ -29,7 +29,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
-  width: min(100%, 1280px);
+  width: min(100%, 940px);
   margin: 0 auto 10px;
 }
 .order-cost .oc-icon {
@@ -151,7 +151,7 @@
   cursor: pointer;
 }
 .order-actions {
-  width: min(100%, 1280px);
+  width: min(100%, 940px);
   margin: 0 auto 90px;
   display: grid;
   grid-template-columns: auto 1fr;
@@ -809,12 +809,6 @@
 }
 .order-backbtn:hover {
   background: #f7f8fa;
-}
-@media (min-width: 1500px) {
-  .order-card { padding: 28px; border-radius: 26px; }
-}
-@media (min-width: 1800px) {
-  .order-card { padding: 34px; border-radius: 30px; }
 }
 /* ---------------- custom select & calendar popovers ---------------- */
 .order-field.clickable {
