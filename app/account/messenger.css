@@ -1,0 +1,519 @@
+/* ===== Мессенджер: собственные стили =====
+   Копия правил из account.css, переименованная в .msgr-*.
+   Компонент рендерится на многих страницах, поэтому переменные объявлены
+   на корневом .msgr-scrim — он ни от чего снаружи не зависит.
+   Правки здесь не задевают ни одну страницу, и наоборот. */
+
+.msgr-scrim {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 22, 28, 0.28);
+  z-index: 500;
+  display: flex;
+
+  --blue: #1e88fa;
+  --blue-dark: #1877ec;
+  --coral: #fe5b6b;
+  --ink: #17181c;
+  --muted: #8a8c93;
+  --muted2: #a9abb1;
+  --border: #ececee;
+  --border2: #e4e5e8;
+}
+.msgr-drawer {
+  margin-left: auto;
+  width: clamp(520px, 38vw, 680px);
+  max-width: 100vw;
+  height: 100vh;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  border-radius: 28px 0 0 28px;
+  overflow: hidden;
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: msgrSlideIn 0.25s ease;
+}
+.msgr-drawer.shoved {
+  transform: translateX(-190px);
+}
+.msgr-drawer.shoved::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.24);
+  z-index: 10;
+  border-radius: inherit;
+  animation: msgrFadeIn 0.2s ease;
+}
+@keyframes msgrFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.msgr-drawer.stacked {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  height: 100vh;
+  width: clamp(550px, 41vw, 715px);
+  max-width: 100vw;
+  border-radius: 28px 0 0 28px;
+  margin: 0;
+  box-shadow: -15px 0 50px rgba(0, 0, 0, 0.22);
+  z-index: 200;
+  transform: none;
+  animation: msgrSlideInStacked 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes msgrSlideInStacked {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+.msgr-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 28px 20px;
+  border-bottom: none;
+}
+.msgr-head h1 {
+  font-size: 30px;
+  font-weight: 500;
+  color: #121212;
+  margin: 0;
+  line-height: 1.15;
+}
+.msgr-head button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: #8a8c93;
+}
+.msgr-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 28px 10px;
+}
+.msgr-foot {
+  display: flex;
+  gap: 12px;
+  padding: 22px 28px 24px;
+  background: #ffffff;
+}
+.msgr-btn-ghost {
+  flex: 1;
+  height: 50px;
+  border-radius: 16px;
+  background: #f3f4f6;
+  color: #787b86;
+  border: none;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: 'TT Norms', sans-serif;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.msgr-btn-ghost:hover {
+  background: #e2e4e9;
+}
+.msgr-btn-primary {
+  flex: 2;
+  height: 50px;
+  border-radius: 16px;
+  background: #007bfb;
+  color: #fafafa;
+  border: none;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: 'TT Norms', sans-serif;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.msgr-btn-primary:hover {
+  background: #0069d9;
+}
+.msgr-btn-primary:disabled {
+  background: #eceef1;
+  color: #9b9fad;
+  cursor: default;
+}
+.msgr-search {
+  width: 100%;
+  height: 54px;
+  border-radius: 23px;
+  background: #ffffff;
+  border: 1px solid #e5e7ea;
+  padding: 10px 10px 10px 20px;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: 'TT Norms', sans-serif;
+  color: #121212;
+  outline: none;
+  margin-bottom: 10px;
+}
+.msgr-search::placeholder {
+  color: #9b9fad;
+  font-family: 'TT Norms', sans-serif;
+}
+.msgr-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid var(--border2);
+  border-radius: 22px;
+  height: 72px;
+  padding: 0 16px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background: #fff;
+}
+.msgr-item:hover {
+  background: #fafafa;
+}
+.msgr-item .m-av {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.msgr-item .m-av.initials {
+  background: #eceef1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #7d7f86;
+}
+.msgr-item .m-av.system {
+  background: #17181c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.msgr-item .m-body {
+  flex: 1;
+  min-width: 0;
+}
+.msgr-item .m-name {
+  font-family: 'TT Norms', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #121212;
+  line-height: 1.25;
+  word-break: break-word;
+}
+.msgr-item .m-name .tag-op {
+  color: #8b7bf7;
+  font-weight: 500;
+  font-size: 16px;
+  margin-left: 8px;
+  display: inline-block;
+  white-space: nowrap;
+}
+.msgr-item .m-name .tag-on {
+  color: #007BFB;
+  font-weight: 500;
+  font-size: 16px;
+  margin-left: 8px;
+  display: inline-block;
+  white-space: nowrap;
+}
+.msgr-item .m-prev {
+  font-size: 13px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 3px;
+}
+.msgr-item .m-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.msgr-time {
+  font-size: 12px;
+  color: var(--muted2);
+}
+.msgr-badge {
+  background: var(--coral);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px 9px;
+  border-radius: 9px;
+}
+.msgr-dots {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+}
+.msgr-ctx {
+  position: absolute;
+  z-index: 30;
+  background: #fafafa;
+  border: 1px solid #e5e7ea;
+  border-radius: 23px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  width: 170px;
+}
+.msgr-ctx button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  border: none;
+  background: none;
+  padding: 8px 10px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: 'TT Norms', sans-serif;
+  color: #34363b;
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+}
+.msgr-ctx button:hover {
+  background: #f0f1f3;
+}
+.msgr-ctx button.blue {
+  color: var(--blue);
+}
+.msgr-ctx button.red {
+  color: var(--coral);
+}
+.msgr-chat-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 24px 28px 20px;
+  position: relative;
+}
+.msgr-chat-head .c-name {
+  font-family: 'TT Norms', sans-serif;
+  font-size: 30px;
+  font-weight: 500;
+  color: #121212;
+  line-height: 1.15;
+}
+.msgr-chat-head .c-on {
+  color: #007bfb;
+  font-family: 'TT Norms', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  background: transparent;
+  border: 1px solid #e5e7ea;
+  border-radius: 13px;
+  height: 40px;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+.msgr-chat-head .c-pills {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 10px;
+}
+.msgr-close-btn {
+  margin-left: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: #8a8c93;
+  display: flex;
+  align-items: center;
+}
+.msgr-chat-head .msgr-dots-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 13px;
+  background: transparent;
+  border: 1px solid #e5e7ea;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  box-sizing: border-box;
+  color: #787b86;
+}
+.msgr-chat-head .msgr-dots-btn:hover {
+  background: #f0f1f3;
+}
+.msgr-chat-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 26px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.msgr-bubble {
+  max-width: 78%;
+  padding: 13px 20px;
+  font-family: 'TT Norms', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.25;
+  border-radius: 18px;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 6px;
+}
+.msgr-bubble.in {
+  align-self: flex-start;
+  background: #f1f2f4;
+  color: #34363b;
+  border-bottom-left-radius: 6px;
+  font-weight: 400;
+}
+.msgr-bubble.out {
+  align-self: flex-end;
+  background: var(--blue);
+  color: #fff;
+  border-bottom-right-radius: 6px;
+}
+.msgr-bubble .b-meta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  opacity: 0.8;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+.msgr-bubble.in .b-meta {
+  color: var(--muted2);
+}
+.msgr-bubble.file {
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: #f1f2f4;
+  border-bottom-left-radius: 6px;
+  max-width: 340px;
+}
+.msgr-bubble.file .file-icon {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+.msgr-bubble.file .f-name {
+  font-family: 'TT Norms', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #34363b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 220px;
+}
+.msgr-bubble.file .f-sub {
+  font-family: 'TT Norms', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #787b86;
+  margin-top: 2px;
+}
+.msgr-chat-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 22px 20px;
+  padding: 6px 6px 6px 16px;
+  border: 1px solid var(--border2);
+  border-radius: 18px;
+  background: #fff;
+}
+.msgr-chat-input input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  font-family: inherit;
+  background: none;
+  color: var(--ink);
+}
+.msgr-chat-input input::placeholder {
+  color: #a9abb1;
+}
+.msgr-chat-input .plus {
+  cursor: pointer;
+  display: flex;
+}
+.msgr-chat-input .send {
+  cursor: pointer;
+  display: flex;
+  flex-shrink: 0;
+}
+.msgr-att-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid var(--border2);
+  border-radius: 16px;
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  position: relative;
+  background: #fff;
+}
+.msgr-att-item .att-icon {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.msgr-att-item .a-body {
+  flex: 1;
+  min-width: 0;
+}
+.msgr-att-item .a-name {
+  font-family: 'TT Norms', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: #34363b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.msgr-att-item .a-sub {
+  font-family: 'TT Norms', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #787b86;
+  margin-top: 3px;
+}
+@keyframes msgrSlideIn {
+  from {
+    transform: translateX(40px);
+    opacity: 0.6;
+  }
+}

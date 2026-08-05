@@ -1,9 +1,71 @@
+/* ===== Каркас страницы «Сотрудники» =====
+   Копия .acc / .acc-main / .acc-surface / .acc-title из account.css.
+   Переменные обязаны жить здесь: их наследуют Sidebar, Header и Messenger,
+   которые рендерятся внутри .emp-page. */
+.emp-page {
+  --page: #ffffff;
+  --panel: #f4f4f5;
+  --card: #ffffff;
+  --subcard: #f3f4f6;
+  --blue: #1e88fa;
+  --blue-dark: #1877ec;
+  --coral: #fe5b6b;
+  --ink: #17181c;
+  --muted: #8a8c93;
+  --muted2: #a9abb1;
+  --border: #ececee;
+  --border2: #e4e5e8;
+
+  display: flex;
+  min-height: 100vh;
+  background: var(--page);
+  color: var(--ink);
+  font-family: 'TT Norms', Arial, sans-serif;
+}
+.emp-main {
+  flex: 1;
+  min-width: 0;
+  background: var(--panel);
+  border-top-left-radius: 26px;
+  margin-top: 0;
+  padding: 22px 40px 60px;
+}
+.emp-main.with-surface {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 20px;
+}
+.emp-surface {
+  flex: 1;
+  background: #fff;
+  border-radius: 30px;
+  padding: 30px 120px 50px;
+  position: relative;
+  box-sizing: border-box;
+}
+.emp-title {
+  text-align: center;
+  font-family: 'TT Norms', sans-serif;
+  font-size: 70px;
+  font-weight: 500;
+  letter-spacing: -0.6px;
+  margin: 0px 0 15px;
+  color: #17181c;
+}
+@media (min-width: 1500px) {
+  .emp-title { font-size: 50px; margin: 24px 0 20px; }
+}
+@media (min-width: 1800px) {
+  .emp-title { font-size: 56px; margin: 32px 0 24px; }
+}
+
 /* ===== Сотрудники main page ===== */
 .emp-row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  width: 100%;
+  gap: 10px;
+  width: 900px;
+  max-width: 100%;
   margin: 0 auto 10px;
 }
 .emp-card {
@@ -80,7 +142,8 @@
 
 /* Управление card */
 .emp-manage {
-  width: 100%;
+  width: 900px;
+  max-width: 100%;
   margin: 0 auto;
   display: flex;
   align-items: stretch;
@@ -205,14 +268,20 @@
   display: flex;
   background: #eef0f2;
   border-radius: 15px;
-  padding: 5px;
+  padding: 4px;
+  height: 43px;
+  box-sizing: border-box;
   margin: 6px 0 18px;
 }
 .emp-tabs button {
   flex: 1;
   border: none;
   background: none;
-  padding: 11px 0;
+  height: 35px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 11px;
   font-family: 'TT Norms', sans-serif;
   font-size: 18px;
@@ -238,15 +307,837 @@
   max-width: 435px;
 }
 
-/* empty-placeholder field */
-.acc-field.ph .val {
-  color: #a9abb1;
+/* ===== Шторка страницы «Сотрудники» =====
+   Собственная копия .acc-drawer* из account.css: правила идентичны,
+   но менять их можно свободно — другие страницы не затрагиваются. */
+.emp-scrim {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 22, 28, 0.28);
+  z-index: 500;
+  display: flex;
 }
-.acc-field.ph label {
+.emp-scrim.center {
+  align-items: center;
+  justify-content: center;
+}
+.emp-drawer {
+  margin-left: auto;
+  width: clamp(520px, 38vw, 680px);
+  max-width: 100vw;
+  height: 100vh;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  border-radius: 28px 0 0 28px;
+  overflow: hidden;
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: empSlideIn 0.25s ease;
+}
+.emp-drawer.shoved {
+  transform: translateX(-190px);
+}
+.emp-drawer.shoved::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.24);
+  z-index: 10;
+  border-radius: inherit;
+  animation: empFadeIn 0.2s ease;
+}
+@keyframes empSlideIn {
+  from {
+    transform: translateX(40px);
+    opacity: 0.6;
+  }
+}
+@keyframes empFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.emp-drawer.stacked {
+  position: fixed;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  height: 100vh;
+  width: clamp(550px, 41vw, 715px);
+  max-width: 100vw;
+  border-radius: 28px 0 0 28px;
+  margin: 0;
+  box-shadow: -15px 0 50px rgba(0, 0, 0, 0.22);
+  z-index: 200;
+  transform: none;
+  animation: empSlideInStacked 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes empSlideInStacked {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+/* --- шапки шторок: у каждой своя копия правил ---
+   Общего класса намеренно нет: правка любой шапки не задевает остальные. */
+
+/* шапка списка «Сотрудники» */
+.emp-head-employees {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 28px 18px;
+  border-bottom: none;
+}
+.emp-head-employees h1 {
+  font-size: 30px;
+  font-weight: 500;
+  color: #121212;
+  margin: 0;
+  line-height: 1.15;
+}
+.emp-head-employees button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: #8a8c93;
+}
+
+/* шапка списка «Отделы» */
+.emp-head-departments {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 28px 18px;
+  border-bottom: none;
+}
+.emp-head-departments h1 {
+  font-size: 30px;
+  font-weight: 500;
+  color: #121212;
+  margin: 0;
+  line-height: 1.15;
+}
+.emp-head-departments button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: #8a8c93;
+}
+
+/* шапка списка «Группы» */
+.emp-head-groups {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 28px 18px;
+  border-bottom: none;
+}
+.emp-head-groups h1 {
+  font-size: 30px;
+  font-weight: 500;
+  color: #121212;
+  margin: 0;
+  line-height: 1.15;
+}
+.emp-head-groups button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: #8a8c93;
+}
+
+/* шапка списка «Пассажиры» */
+.emp-head-passengers {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 28px 18px;
+  border-bottom: none;
+}
+.emp-head-passengers h1 {
+  font-size: 30px;
+  font-weight: 500;
+  color: #121212;
+  margin: 0;
+  line-height: 1.15;
+}
+.emp-head-passengers button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: #8a8c93;
+}
+
+/* шапка карточки (DetailDrawer: сотрудник, пассажир, отдел, группа) */
+.emp-head-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 28px 5px;
+  border-bottom: none;
+}
+.emp-head-card h1 {
+  font-size: 30px;
+  font-weight: 500;
+  color: #121212;
+  margin: 0;
+  line-height: 1.15;
+}
+.emp-head-card button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: #8a8c93;
+}
+.emp-drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 4px 28px 10px;
+}
+.emp-drawer-foot {
+  display: flex;
+  gap: 12px;
+  padding: 22px 28px 24px;
+  background: #ffffff;
+}
+
+/* ===== Кнопки, заголовки, поля, списки и модалка =====
+   Копии .acc-btn-* / .acc-sec-h / .acc-field / .acc-check / .acc-modal /
+   .msg-* из account.css. Внутренние классы (label, .val, .chev, .m-av, .m-name…)
+   стилизуются только как потомки emp-блоков, поэтому переименовывать их не нужно. */
+.emp-btn-ghost {
+  flex: 1;
+  height: 50px;
+  border-radius: 16px;
+  background: #f3f4f6;
+  color: #787b86;
+  border: none;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: 'TT Norms', sans-serif;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.emp-btn-ghost:hover {
+  background: #e2e4e9;
+}
+.emp-btn-primary {
+  flex: 2;
+  height: 50px;
+  border-radius: 16px;
+  background: #007bfb;
+  color: #fafafa;
+  border: none;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: 'TT Norms', sans-serif;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+.emp-btn-primary:hover {
+  background: #0069d9;
+}
+.emp-btn-primary:disabled {
+  background: #eceef1;
+  color: #9b9fad;
+  cursor: default;
+}
+.emp-sec-h {
+  font-size: 24px;
+  font-weight: 500;
+  color: #17181c;
+  margin: 20px 0 0px;
+  letter-spacing: -0.3px;
+}
+
+/* form fields */
+.emp-field {
+  position: relative;
+  border: 1px solid #dcdfe4;
+  border-radius: 18px;
+  padding: 14px 25px;
+  background: #ffffff;
+}
+.emp-field label {
+  display: block;
+  font-size: 14px;
+  color: #9aa0a6;
+  font-weight: 500;
+  margin-bottom: 0px;
+  line-height: 1.1;
+}
+.emp-field .val {
+  font-size: 18px;
+  color: #121212;
+  font-weight: 500;
+  line-height: 1.15;
+  margin-top: 0px;
+}
+.emp-field .chev,
+.emp-field .cal {
+  position: absolute;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #8a8c93;
+}
+.emp-grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.emp-fullrow {
+  margin-bottom: 8px;
+}
+.emp-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  color: #4a4c52;
+}
+.emp-check .box {
+  width: 22px;
+  height: 22px;
+  border-radius: 7px;
+  border: 1.6px solid #d4d5d9;
+}
+
+/* centered modal */
+.emp-modal {
+  background: #ffffff;
+  border-radius: 36px;
+  width: 440px;
+  padding: 24px 28px 28px;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.28);
+  animation: empPop 0.18s ease;
+  position: relative;
+}
+@keyframes empPop {
+  from {
+    transform: scale(0.96);
+    opacity: 0.5;
+  }
+}
+.emp-modal h3 {
+  font-size: 24px;
+  font-weight: 500;
+  color: #121212;
+  margin: 0 0 8px;
+  line-height: 1.25;
+  text-align: center;
+}
+.emp-modal-desc {
+  color: #787b86;
+  font-family: 'TT Norms', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.25;
+  margin: 0 0 18px;
+  max-width: 376px;
+}
+
+/* search + list items */
+/* --- поля поиска: у каждого списка своя копия правил ---
+   Общего класса намеренно нет: правка одного поиска не задевает остальные. */
+
+/* поиск в списке «Сотрудники» */
+.emp-search-employees {
+  width: 100%;
+  height: 54px;
+  border-radius: 23px;
+  background: #ffffff;
+  border: 1px solid #e5e7ea;
+  padding: 10px 10px 10px 20px;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: 'TT Norms', sans-serif;
+  color: #121212;
+  outline: none;
+  margin-bottom: 20px;
+}
+.emp-search-employees::placeholder {
+  color: #9b9fad;
+  font-family: 'TT Norms', sans-serif;
+}
+
+/* поиск в списке «Отделы» */
+.emp-search-departments {
+  width: 100%;
+  height: 54px;
+  border-radius: 23px;
+  background: #ffffff;
+  border: 1px solid #e5e7ea;
+  padding: 10px 10px 10px 20px;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: 'TT Norms', sans-serif;
+  color: #121212;
+  outline: none;
+  margin-bottom: 20px;
+}
+.emp-search-departments::placeholder {
+  color: #9b9fad;
+  font-family: 'TT Norms', sans-serif;
+}
+
+/* поиск в списке «Группы» */
+.emp-search-groups {
+  width: 100%;
+  height: 54px;
+  border-radius: 23px;
+  background: #ffffff;
+  border: 1px solid #e5e7ea;
+  padding: 10px 10px 10px 20px;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: 'TT Norms', sans-serif;
+  color: #121212;
+  outline: none;
+  margin-bottom: 20px;
+}
+.emp-search-groups::placeholder {
+  color: #9b9fad;
+  font-family: 'TT Norms', sans-serif;
+}
+
+/* поиск в списке «Пассажиры» */
+.emp-search-passengers {
+  width: 100%;
+  height: 54px;
+  border-radius: 23px;
+  background: #ffffff;
+  border: 1px solid #e5e7ea;
+  padding: 10px 10px 10px 20px;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: 'TT Norms', sans-serif;
+  color: #121212;
+  outline: none;
+  margin-bottom: 10px;
+}
+.emp-search-passengers::placeholder {
+  color: #9b9fad;
+  font-family: 'TT Norms', sans-serif;
+}
+
+
+/* --- строки списков: у каждой своя копия правил ---
+   Общего класса намеренно нет: правка одной строки не задевает остальные. */
+
+/* строка списка «Сотрудники» */
+.emp-item-employees {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid var(--border2);
+  border-radius: 18px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background: #fff;
+}
+.emp-item-employees:hover {
+  background: #fafafa;
+}
+.emp-item-employees .m-av {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.emp-item-employees .m-av.initials {
+  background: #eceef1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #7d7f86;
+}
+.emp-item-employees .m-body {
+  flex: 1;
+  min-width: 0;
+}
+.emp-item-employees .m-name {
+  font-family: 'TT Norms', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #121212;
+  line-height: 1.25;
+  word-break: break-word;
+}
+.emp-item-employees .m-name .tag-on {
+  color: #007BFB;
+  font-weight: 500;
+  font-size: 16px;
+  margin-left: 8px;
+  display: inline-block;
+  white-space: nowrap;
+}
+.emp-item-employees .m-prev {
+  font-size: 13px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 3px;
+}
+.emp-item-employees .m-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* строка списка «Отделы» */
+.emp-item-departments {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid var(--border2);
+  border-radius: 18px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background: #fff;
+}
+.emp-item-departments:hover {
+  background: #fafafa;
+}
+.emp-item-departments .m-av {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.emp-item-departments .m-av.initials {
+  background: #eceef1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #7d7f86;
+}
+.emp-item-departments .m-body {
+  flex: 1;
+  min-width: 0;
+}
+.emp-item-departments .m-name {
+  font-family: 'TT Norms', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #121212;
+  line-height: 1.25;
+  word-break: break-word;
+}
+.emp-item-departments .m-name .tag-on {
+  color: #007BFB;
+  font-weight: 500;
+  font-size: 16px;
+  margin-left: 8px;
+  display: inline-block;
+  white-space: nowrap;
+}
+.emp-item-departments .m-prev {
+  font-size: 13px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 3px;
+}
+.emp-item-departments .m-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* строка списка «Группы» */
+.emp-item-groups {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid var(--border2);
+  border-radius: 18px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background: #fff;
+}
+.emp-item-groups:hover {
+  background: #fafafa;
+}
+.emp-item-groups .m-av {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.emp-item-groups .m-av.initials {
+  background: #eceef1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #7d7f86;
+}
+.emp-item-groups .m-body {
+  flex: 1;
+  min-width: 0;
+}
+.emp-item-groups .m-name {
+  font-family: 'TT Norms', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #121212;
+  line-height: 1.25;
+  word-break: break-word;
+}
+.emp-item-groups .m-name .tag-on {
+  color: #007BFB;
+  font-weight: 500;
+  font-size: 16px;
+  margin-left: 8px;
+  display: inline-block;
+  white-space: nowrap;
+}
+.emp-item-groups .m-prev {
+  font-size: 13px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 3px;
+}
+.emp-item-groups .m-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* строка списка «Пассажиры» */
+.emp-item-passengers {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid var(--border2);
+  border-radius: 18px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background: #fff;
+}
+.emp-item-passengers:hover {
+  background: #fafafa;
+}
+.emp-item-passengers .m-av {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.emp-item-passengers .m-av.initials {
+  background: #eceef1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #7d7f86;
+}
+.emp-item-passengers .m-body {
+  flex: 1;
+  min-width: 0;
+}
+.emp-item-passengers .m-name {
+  font-family: 'TT Norms', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #121212;
+  line-height: 1.25;
+  word-break: break-word;
+}
+.emp-item-passengers .m-name .tag-on {
+  color: #007BFB;
+  font-weight: 500;
+  font-size: 16px;
+  margin-left: 8px;
+  display: inline-block;
+  white-space: nowrap;
+}
+.emp-item-passengers .m-prev {
+  font-size: 13px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 3px;
+}
+.emp-item-passengers .m-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* строка сотрудника/пассажира внутри карточки (PersonRow) */
+.emp-item-person {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border: 1px solid var(--border2);
+  border-radius: 18px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  background: #fff;
+}
+.emp-item-person:hover {
+  background: #fafafa;
+}
+.emp-item-person .m-av {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.emp-item-person .m-av.initials {
+  background: #eceef1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 500;
+  color: #7d7f86;
+}
+.emp-item-person .m-body {
+  flex: 1;
+  min-width: 0;
+}
+.emp-item-person .m-name {
+  font-family: 'TT Norms', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #121212;
+  line-height: 1.25;
+  word-break: break-word;
+}
+.emp-item-person .m-name .tag-on {
+  color: #007BFB;
+  font-weight: 500;
+  font-size: 16px;
+  margin-left: 8px;
+  display: inline-block;
+  white-space: nowrap;
+}
+.emp-item-person .m-prev {
+  font-size: 13px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 3px;
+}
+.emp-item-person .m-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.emp-dots {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px;
+}
+
+/* popup context menu */
+.emp-ctx {
+  position: absolute;
+  z-index: 30;
+  background: #fafafa;
+  border: 1px solid #e5e7ea;
+  border-radius: 23px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  width: 170px;
+}
+.emp-ctx button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  border: none;
+  background: none;
+  padding: 8px 10px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: 'TT Norms', sans-serif;
+  color: #34363b;
+  cursor: pointer;
+  text-align: left;
+  white-space: nowrap;
+}
+.emp-ctx button:hover {
+  background: #f0f1f3;
+}
+.emp-ctx button.blue {
+  color: var(--blue);
+}
+.emp-ctx button.red {
+  color: var(--coral);
+}
+
+/* empty-placeholder field */
+.emp-field.ph {
+  height: 51px;
+  padding: 0 22px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.emp-field.ph label {
   display: none;
 }
-.acc-field.ph {
-  padding: 17px 16px;
+.emp-field.ph .val {
+  color: #9b9fad;
+  font-family: 'TT Norms', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
 }
 
 /* add-field row (Добавить сотрудника/пассажира) */
@@ -264,20 +1155,27 @@
 }
 .emp-idcard {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  border: 1px solid var(--border2);
-  border-radius: 16px;
-  padding: 16px 18px;
+  border: 1px solid #e5e7ea;
+  border-radius: 22px;
+  padding: 15px 20px;
+  background: #ffffff;
+  margin-bottom: 20px;
 }
 .emp-idcard .id-name {
-  font-size: 18px;
+  font-family: 'TT Norms', sans-serif;
+  font-size: 24px;
   font-weight: 500;
+  color: #121212;
+  line-height: 1.2;
 }
 .emp-idcard .id-on {
-  color: var(--blue);
+  color: #007BFB;
+  font-family: 'TT Norms', sans-serif;
   font-size: 14px;
-  margin-top: 2px;
+  font-weight: 500;
+  /* margin-top: 4px; */
 }
 .emp-idcard .id-right {
   display: flex;
@@ -289,21 +1187,36 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  height: 38px;
+  width: 160px;
+  height: 40px;
   padding: 0 14px;
-  border: 1px solid var(--border2);
-  border-radius: 11px;
-  background: #fff;
-  font-size: 14px;
+  border: 1px solid #e5e7ea;
+  border-radius: 13px;
+  background: #ffffff;
+  font-family: 'TT Norms', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #787b86;
+  box-sizing: border-box;
+  justify-content: center;
 }
 .emp-settings-btn {
-  height: 36px;
-  padding: 0 22px;
-  border-radius: 11px;
-  background: #ededef;
-  color: #9a9ca3;
+  width: 160px;
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 13px;
+  background: #eef0f2;
+  color: #787b86;
   border: none;
-  font-size: 14px;
-  font-family: inherit;
+  font-family: 'TT Norms', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
   cursor: pointer;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.emp-settings-btn:hover {
+  background: #e2e4e8;
 }

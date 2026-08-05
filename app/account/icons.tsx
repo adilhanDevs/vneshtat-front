@@ -222,17 +222,11 @@ export const IcPlus = () => (
   </svg>
 );
 
-/* ---- messenger ---- */
-export const IcPin = ({ color = "#a9abb1" }: { color?: string }) => (
-  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke={color} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M8 3h4l-.6 4.5 2.6 2v1.5H6V9.5l2.6-2L8 3ZM10 11v5" />
-  </svg>
+export const IcPin = () => (
+  <img src="/img/ctx-pin.png" alt="" width={18} height={18} style={{ display: "inline-block", verticalAlign: "middle" }} />
 );
-export const IcNote = ({ color = "#1e88fa" }: { color?: string }) => (
-  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" stroke={color} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M4 6.5A1.5 1.5 0 0 1 5.5 5h5m4.5 3.5V14a1.5 1.5 0 0 1-1.5 1.5H5.5A1.5 1.5 0 0 1 4 14v-1" />
-    <path d="M9 11.5 15.5 5l2 2L11 13.5l-2.6.6.6-2.6Z" />
-  </svg>
+export const IcNote = () => (
+  <img src="/img/ctx-mark.png" alt="" width={18} height={18} style={{ display: "inline-block", verticalAlign: "middle" }} />
 );
 export const IcDownload = () => (
   <img src="/img/vneshtat11/Download.png" alt="" width={18} height={18} style={{ display: "inline-block", verticalAlign: "middle", cursor: "pointer" }} />

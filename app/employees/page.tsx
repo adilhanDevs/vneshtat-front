@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Header from "../Header";
 import { useRouter } from "next/navigation";
+// account.css нужен только общим компонентам ниже (Sidebar, Header, Messenger) —
+// собственная разметка этой страницы стилизуется исключительно из employees.css
 import "../account/account.css";
 import "./employees.css";
 import Sidebar from "../account/Sidebar";
@@ -41,14 +43,14 @@ export default function Employees() {
   const closeAll = () => { setList(null); setCard(null); setAddOpen(false); };
 
   return (
-    <div className="acc">
+    <div className="emp-page">
       <Sidebar active="desk" />
 
-      <main className="acc-main with-surface">
+      <main className="emp-main with-surface">
         <Header onMessengerClick={() => setMessenger(true)} />
 
-        <div className="acc-surface">
-          <h1 className="acc-title" style={{ cursor: "pointer" }} onClick={() => setHasData((v) => !v)}>Сотрудники</h1>
+        <div className="emp-surface">
+          <h1 className="emp-title" style={{ cursor: "pointer" }} onClick={() => setHasData((v) => !v)}>Сотрудники</h1>
 
         {hasData ? (
           <div className="emp-row">
@@ -106,7 +108,7 @@ export default function Employees() {
           </div>
         )}
 
-        <div className="acc-card emp-manage">
+        <div className="emp-manage">
           <div className="m-left">
             <h2>Управление</h2>
             <p>Настройка ограничений и полномочий сотрудников</p>
@@ -143,31 +145,31 @@ export default function Employees() {
 
       {/* ============ list drawers ============ */}
       {list && (
-        <div className="acc-scrim" onClick={closeAll}>
+        <div className="emp-scrim" onClick={closeAll}>
           {/* --- employees list --- */}
           {list === "employees" && (
-            <div className={`acc-drawer${card ? " shoved" : ""}`} onClick={(e) => e.stopPropagation()}>
-              <div className="acc-drawer-head">
+            <div className={`emp-drawer${card ? " shoved" : ""}`} onClick={(e) => e.stopPropagation()}>
+              <div className="emp-head-employees">
                 <h1>Сотрудники</h1>
                 <button onClick={closeAll}><IcClose /></button>
               </div>
-              <div className="acc-drawer-body" onClick={() => setCtx(null)}>
-                <input className="msg-search" placeholder="Поиск" />
+              <div className="emp-drawer-body" onClick={() => setCtx(null)}>
+                <input className="emp-search-employees" placeholder="Поиск" />
                 {[
                   { id: "e1", name: "Яковлев Николай Никитич", on: true, av: "/img/avatar.png" },
                   { id: "e2", name: "Анастасия Александровна Белосельская-Белозерская", on: false, av: "/img/avatar.png" },
                   { id: "e3", name: "Яковлев Николай Никитич", on: true, av: "/img/avatar.png" },
                 ].map((e) => (
-                  <div key={e.id} className="msg-item" onClick={() => openCard("employee")}>
+                  <div key={e.id} className="emp-item-employees" onClick={() => openCard("employee")}>
                     <img className="m-av" src={e.av} alt="" />
                     <div className="m-body">
                       <div className="m-name">{e.name}{e.on && <span className="tag-on">Онлайн</span>}</div>
                     </div>
                     <div className="m-right">
-                      <button className="msg-dots" onClick={(ev) => { ev.stopPropagation(); setCtx(ctx === e.id ? null : e.id); }}><IcDots /></button>
+                      <button className="emp-dots" onClick={(ev) => { ev.stopPropagation(); setCtx(ctx === e.id ? null : e.id); }}><IcDots /></button>
                     </div>
                     {ctx === e.id && (
-                      <div className="msg-ctx" style={{ right: 10, top: 44 }} onClick={(ev) => ev.stopPropagation()}>
+                      <div className="emp-ctx" style={{ right: 10, top: 44 }} onClick={(ev) => ev.stopPropagation()}>
                         <button onClick={() => { setCtx(null); openCard("employee"); }}><IcMenuChat /> Открыть чат</button>
                         <button onClick={() => setCtx(null)}><IcArchive /> Архивировать</button>
                         <button className="red" onClick={() => setCtx(null)}><IcBan /> Закрыть доступ</button>
@@ -177,37 +179,37 @@ export default function Employees() {
                   </div>
                 ))}
               </div>
-              <div className="acc-drawer-foot">
-                <button className="acc-btn-ghost" onClick={closeAll}>Отмена</button>
-                <button className="acc-btn-primary" onClick={() => setAddOpen(true)}>Добавить сотрудника</button>
+              <div className="emp-drawer-foot">
+                <button className="emp-btn-ghost" onClick={closeAll}>Отмена</button>
+                <button className="emp-btn-primary" onClick={() => setAddOpen(true)}>Добавить сотрудника</button>
               </div>
             </div>
           )}
 
           {/* --- departments list --- */}
           {list === "departments" && (
-            <div className={`acc-drawer${card ? " shoved" : ""}`} onClick={(e) => e.stopPropagation()}>
-              <div className="acc-drawer-head">
+            <div className={`emp-drawer${card ? " shoved" : ""}`} onClick={(e) => e.stopPropagation()}>
+              <div className="emp-head-departments">
                 <h1>Отделы</h1>
                 <button onClick={closeAll}><IcClose /></button>
               </div>
-              <div className="acc-drawer-body" onClick={() => setCtx(null)}>
-                <input className="msg-search" placeholder="Поиск" />
+              <div className="emp-drawer-body" onClick={() => setCtx(null)}>
+                <input className="emp-search-departments" placeholder="Поиск" />
                 {[
                   { id: "d1", name: "Администрация", sub: "8 сотрудников" },
                   { id: "d2", name: "Бухгалтерия", sub: "3 сотрудника" },
                   { id: "d3", name: "IT-отдел", sub: "21 сотрудник" },
                 ].map((d) => (
-                  <div key={d.id} className="msg-item" onClick={() => openCard("department")}>
+                  <div key={d.id} className="emp-item-departments" onClick={() => openCard("department")}>
                     <div className="m-body">
                       <div className="m-name">{d.name}</div>
                       <div className="m-prev">{d.sub}</div>
                     </div>
                     <div className="m-right">
-                      <button className="msg-dots" onClick={(ev) => { ev.stopPropagation(); setCtx(ctx === d.id ? null : d.id); }}><IcDots /></button>
+                      <button className="emp-dots" onClick={(ev) => { ev.stopPropagation(); setCtx(ctx === d.id ? null : d.id); }}><IcDots /></button>
                     </div>
                     {ctx === d.id && (
-                      <div className="msg-ctx" style={{ right: 10, top: 44 }} onClick={(ev) => ev.stopPropagation()}>
+                      <div className="emp-ctx" style={{ right: 10, top: 44 }} onClick={(ev) => ev.stopPropagation()}>
                         <button onClick={() => { setCtx(null); openCard("department"); }}><IcEdit /> Изменить</button>
                         <button className="red" onClick={() => setCtx(null)}><IcTrash /> Удалить</button>
                       </div>
@@ -215,37 +217,37 @@ export default function Employees() {
                   </div>
                 ))}
               </div>
-              <div className="acc-drawer-foot">
-                <button className="acc-btn-ghost" onClick={closeAll}>Отмена</button>
-                <button className="acc-btn-primary" onClick={() => openCard("department", true)}>Создать отдел</button>
+              <div className="emp-drawer-foot">
+                <button className="emp-btn-ghost" onClick={closeAll}>Отмена</button>
+                <button className="emp-btn-primary" onClick={() => openCard("department", true)}>Создать отдел</button>
               </div>
             </div>
           )}
 
           {/* --- groups list --- */}
           {list === "groups" && (
-            <div className={`acc-drawer${card ? " shoved" : ""}`} onClick={(e) => e.stopPropagation()}>
-              <div className="acc-drawer-head">
+            <div className={`emp-drawer${card ? " shoved" : ""}`} onClick={(e) => e.stopPropagation()}>
+              <div className="emp-head-groups">
                 <h1>Группы</h1>
                 <button onClick={closeAll}><IcClose /></button>
               </div>
-              <div className="acc-drawer-body" onClick={() => setCtx(null)}>
-                <input className="msg-search" placeholder="Поиск" />
+              <div className="emp-drawer-body" onClick={() => setCtx(null)}>
+                <input className="emp-search-groups" placeholder="Поиск" />
                 {[
                   { id: "g1", name: "Командировка в Самару", sub: "8 пассажиров" },
                   { id: "g2", name: "Встреча с инвесторами", sub: "3 пассажира" },
                   { id: "g3", name: "Ремонт моста", sub: "21 пассажир" },
                 ].map((g) => (
-                  <div key={g.id} className="msg-item" onClick={() => openCard("group")}>
+                  <div key={g.id} className="emp-item-groups" onClick={() => openCard("group")}>
                     <div className="m-body">
                       <div className="m-name">{g.name}</div>
                       <div className="m-prev">{g.sub}</div>
                     </div>
                     <div className="m-right">
-                      <button className="msg-dots" onClick={(ev) => { ev.stopPropagation(); setCtx(ctx === g.id ? null : g.id); }}><IcDots /></button>
+                      <button className="emp-dots" onClick={(ev) => { ev.stopPropagation(); setCtx(ctx === g.id ? null : g.id); }}><IcDots /></button>
                     </div>
                     {ctx === g.id && (
-                      <div className="msg-ctx" style={{ right: 10, top: 44 }} onClick={(ev) => ev.stopPropagation()}>
+                      <div className="emp-ctx" style={{ right: 10, top: 44 }} onClick={(ev) => ev.stopPropagation()}>
                         <button onClick={() => { setCtx(null); openCard("group"); }}><IcEdit /> Изменить</button>
                         <button className="red" onClick={() => setCtx(null)}><IcTrash /> Удалить</button>
                       </div>
@@ -253,34 +255,34 @@ export default function Employees() {
                   </div>
                 ))}
               </div>
-              <div className="acc-drawer-foot">
-                <button className="acc-btn-ghost" onClick={closeAll}>Отмена</button>
-                <button className="acc-btn-primary" onClick={() => openCard("group", true)}>Создать группу</button>
+              <div className="emp-drawer-foot">
+                <button className="emp-btn-ghost" onClick={closeAll}>Отмена</button>
+                <button className="emp-btn-primary" onClick={() => openCard("group", true)}>Создать группу</button>
               </div>
             </div>
           )}
 
           {/* --- passengers list --- */}
           {list === "passengers" && (
-            <div className={`acc-drawer${card ? " shoved" : ""}`} onClick={(e) => e.stopPropagation()}>
-              <div className="acc-drawer-head">
+            <div className={`emp-drawer${card ? " shoved" : ""}`} onClick={(e) => e.stopPropagation()}>
+              <div className="emp-head-passengers">
                 <h1>Пассажиры</h1>
                 <button onClick={closeAll}><IcClose /></button>
               </div>
-              <div className="acc-drawer-body" onClick={() => setCtx(null)}>
-                <input className="msg-search" placeholder="Поиск" />
+              <div className="emp-drawer-body" onClick={() => setCtx(null)}>
+                <input className="emp-search-passengers" placeholder="Поиск" />
                 {[
                   { id: "p1", ini: "ЯН", name: "Яковлев Николай Никитич" },
                   { id: "p2", ini: "БА", name: "Белосельская-Белозерская Анастасия Александровна" },
                 ].map((p) => (
-                  <div key={p.id} className="msg-item" onClick={() => openCard("passenger")}>
+                  <div key={p.id} className="emp-item-passengers" onClick={() => openCard("passenger")}>
                     <span className="m-av initials">{p.ini}</span>
                     <div className="m-body"><div className="m-name">{p.name}</div></div>
                     <div className="m-right">
-                      <button className="msg-dots" onClick={(ev) => { ev.stopPropagation(); setCtx(ctx === p.id ? null : p.id); }}><IcDots /></button>
+                      <button className="emp-dots" onClick={(ev) => { ev.stopPropagation(); setCtx(ctx === p.id ? null : p.id); }}><IcDots /></button>
                     </div>
                     {ctx === p.id && (
-                      <div className="msg-ctx" style={{ right: 10, top: 44 }} onClick={(ev) => ev.stopPropagation()}>
+                      <div className="emp-ctx" style={{ right: 10, top: 44 }} onClick={(ev) => ev.stopPropagation()}>
                         <button onClick={() => { setCtx(null); openCard("passenger"); }}><IcInfoCircle /> Данные</button>
                         <button className="red" onClick={() => setCtx(null)}><IcTrash /> Удалить</button>
                       </div>
@@ -288,9 +290,9 @@ export default function Employees() {
                   </div>
                 ))}
               </div>
-              <div className="acc-drawer-foot">
-                <button className="acc-btn-ghost" onClick={closeAll}>Отмена</button>
-                <button className="acc-btn-primary" onClick={() => openCard("passenger", true)}>Добавить пассажира</button>
+              <div className="emp-drawer-foot">
+                <button className="emp-btn-ghost" onClick={closeAll}>Отмена</button>
+                <button className="emp-btn-primary" onClick={() => openCard("passenger", true)}>Добавить пассажира</button>
               </div>
             </div>
           )}
@@ -314,7 +316,7 @@ export default function Employees() {
                 <button className={tab === "data" ? "on" : ""} onClick={() => setTab("data")}>Данные</button>
                 <button className={tab === "access" ? "on" : ""} onClick={() => setTab("access")}>Доступ</button>
               </div>
-              {tab === "data" ? <PassengerData /> : <div className="acc-sec-h" style={{ marginTop: 4 }}>Внештат ID<IdCard /></div>}
+              {tab === "data" ? <PassengerData /> : <div className="emp-sec-h" style={{ marginTop: 4 }}>Внештат ID<IdCard /></div>}
             </DetailDrawer>
           )}
 
@@ -327,11 +329,11 @@ export default function Employees() {
               </div>
               {tab === "data" ? (
                 <>
-                  <div className="acc-sec-h" style={{ marginTop: 4 }}>Данные</div>
+                  <div className="emp-sec-h" style={{ marginTop: 4 }}>Данные</div>
                   <div style={{ height: 10 }} />
-                  <div className="acc-fullrow"><F label="Название" value={empty ? "" : "Бухгалтерия"} ph={empty} /></div>
-                  <div className="acc-fullrow"><F label="Руководитель отдела" value={empty ? "" : "Яковлев Николай Никитич"} ph={empty} chevron /></div>
-                  <div className="acc-sec-h">Сотрудники</div>
+                  <div className="emp-fullrow"><F label="Название" value={empty ? "" : "Бухгалтерия"} ph={empty} /></div>
+                  <div className="emp-fullrow"><F label="Руководитель отдела" value={empty ? "" : "Яковлев Николай Никитич"} ph={empty} chevron /></div>
+                  <div className="emp-sec-h">Сотрудники</div>
                   <div style={{ height: 10 }} />
                   {!empty && <PersonRow />}
                   <div className="emp-addrow">Добавить сотрудника <IcPlusField /></div>
@@ -343,11 +345,11 @@ export default function Employees() {
           {card === "group" && (
             <DetailDrawer title="Группа" onClose={() => setCard(null)} onSave={() => setCard(null)}>
               <p className="emp-desc">Объедините пассажиров в смысловые группы, чтобы облегчить создание групповых поездок.</p>
-              <div className="acc-sec-h" style={{ marginTop: 6 }}>Данные</div>
+              <div className="emp-sec-h" style={{ marginTop: 6 }}>Данные</div>
               <div style={{ height: 10 }} />
-              <div className="acc-fullrow"><F label="Название" value={empty ? "" : "Командировка в Самару"} ph={empty} /></div>
-              <div className="acc-fullrow"><F label="Ответственный" value={empty ? "" : "Яковлев Николай Никитич"} ph={empty} chevron /></div>
-              <div className="acc-sec-h">Пассажиры</div>
+              <div className="emp-fullrow"><F label="Название" value={empty ? "" : "Командировка в Самару"} ph={empty} /></div>
+              <div className="emp-fullrow"><F label="Ответственный" value={empty ? "" : "Яковлев Николай Никитич"} ph={empty} chevron /></div>
+              <div className="emp-sec-h">Пассажиры</div>
               <div style={{ height: 10 }} />
               {!empty && <PersonRow />}
               <div className="emp-addrow">Добавить пассажира <IcPlusField /></div>
@@ -358,21 +360,21 @@ export default function Employees() {
 
       {/* ============ add employee modal ============ */}
       {addOpen && (
-        <div className="acc-scrim center" onClick={() => setAddOpen(false)}>
-          <div className="acc-modal" onClick={(e) => e.stopPropagation()} style={{ width: 400, textAlign: "left" }}>
+        <div className="emp-scrim center" onClick={() => setAddOpen(false)}>
+          <div className="emp-modal" onClick={(e) => e.stopPropagation()} style={{ width: 400, textAlign: "left" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
               <h3 style={{ margin: 0 }}>Добавить сотрудника</h3>
               <button style={{ background: "none", border: "none", cursor: "pointer" }} onClick={() => setAddOpen(false)}><IcClose size={20} /></button>
             </div>
-            <p className="emp-desc" style={{ marginBottom: 18 }}>Вы можете ввести данные нового сотрудника вручную или импортировать таблицу с несколькими сотрудниками.</p>
-            <div className="acc-field" style={{ marginBottom: 18 }}>
+            <p className="emp-modal-desc">Вы можете ввести данные нового сотрудника вручную или импортировать таблицу с несколькими сотрудниками.</p>
+            <div className="emp-field" style={{ marginBottom: 18 }}>
               <label>Выбранный способ</label>
               <div className="val">Добавить вручную</div>
               <span className="chev"><IcChevron /></span>
             </div>
             <div style={{ display: "flex", gap: 14 }}>
-              <button className="acc-btn-ghost" style={{ flex: 1 }} onClick={() => setAddOpen(false)}>Отмена</button>
-              <button className="acc-btn-primary" onClick={() => { setAddOpen(false); openCard("employee", true); }}>Далее</button>
+              <button className="emp-btn-ghost" style={{ flex: 1 }} onClick={() => setAddOpen(false)}>Отмена</button>
+              <button className="emp-btn-primary" onClick={() => { setAddOpen(false); openCard("employee", true); }}>Далее</button>
             </div>
           </div>
         </div>
@@ -386,15 +388,15 @@ function DetailDrawer({ title, children, onClose, onSave }: {
   title: string; children: React.ReactNode; onClose: () => void; onSave: () => void;
 }) {
   return (
-    <div className="acc-drawer stacked" onClick={(e) => e.stopPropagation()}>
-      <div className="acc-drawer-head">
+    <div className="emp-drawer stacked" onClick={(e) => e.stopPropagation()}>
+      <div className="emp-head-card">
         <h1>{title}</h1>
         <button onClick={onClose}><IcClose /></button>
       </div>
-      <div className="acc-drawer-body">{children}</div>
-      <div className="acc-drawer-foot">
-        <button className="acc-btn-ghost" onClick={onClose}>Отмена</button>
-        <button className="acc-btn-primary" onClick={onSave}>Сохранить</button>
+      <div className="emp-drawer-body">{children}</div>
+      <div className="emp-drawer-foot">
+        <button className="emp-btn-ghost" onClick={onClose}>Отмена</button>
+        <button className="emp-btn-primary" onClick={onSave}>Сохранить</button>
       </div>
     </div>
   );
@@ -404,7 +406,7 @@ function F({ label, value, ph, chevron, cal }: {
   label: string; value?: string; ph?: boolean; chevron?: boolean; cal?: boolean;
 }) {
   return (
-    <div className={`acc-field${ph ? " ph" : ""}`}>
+    <div className={`emp-field${ph ? " ph" : ""}`}>
       {!ph && <label>{label}</label>}
       <div className="val">{ph ? label : value}</div>
       {chevron && <span className="chev"><IcChevron /></span>}
@@ -416,25 +418,25 @@ function F({ label, value, ph, chevron, cal }: {
 function PersonData({ empty }: { empty: boolean }) {
   return (
     <>
-      <div className="acc-sec-h" style={{ marginTop: 4 }}>Личные данные</div>
+      <div className="emp-sec-h" style={{ marginTop: 4 }}>Личные данные</div>
       <div style={{ height: 10 }} />
-      <div className="acc-grid2">
+      <div className="emp-grid2">
         <F label="Фамилия" value="Вознесенский" ph={empty} />
         <F label="Имя" value="Иван" ph={empty} />
       </div>
-      <div className="acc-grid2">
+      <div className="emp-grid2">
         <F label="Отчество" value="Сергеевич" ph={empty} />
-        <div className="acc-check" style={{ paddingLeft: 6 }}><span className="box" /> Нет отчества</div>
+        <div className="emp-check" style={{ paddingLeft: 6 }}><span className="box" /> Нет отчества</div>
       </div>
-      <div className="acc-fullrow"><F label="Пол" value="Мужской" ph={empty} chevron /></div>
-      <div className="acc-fullrow"><F label="Дата рождения" value="18 марта 1999" ph={empty} cal /></div>
-      <div className="acc-grid2">
+      <div className="emp-fullrow"><F label="Пол" value="Мужской" ph={empty} chevron /></div>
+      <div className="emp-fullrow"><F label="Дата рождения" value="18 марта 1999" ph={empty} cal /></div>
+      <div className="emp-grid2">
         <F label="Фамилия (латиница)" value="Voznesenskiy" ph={empty} />
         <F label="Имя (латиница)" value="Ivan" ph={empty} />
       </div>
-      <div className="acc-sec-h">Контакты</div>
+      <div className="emp-sec-h">Контакты</div>
       <div style={{ height: 10 }} />
-      <div className="acc-grid2">
+      <div className="emp-grid2">
         <F label="Телефон" value="+7 913 390 38 90" ph={empty} />
         <F label="Email" value="ivanov.ivan@mail.ru" ph={empty} />
       </div>
@@ -445,18 +447,18 @@ function PersonData({ empty }: { empty: boolean }) {
 function PassengerData() {
   return (
     <>
-      <div className="acc-sec-h" style={{ marginTop: 4 }}>Личные данные</div>
+      <div className="emp-sec-h" style={{ marginTop: 4 }}>Личные данные</div>
       <div style={{ height: 10 }} />
-      <div className="acc-grid2">
+      <div className="emp-grid2">
         <F label="Фамилия" value="Горбачев" />
         <F label="Имя" value="Роман" />
       </div>
-      <div className="acc-grid2">
+      <div className="emp-grid2">
         <F label="Отчество" value="Дмитриевич" />
-        <div className="acc-check" style={{ paddingLeft: 6 }}><span className="box" /> Нет отчества</div>
+        <div className="emp-check" style={{ paddingLeft: 6 }}><span className="box" /> Нет отчества</div>
       </div>
-      <div className="acc-fullrow"><F label="Пол" value="Мужской" chevron /></div>
-      <div className="acc-fullrow"><F label="Дата рождения" value="18 марта 1999" cal /></div>
+      <div className="emp-fullrow"><F label="Пол" value="Мужской" chevron /></div>
+      <div className="emp-fullrow"><F label="Дата рождения" value="18 марта 1999" cal /></div>
     </>
   );
 }
@@ -479,17 +481,17 @@ function IdCard() {
 function EmployeeAccess() {
   return (
     <>
-      <div className="acc-sec-h" style={{ marginTop: 4 }}>Внештат ID</div>
+      <div className="emp-sec-h" style={{ marginTop: 4 }}>Внештат ID</div>
       <IdCard />
-      <div className="acc-sec-h">Доступ</div>
+      <div className="emp-sec-h">Доступ</div>
       <div style={{ height: 10 }} />
-      <div className="acc-grid2">
+      <div className="emp-grid2">
         <F label="Уровень" value="Сотрудник" chevron />
         <F label="Срок действия" value="Бессрочно" cal />
       </div>
-      <div className="acc-sec-h">Тревел-политика</div>
+      <div className="emp-sec-h">Тревел-политика</div>
       <div style={{ height: 10 }} />
-      <div className="acc-fullrow"><F label="Авиабилеты" value="Линейный персонал" chevron /></div>
+      <div className="emp-fullrow"><F label="Авиабилеты" value="Линейный персонал" chevron /></div>
     </>
   );
 }
@@ -497,15 +499,15 @@ function EmployeeAccess() {
 function TravelPolicy() {
   return (
     <>
-      <div className="acc-sec-h" style={{ marginTop: 4 }}>Тревел-политика</div>
+      <div className="emp-sec-h" style={{ marginTop: 4 }}>Тревел-политика</div>
       <div style={{ height: 10 }} />
-      <div className="acc-fullrow"><F label="Авиабилеты" value="По умолчанию" chevron /></div>
-      <div className="acc-fullrow"><F label="Билеты на поезд" value="По умолчанию" chevron /></div>
-      <div className="acc-fullrow"><F label="Проживание" value="По умолчанию" chevron /></div>
-      <div className="acc-fullrow"><F label="Такси" value="По умолчанию" chevron /></div>
-      <div className="acc-sec-h">Согласование</div>
+      <div className="emp-fullrow"><F label="Авиабилеты" value="По умолчанию" chevron /></div>
+      <div className="emp-fullrow"><F label="Билеты на поезд" value="По умолчанию" chevron /></div>
+      <div className="emp-fullrow"><F label="Проживание" value="По умолчанию" chevron /></div>
+      <div className="emp-fullrow"><F label="Такси" value="По умолчанию" chevron /></div>
+      <div className="emp-sec-h">Согласование</div>
       <div style={{ height: 10 }} />
-      <div className="acc-grid2">
+      <div className="emp-grid2">
         <F label="Поездок" value="По умолчанию" chevron />
         <F label="Отчетов" value="По умолчанию" chevron />
       </div>
@@ -515,10 +517,10 @@ function TravelPolicy() {
 
 function PersonRow() {
   return (
-    <div className="msg-item" style={{ cursor: "default" }}>
+    <div className="emp-item-person" style={{ cursor: "default" }}>
       <img className="m-av" src="/img/avatar.png" alt="" />
       <div className="m-body"><div className="m-name">Яковлев Николай Никитич<span className="tag-on" style={{ background: "#1e88fa", color: "#fff", padding: "2px 8px", borderRadius: 8, fontSize: 12 }}>Онлайн</span></div></div>
-      <button className="msg-dots"><IcDots /></button>
+      <button className="emp-dots"><IcDots /></button>
     </div>
   );
 }
