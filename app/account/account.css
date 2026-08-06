@@ -47,17 +47,22 @@
 .acc-logo {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin: 0 8px 34px;
+  gap: 10px;
+  padding: 5px 12px;
+  margin: 0 0 34px;
 }
 .acc-logo img {
-  width: 26px;
-  height: auto;
+  width: 30px;
+  height: 40px;
+  object-fit: contain;
+  display: block;
+  transform: translateY(-3px);
 }
 .acc-logo span {
   font-size: 26px;
   font-weight: 800;
   letter-spacing: -0.4px;
+  line-height: 1;
 }
 .acc-nav {
   display: flex;

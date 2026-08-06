@@ -442,11 +442,13 @@ export default function Dashboard() {
                 onClick={cycleDashMode}
                 title={dashMode === "chat" ? "Режим ИИ" : dashMode === "docs" ? "Режим документов" : "Режим поездки"}
               >
-                {dashMode === "chat" && (
-                  <img src="/img/chat-mode.png" alt="" style={{ width: 18, height: 18, objectFit: "contain" }} />
-                )}
-                {dashMode === "docs" && <IcDocMode />}
-                {dashMode === "trip" && <IcPlane />}
+                <span key={dashMode} className="mode-ico">
+                  {dashMode === "chat" && (
+                    <img src="/img/chat-mode.png" alt="" style={{ width: 18, height: 18, objectFit: "contain" }} />
+                  )}
+                  {dashMode === "docs" && <IcDocMode />}
+                  {dashMode === "trip" && <IcPlane />}
+                </span>
               </button>
             </div>
             <input

@@ -14,6 +14,43 @@
 .cht-scroll::-webkit-scrollbar {
   display: none;
 }
+/* Mode switch (чат / документы / поездка) replaces the whole canvas at once.
+   Fade the canvas out, swap behind the blank frame, fade it back in. */
+.cht-modefade {
+  transition: opacity 190ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 190ms ease;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+  will-change: opacity, transform;
+}
+.cht-modefade.out {
+  opacity: 0;
+  transform: translateY(8px) scale(0.985);
+  filter: blur(3px);
+  pointer-events: none;
+}
+/* The pill icon itself swaps too — pop it in instead of hard-cutting. */
+.ord-round .mode-ico {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  animation: mode-ico-in 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes mode-ico-in {
+  from { opacity: 0; transform: scale(0.6) rotate(-25deg); }
+  to { opacity: 1; transform: scale(1) rotate(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cht-modefade,
+  .cht-modefade.out {
+    transition-duration: 1ms;
+    transform: none;
+    filter: none;
+  }
+  .ord-round .mode-ico { animation: none; }
+}
 .cht-out-row {
   display: flex;
   justify-content: flex-end;

@@ -68,12 +68,22 @@ export default function Chat() {
   const [participants, setParticipants] = useState(false);
   const [checked, setChecked] = useState<Record<number, boolean>>({ 0: true });
 
+  // Mode switches swap the whole canvas. Blank it out first, swap while it is
+  // invisible, then fade back in — otherwise the old and new hero visibly
+  // trade places.
+  const [modeFade, setModeFade] = useState(false);
+  const modeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const switchMode = (next: "chat" | "docs" | "trip") => {
+    if (next === mode || modeTimer.current) return;
+    setModeFade(true);
+    modeTimer.current = setTimeout(() => {
+      setMode(next);
+      setModeFade(false);
+      modeTimer.current = null;
+    }, 190);
+  };
   const cycleMode = () => {
-    setMode((prev) => {
-      if (prev === "chat") return "docs";
-      if (prev === "docs") return "trip";
-      return "chat";
-    });
+    switchMode(mode === "chat" ? "docs" : mode === "docs" ? "trip" : "chat");
   };
   const [ctx, setCtx] = useState<number | null>(null);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -162,7 +172,7 @@ export default function Chat() {
         )}
 
         <div className="acc-surface chat-surface">
-          <div className="cht-scroll">
+          <div className={`cht-scroll cht-modefade${modeFade ? " out" : ""}`}>
           {mode === "trip" && (
             <>
               <div
@@ -372,8 +382,8 @@ export default function Chat() {
               <button className="ord-round" onClick={() => setPlusMenu((v) => !v)}><IcPlus /></button>
               {plusMenu && (
                 <div className="cht-plusmenu">
-                  <button onClick={() => { setPlusMenu(false); setMode("docs"); }}><IcDocMode /> Документы</button>
-                  <button onClick={() => { setPlusMenu(false); setMode("trip"); }}><IcPlane /> Поездка</button>
+                  <button onClick={() => { setPlusMenu(false); switchMode("docs"); }}><IcDocMode /> Документы</button>
+                  <button onClick={() => { setPlusMenu(false); switchMode("trip"); }}><IcPlane /> Поездка</button>
                   <button onClick={() => { setPlusMenu(false); attachFile(); }}><IcPaperclip /> Прикрепить файл</button>
                 </div>
               )}
@@ -383,11 +393,13 @@ export default function Chat() {
               title={mode === "chat" ? "Режим ИИ" : mode === "docs" ? "Режим документов" : "Режим поездки"}
               onClick={cycleMode}
             >
-              {mode === "chat" && (
-                <img src="/img/chat-mode.png" alt="" style={{ width: 18, height: 18, objectFit: "contain" }} />
-              )}
-              {mode === "docs" && <IcDocMode />}
-              {mode === "trip" && <IcPlane />}
+              <span key={mode} className="mode-ico">
+                {mode === "chat" && (
+                  <img src="/img/chat-mode.png" alt="" style={{ width: 18, height: 18, objectFit: "contain" }} />
+                )}
+                {mode === "docs" && <IcDocMode />}
+                {mode === "trip" && <IcPlane />}
+              </span>
             </button>
           </div>
           <textarea
