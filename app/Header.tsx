@@ -22,7 +22,7 @@ export default function Header({
           <span className="b-div" />
           <span className="b-amount"><IcCard /> 490 000 ₽</span>
           <span className="b-div" />
-          <img src="/img/Overdraft.png" alt="Overdraft" style={{ height: 28, width: "auto", display: "block" }} />
+          <img src="/img/Overdraft.png" alt="Overdraft" style={{ width: 25, height: 16, display: "block", objectFit: "contain" }} />
         </div>
         <div className="acc-top-right">
           <button className="acc-iconbtn"><IcDots /></button>

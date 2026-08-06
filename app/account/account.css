@@ -81,21 +81,22 @@
   background: #f4f4f6;
 }
 .acc-nav a.active {
-  background: #eef5ff;
-  color: var(--blue);
-  font-weight: 600;
+  background: #eceef1;
+  color: #007bfb;
+  font-weight: 500;
+  border-radius: 13px;
 }
 .acc-nav a svg {
   color: #8c8e95;
 }
 .acc-nav a.active svg {
-  color: var(--blue);
+  color: #007bfb;
 }
 .acc-nav a.active svg [stroke] {
-  stroke: var(--blue);
+  stroke: #007bfb;
 }
 .acc-nav a.active svg [fill]:not([fill='none']) {
-  fill: var(--blue);
+  fill: #007bfb;
 }
 .acc-sep {
   height: 1px;
@@ -152,7 +153,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 40px;
+  padding: 0 40px 0 0;
   margin-bottom: 22px;
 }
 .acc-balance {

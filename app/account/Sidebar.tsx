@@ -8,7 +8,7 @@ export default function Sidebar({ active, tripTitle }: { active?: string; tripTi
   return (
     <aside className="acc-side">
       <div className="acc-logo">
-        <img src="/img/logo-mark.png" alt="" />
+        <img src="/img/Union.png" alt="" />
         <span>Внештат</span>
       </div>
       <nav className="acc-nav">

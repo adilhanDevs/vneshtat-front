@@ -9,7 +9,7 @@ import Sidebar from "../account/Sidebar";
 import Messenger from "../account/Messenger";
 import {
   IcCard, IcDots, IcBubble, IcClose, IcWidgets as IcWidgetsNav,
-  IcCalHeader, IcRadar, IcPlus, IcSparkle, IcInfoCircle, IcPlane, IcMenuChat,
+  IcCalHeader, IcRadar, IcPlus, IcSparkle, IcInfoCircle, IcPlane, IcMenuChat, IcDocMode,
 } from "../account/icons";
 
 /* ====================== ICON COMPONENTS ====================== */
@@ -129,6 +129,15 @@ export default function Dashboard() {
   // Finance widget state
   const [financeVariant, setFinanceVariant] = useState<"normal" | "debt">("normal");
   const [dashInput, setDashInput] = useState("");
+  const [dashMode, setDashMode] = useState<"chat" | "docs" | "trip">("trip");
+
+  const cycleDashMode = () => {
+    setDashMode((prev) => {
+      if (prev === "chat") return "docs";
+      if (prev === "docs") return "trip";
+      return "chat";
+    });
+  };
 
   // Radar timer
   const [radarTime, setRadarTime] = useState(13534); // 03:45:34 in seconds
@@ -428,8 +437,16 @@ export default function Dashboard() {
           <div className="dash-ai-bar">
             <div className="dash-ai-left">
               <button className="dash-ai-plus"><IcPlus /></button>
-              <button className="dash-ai-sparkle active">
-                <IcPlane />
+              <button
+                className="dash-ai-sparkle active"
+                onClick={cycleDashMode}
+                title={dashMode === "chat" ? "Режим ИИ" : dashMode === "docs" ? "Режим документов" : "Режим поездки"}
+              >
+                {dashMode === "chat" && (
+                  <img src="/img/chat-mode.png" alt="" style={{ width: 18, height: 18, objectFit: "contain" }} />
+                )}
+                {dashMode === "docs" && <IcDocMode />}
+                {dashMode === "trip" && <IcPlane />}
               </button>
             </div>
             <input

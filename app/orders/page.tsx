@@ -9,7 +9,7 @@ import "../dashboard/dashboard.css";
 import Sidebar from "../account/Sidebar";
 import Messenger from "../account/Messenger";
 import {
-  IcCard, IcDots, IcBubble, IcMenuChat, IcPlane, IcPlus, IcInfoCircle,
+  IcCard, IcDots, IcBubble, IcMenuChat, IcPlane, IcPlus, IcInfoCircle, IcDocMode,
 } from "../account/icons";
 
 const ORDERS = [
@@ -38,6 +38,15 @@ export default function Orders() {
   const [messenger, setMessenger] = useState(false);
   const [seg, setSeg] = useState<"active" | "archive">("active");
   const [ctx, setCtx] = useState<string | null>(null);
+  const [ordMode, setOrdMode] = useState<"chat" | "docs" | "trip">("trip");
+
+  const cycleOrdMode = () => {
+    setOrdMode((prev) => {
+      if (prev === "chat") return "docs";
+      if (prev === "docs") return "trip";
+      return "chat";
+    });
+  };
 
   return (
     <div className="ord-root">
@@ -116,7 +125,16 @@ export default function Orders() {
       <div className="ord-chatbar">
         <div className="inner">
           <button className="ord-round"><IcPlus /></button>
-          <button className="ord-round active"><IcPlane /></button>
+          <button
+            className="ord-round active"
+            onClick={cycleOrdMode}
+          >
+            {ordMode === "chat" && (
+              <img src="/img/chat-mode.png" alt="" style={{ width: 18, height: 18, objectFit: "contain" }} />
+            )}
+            {ordMode === "docs" && <IcDocMode />}
+            {ordMode === "trip" && <IcPlane />}
+          </button>
           <input placeholder="Напишите свой запрос" />
           <button className="ord-send">
             <img src="/img/Send (1).png" alt="" style={{ width: 22, height: 22, objectFit: "contain" }} />

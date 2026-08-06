@@ -12,7 +12,7 @@ import Sidebar from "../account/Sidebar";
 import Messenger from "../account/Messenger";
 import {
   IcCard, IcDots, IcBubble, IcPlus, IcPlane, IcPlaneOutline, IcStop, IcRefresh, IcUndo,
-  IcThumbUp, IcThumbDown, IcCopy, IcClose, IcInfoCircle, IcMenuChat,
+  IcThumbUp, IcThumbDown, IcCopy, IcClose, IcInfoCircle, IcMenuChat, IcDocMode,
 } from "../account/icons";
 
 type Phase = "empty" | "generating" | "variants" | "chosen" | "booking";
@@ -53,6 +53,15 @@ export default function Trip() {
   const [checked, setChecked] = useState<Record<number, boolean>>({ 0: true });
   const router = useRouter();
   const [ctx, setCtx] = useState<number | null>(null);
+  const [tripMode, setTripMode] = useState<"chat" | "docs" | "trip">("trip");
+
+  const cycleTripMode = () => {
+    setTripMode((prev) => {
+      if (prev === "chat") return "docs";
+      if (prev === "docs") return "trip";
+      return "chat";
+    });
+  };
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const taRef = useRef<HTMLTextAreaElement>(null);
   const grow = (el: HTMLTextAreaElement) => { el.style.height = "auto"; el.style.height = Math.min(el.scrollHeight, 200) + "px"; };
@@ -202,7 +211,16 @@ export default function Trip() {
       <div className="trip-chatbar">
         <div className="inner">
           <button className="trip-round"><IcPlus /></button>
-          <button className="trip-round active"><IcPlane /></button>
+          <button
+            className="trip-round active"
+            onClick={cycleTripMode}
+          >
+            {tripMode === "chat" && (
+              <img src="/img/chat-mode.png" alt="" style={{ width: 18, height: 18, objectFit: "contain" }} />
+            )}
+            {tripMode === "docs" && <IcDocMode />}
+            {tripMode === "trip" && <IcPlane />}
+          </button>
           <textarea
             ref={taRef}
             rows={1}

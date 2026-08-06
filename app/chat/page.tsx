@@ -383,7 +383,11 @@ export default function Chat() {
               title={mode === "chat" ? "Режим ИИ" : mode === "docs" ? "Режим документов" : "Режим поездки"}
               onClick={cycleMode}
             >
-              <IcPlane />
+              {mode === "chat" && (
+                <img src="/img/chat-mode.png" alt="" style={{ width: 18, height: 18, objectFit: "contain" }} />
+              )}
+              {mode === "docs" && <IcDocMode />}
+              {mode === "trip" && <IcPlane />}
             </button>
           </div>
           <textarea

@@ -53,7 +53,6 @@
   gap: 16px;
 }
 .order-timer {
-  background: #f8f9fb;
   border: 1px solid #e8eaee;
   border-radius: 20px;
   padding: 10px 18px;
@@ -107,7 +106,7 @@
   top: 0;
   right: 0;
   width: 173.21px;
-  height: 168.94px;
+  height: 195px;
   z-index: 0;
 }
 .order-stats .os-box,
@@ -170,7 +169,7 @@
 }
 .order-actions .oa-left h2 {
   font-size: 36px;
-  font-weight: 800;
+  font-weight: 600;
   margin: 0;
 }
 .order-actions .oa-left p {
