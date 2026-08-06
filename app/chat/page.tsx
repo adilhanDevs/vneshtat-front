@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Header from "../Header";
 import { useRouter } from "next/navigation";
 import "../account/account.css";
@@ -293,30 +293,30 @@ export default function Chat() {
             </>
           )}
 
-          {mode !== "trip" && empty && mode === "chat" && (
-            <div className="cht-hero">
-              <div className="cht-hero-stack">
-                <div className="hero-title">Новый чат</div>
-                <img src="/img/chat-hero.png" alt="" />
+          {mode !== "trip" && empty && (
+            <>
+              <div className="cht-hero" style={{ display: mode === "chat" ? "flex" : "none" }}>
+                <div className="cht-hero-stack">
+                  <div className="hero-title">Новый чат</div>
+                  <img src="/img/chat-hero.png" alt="" />
+                </div>
+                <div className="hero-sub">
+                  Попросите чат организовать поездку, найти самый дешевый билет
+                  или сформировать документы. Он умеет очень многое.
+                </div>
               </div>
-              <div className="hero-sub">
-                Попросите чат организовать поездку, найти самый дешевый билет
-                или сформировать документы. Он умеет очень многое.
-              </div>
-            </div>
-          )}
 
-          {mode !== "trip" && empty && mode === "docs" && (
-            <div className="cht-hero doc-hero">
-              <div className="cht-hero-stack">
-                <div className="hero-title">Документы</div>
-                <img src="/img/person-docs.png" alt="" />
+              <div className="cht-hero doc-hero" style={{ display: mode === "docs" ? "flex" : "none" }}>
+                <div className="cht-hero-stack">
+                  <div className="hero-title">Документы</div>
+                  <img src="/img/person-docs.png" alt="" />
+                </div>
+                <div className="hero-sub">
+                  Вы находитесь в режиме работы с документами. Напишите
+                  в сообщении запрос и чат соберет необходимый документ.
+                </div>
               </div>
-              <div className="hero-sub">
-                Вы находитесь в режиме работы с документами. Напишите
-                в сообщении запрос и чат соберет необходимый документ.
-              </div>
-            </div>
+            </>
           )}
 
           {msgs.map((m, i) => {
