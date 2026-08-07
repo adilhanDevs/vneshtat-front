@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Comfortaa, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
+import ImagePreloader from "./ImagePreloader";
+
 // Plus Jakarta Sans (для латиницы и цифр)
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta",
@@ -33,6 +35,7 @@ export default function RootLayout({
       className={`${plusJakartaSans.variable} ${comfortaa.variable} h-full antialiased`}
     >
       <body className={`${plusJakartaSans.className} min-h-full flex flex-col`}>
+        <ImagePreloader />
         {children}
       </body>
     </html>

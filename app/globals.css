@@ -1,88 +1,130 @@
 @import "tailwindcss";
 
-/* TT Norms font faces */
+/* TT Norms Pro font faces */
 @font-face {
   font-family: 'TT Norms';
-  src: url('/fonts/TT Norms Std Trial Condensed Thin.otf') format('opentype');
+  src: url('/fonts/TT-Norms-Pro/TT Norms Pro Thin.woff2') format('woff2'),
+       url('/fonts/TT-Norms-Pro/TT Norms Pro Thin.otf') format('opentype');
   font-weight: 100;
   font-style: normal;
 }
 @font-face {
   font-family: 'TT Norms';
-  src: url('/fonts/TT Norms Std Trial Condensed Thin Italic.otf') format('opentype');
+  src: url('/fonts/TT-Norms-Pro/TT Norms Pro Thin Italic.woff2') format('woff2'),
+       url('/fonts/TT-Norms-Pro/TT Norms Pro Thin Italic.otf') format('opentype');
   font-weight: 100;
   font-style: italic;
 }
 @font-face {
   font-family: 'TT Norms';
-  src: url('/fonts/TT Norms Std Trial Condensed Light.otf') format('opentype');
+  src: url('/fonts/TT-Norms-Pro/TT Norms Pro Extra Light.woff2') format('woff2'),
+       url('/fonts/TT-Norms-Pro/TT Norms Pro ExtraLight.otf') format('opentype');
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'TT Norms';
+  src: url('/fonts/TT-Norms-Pro/TT Norms Pro Extra Light Italic.woff2') format('woff2'),
+       url('/fonts/TT-Norms-Pro/TT Norms Pro ExtraLight Italic.otf') format('opentype');
+  font-weight: 200;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'TT Norms';
+  src: url('/fonts/TT-Norms-Pro/TT Norms Pro Light.woff2') format('woff2'),
+       url('/fonts/TT-Norms-Pro/TT Norms Pro Light.otf') format('opentype');
   font-weight: 300;
   font-style: normal;
 }
 @font-face {
   font-family: 'TT Norms';
-  src: url('/fonts/TT Norms Std Trial Condensed Light Italic.otf') format('opentype');
+  src: url('/fonts/TT-Norms-Pro/TT Norms Pro Light Italic.woff2') format('woff2'),
+       url('/fonts/TT-Norms-Pro/TT Norms Pro Light Italic.otf') format('opentype');
   font-weight: 300;
   font-style: italic;
 }
 @font-face {
   font-family: 'TT Norms';
-  src: url('/fonts/TT Norms Std Trial Condensed Regular.otf') format('opentype');
+  src: url('/fonts/TT-Norms-Pro/TT Norms Pro Regular.woff2') format('woff2'),
+       url('/fonts/TT-Norms-Pro/TT Norms Pro Regular.otf') format('opentype');
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
   font-family: 'TT Norms';
-  src: url('/fonts/TT Norms Std Trial Condensed Italic.otf') format('opentype');
+  src: url('/fonts/TT-Norms-Pro/TT Norms Pro Italic.woff2') format('woff2'),
+       url('/fonts/TT-Norms-Pro/TT Norms Pro Italic.otf') format('opentype');
   font-weight: 400;
   font-style: italic;
 }
 @font-face {
   font-family: 'TT Norms';
-  src: url('/fonts/TT Norms Std Trial Condensed Medium.otf') format('opentype');
+  src: url('/fonts/TT-Norms-Pro/TT Norms Pro Medium.woff2') format('woff2'),
+       url('/fonts/TT-Norms-Pro/TT Norms Pro Medium.otf') format('opentype');
   font-weight: 500;
   font-style: normal;
 }
 @font-face {
   font-family: 'TT Norms';
-  src: url('/fonts/TT Norms Std Trial Condensed Medium Italic.otf') format('opentype');
+  src: url('/fonts/TT-Norms-Pro/TT Norms Pro Medium Italic.woff2') format('woff2'),
+       url('/fonts/TT-Norms-Pro/TT Norms Pro Medium Italic.otf') format('opentype');
   font-weight: 500;
   font-style: italic;
 }
 @font-face {
   font-family: 'TT Norms';
-  src: url('/fonts/TT Norms Std Trial Condensed Bold.otf') format('opentype');
+  src: url('/fonts/TT-Norms-Pro/TT Norms Pro Bold.woff2') format('woff2'),
+       url('/fonts/TT-Norms-Pro/TT Norms Pro Bold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
 }
 @font-face {
   font-family: 'TT Norms';
-  src: url('/fonts/TT Norms Std Trial Condensed Bold Italic.otf') format('opentype');
+  src: url('/fonts/TT-Norms-Pro/TT Norms Pro Bold Italic.woff2') format('woff2'),
+       url('/fonts/TT-Norms-Pro/TT Norms Pro Bold Italic.otf') format('opentype');
   font-weight: 700;
   font-style: italic;
 }
 @font-face {
   font-family: 'TT Norms';
-  src: url('/fonts/TT Norms Std Trial Condensed ExtraBold.otf') format('opentype');
+  src: url('/fonts/TT-Norms-Pro/TT Norms Pro Extra Bold.woff2') format('woff2'),
+       url('/fonts/TT-Norms-Pro/TT Norms Pro ExtraBold.otf') format('opentype');
   font-weight: 800;
   font-style: normal;
 }
 @font-face {
   font-family: 'TT Norms';
-  src: url('/fonts/TT Norms Std Trial Condensed ExtraBold Italic.otf') format('opentype');
+  src: url('/fonts/TT-Norms-Pro/TT Norms Pro Extra Bold Italic.woff2') format('woff2'),
+       url('/fonts/TT-Norms-Pro/TT Norms Pro ExtraBold Italic.otf') format('opentype');
   font-weight: 800;
   font-style: italic;
 }
 @font-face {
   font-family: 'TT Norms';
-  src: url('/fonts/TT Norms Std Trial Condensed Black.otf') format('opentype');
+  src: url('/fonts/TT-Norms-Pro/TT Norms Pro Black.woff2') format('woff2'),
+       url('/fonts/TT-Norms-Pro/TT Norms Pro Black.otf') format('opentype');
   font-weight: 900;
   font-style: normal;
 }
 @font-face {
   font-family: 'TT Norms';
-  src: url('/fonts/TT Norms Std Trial Condensed Black Italic.otf') format('opentype');
+  src: url('/fonts/TT-Norms-Pro/TT Norms Pro Black Italic.woff2') format('woff2'),
+       url('/fonts/TT-Norms-Pro/TT Norms Pro Black Italic.otf') format('opentype');
   font-weight: 900;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'TT Norms';
+  src: url('/fonts/TT-Norms-Pro/TT Norms Pro Extra Black.woff2') format('woff2'),
+       url('/fonts/TT-Norms-Pro/TT Norms Pro ExtraBlack.otf') format('opentype');
+  font-weight: 950;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'TT Norms';
+  src: url('/fonts/TT-Norms-Pro/TT Norms Pro Extra Black Italic.woff2') format('woff2'),
+       url('/fonts/TT-Norms-Pro/TT Norms Pro ExtraBlack Italic.otf') format('opentype');
+  font-weight: 950;
   font-style: italic;
 }
 
